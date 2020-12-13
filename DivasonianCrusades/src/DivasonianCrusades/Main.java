@@ -22,17 +22,17 @@ public class Main {
 		
 		if(número <= 20) {
 			
-			System.out.println("El gay tiene el autoestima baja. Más te valdría comer más champillones que te suban la moral y dejes de ser tan tremendo maricón. Los lunes no son tan malos como para que llegues tarde a clase tarde porque te pasas la primera parte de la mañana en la cama lloriqueando, pedazo de nenaza.");
+			System.out.println("El gay tiene el autoestima baja. Más te valdría comer más champillones que te suban la moral \n y dejes de ser tan tremendo maricón. Los lunes no son tan malos como para que llegues tarde a clase tarde \n porque te pasas la primera parte de la mañana en la cama lloriqueando, pedazo de nenaza.");
 			
 		}
 		else if(número < 80) {
 			
-			System.out.println("Ah bueno disculpe no sabía que usted era una nenaza normi con peinado de maricón. Pensé que podría tratarle con un cierto respeto porque tendría algo especial que le diferenciase de la basura, pero ya veo que todo lo que puedo encontrar es un montón de mierda ponzoñosa. Gracias entonces bobalicón chupa escrotos.");
+			System.out.println("Ah bueno disculpe no sabía que usted era una nenaza normi con peinado de maricón. Pensé que podría \n tratarle con un cierto respeto porque tendría algo especial que le diferenciase de la basura, pero \n ya veo que todo lo que puedo encontrar es un montón de mierda ponzoñosa. Gracias entonces bobalicón bebe escrotos.");
 			
 		}
 		else {
-			
-			System.out.println("Pero mira a quién tenemos aquí. Más de 80, eh gay? Seguro que te crees súper poderoso por tener una pija de más de 8 cm y por depilarte las cejas con cera. Pues que sepas que dormir con tu osito de peluche y rascarte los pelos del culo te delata como pedazo de verga infecta culo roto.");
+		
+			System.out.println("Pero mira a quién tenemos aquí. Más de 80, eh gay? Seguro que te crees súper poderoso por tener \n una pija de más de 8 cm y por depilarte las cejas con cera. Pues que sepas que dormir con tu osito \n de peluche retrasado y rascarte los pelos del culo te delata como pedazo de verga infecta culo roto.");
 			
 		}
 	}
