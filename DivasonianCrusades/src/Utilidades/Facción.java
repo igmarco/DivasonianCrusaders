@@ -1,8 +1,6 @@
 package Utilidades;
 
 public enum Facción {
-
-	FACCIÓN1,
-	FACCIÓN2
-	
+    Facción1,
+    Facción2;
 }
