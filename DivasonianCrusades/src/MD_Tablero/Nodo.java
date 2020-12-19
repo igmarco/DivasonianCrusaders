@@ -54,11 +54,11 @@ public class Nodo {
 
     public void resolverTurno() {
     	
-    	//Resolvemos combate, damos curación y sufrimos hacha. ¿Algo más? Quién sabe.
+    	//Resolvemos combate, damos curación y sufrimos hacha. ¿Algo más? Quién sabe. Puede que resolver el disparo automático.
     	
     }
 
-    private void resolverCombate() {
+	private void resolverCombate() {
     }
 
     private void darCuración() {
@@ -75,5 +75,31 @@ public class Nodo {
 
     public boolean hayFicha(Facción fc) {
     }
+    
+    //Getters y setters:
+    
+    public Casilla getCasilla() {
+		return casilla;
+	}
+
+	public void setCasilla(Casilla casilla) {
+		this.casilla = casilla;
+	}
+
+	public Ficha getFichaDefensora() {
+		return fichaDefensora;
+	}
+
+	public void setFichaDefensora(Ficha fichaDefensora) {
+		this.fichaDefensora = fichaDefensora;
+	}
+
+	public Ficha getFichaAtacante() {
+		return fichaAtacante;
+	}
+
+	public void setFichaAtacante(Ficha fichaAtacante) {
+		this.fichaAtacante = fichaAtacante;
+	}
 
 }

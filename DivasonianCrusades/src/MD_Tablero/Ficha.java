@@ -13,6 +13,24 @@ public class Ficha {
     public HachaDivasónica hachaDivasónica;
 
     public Facción facción;
+    
+    public Ficha(HachaDivasónica hachaDivasónica,
+			Facción facción) {
+		super();
+		this.hachaDivasónica = hachaDivasónica;
+		this.facción = facción;
+	}
+    
+    public Ficha(int daño, int vida, int vidaMáxima, int dañoVariable, HachaDivasónica hachaDivasónica,
+			Facción facción) {
+		super();
+		this.daño = daño;
+		this.vida = vida;
+		this.vidaMáxima = vidaMáxima;
+		this.dañoVariable = dañoVariable;
+		this.hachaDivasónica = hachaDivasónica;
+		this.facción = facción;
+	}
 
     public int realizarAtaque(Ficha f) {
     	
@@ -26,7 +44,7 @@ public class Ficha {
     	
     }
 
-    public boolean estáMuerta() {
+	public boolean estáMuerta() {
     	
     	return (vida<=0);
     	
