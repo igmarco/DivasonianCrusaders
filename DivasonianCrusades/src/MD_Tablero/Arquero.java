@@ -8,9 +8,15 @@ public class Arquero extends Ficha {
     public int dañoFlechasVariable;
 
     public int realizarDisparo() {
+    	
+    	return dañoFlechas + (int) Math.floor(Math.random()*2*(dañoFlechasVariable)-1);
+    	
     }
 
     public int getRango() {
+    	
+    	return rango;
+    	
     }
 
 }

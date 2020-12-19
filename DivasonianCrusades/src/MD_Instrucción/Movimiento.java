@@ -5,6 +5,9 @@ public class Movimiento extends Operación {
     public Dirección dirección;
 
     public Dirección getDirección() {
+    	
+    	return dirección;
+    	
     }
 
 }

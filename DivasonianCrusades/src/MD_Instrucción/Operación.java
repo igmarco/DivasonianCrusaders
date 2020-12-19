@@ -5,6 +5,9 @@ public class Operación {
     public Ficha ficha;
 
     public Ficha getFicha() {
+    	
+    	return ficha;
+    	
     }
 
 }
