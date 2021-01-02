@@ -3,9 +3,9 @@ import Utilidades.Facción;
 
 public class Copa extends Casilla {
 	
-    public Facción facción;
+    private Facción facción;
 
-    public int vida;
+    private int vida;
     
     public Copa() {
 		super();
@@ -19,8 +19,8 @@ public class Copa extends Casilla {
 //		this.vida = 
 	}
     
-    public Copa(Facción facción, int vida) {
-		super();
+    public Copa(Facción facción, int vida, HachaDivasónica hachaDivasónica) {
+		super(hachaDivasónica);
 		this.facción = facción;
 		this.vida = vida;
 	}
@@ -36,5 +36,22 @@ public class Copa extends Casilla {
     	return (vida <= 0);
     	
     }
+    
+    public Facción getFacción() {
+    	
+    	return this.facción;
+    	
+    }
+    
+    public boolean equals(Casilla c) {
+
+    	//Si tiene el mismo tipo de casilla (en caso de la copa (este en concreto) tiene que ser de la misma facción).
+		
+		if(c == null) return false;
+		else if(c.getClass() != this.getClass()) return false;
+		else if(((Copa) c).getFacción() != this.getFacción()) return false;
+		else return true;
+		
+	}
 
 }

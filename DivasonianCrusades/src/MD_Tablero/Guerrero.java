@@ -16,11 +16,7 @@ public class Guerrero extends Ficha {
 	
 	public Guerrero(int daño, int vida, int vidaMáxima, int dañoVariable, HachaDivasónica hachaDivasónica,
 			Facción facción) {
-		super(hachaDivasónica,facción);
-		this.daño = daño;
-		this.vida = vida;
-		this.vidaMáxima = vidaMáxima;
-		this.dañoVariable = dañoVariable;
+		super(daño, vida, vidaMáxima, dañoVariable, hachaDivasónica, facción);
 	}
 	
 }

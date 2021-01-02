@@ -15,11 +15,21 @@ public class Tablero {
 	}
     
     public boolean movimientoPosible(Ficha f, Facción fc) {
+    	
+    	// Devuelve false si una ficha ha sido trabada en combate en este turno (en una operación anterior a la siguiente).
+    	
     }
+    
 	public void moverFicha(int casillaOrigen, int casillaDestino) {
+		
+		//Si puede, mueve la ficha.
+		
     }
 
     public void resolverTurno() {
+    	
+    	//Resuelve el turno, haciendo en cada nodo lo que deba.
+    	
     }
 
     public boolean haTerminado() {
@@ -33,6 +43,9 @@ public class Tablero {
     }
 
     public Facción getGanador() {
+    	
+    	//Indica qué facción ha ganado.
+    	
     }
 
     public boolean comprobarInstrucción(Instrucción i, Facción fc) {
@@ -59,6 +72,9 @@ public class Tablero {
     }
 
     public void dispararProyectiles(int casillaObjetivo) {
+    	
+    	//Hace daño de catapulta a los bichos que haya en la casilla casillaObjetivo.
+    	
     }
 
     private boolean hayFicha(int casilla) {
