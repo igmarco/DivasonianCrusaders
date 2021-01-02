@@ -1,6 +1,22 @@
 package MD_Tablero;
 
 public class Colina extends Casilla {
-    public int dañoExtra;
+	private int dañoExtra;
 
-}
+	public Colina() {
+		super();
+//		this.dañoExtra = 
+	}
+    
+    public Colina(int dañoExtra, HachaDivasónica hachaDivasónica) {
+		super(hachaDivasónica);
+		this.dañoExtra = dañoExtra;
+	}
+    
+    public int getDañoExtra() {
+    	
+    	return this.dañoExtra;
+    	
+    }
+	
+} 

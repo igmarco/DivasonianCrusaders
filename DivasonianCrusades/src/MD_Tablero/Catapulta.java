@@ -1,11 +1,23 @@
 package MD_Tablero;
 
 public class Catapulta extends Casilla {
-    public int dañoProyectiles;
+	private int dañoProyectiles;
 
-    public int dañoProyectilesVariable;
+	private int dañoProyectilesVariable;
 
-    public int rango;
+	private int rango;
+	
+	public Catapulta() {
+		super();
+//		this.dañoExtra = 
+	}
+    
+    public Catapulta(int dañoProyectiles, int dañoProyectilesVariable, int rango, HachaDivasónica hachaDivasónica) {
+		super(hachaDivasónica);
+		this.dañoProyectiles = dañoProyectiles;
+		this.dañoProyectilesVariable = dañoProyectilesVariable;
+		this.rango = rango;
+	}
 
     public int realizarDisparo() {
     	
@@ -14,6 +26,9 @@ public class Catapulta extends Casilla {
     }
 
     public int getRango() {
+    	
+    	return this.rango;
+    	
     }
 
 }

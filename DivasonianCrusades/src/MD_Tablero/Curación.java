@@ -1,14 +1,10 @@
 package MD_Tablero;
 
-
-//TERMINADA SALVO PARÁMETROS
-
-
 public class Curación extends Casilla {
 
-	public int curación;
+	private int curación;
 
-    public int curaciónVariable;
+	private int curaciónVariable;
 
     public Curación() {
     	
@@ -17,8 +13,8 @@ public class Curación extends Casilla {
 //		this.curaciónVariable = ;
 	}
     
-    public Curación(int curación, int curaciónVariable) {
-		super();
+    public Curación(int curación, int curaciónVariable, HachaDivasónica hachaDivasónica) {
+		super(hachaDivasónica);
 		this.curación = curación;
 		this.curaciónVariable = curaciónVariable;
 	}

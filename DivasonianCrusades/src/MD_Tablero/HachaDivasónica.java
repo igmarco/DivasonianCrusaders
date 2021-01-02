@@ -1,9 +1,5 @@
 package MD_Tablero;
 
-
-//TERMINADA SALVO PARÁMETROS
-
-
 public class HachaDivasónica {
     public int dañoExtra;
     

@@ -1,9 +1,9 @@
 package MD_Instrucción;
 
 public class Disparo extends Operación {
-    public int x;
+	private int x;
 
-    public int y;
+	private int y;
 
     public int getX() {
     	

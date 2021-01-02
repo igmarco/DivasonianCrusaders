@@ -26,7 +26,12 @@ public class Ejecutor {
     	if(tablero.movimientoPosible(f, fc)) {
     		
     		int desde = tablero.dóndeEstá(f,fc);
-//    		int hasta = //Ojito porque aquí hay que pasar de coordenadas a posición en el vector.
+    		int hasta; //Ojito porque aquí hay que pasar de coordenadas a posición en el vector.
+    		
+    		if(d == Dirección.derecha) hasta = desde + 1;
+    		else if(d == Dirección.izquierda) hasta = desde - 1;
+    		else if(d == Dirección.abajo) hasta = desde + 9;
+    		else hasta = desde - 9;
     		
     		tablero.moverFicha(desde, hasta);
     		
@@ -52,6 +57,7 @@ public class Ejecutor {
     	
     	tablero.resolverTurno();
     	//Puede que haya que hacer algo más
+    	//Pues puede ser, bro, no sé, tú sabrás
     	
     }
 

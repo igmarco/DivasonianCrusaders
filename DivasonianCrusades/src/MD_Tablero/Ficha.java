@@ -1,29 +1,31 @@
 package MD_Tablero;
 import Utilidades.Facción;
 
-public class Ficha {
-    public int daño;
+public abstract class Ficha {
+    protected int daño;
 
-    public int vida;
+    protected int vida;
     
-    public int vidaMáxima;
+    protected int vidaMáxima;
 
-    public int dañoVariable;
+    protected int dañoVariable;
 
-    public HachaDivasónica hachaDivasónica;
+    protected HachaDivasónica hachaDivasónica;
 
-    public Facción facción;
+    protected Facción facción;
     
-    public Ficha(HachaDivasónica hachaDivasónica,
+    public HachaDivasónica getHachaDivasónica() {
+		return hachaDivasónica;
+	}
+
+	public Ficha(HachaDivasónica hachaDivasónica,
 			Facción facción) {
-		super();
 		this.hachaDivasónica = hachaDivasónica;
 		this.facción = facción;
 	}
     
     public Ficha(int daño, int vida, int vidaMáxima, int dañoVariable, HachaDivasónica hachaDivasónica,
 			Facción facción) {
-		super();
 		this.daño = daño;
 		this.vida = vida;
 		this.vidaMáxima = vidaMáxima;
@@ -31,6 +33,12 @@ public class Ficha {
 		this.hachaDivasónica = hachaDivasónica;
 		this.facción = facción;
 	}
+    
+    public int realizarAtaque() {
+    	
+    	return daño + (int) Math.floor(Math.random()*2*(dañoVariable)-1);
+    	
+    }
 
     public int realizarAtaque(Ficha f) {
     	
@@ -82,14 +90,25 @@ public class Ficha {
     }
 
     public boolean equals(Ficha f) {
-    	
-    	//Si es el mismo tipo y facción (ya que cada jugador solo tiene una de cada tipo.)
-    	
-    }
+
+    	//Si es el mismo tipo y facción (ya que cada jugador solo tiene una de cada tipo).
+		
+		if(f == null) return false;
+		else if(f.getFacción() != this.getFacción()) return false;
+		else if(f.getClass() != this.getClass()) return false;
+		else return true;
+		
+	}
 
     public int realizarCarga(Ficha f) {
     	
     	return this.realizarAtaque(f);
+    	
+    }
+    
+    public void setHachaDivasónica(HachaDivasónica h) {
+    	
+    	this.hachaDivasónica = h;
     	
     }
 
