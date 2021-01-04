@@ -25,7 +25,7 @@ public class Lancero extends Ficha {
 	
 	public int realizarAtaque(Ficha f) {
     	
-		if(f.getClass() == (new Caballero(Facción.Facción1)).getClass()) return dañoACaballería + (int) Math.floor(Math.random()*2*(dañoVariable)-1);
+		if(f instanceof Caballero) return dañoACaballería + (int) Math.floor(Math.random()*2*(dañoVariable)-1);
 		else return daño + (int) Math.floor(Math.random()*2*(dañoVariable)-1);
     	
     }

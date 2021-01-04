@@ -21,11 +21,12 @@ public class Ejecutor {
 	
 	}
 
-    public void moverFicha(Ficha f, Facción fc, Dirección d) {
+    public void moverFicha(Ficha f, Dirección d) {
     	
-    	if(tablero.movimientoPosible(f, fc)) {
+    	//ESTA COMPROBACIÓN SE HARÁ EN Partida.
+//    	if(tablero.movimientoPosible(f)) {
     		
-    		int desde = tablero.dóndeEstá(f,fc);
+    		int desde = tablero.dóndeEstá(f);
     		int hasta; //Ojito porque aquí hay que pasar de coordenadas a posición en el vector.
     		
     		if(d == Dirección.derecha) hasta = desde + 1;
@@ -33,9 +34,9 @@ public class Ejecutor {
     		else if(d == Dirección.abajo) hasta = desde + 9;
     		else hasta = desde - 9;
     		
-    		tablero.moverFicha(desde, hasta);
+    		tablero.moverFicha(f, desde, hasta);
     		
-    	}
+//    	}
     	
     }
     public void dispararProyectiles(int x, int y) {

@@ -1,5 +1,5 @@
 module DivasonianCrusades {
 	
-	//Ojo a los atributos públicos, que tienen que ser privados.
+	"Revisar el quitar y poner ficha de la clase Nodo."
 	
 }

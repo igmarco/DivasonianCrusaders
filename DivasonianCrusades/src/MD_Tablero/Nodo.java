@@ -2,11 +2,11 @@ package MD_Tablero;
 import Utilidades.Facción;
 
 public class Nodo {
-    public Casilla casilla;
+    private Casilla casilla;
 
-    public Ficha fichaDefensora;
+    private Ficha fichaDefensora;
 
-    public Ficha fichaAtacante;
+    private Ficha fichaAtacante;
     
     public Nodo() {
     	
@@ -48,7 +48,7 @@ public class Nodo {
     	
     }
 
-    public boolean estáAquí(Ficha f, Facción fc) {
+    public boolean estáAquí(Ficha f) {
     	
     	boolean está = false;
     	
@@ -99,8 +99,36 @@ public class Nodo {
 
     public void quitarFicha(Ficha f) {
     	
-    	if(f.equals(this.fichaDefensora)) this.fichaDefensora = null;
-    	else if(f.equals(this.fichaAtacante)) this.fichaAtacante = null;
+    	//Cómo gestiono el hecho de que hacen pupa los que se quedan a los que se van? T.T
+    	
+    	if(f.equals(this.fichaDefensora)) {
+    		
+//    		if(this.fichaAtacante != null) {
+//    			
+//    			this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarAtaque(this.fichaDefensora));
+//    			
+//    		}
+//    		if(this.fichaDefensora.estáMuerta()) {
+//    			
+//    			asdasdfghasfrhhqarfhafasdfhasdfghasdfhafhrahwerqa
+//    			
+//    		}
+    		
+    		this.fichaDefensora = this.fichaAtacante;
+    		this.fichaAtacante = null;
+    		
+    	}
+    	else if(f.equals(this.fichaAtacante)) {
+    		
+    		if(this.fichaAtacante != null) {
+    			
+    			this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarAtaque(this.fichaDefensora));
+    			
+    		}
+    		
+    		this.fichaAtacante = null;
+    		
+    	}
     	
     }
 
@@ -131,7 +159,7 @@ public class Nodo {
     		
     	}
     	
-    	if (this.casilla.getClass() == (new Copa()).getClass() && this.fichaDefensora != null && this.fichaAtacante == null && this.fichaAtacante.getFacción() != ((Copa) this.casilla).getFacción()) {
+    	if (this.casilla instanceof Copa && this.fichaDefensora != null && this.fichaAtacante == null && this.fichaAtacante.getFacción() != ((Copa) this.casilla).getFacción()) {
     		
     		((Copa) this.casilla).sufrirDaño(this.fichaDefensora.realizarAtaque());
     		
