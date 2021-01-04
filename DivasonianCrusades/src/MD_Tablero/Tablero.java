@@ -1,4 +1,7 @@
 package MD_Tablero;
+import java.util.ArrayList;
+import java.util.List;
+
 import MD_Instrucción.Instrucción;
 import Utilidades.Facción;
 
@@ -89,9 +92,14 @@ public class Tablero {
     	
     }
 
-    private List<int> dóndeDisparar(Catapulta cp) {
+    private List<Integer> dóndeDisparar(Catapulta cp) {
     	
     	//Devuelve una lista de enteros que representan las posiciones de las casillas a las que le llega el rango la catapulta dada.
+    	List<Integer> posiciones = new ArrayList<Integer>();
+    	
+    	if()
+    	
+    	return posiciones;
     	
     }
 

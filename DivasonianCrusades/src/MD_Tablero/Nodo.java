@@ -7,6 +7,46 @@ public class Nodo {
     public Ficha fichaDefensora;
 
     public Ficha fichaAtacante;
+    
+    public Nodo() {
+    	
+    	this.casilla = new Normal();
+    	this.fichaDefensora = null;
+    	this.fichaAtacante = null;
+    	
+    }
+    
+    public Nodo(Casilla casilla) {
+    	
+    	this.casilla = casilla;
+    	this.fichaDefensora = null;
+    	this.fichaAtacante = null;
+    	
+    }
+    
+    public Nodo(Ficha fichaDefensora) {
+    	
+    	this.casilla = new Normal();
+    	this.fichaDefensora = fichaDefensora;
+    	this.fichaAtacante = null;
+    	
+    }
+    
+    public Nodo(Casilla casilla, Ficha fichaDefensora) {
+    	
+    	this.casilla = casilla;
+    	this.fichaDefensora = fichaDefensora;
+    	this.fichaAtacante = null;
+    	
+    }
+    
+    public Nodo(Casilla casilla, Ficha fichaDefensora, Ficha fichaAtacante) {
+    	
+    	this.casilla = casilla;
+    	this.fichaDefensora = fichaDefensora;
+    	this.fichaAtacante = fichaAtacante;
+    	
+    }
 
     public boolean estáAquí(Ficha f, Facción fc) {
     	
