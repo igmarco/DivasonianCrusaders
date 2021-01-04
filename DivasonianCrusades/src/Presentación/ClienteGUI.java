@@ -138,7 +138,7 @@ public class ClienteGUI extends JFrame {
 		panel.add(btNuevaPartida);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\LogoD.png"));
+		lblNewLabel.setIcon(new ImageIcon("Rercursos\\LogoD.png"));
 		lblNewLabel.setBounds(48, 5, 303, 113);
 		panel.add(lblNewLabel);
 	}
