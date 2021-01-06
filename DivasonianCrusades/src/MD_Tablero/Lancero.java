@@ -29,5 +29,7 @@ public class Lancero extends Ficha {
 		else return daño + (int) Math.floor(Math.random()*2*(dañoVariable)-1);
     	
     }
+	
+	//Creo que no hay por qué redefinir realizarCarga() porque en Ficha hace referencia a realizarAtaque().
     
 }

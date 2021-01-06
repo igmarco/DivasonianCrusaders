@@ -33,8 +33,14 @@ public class Tablero {
     
 	public void moverFicha(Ficha f, int casillaOrigen, int casillaDestino) {
 		
-		//Si puede, mueve la ficha.
-		//No no, si puede no: La mueve y punto.
+		//Mueve y resuelve combate
+		
+    }
+	
+	//NUEVO MÉTODO, PARA CUANDO DOS FICHAS SE MUEVEN A UNA SOLA CASILLA COMÚN
+	public void moverFichasALaMismaCasilla(Ficha f1, Ficha f2, int casillaOrigen, int casillaDestino) {
+		
+		//Mueve y resuelve combate
 		
     }
 

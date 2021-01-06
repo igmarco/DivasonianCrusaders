@@ -85,13 +85,15 @@ public class Nodo {
     		
     		this.fichaAtacante = f;
     		
-    		this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarCarga(this.fichaDefensora));
-    		if(!this.fichaDefensora.estáMuerta()) {
-    			
-    			if(this.casilla.equals(new Colina())) this.fichaAtacante.sufrirDaño((this.fichaDefensora.realizarAtaque(this.fichaAtacante)) + ((Colina) this.casilla).getDañoExtra());
-    			else this.fichaAtacante.sufrirDaño(this.fichaDefensora.realizarAtaque(this.fichaAtacante));
-    			
-    		}
+    		//Voy a intentar que el daño se haga en Tablero.
+//    		this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarCarga(this.fichaDefensora));
+//    		if(!this.fichaDefensora.estáMuerta()) {
+//    			
+//    			if(this.casilla.equals(new Colina())) this.fichaAtacante.sufrirDaño((this.fichaDefensora.realizarAtaque(this.fichaAtacante)) + ((Colina) this.casilla).getDañoExtra());
+//    			else this.fichaAtacante.sufrirDaño(this.fichaDefensora.realizarAtaque(this.fichaAtacante));
+//    			
+//    		}
+//    		//Falta en el else quitar la ficha, creo.
     		
     	}
     	
@@ -99,9 +101,9 @@ public class Nodo {
 
     public void quitarFicha(Ficha f) {
     	
-    	//Cómo gestiono el hecho de que hacen pupa los que se quedan a los que se van? T.T
-    	
     	if(f.equals(this.fichaDefensora)) {
+    		
+    		//Voy a intentar que el daño se haga en Tablero.
     		
 //    		if(this.fichaAtacante != null) {
 //    			
@@ -143,14 +145,7 @@ public class Nodo {
     	this.darCuración();
     	this.sufrirHacha();
     	
-    	if(this.fichaAtacante.estáMuerta()) this.fichaAtacante = null;
-    	if(this.fichaDefensora.estáMuerta()) {
-    		
-    		//ADVERTENCIA: POSIBLES PROBLEMAS DE PROG3
-    		this.fichaDefensora = this.fichaAtacante;
-    		this.fichaAtacante = null;
-    		
-    	}
+    	this.comprobarMuertes();
     	
     	if(this.casilla.tieneHacha() && this.fichaDefensora != null && this.fichaAtacante == null) {
     		
@@ -220,6 +215,43 @@ public class Nodo {
 //    public boolean hayFicha(Facción fc) {
 //    	
 //    }
+    
+    //ESTO LO AGREGO PARA GESTIONAR LAS CARGAS Y LAS HUIDAS DESDE Tablero.
+    public void ejecutarCrga() {
+    	
+    	this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarCarga(this.fichaDefensora));
+		if(!this.fichaDefensora.estáMuerta()) {
+			
+			if(this.casilla.equals(new Colina())) this.fichaAtacante.sufrirDaño((this.fichaDefensora.realizarAtaque(this.fichaAtacante)) + ((Colina) this.casilla).getDañoExtra());
+			else this.fichaAtacante.sufrirDaño(this.fichaDefensora.realizarAtaque(this.fichaAtacante));
+			
+		}
+
+		this.comprobarMuertes();
+    	
+    }
+    
+    public void ejecutarCrgasRespectivas() {
+    	
+    	this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarCarga(this.fichaDefensora));
+    	this.fichaAtacante.sufrirDaño(this.fichaDefensora.realizarCarga(this.fichaAtacante));
+    	
+    	this.comprobarMuertes();
+    	
+    }
+    
+    private void comprobarMuertes() {
+    	
+    	if(this.fichaAtacante.estáMuerta()) this.fichaAtacante = null;
+    	if(this.fichaDefensora.estáMuerta()) {
+    		
+    		//ADVERTENCIA: POSIBLES PROBLEMAS DE PROG3
+    		this.fichaDefensora = this.fichaAtacante;
+    		this.fichaAtacante = null;
+    		
+    	}
+    	
+    }
     
     //Getters y setters:
     
