@@ -242,6 +242,7 @@ public class TableroGrafico extends JFrame {
 		
 		JButton cas23 = new JButton("");
 		cas23.setBackground(new Color(245, 245, 220));
+		cas23.setBorder(null);
 		panel.add(cas23);
 		
 		JButton cas24 = new JButton("");
