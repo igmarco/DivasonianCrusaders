@@ -70,6 +70,7 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas1);
 		
 		JButton cas2 = new JButton("");
+		cas2.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\Curarse.png"));
 		cas2.setBackground(new Color(245, 245, 220));
 		panel.add(cas2);
 		
@@ -82,6 +83,7 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas4);
 		
 		JButton cas5 = new JButton("");
+		cas5.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\Colina.png"));
 		cas5.setBackground(new Color(245, 245, 220));
 		panel.add(cas5);
 		
@@ -212,6 +214,7 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas19);
 		
 		JButton cas20 = new JButton("");
+		cas20.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\CatapultaAzul.png"));
 		cas20.setBackground(new Color(245, 245, 220));
 		panel.add(cas20);
 		
@@ -242,6 +245,7 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas23);
 		
 		JButton cas24 = new JButton("");
+		cas24.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\CatapultaRoja.png"));
 		cas24.setBackground(new Color(245, 245, 220));
 		panel.add(cas24);
 		
@@ -372,6 +376,7 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas38);
 		
 		JButton cas39 = new JButton("");
+		cas39.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\Colina.png"));
 		cas39.setBackground(new Color(245, 245, 220));
 		panel.add(cas39);
 		
@@ -384,6 +389,7 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas41);
 		
 		JButton cas42 = new JButton("");
+		cas42.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\Curarse.png"));
 		cas42.setBackground(new Color(245, 245, 220));
 		panel.add(cas42);
 		
