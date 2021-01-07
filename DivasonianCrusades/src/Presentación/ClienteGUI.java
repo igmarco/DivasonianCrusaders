@@ -2,19 +2,17 @@ package Presentación;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import java.awt.Font;
-import javax.swing.JLabel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class ClienteGUI extends JFrame {
 
@@ -40,6 +38,7 @@ public class ClienteGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public ClienteGUI() {
+		final ClienteGUI main = this;
 		setResizable(false);
 		setBounds(100, 100, 395, 399);
 		contentPane = new JPanel();
@@ -55,10 +54,6 @@ public class ClienteGUI extends JFrame {
 		panel.setLayout(null);
 		
 		final JButton btCargarPartida = new JButton("");
-		btCargarPartida.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btCargarPartida.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -125,6 +120,16 @@ public class ClienteGUI extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				btNuevaPartida.setIcon(new ImageIcon("Rercursos\\NuevaPartida.png"));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+						try {
+							TableroGrafico tablero = new TableroGrafico(main);
+							tablero.setVisible(true);
+							setVisible(false);
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
 			}
 		});
 		btNuevaPartida.setBackground(new Color(240, 230, 140));
