@@ -6,6 +6,10 @@ public class Partida {
     public int turno;
 
     public int movimiento;
+    
+    public String nombre1;
+    
+    public String nombre2;
 
     public Instrucción instrucciónFacción1;
 

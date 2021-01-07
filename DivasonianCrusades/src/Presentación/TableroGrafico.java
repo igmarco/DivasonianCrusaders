@@ -51,16 +51,16 @@ public class TableroGrafico extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				cas0.setBackground(Color.white);
-				cas0.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\ArqueroAzulC.png"));
+				cas0.setIcon(new ImageIcon("Recursos\\ArqueroAzulC.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				cas0.setBackground(new Color(245, 245, 220));
-				cas0.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\ArqueroAzulBN.png"));
+				cas0.setIcon(new ImageIcon("Recursos\\ArqueroAzulBN.png"));
 			}
 		});
 		cas0.setBackground(new Color(245, 245, 220));
-		cas0.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\ArqueroAzulBN.png"));
+		cas0.setIcon(new ImageIcon("Recursos\\ArqueroAzulBN.png"));
 		cas0.setBorder(null);
 		panel.add(cas0);
 
@@ -97,16 +97,16 @@ public class TableroGrafico extends JFrame {
 		cas8.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				cas8.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\CaballeroRojoC.png"));
+				cas8.setIcon(new ImageIcon("Recursos\\CaballeroRojoC.png"));
 				cas8.setBackground(Color.white);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				cas8.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\CaballeroRojoBC.png"));
+				cas8.setIcon(new ImageIcon("Recursos\\CaballeroRojoBC.png"));
 				cas8.setBackground(new Color(245, 245, 220));
 			}
 		});
-		cas8.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\CaballeroRojoBC.png"));
+		cas8.setIcon(new ImageIcon("Recursos\\CaballeroRojoBC.png"));
 		cas8.setBackground(new Color(245, 245, 220));
 		cas8.setBorder(null);
 		panel.add(cas8);
@@ -115,17 +115,17 @@ public class TableroGrafico extends JFrame {
 		cas17.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				cas17.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\LanzeroAzulC.png"));
+				cas17.setIcon(new ImageIcon("Recursos\\LanzeroAzulC.png"));
 				cas17.setBackground(Color.white);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				cas17.setBackground(new Color(245, 245, 220));
-				cas17.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\LanzeroAzulBN.png"));
+				cas17.setIcon(new ImageIcon("Recursos\\LanzeroAzulBN.png"));
 			}
 		});
 		cas17.setBackground(new Color(245, 245, 220));
-		cas17.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\LanzeroAzulBN.png"));
+		cas17.setIcon(new ImageIcon("Recursos\\LanzeroAzulBN.png"));
 		cas17.setBorder(null);
 		panel.add(cas17);
 		
@@ -161,16 +161,16 @@ public class TableroGrafico extends JFrame {
 		cas16.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				cas16.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\BarbaroRojoC.png"));
+				cas16.setIcon(new ImageIcon("Recursos\\BarbaroRojoC.png"));
 				cas16.setBackground(Color.white);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				cas16.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\BarbaroRojoBC.png"));
+				cas16.setIcon(new ImageIcon("Recursos\\BarbaroRojoBC.png"));
 				cas16.setBackground(new Color(245, 245, 220));
 			}
 		});
-		cas16.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\BarbaroRojoBC.png"));
+		cas16.setIcon(new ImageIcon("Recursos\\BarbaroRojoBC.png"));
 		cas16.setBackground(new Color(245, 245, 220));
 		cas16.setBorder(null);
 		panel.add(cas16);
@@ -179,16 +179,16 @@ public class TableroGrafico extends JFrame {
 		cas18.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				cas18.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\CoronaAzul.png"));
+				cas18.setIcon(new ImageIcon("Recursos\\CoronaAzul.png"));
 				cas18.setBackground(Color.white);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				cas18.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\CoronaBC.png"));
+				cas18.setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
 				cas18.setBackground(new Color(204, 204, 255));
 			}
 		});
-		cas18.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\CoronaBC.png"));
+		cas18.setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
 		cas18.setBorder(null);
 		cas18.setBackground(new Color(204, 204, 255));
 		panel.add(cas18);
@@ -197,16 +197,16 @@ public class TableroGrafico extends JFrame {
 		cas19.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				cas19.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\GuerreroAzulC.png"));
+				cas19.setIcon(new ImageIcon("Recursos\\GuerreroAzulC.png"));
 				cas19.setBackground(Color.white);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				cas19.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\GuerreroAzulBC.png"));
+				cas19.setIcon(new ImageIcon("Recursos\\GuerreroAzulBC.png"));
 				cas19.setBackground(new Color(245, 245, 220));
 			}
 		});
-		cas19.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\GuerreroAzulBC.png"));
+		cas19.setIcon(new ImageIcon("Recursos\\GuerreroAzulBC.png"));
 		cas19.setBackground(new Color(245, 245, 220));
 		cas19.setBorder(null);
 		panel.add(cas19);
@@ -223,16 +223,16 @@ public class TableroGrafico extends JFrame {
 		cas22.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				cas22.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\HachaDivasonicaS.png"));
+				cas22.setIcon(new ImageIcon("Recursos\\HachaDivasonicaS.png"));
 				cas22.setBackground(Color.white);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				cas22.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\HachaDivasonica.png"));
+				cas22.setIcon(new ImageIcon("Recursos\\HachaDivasonica.png"));
 				cas22.setBackground(new Color(245, 245, 220));
 			}
 		});
-		cas22.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\HachaDivasonica.png"));
+		cas22.setIcon(new ImageIcon("Recursos\\HachaDivasonica.png"));
 		cas22.setBackground(new Color(245, 245, 220));
 		cas22.setBorder(null);
 		panel.add(cas22);
@@ -249,16 +249,16 @@ public class TableroGrafico extends JFrame {
 		cas25.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				cas25.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\GuerreroRojoC.png"));
+				cas25.setIcon(new ImageIcon("Recursos\\GuerreroRojoC.png"));
 				cas25.setBackground(Color.white);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				cas25.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\GuerreroRojoBC.png"));
+				cas25.setIcon(new ImageIcon("Recursos\\GuerreroRojoBC.png"));
 				cas25.setBackground(new Color(245, 245, 220));
 			}
 		});
-		cas25.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\GuerreroRojoBC.png"));
+		cas25.setIcon(new ImageIcon("Recursos\\GuerreroRojoBC.png"));
 		cas25.setBackground(new Color(245, 245, 220));
 		cas25.setBorder(null);
 		panel.add(cas25);
@@ -267,16 +267,16 @@ public class TableroGrafico extends JFrame {
 		cas26.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				cas26.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\CoronaRojo.png"));
+				cas26.setIcon(new ImageIcon("Recursos\\CoronaRojo.png"));
 				cas26.setBackground(Color.white);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				cas26.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\CoronaBC.png"));
+				cas26.setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
 				cas26.setBackground(new Color(255, 204, 204));
 			}
 		});
-		cas26.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\CoronaBC.png"));
+		cas26.setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
 		cas26.setBackground(new Color(255, 204, 204));
 		cas26.setBorder(null);
 		panel.add(cas26);
@@ -285,16 +285,16 @@ public class TableroGrafico extends JFrame {
 		cas27.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				cas27.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\BarbaroAzulC.png"));
+				cas27.setIcon(new ImageIcon("Recursos\\BarbaroAzulC.png"));
 				cas27.setBackground(Color.white);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				cas27.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\BarbaroAzulBC.png"));
+				cas27.setIcon(new ImageIcon("Recursos\\BarbaroAzulBC.png"));
 				cas27.setBackground(new Color(245, 245, 220));
 			}
 		});
-		cas27.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\BarbaroAzulBC.png"));
+		cas27.setIcon(new ImageIcon("Recursos\\BarbaroAzulBC.png"));
 		cas27.setBackground(new Color(245, 245, 220));
 		cas27.setBorder(null);
 		panel.add(cas27);
@@ -332,16 +332,16 @@ public class TableroGrafico extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				cas35.setBackground(Color.white);
-				cas35.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\LanzeroRojoC.png"));
+				cas35.setIcon(new ImageIcon("Recursos\\LanzeroRojoC.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				cas35.setBackground(new Color(245, 245, 220));
-				cas35.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\LanzeroRojoBN.png"));
+				cas35.setIcon(new ImageIcon("Recursos\\LanzeroRojoBN.png"));
 			}
 		});
 		cas35.setBackground(new Color(245, 245, 220));
-		cas35.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\LanzeroRojoBN.png"));
+		cas35.setIcon(new ImageIcon("Recursos\\LanzeroRojoBN.png"));
 		cas35.setBorder(null);
 		panel.add(cas35);
 		
@@ -349,16 +349,16 @@ public class TableroGrafico extends JFrame {
 		cas36.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				cas36.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\CaballeroAzulC.png"));
+				cas36.setIcon(new ImageIcon("Recursos\\CaballeroAzulC.png"));
 				cas36.setBackground(Color.white);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				cas36.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\CaballeroAzulBC.png"));
+				cas36.setIcon(new ImageIcon("Recursos\\CaballeroAzulBC.png"));
 				cas36.setBackground(new Color(245, 245, 220));
 			}
 		});
-		cas36.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\CaballeroAzulBC.png"));
+		cas36.setIcon(new ImageIcon("Recursos\\CaballeroAzulBC.png"));
 		cas36.setBackground(new Color(245, 245, 220));
 		cas36.setBorder(null);
 		panel.add(cas36);
@@ -396,15 +396,15 @@ public class TableroGrafico extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				cas44.setBackground(Color.white);
-				cas44.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\ArqueroRojoC.png"));
+				cas44.setIcon(new ImageIcon("Recursos\\ArqueroRojoC.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				cas44.setBackground(new Color(245, 245, 220));
-				cas44.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\ArqueroRojoBN.png"));
+				cas44.setIcon(new ImageIcon("Recursos\\ArqueroRojoBN.png"));
 			}
 		});
-		cas44.setIcon(new ImageIcon("C:\\Users\\pablo\\OneDrive\\Escritorio\\BlackLynx-Studio\\DivasonianCrusades\\Rercursos\\ArqueroRojoBN.png"));
+		cas44.setIcon(new ImageIcon("Recursos\\ArqueroRojoBN.png"));
 		cas44.setBackground(new Color(245, 245, 220));
 		cas44.setBorder(null);
 		panel.add(cas44);
@@ -414,11 +414,11 @@ public class TableroGrafico extends JFrame {
 		btnMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				btnMenu.setIcon(new ImageIcon("Rercursos\\Menu2.png"));
+				btnMenu.setIcon(new ImageIcon("Recursos\\Menu2.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				btnMenu.setIcon(new ImageIcon("Rercursos\\Menu.png"));
+				btnMenu.setIcon(new ImageIcon("Recursos\\Menu.png"));
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -427,7 +427,7 @@ public class TableroGrafico extends JFrame {
 			}
 		});
 		btnMenu.setBackground(new Color(240, 230, 140));
-		btnMenu.setIcon(new ImageIcon("Rercursos\\Menu.png"));
+		btnMenu.setIcon(new ImageIcon("Recursos\\Menu.png"));
 		btnMenu.setBorder(null);
 		btnMenu.setBounds(42, 615, 179, 47);
 		contentPane.add(btnMenu);
