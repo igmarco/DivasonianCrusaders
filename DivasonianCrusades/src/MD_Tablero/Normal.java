@@ -11,4 +11,8 @@ public class Normal extends Casilla {
 		super(hachaDivasónica);
 	}
     
+    public Normal(HachaDivasónica hachaDivasónica, boolean casillaDeCuración) {
+		super(hachaDivasónica, casillaDeCuración);
+	}
+    
 }

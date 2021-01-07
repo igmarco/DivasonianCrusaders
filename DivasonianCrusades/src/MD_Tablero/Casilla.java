@@ -2,16 +2,27 @@ package MD_Tablero;
 
 public abstract class Casilla {
 	protected HachaDivasónica hachaDivasónica;
+	protected boolean casillaDeCura;
 	
 	public Casilla() {
 		
 		this.hachaDivasónica = null;
+		this.casillaDeCura = false;
 		
 	}
 	
 	public Casilla(HachaDivasónica hachaDivasónica) {
 		
 		this.hachaDivasónica = hachaDivasónica;
+		this.casillaDeCura = false;
+		
+	}
+
+	
+	public Casilla(HachaDivasónica hachaDivasónica, boolean casillaDeCura) {
+		
+		this.hachaDivasónica = hachaDivasónica;
+		this.casillaDeCura = casillaDeCura;
 		
 	}
 

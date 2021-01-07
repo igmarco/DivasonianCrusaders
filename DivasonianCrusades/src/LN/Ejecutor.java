@@ -1,6 +1,6 @@
 package LN;
 
-import MD_Instrucción.Instrucción;
+import MD_Tablero.Catapulta;
 import MD_Tablero.Ficha;
 import MD_Tablero.Tablero;
 import Utilidades.Dirección;
@@ -39,7 +39,10 @@ public class Ejecutor {
 //    	}
     	
     }
-    public void dispararProyectiles(int x, int y) {
+    public void dispararProyectiles(Catapulta c, int x, int y) {
+    	
+    	tablero.dispararProyectiles(c, (5-y)*9 + x-1);
+    	
     }
 
     public boolean haTerminado() {
@@ -96,7 +99,7 @@ public class Ejecutor {
     		}
     		else if(hasta1 == hasta2) {
     			
-    			tablero.moverFichasALaMismaCasilla(f1, f2, desde1, hasta1);
+    			tablero.moverFichasALaMismaCasilla(f1, f2, desde1, desde2, hasta1);
     			
     		}
     	

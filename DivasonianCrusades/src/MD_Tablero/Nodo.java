@@ -99,9 +99,13 @@ public class Nodo {
     	
     }
 
-    public void quitarFicha(Ficha f) {
+    public Ficha quitarFicha(Ficha f) {
+    	
+    	Ficha freturn = null;
     	
     	if(f.equals(this.fichaDefensora)) {
+    		
+    		freturn = this.fichaDefensora;
     		
     		//Voy a intentar que el daño se haga en Tablero.
     		
@@ -122,6 +126,8 @@ public class Nodo {
     	}
     	else if(f.equals(this.fichaAtacante)) {
     		
+    		freturn = this.fichaAtacante;
+    		
     		if(this.fichaAtacante != null) {
     			
     			this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarAtaque(this.fichaDefensora));
@@ -132,6 +138,8 @@ public class Nodo {
     		
     	}
     	
+    	return freturn;
+    	
     }
 
     public void resolverTurno() {
@@ -140,6 +148,7 @@ public class Nodo {
     	//Vale, no, resolver el disparo automático DESCARTADO.
     	//Claro, tenía que contemplar que hubiese hacha y que se la diese al último en pie (si lo hay).
     	//Epa, queda una cosa, saber si es una copa y resolver el daño también.
+    	//Falta una última cosa. Si está el hacha divasónica tirada en el suelo, entonces la recoge la tropa.
     	
     	this.resolverCombate();
     	this.darCuración();
@@ -151,6 +160,12 @@ public class Nodo {
     		
     		this.fichaDefensora.setHachaDivasónica(this.casilla.getHachaDivasónica());
     		this.casilla.setHachaDivasónica(null);
+    		
+    	}
+    	
+    	if(casilla.getHachaDivasónica() != null && fichaDefensora != null && fichaAtacante == null && fichaDefensora.getHachaDivasónica() == null) {
+    		
+    		this.fichaDefensora.setHachaDivasónica(casilla.getHachaDivasónica());
     		
     	}
     	
@@ -195,6 +210,8 @@ public class Nodo {
     	
     	this.fichaDefensora.sufrirDaño(daño);
     	this.fichaAtacante.sufrirDaño(daño);
+    	
+    	this.comprobarMuertes();
     	
     }
 
@@ -242,8 +259,23 @@ public class Nodo {
     
     private void comprobarMuertes() {
     	
-    	if(this.fichaAtacante.estáMuerta()) this.fichaAtacante = null;
-    	if(this.fichaDefensora.estáMuerta()) {
+    	if(this.fichaAtacante != null && this.fichaAtacante.estáMuerta()) {
+    		
+    		if(fichaAtacante.getHachaDivasónica() != null && fichaDefensora.getHachaDivasónica() == null) {
+    			
+    			fichaDefensora.setHachaDivasónica(fichaAtacante.getHachaDivasónica());
+    			
+    		}
+    		this.fichaAtacante = null;
+    		
+    	}
+    	if(this.fichaDefensora != null && this.fichaDefensora.estáMuerta()) {
+    		
+    		if(fichaDefensora.getHachaDivasónica() != null && casilla.getHachaDivasónica() == null) {
+    			
+    			casilla.setHachaDivasónica(fichaDefensora.getHachaDivasónica());
+    			
+    		}
     		
     		//ADVERTENCIA: POSIBLES PROBLEMAS DE PROG3
     		this.fichaDefensora = this.fichaAtacante;

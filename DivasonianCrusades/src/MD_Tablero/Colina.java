@@ -7,9 +7,14 @@ public class Colina extends Casilla {
 		super();
 //		this.dañoExtra = 
 	}
-    
-    public Colina(int dañoExtra, HachaDivasónica hachaDivasónica) {
+	
+	public Colina(int dañoExtra, HachaDivasónica hachaDivasónica) {
 		super(hachaDivasónica);
+		this.dañoExtra = dañoExtra;
+	}
+    
+    public Colina(int dañoExtra, HachaDivasónica hachaDivasónica, boolean casillaDeCuración) {
+		super(hachaDivasónica, casillaDeCuración);
 		this.dañoExtra = dañoExtra;
 	}
     

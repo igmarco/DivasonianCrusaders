@@ -34,13 +34,28 @@ public class Tablero {
 	public void moverFicha(Ficha f, int casillaOrigen, int casillaDestino) {
 		
 		//Mueve y resuelve combate
+		Ficha freal = nodos[casillaOrigen].quitarFicha(f);
+		nodos[casillaDestino].ponerFicha(freal);
+		
+		if(nodos[casillaDestino].hayDosFichas()) {
+			
+			nodos[casillaDestino].ejecutarCrga();
+			
+		}
 		
     }
 	
 	//NUEVO MÉTODO, PARA CUANDO DOS FICHAS SE MUEVEN A UNA SOLA CASILLA COMÚN
-	public void moverFichasALaMismaCasilla(Ficha f1, Ficha f2, int casillaOrigen, int casillaDestino) {
+	public void moverFichasALaMismaCasilla(Ficha f1, Ficha f2, int casillaOrigen1, int casillaOrigen2, int casillaDestino) {
 		
 		//Mueve y resuelve combate
+		Ficha freal1 = nodos[casillaOrigen1].quitarFicha(f1);
+		nodos[casillaDestino].ponerFicha(freal1);
+		
+		Ficha freal2 = nodos[casillaOrigen2].quitarFicha(f2);
+		nodos[casillaDestino].ponerFicha(freal2);
+		
+		nodos[casillaDestino].ejecutarCrgasRespectivas();
 		
     }
 
@@ -57,8 +72,6 @@ public class Tablero {
     }
 
     public boolean haTerminado() {
-    	
-    	boolean perdido = false;
     	
     	int posCopa1 = this.dóndeEstá(new Copa(Facción.Facción1));
     	int posCopa2 = this.dóndeEstá(new Copa(Facción.Facción2));
@@ -91,7 +104,7 @@ public class Tablero {
     		
     	}
     	
-    	if(!algunoVivo1) return true;
+    	if (!algunoVivo2) return true;
     	
     	return (false);
     	
@@ -174,20 +187,20 @@ public class Tablero {
     	
     }
 
-    private boolean hayFicha(int casilla) {
+    public boolean hayFicha(int casilla) {
     	
     	return (nodos[casilla].hayFicha());
     	
     }
     
     //OJOOOO ESTE LO HE AÑADIDO DE FREE TOTALMENTE
-    private boolean hayDosFichas(int casilla) {
+    public boolean hayDosFichas(int casilla) {
     	
     	return (nodos[casilla].hayDosFichas());
     	
     }
 
-    private boolean hayFicha(Facción fc, int casilla) {
+    public boolean hayFicha(Facción fc, int casilla) {
     	
     	return (nodos[casilla].hayFicha());
     	

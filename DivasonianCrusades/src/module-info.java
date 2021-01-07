@@ -1,5 +1,5 @@
 module DivasonianCrusades {
 	
-	"Revisar el mover fichas con todas sus posibilidades.";
+	"Terminar los constructores, revisar las clases y ponerse al tajo con los sockets.";
 	
 }
