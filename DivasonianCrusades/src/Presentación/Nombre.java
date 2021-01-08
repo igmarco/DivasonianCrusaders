@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 
 public class Nombre extends JFrame {
 
@@ -28,9 +29,10 @@ public class Nombre extends JFrame {
 	 * Create the frame.
 	 */
 	public Nombre(final TableroGrafico tablero) {
+		setResizable(false);
 		try {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setBounds(100, 100, 450, 241);
+			setBounds(100, 100, 450, 258);
 			contentPane = new JPanel();
 			contentPane.setBackground(new Color(240, 230, 140));
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -38,17 +40,18 @@ public class Nombre extends JFrame {
 			contentPane.setLayout(null);
 			
 			JLabel lblNewLabel_1 = new JLabel("Introduzca su nombre:");	
-			lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 19));
-			lblNewLabel_1.setBounds(27, 108, 197, 14);
+			lblNewLabel_1.setFont(new Font("Consolas", Font.PLAIN, 20));
+			lblNewLabel_1.setBounds(10, 105, 251, 28);
 			contentPane.add(lblNewLabel_1);
 			
 			textField = new JTextField();
-			textField.setFont(new Font("Arial", Font.PLAIN, 19));
-			textField.setBounds(244, 101, 166, 28);
+			textField.setFont(new Font("Consolas", Font.PLAIN, 20));
+			textField.setBounds(258, 101, 166, 28);
 			contentPane.add(textField);
 			textField.setColumns(10);
 			
-			Aceptar = new JButton("Conectar");
+			Aceptar = new JButton("");
+			Aceptar.setIcon(new ImageIcon("Recursos\\Conectar.png"));
 			Aceptar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -78,12 +81,21 @@ public class Nombre extends JFrame {
 						lblNewLabel.setText("Error al conectar");
 					}
 				}
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					Aceptar.setIcon(new ImageIcon("Recursos\\ConectarS.png"));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					Aceptar.setIcon(new ImageIcon("Recursos\\Conectar.png"));
+				}
 			});
-			Aceptar.setBounds(282, 140, 89, 23);
+			Aceptar.setBounds(136, 148, 175, 47);
+			Aceptar.setBorder(null);
 			contentPane.add(Aceptar);
 			lblNewLabel = new JLabel("Estableciendo Conexion...");
-			lblNewLabel.setBounds(100, 36, 274, 14);
-			lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 19));
+			lblNewLabel.setBounds(85, 35, 289, 28);
+			lblNewLabel.setFont(new Font("Consolas", Font.PLAIN, 20));
 			contentPane.add(lblNewLabel);
 		}catch(Exception e) {
 			e.printStackTrace();
