@@ -166,7 +166,6 @@ public class TableroGrafico extends JFrame {
 		
 		JButton cas23 = new JButton("");
 		cas23.setBackground(new Color(245, 245, 220));
-		cas23.setBorder(null);
 		panel.add(cas23);
 		
 		JButton cas24 = new JButton("");
@@ -314,7 +313,7 @@ public class TableroGrafico extends JFrame {
 				this.casillas[i].setIcon(new ImageIcon("Recursos\\Curarse.png"));
 			}else if(cas instanceof Copa) {
 				if(((Copa) cas).getFacción().equals(Facción.Facción1)) {
-					this.casillas[i].setIcon(new ImageIcon("Recursos\\CopaBC.png"));
+					this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
 					this.casillas[i].addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseEntered(MouseEvent e) {
@@ -326,7 +325,7 @@ public class TableroGrafico extends JFrame {
 						}
 					});
 				}else {
-					this.casillas[i].setIcon(new ImageIcon("Recursos\\CopaBC.png"));
+					this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
 				}
 				
 			}else {

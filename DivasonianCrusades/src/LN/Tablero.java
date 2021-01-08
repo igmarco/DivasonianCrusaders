@@ -50,7 +50,6 @@ public class Tablero {
 		
 		nodos[0] = new Nodo(new Lancero(Facción.Facción1));
 		nodos[4] = new Nodo();
-		nodos[5] = new Nodo();
 		nodos[6] = new Nodo();
 		nodos[7] = new Nodo();
 		
