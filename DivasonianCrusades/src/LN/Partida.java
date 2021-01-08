@@ -76,6 +76,10 @@ public class Partida implements Runnable {
 				
 			}
 			
+			//Esto habrá que quitarlo, pero de momento lo voy a dejar porque siempre está bien que el señor del servidor cotillee quién gana y quién pierde.
+			if(this.ejecutor.getGanador() == Facción.Facción1) System.out.println("¡Enhorabuena! Ha ganado el azul " + nombre1);
+			else System.out.println("¡Nada mal! Ha ganado el rojo " + nombre2);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
