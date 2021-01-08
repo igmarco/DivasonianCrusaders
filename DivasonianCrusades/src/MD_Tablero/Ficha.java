@@ -14,6 +14,8 @@ public abstract class Ficha {
 
     protected Facción facción;
     
+    public boolean puedeMover;
+    
     public HachaDivasónica getHachaDivasónica() {
 		return hachaDivasónica;
 	}
@@ -22,6 +24,7 @@ public abstract class Ficha {
 			Facción facción) {
 		this.hachaDivasónica = hachaDivasónica;
 		this.facción = facción;
+		this.puedeMover = true;
 	}
     
     public Ficha(int daño, int vida, int vidaMáxima, int dañoVariable, HachaDivasónica hachaDivasónica,
@@ -32,6 +35,7 @@ public abstract class Ficha {
 		this.dañoVariable = dañoVariable;
 		this.hachaDivasónica = hachaDivasónica;
 		this.facción = facción;
+		this.puedeMover = true;
 	}
     
     public int realizarAtaque() {

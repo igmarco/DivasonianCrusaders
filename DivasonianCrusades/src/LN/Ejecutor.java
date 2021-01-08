@@ -23,7 +23,6 @@ public class Ejecutor {
 
     public void moverFicha(Ficha f, Dirección d) {
     	
-    	//ESTA COMPROBACIÓN SE HARÁ EN Partida.
 //    	if(tablero.movimientoPosible(f)) {
     		
     		int desde = tablero.dóndeEstá(f);

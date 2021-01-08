@@ -16,14 +16,13 @@ public class Tablero {
 		this.nodos = nodos;
 	}
     
-    //ESTE MÉTODO ESTOY BASTANTE SEGURO DE QUE NO SE REQUIERE AQUÍ, YA QUE ESTA COMPROBACIÓN SE TENDRÁ QUE HACER EN LA CLASE Partida.
-//    public boolean movimientoPosible(Ficha f) {
-//    	
-//    	// Devuelve false si la ficha ha sido trabada en combate en este turno (en una operación anterior a la siguiente).
-//    	
-//    }
+    public boolean movimientoPosible(Ficha f) {
+    	
+    	// Devuelve false si la ficha ha sido trabada en combate en este turno (en una operación anterior a la siguiente).
+    	return (nodos[this.dóndeEstá(f)]).puedeMover(f);
+    	
+    }
     
-    //A CAMBIO DEL ANTERIOR NECESITAREMOS ESTE PARA SABER ESTÁ TRABADO.
     public boolean estáTrabada(Ficha f) {
     	
     	// Devuelve true si la ficha está trabada en combate.
@@ -40,6 +39,7 @@ public class Tablero {
 		if(nodos[casillaDestino].hayDosFichas()) {
 			
 			nodos[casillaDestino].ejecutarCrga();
+			nodos[casillaDestino].noPuedeMover(f); //En caso de que haya muerto este método no hará nada.
 			
 		}
 		
@@ -56,6 +56,9 @@ public class Tablero {
 		nodos[casillaDestino].ponerFicha(freal2);
 		
 		nodos[casillaDestino].ejecutarCrgasRespectivas();
+		
+		nodos[casillaDestino].noPuedeMover(f1); //En caso de que haya muerto este método no hará nada.
+		nodos[casillaDestino].noPuedeMover(f2); //En caso de que haya muerto este método no hará nada.
 		
     }
 

@@ -156,6 +156,8 @@ public class Nodo {
     	
     	this.comprobarMuertes();
     	
+    	this.fichaAtacante.puedeMover = true;
+    	
     	if(this.casilla.tieneHacha() && this.fichaDefensora != null && this.fichaAtacante == null) {
     		
     		this.fichaDefensora.setHachaDivasónica(this.casilla.getHachaDivasónica());
@@ -283,6 +285,21 @@ public class Nodo {
     		
     	}
     	
+    }
+    
+    //POR SI SE HA TRABADO EN COMBATE ESTE TURNETT.
+    public void noPuedeMover(Ficha f) {
+    	
+    	if(this.fichaAtacante.equals(f)) this.fichaAtacante.puedeMover = false;
+    	else if(this.fichaDefensora.equals(f)) this.fichaDefensora.puedeMover = false;
+    	
+    }
+    
+    public boolean puedeMover(Ficha f) {
+    	
+    	if(this.fichaAtacante.equals(f)) return this.fichaAtacante.puedeMover;
+    	else if(this.fichaDefensora.equals(f)) return this.fichaDefensora.puedeMover;
+    	else return false;
     }
     
     //Getters y setters:
