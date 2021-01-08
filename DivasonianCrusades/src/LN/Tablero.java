@@ -3,18 +3,83 @@ import java.util.ArrayList;
 import java.util.List;
 
 import MD_Tablero.Arquero;
+import MD_Tablero.Bárbaro;
+import MD_Tablero.Caballero;
 import MD_Tablero.Casilla;
 import MD_Tablero.Catapulta;
+import MD_Tablero.Colina;
 import MD_Tablero.Copa;
+import MD_Tablero.Curación;
 import MD_Tablero.Ficha;
+import MD_Tablero.Guerrero;
+import MD_Tablero.HachaDivasónica;
+import MD_Tablero.Lancero;
 import MD_Tablero.Nodo;
+import MD_Tablero.Normal;
 import Utilidades.Facción;
 
 public class Tablero {
     public Nodo[] nodos = new Nodo[45];
 
     public Tablero() {
-//		this.nodos = 
+    	nodos[18] = new Nodo(new Copa(Facción.Facción1));
+		nodos[26] = new Nodo(new Copa(Facción.Facción2));
+		
+		nodos[5] = new Nodo(new Colina());
+		nodos[39] = new Nodo(new Colina());
+		
+		nodos[20] = new Nodo(new Catapulta(1));
+		nodos[24] = new Nodo(new Catapulta(2));
+		
+		nodos[2] = new Nodo(new Curación(1));
+		nodos[42] = new Nodo(new Curación(2));
+		
+		nodos[22] = new Nodo(new Normal(new HachaDivasónica()));
+		
+		nodos[1] = new Nodo(new Normal(null, true));
+		nodos[3] = new Nodo(new Normal(null, true));
+		nodos[10] = new Nodo(new Normal(null, true));
+		nodos[11] = new Nodo(new Normal(null, true));
+		nodos[12] = new Nodo(new Normal(null, true));
+		
+		nodos[32] = new Nodo(new Normal(null, true));
+		nodos[33] = new Nodo(new Normal(null, true));
+		nodos[34] = new Nodo(new Normal(null, true));
+		nodos[41] = new Nodo(new Normal(null, true));
+		nodos[43] = new Nodo(new Normal(null, true));
+		
+		nodos[0] = new Nodo(new Lancero(Facción.Facción1));
+		nodos[4] = new Nodo();
+		nodos[5] = new Nodo();
+		nodos[6] = new Nodo();
+		nodos[7] = new Nodo();
+		
+		nodos[8] = new Nodo(new Lancero(Facción.Facción2));
+		nodos[9] = new Nodo(new Arquero(Facción.Facción1));
+		nodos[13] = new Nodo();
+		nodos[14] = new Nodo();
+		nodos[15] = new Nodo();
+		
+		nodos[16] = new Nodo();
+		nodos[17] = new Nodo(new Arquero(Facción.Facción2));
+		nodos[19] = new Nodo(new Guerrero(Facción.Facción1));
+		nodos[21] = new Nodo();
+		nodos[23] = new Nodo();
+		
+		nodos[25] = new Nodo(new Guerrero(Facción.Facción2));
+		nodos[27] = new Nodo(new Bárbaro(Facción.Facción1));
+		nodos[28] = new Nodo();
+		nodos[29] = new Nodo();
+		nodos[30] = new Nodo();
+		
+		nodos[31]= new Nodo();
+		nodos[35] = new Nodo(new Bárbaro(Facción.Facción2));
+		nodos[36] = new Nodo(new Caballero(Facción.Facción1));
+		nodos[37] = new Nodo();
+		nodos[38] = new Nodo();
+		
+		nodos[40] = new Nodo();
+		nodos[44] = new Nodo(new Caballero(Facción.Facción2));
 	}
     
     public Tablero(Nodo[] nodos) {
