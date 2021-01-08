@@ -20,7 +20,7 @@ public class Ejecutor {
 	
 	}
 
-    public void moverFicha(Ficha f, Dirección d) {
+	public void moverFicha(Ficha f, Dirección d) {
     	
 //    	if(tablero.movimientoPosible(f)) {
     		

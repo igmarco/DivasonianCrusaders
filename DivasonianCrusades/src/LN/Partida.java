@@ -4,7 +4,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import MD_Instrucción.Disparo;
 import MD_Instrucción.Instrucción;
+import MD_Instrucción.Movimiento;
 import MD_Instrucción.Operación;
 import Utilidades.Facción;
 
@@ -62,11 +64,15 @@ public class Partida implements Runnable {
 					
 					this.ejecutarOperación();
 					
-					this.mandarTableros();
+					this.mandarTableros(oos1, oos2);
 					
 				}
 				
 				turno++;
+				
+				this.resolverTurno();
+				
+				this.mandarTableros(oos1, oos2);
 				
 			}
 			
@@ -108,6 +114,16 @@ public class Partida implements Runnable {
     		else {
     			
     			//Hace cosas solo el 2
+    			if(op2 instanceof Movimiento) {
+    				
+    				this.ejecutor.moverFicha(((Movimiento) op2).getFicha(), ((Movimiento) op2).getDirección());
+    				
+    			}
+    			else if(op2 instanceof Disparo) {
+    				
+    				this.ejecutor.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY());
+    				
+    			}
     			
     		}
     		
@@ -115,11 +131,59 @@ public class Partida implements Runnable {
     	else if(op2 == null) {
     		
     		//Hace cosas solo el 1
+    		if(op1 instanceof Movimiento) {
+				
+				this.ejecutor.moverFicha(((Movimiento) op1).getFicha(), ((Movimiento) op1).getDirección());
+				
+			}
+			else if(op1 instanceof Disparo) {
+				
+				this.ejecutor.dispararProyectiles(((Disparo) op1).getCatapulta(), ((Disparo) op1).getX(), ((Disparo) op1).getY());
+				
+			}
     		
     	}
     	else {
     		
     		//Hacen cosas los dos
+			if(op2 instanceof Disparo) {
+				
+				this.ejecutor.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY());
+				
+				//Ahora hace cosas el 1
+				if(op1 instanceof Movimiento) {
+					
+					this.ejecutor.moverFicha(((Movimiento) op1).getFicha(), ((Movimiento) op1).getDirección());
+					
+				}
+				else if(op1 instanceof Disparo) {
+					
+					this.ejecutor.dispararProyectiles(((Disparo) op1).getCatapulta(), ((Disparo) op1).getX(), ((Disparo) op1).getY());
+					
+				}
+				
+			}
+			else if(op1 instanceof Disparo) {
+				
+				//Ahora hace cosas el 2
+				if(op2 instanceof Movimiento) {
+					
+					this.ejecutor.moverFicha(((Movimiento) op2).getFicha(), ((Movimiento) op2).getDirección());
+					
+				}
+				else if(op2 instanceof Disparo) {
+					
+					this.ejecutor.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY());
+					
+				}
+				
+			}
+			else {
+				
+				//Los dos hacen movimientos
+				this.ejecutor.moverFichasALaVez(((Movimiento) op1).getFicha(), ((Movimiento) op1).getDirección(), ((Movimiento) op2).getFicha(), ((Movimiento) op2).getDirección());
+				
+			}
     		
     	}
     	
@@ -153,9 +217,22 @@ public class Partida implements Runnable {
     	
     }
 
-    public void mandarTableros() {
+    public void mandarTableros(ObjectOutputStream oos1, ObjectOutputStream oos2) {
     	
     	//Abran sus sockets que les vamos a meter tremendos tableros
+    	
+    	try {
+    		
+			oos1.writeObject(this.ejecutor.tablero);
+			oos2.writeObject(this.ejecutor.tablero);
+			
+			oos1.writeObject(this.ejecutor.haTerminado());
+			oos2.writeObject(this.ejecutor.haTerminado());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
     }
 
