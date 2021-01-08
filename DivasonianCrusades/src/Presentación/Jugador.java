@@ -43,6 +43,7 @@ public class Jugador {
     public boolean comprobarOperación(Operación o) {
     	
     	//Utiliza los métodos tablero.comprobarMovimiento y tablero.comprobarDisparo y esos, que con casi total seguridad no están puestos en la clase tablero todavía
+    	return false;
     	
     }
 
