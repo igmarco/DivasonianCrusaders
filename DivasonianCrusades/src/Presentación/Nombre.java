@@ -27,10 +27,10 @@ public class Nombre extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Nombre(final ClienteGUI main, final TableroGrafico tablero) {
+	public Nombre(final TableroGrafico tablero) {
 		try {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setBounds(100, 100, 450, 300);
+			setBounds(100, 100, 450, 241);
 			contentPane = new JPanel();
 			contentPane.setBackground(new Color(240, 230, 140));
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -43,7 +43,8 @@ public class Nombre extends JFrame {
 			contentPane.add(lblNewLabel_1);
 			
 			textField = new JTextField();
-			textField.setBounds(240, 108, 111, 20);
+			textField.setFont(new Font("Arial", Font.PLAIN, 19));
+			textField.setBounds(244, 101, 166, 28);
 			contentPane.add(textField);
 			textField.setColumns(10);
 			
@@ -53,23 +54,24 @@ public class Nombre extends JFrame {
 				public void mouseClicked(MouseEvent e) {
 					try {
 						Socket s = new Socket("localhost",58000);
+						boolean azul;
 						DataInputStream in = new DataInputStream( s.getInputStream());
 						DataOutputStream out = new DataOutputStream(s.getOutputStream());
-						out.writeBytes("Conexion establecida\r\n");
-						out.flush();
 						String linea = in.readLine();
 						System.out.println("Llegué sii...");
 						if(linea.compareTo("OK1")==0) {
+							azul = true;
 							linea = in.readLine();
 							lblNewLabel.setText("¡Oponente encontrado!");
 						}else {
+							azul=false;
 							lblNewLabel.setText("¡Oponente encontrado!");
 						}
 						Aceptar.setEnabled(false);
 						out.writeBytes(textField.getText()+"\r\n");
 						out.flush();
 						String name = in.readLine();
-						tablero.setNombre(textField.getText(), name);
+						tablero.setNombre(textField.getText(), name,azul);
 						tablero.setVisible(true);
 						setVisible(false);
 					}catch(IOException ex) {
@@ -77,10 +79,10 @@ public class Nombre extends JFrame {
 					}
 				}
 			});
-			Aceptar.setBounds(240, 154, 89, 23);
+			Aceptar.setBounds(282, 140, 89, 23);
 			contentPane.add(Aceptar);
 			lblNewLabel = new JLabel("Estableciendo Conexion...");
-			lblNewLabel.setBounds(122, 35, 197, 14);
+			lblNewLabel.setBounds(100, 36, 274, 14);
 			lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 19));
 			contentPane.add(lblNewLabel);
 		}catch(Exception e) {

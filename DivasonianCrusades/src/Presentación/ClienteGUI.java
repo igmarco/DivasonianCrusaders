@@ -26,7 +26,7 @@ public class ClienteGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ClienteGUI frame = new ClienteGUI();
+					ClienteGUI frame = new ClienteGUI(true,null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,9 +38,9 @@ public class ClienteGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ClienteGUI() {
+	public ClienteGUI(boolean nuevo, final TableroGrafico Tablero) {
 		final ClienteGUI main = this;
-		tablero = new TableroGrafico(main);
+		tablero = new TableroGrafico();
 		setResizable(false);
 		setBounds(100, 100, 395, 399);
 		contentPane = new JPanel();
@@ -113,51 +113,68 @@ public class ClienteGUI extends JFrame {
 		btSalir.setBorder(null);
 		panel.add(btSalir);
 	
-		final JButton btNuevaPartida = new JButton("");
-		btNuevaPartida.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida2.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida.png"));
-			}
-			@Override
-			public void mouseClicked(MouseEvent e) {
-						try {
-							setVisible(false);
-							Nombre nom = new Nombre(main,tablero);
-							nom.setVisible(true);
-							panel.remove(btNuevaPartida);
-							JButton btContinuar = new JButton("Continuar Partida");
-							btNuevaPartida.addMouseListener(new MouseAdapter() {
-								public void mouseClicked(MouseEvent e) {
-									tablero.setVisible(true);
-									setVisible(false);
-								}
-							});
-							btContinuar.setBackground(new Color(240, 230, 140));
-							btContinuar.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
-							btContinuar.setForeground(new Color(245, 245, 245));
-							btContinuar.setBounds(104, 125, 175, 47);
-							btContinuar.setHorizontalTextPosition(SwingConstants.CENTER);
-							btContinuar.setBorder(null);
-							panel.add(btNuevaPartida);
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						}
-			}
-		});
-		btNuevaPartida.setBackground(new Color(240, 230, 140));
-		btNuevaPartida.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
-		btNuevaPartida.setForeground(new Color(245, 245, 245));
-		//btNuevaPartida.setBackground(new Color(240, 230, 140));
-		btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida.png"));
-		btNuevaPartida.setBounds(104, 125, 175, 47);
-		btNuevaPartida.setHorizontalTextPosition(SwingConstants.CENTER);
-		btNuevaPartida.setBorder(null);
-		panel.add(btNuevaPartida);
+		if(nuevo) {
+			final JButton btNuevaPartida = new JButton("");
+			btNuevaPartida.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida2.png"));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida.png"));
+				}
+				@Override
+				public void mouseClicked(MouseEvent e) {
+							try {
+								setVisible(false);
+								Nombre nom = new Nombre(tablero);
+								nom.setVisible(true);
+							} catch (Exception ex) {
+								ex.printStackTrace();
+							}
+				}
+			});
+			btNuevaPartida.setBackground(new Color(240, 230, 140));
+			btNuevaPartida.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
+			btNuevaPartida.setForeground(new Color(245, 245, 245));
+			//btNuevaPartida.setBackground(new Color(240, 230, 140));
+			btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida.png"));
+			btNuevaPartida.setBounds(104, 125, 175, 47);
+			btNuevaPartida.setHorizontalTextPosition(SwingConstants.CENTER);
+			btNuevaPartida.setBorder(null);
+			panel.add(btNuevaPartida);
+		}else {
+			final JButton btContinuarPartida = new JButton("");
+			btContinuarPartida.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					btContinuarPartida.setIcon(new ImageIcon("Recursos\\ContinuarBotonS.png"));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					btContinuarPartida.setIcon(new ImageIcon("Recursos\\ContinuarBoton.png"));
+				}
+				@Override
+				public void mouseClicked(MouseEvent e) {
+							try {
+								setVisible(false);
+								Tablero.setVisible(true);
+							} catch (Exception ex) {
+								ex.printStackTrace();
+							}
+				}
+			});
+			btContinuarPartida.setBackground(new Color(240, 230, 140));
+			btContinuarPartida.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
+			btContinuarPartida.setForeground(new Color(245, 245, 245));
+			//btNuevaPartida.setBackground(new Color(240, 230, 140));
+			btContinuarPartida.setIcon(new ImageIcon("Recursos\\ContinuarBoton.png"));
+			btContinuarPartida.setBounds(104, 125, 175, 47);
+			btContinuarPartida.setHorizontalTextPosition(SwingConstants.CENTER);
+			btContinuarPartida.setBorder(null);
+			panel.add(btContinuarPartida);
+		}
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Recursos\\LogoD.png"));
