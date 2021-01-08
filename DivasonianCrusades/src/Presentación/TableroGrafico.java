@@ -39,7 +39,9 @@ public class TableroGrafico extends JFrame {
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
 	private Tablero tab;
+	private String nombre;
 	private final JButton[] casillas = new JButton[45];
+	private boolean azul;
 
 	/**
 	 * Create the frame.
@@ -105,6 +107,10 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas7);
 		
 		final JButton cas8 = new JButton("");
+		cas8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		cas8.setBackground(new Color(245, 245, 220));
 		panel.add(cas8);
 		
@@ -341,10 +347,31 @@ public class TableroGrafico extends JFrame {
 				
 			}else {
 				if(f instanceof Arquero) {
-					if(f.getFacción().equals(Facción.Facción1))
+					System.out.println("Mi color es: "+this.azul);
+					if(f.getFacción().equals(Facción.Facción1)) {
 						this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroAzulBC.png"));
-					else{
+						this.casillas[i].addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseEntered(MouseEvent e) {
+								ratonInArqueroAzul(x);
+							}
+							@Override
+							public void mouseExited(MouseEvent e) {
+								ratonOutArqueroAzul(x);
+							}
+						});
+					}else{
 						this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroRojoBC.png"));
+						this.casillas[i].addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseEntered(MouseEvent e) {
+								ratonInArqueroRojo(x);
+							}
+							@Override
+							public void mouseExited(MouseEvent e) {
+								ratonOutArqueroRojo(x);
+							}
+						});
 					}
 				}else if(f instanceof Lancero) {
 					if(f.getFacción().equals(Facción.Facción1))
@@ -432,6 +459,9 @@ public class TableroGrafico extends JFrame {
 			lblNewLabel_3.setText("Tú: "+nombre1+" (Rojo)");
 			lblNewLabel_4.setText("Oponente: "+nombre2+" (Azul)");
 		}
+		this.azul=azul;
+		System.out.println(this.azul);
+		this.nombre=nombre1;
 	}
 
 	public void ratonInCoronaAzul(int i) {
@@ -439,9 +469,31 @@ public class TableroGrafico extends JFrame {
 		this.casillas[i].setBackground(Color.white);
 	}
 	
+	
+	
 	public void ratonOutCoronaAzul(int i) {
 		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
 		this.casillas[i].setBackground(new Color(204, 204, 255));
+	}
+	
+	public void ratonInArqueroAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroAzulC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+	
+	public void ratonOutArqueroAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroAzulBC.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+	
+	public void ratonInArqueroRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroRojoC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+	
+	public void ratonOutArqueroRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroRojoBC.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
 	}
 	
 }
