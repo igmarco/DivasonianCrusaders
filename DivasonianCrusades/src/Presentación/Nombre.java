@@ -51,6 +51,7 @@ public class Nombre extends JFrame {
 			textField.setColumns(10);
 			
 			Aceptar = new JButton("");
+			Aceptar.setBackground(new Color(240, 230, 140));
 			Aceptar.setIcon(new ImageIcon("Recursos\\Conectar.png"));
 			Aceptar.addMouseListener(new MouseAdapter() {
 				@Override
