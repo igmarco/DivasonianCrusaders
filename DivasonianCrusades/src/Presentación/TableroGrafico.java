@@ -302,11 +302,22 @@ public class TableroGrafico extends JFrame {
 		for(int i=0 ; i<45; i++) {
 			final Integer x =i;
 			Casilla cas = nodos[i].getCasilla();
+			Ficha f = nodos[i].getFichaDefensora();
+			Ficha fat = nodos[i].getFichaDefensora();
 			if(cas instanceof Catapulta) {
-				if(((Catapulta) cas).getIdentificador()==1)
-					this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaAzul.png"));
-				else
-					this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaRoja.png"));
+				if(((Catapulta) cas).getIdentificador()==1) {
+					if(f == null)
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaAzul.png"));
+					else {
+						
+					}
+				}else {
+					if(f==null) {
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaRoja.png"));
+					}else {
+						
+					}
+				}
 			}else if(cas instanceof Colina) {
 				this.casillas[i].setIcon(new ImageIcon("Recursos\\Colina.png"));
 			}else if(cas instanceof Curación) {
@@ -329,7 +340,6 @@ public class TableroGrafico extends JFrame {
 				}
 				
 			}else {
-				Ficha f = nodos[i].getFichaDefensora();
 				if(f instanceof Arquero) {
 					if(f.getFacción().equals(Facción.Facción1))
 						this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroAzulBC.png"));
@@ -431,7 +441,7 @@ public class TableroGrafico extends JFrame {
 	
 	public void ratonOutCoronaAzul(int i) {
 		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
-		this.casillas[i].setBackground(Color.white);
+		this.casillas[i].setBackground(new Color(204, 204, 255));
 	}
 	
 }
