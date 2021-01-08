@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 public class ClienteGUI extends JFrame {
 
 	private JPanel contentPane;
+	private final TableroGrafico tablero;
 
 	/**
 	 * Launch the application.
@@ -39,6 +40,7 @@ public class ClienteGUI extends JFrame {
 	 */
 	public ClienteGUI() {
 		final ClienteGUI main = this;
+		tablero = new TableroGrafico(main);
 		setResizable(false);
 		setBounds(100, 100, 395, 399);
 		contentPane = new JPanel();
@@ -47,7 +49,7 @@ public class ClienteGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
+		final JPanel panel = new JPanel();
 		panel.setBackground(new Color(240, 230, 140));
 		panel.setBounds(0, 0, 389, 370);
 		contentPane.add(panel);
@@ -124,9 +126,24 @@ public class ClienteGUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 						try {
-							TableroGrafico tablero = new TableroGrafico(main);
-							tablero.setVisible(true);
 							setVisible(false);
+							Nombre nom = new Nombre(main,tablero);
+							nom.setVisible(true);
+							panel.remove(btNuevaPartida);
+							JButton btContinuar = new JButton("Continuar Partida");
+							btNuevaPartida.addMouseListener(new MouseAdapter() {
+								public void mouseClicked(MouseEvent e) {
+									tablero.setVisible(true);
+									setVisible(false);
+								}
+							});
+							btContinuar.setBackground(new Color(240, 230, 140));
+							btContinuar.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
+							btContinuar.setForeground(new Color(245, 245, 245));
+							btContinuar.setBounds(104, 125, 175, 47);
+							btContinuar.setHorizontalTextPosition(SwingConstants.CENTER);
+							btContinuar.setBorder(null);
+							panel.add(btNuevaPartida);
 						} catch (Exception ex) {
 							ex.printStackTrace();
 						}
