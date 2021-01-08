@@ -1,7 +1,13 @@
-package MD_Tablero;
+package LN;
 import java.util.ArrayList;
 import java.util.List;
 
+import MD_Tablero.Arquero;
+import MD_Tablero.Casilla;
+import MD_Tablero.Catapulta;
+import MD_Tablero.Copa;
+import MD_Tablero.Ficha;
+import MD_Tablero.Nodo;
 import Utilidades.Facción;
 
 public class Tablero {

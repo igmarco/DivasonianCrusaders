@@ -5,6 +5,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import MD_Instrucción.Instrucción;
+import MD_Instrucción.Operación;
 import Utilidades.Facción;
 
 public class Partida implements Runnable {
@@ -54,21 +55,18 @@ public class Partida implements Runnable {
 			
 			while(!haTerminado) {
 				
-				movimiento = 0;
-				turno++;
-				
 				instrucciónFacción1 = (Instrucción) ois1.readObject();
 				instrucciónFacción2 = (Instrucción) ois2.readObject();
 				
-				for(int i = 0; i < 6; i++) {
-					
-					movimiento++;
+				for(movimiento = 0; movimiento < 6; movimiento++) {
 					
 					this.ejecutarOperación();
 					
 					this.mandarTableros();
 					
 				}
+				
+				turno++;
 				
 			}
 			
@@ -97,6 +95,33 @@ public class Partida implements Runnable {
     public void ejecutarOperación() {
     	
     	//Hacemos lo que haya que hacer con el ejecutor.
+    	Operación op1 = instrucciónFacción1.getOperacion(movimiento);
+    	Operación op2 = instrucciónFacción2.getOperacion(movimiento);
+    	
+    	if(op1 == null) {
+    		
+    		if(op2 == null) {
+        		
+        		//No hacer nada
+        		
+        	}
+    		else {
+    			
+    			//Hace cosas solo el 2
+    			
+    		}
+    		
+    	}
+    	else if(op2 == null) {
+    		
+    		//Hace cosas solo el 1
+    		
+    	}
+    	else {
+    		
+    		//Hacen cosas los dos
+    		
+    	}
     	
     }
 
