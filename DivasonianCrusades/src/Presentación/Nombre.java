@@ -54,19 +54,22 @@ public class Nombre extends JFrame {
 					try {
 						Socket s = new Socket("localhost",58000);
 						DataInputStream in = new DataInputStream( s.getInputStream());
+						DataOutputStream out = new DataOutputStream(s.getOutputStream());
+						out.writeBytes("Conexion establecida\r\n");
+						out.flush();
 						String linea = in.readLine();
 						System.out.println("Llegué sii...");
 						if(linea.compareTo("OK1")==0) {
-							lblNewLabel.setText("Buscando oponente...");
-							//linea = in.readLine();
-							lblNewLabel.setText("Oponente encontrado!");
+							linea = in.readLine();
+							lblNewLabel.setText("¡Oponente encontrado!");
 						}else {
-							lblNewLabel.setText("Oponente encontrado!");
+							lblNewLabel.setText("¡Oponente encontrado!");
 						}
 						Aceptar.setEnabled(false);
-						DataOutputStream out = new DataOutputStream(s.getOutputStream());
-						out.writeBytes(textField.getText());
+						out.writeBytes(textField.getText()+"\r\n");
 						out.flush();
+						String name = in.readLine();
+						tablero.setNombre(textField.getText(), name);
 						tablero.setVisible(true);
 						setVisible(false);
 					}catch(IOException ex) {
@@ -76,11 +79,10 @@ public class Nombre extends JFrame {
 			});
 			Aceptar.setBounds(240, 154, 89, 23);
 			contentPane.add(Aceptar);
-			lblNewLabel = new JLabel("");
+			lblNewLabel = new JLabel("Estableciendo Conexion...");
 			lblNewLabel.setBounds(122, 35, 197, 14);
 			lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 19));
 			contentPane.add(lblNewLabel);
-			//this.comprobar();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

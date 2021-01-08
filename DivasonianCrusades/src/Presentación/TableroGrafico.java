@@ -20,6 +20,8 @@ public class TableroGrafico extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnMenu;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_4;
 
 	/**
 	 * Create the frame.
@@ -451,5 +453,18 @@ public class TableroGrafico extends JFrame {
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setBounds(751, 206, 9, 390);
 		contentPane.add(separator);
+		
+		lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setBounds(42, 170, 191, 14);
+		contentPane.add(lblNewLabel_3);
+		
+		lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setBounds(249, 170, 196, 14);
+		contentPane.add(lblNewLabel_4);
+	}
+	
+	public void setNombre(String nombre1, String nombre2) {
+		lblNewLabel_3.setText("Tú: "+nombre1);
+		lblNewLabel_4.setText("Oponente: "+nombre2);
 	}
 }
