@@ -27,7 +27,7 @@ public class Nombre extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Nombre(final ClienteGUI main, final TableroGrafico tablero) {
+	public Nombre(final TableroGrafico tablero) {
 		try {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 450, 241);
@@ -44,7 +44,7 @@ public class Nombre extends JFrame {
 			
 			textField = new JTextField();
 			textField.setFont(new Font("Arial", Font.PLAIN, 19));
-			textField.setBounds(240, 108, 135, 20);
+			textField.setBounds(244, 101, 166, 28);
 			contentPane.add(textField);
 			textField.setColumns(10);
 			
@@ -79,7 +79,7 @@ public class Nombre extends JFrame {
 					}
 				}
 			});
-			Aceptar.setBounds(240, 153, 89, 23);
+			Aceptar.setBounds(282, 140, 89, 23);
 			contentPane.add(Aceptar);
 			lblNewLabel = new JLabel("Estableciendo Conexion...");
 			lblNewLabel.setBounds(100, 36, 274, 14);

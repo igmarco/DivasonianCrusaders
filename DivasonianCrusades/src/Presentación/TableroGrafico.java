@@ -27,7 +27,8 @@ public class TableroGrafico extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TableroGrafico(final ClienteGUI main) {
+	public TableroGrafico() {
+		final TableroGrafico tablero= this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1080, 720);
 		contentPane = new JPanel();
@@ -432,7 +433,8 @@ public class TableroGrafico extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				main.setVisible(true);
+
+				ClienteGUI frame = new ClienteGUI(false,tablero);
 				setVisible(false);
 			}
 		});
