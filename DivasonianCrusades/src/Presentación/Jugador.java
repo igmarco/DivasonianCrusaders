@@ -1,7 +1,7 @@
 package Presentación;
+import LN.Tablero;
 import MD_Instrucción.Instrucción;
 import MD_Instrucción.Operación;
-import MD_Tablero.Tablero;
 import Utilidades.Facción;
 
 public class Jugador {

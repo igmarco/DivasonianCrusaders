@@ -2,7 +2,6 @@ package LN;
 
 import MD_Tablero.Catapulta;
 import MD_Tablero.Ficha;
-import MD_Tablero.Tablero;
 import Utilidades.Dirección;
 import Utilidades.Facción;
 

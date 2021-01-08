@@ -31,7 +31,7 @@ public class ClienteConsola extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ClienteConsola frame = new ClienteConsola();
+					ClienteConsola frame = new ClienteConsola(true,null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,9 +43,9 @@ public class ClienteConsola extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ClienteConsola() {
+	public ClienteConsola(boolean nuevo, final TableroConsola Tablero) {
 		final ClienteConsola main = this;
-		tablero = new TableroConsola(main);
+		tablero = new TableroConsola();
 		setResizable(false);
 		setBounds(100, 100, 395, 399);
 		contentPane = new JPanel();
@@ -118,63 +118,98 @@ public class ClienteConsola extends JFrame {
 		btSalir.setBorder(null);
 		panel.add(btSalir);
 	
-		final JButton btNuevaPartida = new JButton("");
-		btNuevaPartida.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida2.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida.png"));
-			}
-			@Override
-			public void mouseClicked(MouseEvent e) {
-						try {
-							setVisible(false);
-							
-							Scanner sc = new Scanner(System.in);
-							System.out.println("Introduzca el nombre:");
-							String nom = sc.nextLine();
-							
-//							Nombre nom = new Nombre(main,tablero);
-//							nom.setVisible(true);
-							
-							Socket s = new Socket("localhost",58000);
-							DataInputStream in = new DataInputStream( s.getInputStream());
-							DataOutputStream out = new DataOutputStream(s.getOutputStream());
-							out.writeBytes("Conexion establecida\r\n");
-							out.flush();
-							String linea = in.readLine();
-							if(linea.compareTo("OK1")==0) {
-								linea = in.readLine();
-								System.out.println("¡Oponente encontrado!");
-							}else {
-								System.out.println("¡Oponente encontrado!");
-							}
-							out.writeBytes(nom+"\r\n");
-							out.flush();
-							String name = in.readLine();
-							tablero.setNombre(nom, name);
-							tablero.setVisible(true);
-							setVisible(false);
-							
-						} catch(IOException ex) {
-							System.out.println("Error al conectar");
-						} catch (Exception ex) {
-							ex.printStackTrace();
+		if(nuevo) {
+			final JButton btNuevaPartida = new JButton("");
+			btNuevaPartida.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida2.png"));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida.png"));
+				}
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					try {
+						setVisible(false);
+						
+						Scanner sc = new Scanner(System.in);
+						System.out.println("Introduzca el nombre:");
+						String nom = sc.nextLine();
+						
+//						Nombre nom = new Nombre(main,tablero);
+//						nom.setVisible(true);
+						
+						Socket s = new Socket("localhost",58000);
+						
+						boolean azul;
+						DataInputStream in = new DataInputStream( s.getInputStream());
+						DataOutputStream out = new DataOutputStream(s.getOutputStream());
+						String linea = in.readLine();
+						if(linea.compareTo("OK1")==0) {
+							azul = true;
+							linea = in.readLine();
+							System.out.println("¡Oponente encontrado!");
+						}else {
+							azul=false;
+							System.out.println("¡Oponente encontrado!");
 						}
-			}
-		});
-		btNuevaPartida.setBackground(new Color(240, 230, 140));
-		btNuevaPartida.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
-		btNuevaPartida.setForeground(new Color(245, 245, 245));
-		//btNuevaPartida.setBackground(new Color(240, 230, 140));
-		btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida.png"));
-		btNuevaPartida.setBounds(104, 125, 175, 47);
-		btNuevaPartida.setHorizontalTextPosition(SwingConstants.CENTER);
-		btNuevaPartida.setBorder(null);
-		panel.add(btNuevaPartida);
+						
+						out.writeBytes(nom+"\r\n");
+						out.flush();
+						String name = in.readLine();
+						tablero.setNombre(nom, name, azul);
+						tablero.setVisible(true);
+						setVisible(false);
+						
+					} catch(IOException ex) {
+						System.out.println("Error al conectar");
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
+			btNuevaPartida.setBackground(new Color(240, 230, 140));
+			btNuevaPartida.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
+			btNuevaPartida.setForeground(new Color(245, 245, 245));
+			//btNuevaPartida.setBackground(new Color(240, 230, 140));
+			btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida.png"));
+			btNuevaPartida.setBounds(104, 125, 175, 47);
+			btNuevaPartida.setHorizontalTextPosition(SwingConstants.CENTER);
+			btNuevaPartida.setBorder(null);
+			panel.add(btNuevaPartida);
+		}else {
+			final JButton btContinuarPartida = new JButton("");
+			btContinuarPartida.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					btContinuarPartida.setIcon(new ImageIcon("Recursos\\ContinuarBotonS.png"));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					btContinuarPartida.setIcon(new ImageIcon("Recursos\\ContinuarBoton.png"));
+				}
+				@Override
+				public void mouseClicked(MouseEvent e) {
+							try {
+								setVisible(false);
+								Tablero.setVisible(true);
+							} catch (Exception ex) {
+								ex.printStackTrace();
+							}
+				}
+			});
+			btContinuarPartida.setBackground(new Color(240, 230, 140));
+			btContinuarPartida.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
+			btContinuarPartida.setForeground(new Color(245, 245, 245));
+			//btNuevaPartida.setBackground(new Color(240, 230, 140));
+			btContinuarPartida.setIcon(new ImageIcon("Recursos\\ContinuarBoton.png"));
+			btContinuarPartida.setBounds(104, 125, 175, 47);
+			btContinuarPartida.setHorizontalTextPosition(SwingConstants.CENTER);
+			btContinuarPartida.setBorder(null);
+			panel.add(btContinuarPartida);
+		}
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Recursos\\LogoD.png"));
@@ -182,3 +217,4 @@ public class ClienteConsola extends JFrame {
 		panel.add(lblNewLabel);
 	}
 }
+
