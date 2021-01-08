@@ -15,6 +15,7 @@ import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
+import java.awt.Font;
 
 public class TableroGrafico extends JFrame {
 
@@ -455,16 +456,23 @@ public class TableroGrafico extends JFrame {
 		contentPane.add(separator);
 		
 		lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblNewLabel_3.setBounds(42, 170, 191, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblNewLabel_4.setBounds(249, 170, 196, 14);
 		contentPane.add(lblNewLabel_4);
 	}
 	
-	public void setNombre(String nombre1, String nombre2) {
-		lblNewLabel_3.setText("Tú: "+nombre1);
-		lblNewLabel_4.setText("Oponente: "+nombre2);
+	public void setNombre(String nombre1, String nombre2,boolean azul) {
+		if(azul) {
+			lblNewLabel_3.setText("Tú: "+nombre1+" (Azul)");
+			lblNewLabel_4.setText("Oponente: "+nombre2+" (Rojo)");
+		}else {
+			lblNewLabel_3.setText("Tú: "+nombre1+" (Rojo)");
+			lblNewLabel_4.setText("Oponente: "+nombre2+" (Azul)");
+		}
 	}
 }

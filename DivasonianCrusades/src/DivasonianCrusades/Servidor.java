@@ -30,7 +30,6 @@ public class Servidor {
 				Socket s1 = ss.accept();
 				dos1 = new DataOutputStream(s1.getOutputStream());
 				dis1 = new DataInputStream(s1.getInputStream());
-				System.out.println(dis1.readLine());
 				dos1.writeBytes("OK1\r\n");
 				dos1.flush();
 				
