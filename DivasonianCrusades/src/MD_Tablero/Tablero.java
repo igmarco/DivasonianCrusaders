@@ -287,5 +287,72 @@ public class Tablero {
     	return posiciones;
     	
     }
+    
+    //PARA ASISTIR EL MOVIMIENTO DENTRO DEL CLIENTE
+    public List<Integer> dóndePuedeMover(Ficha f) {
+    	
+    	List<Integer> movPosibles = new ArrayList<Integer>();
+    	
+    	//Faltan cosas
+    	int dóndeEstá = this.dóndeEstá(f);
+    	
+    	movPosibles.add(dóndeEstá - 9 - 1);
+    	movPosibles.add(dóndeEstá - 9);
+    	movPosibles.add(dóndeEstá - 9 + 1);
+    	movPosibles.add(dóndeEstá - 1);
+    	movPosibles.add(dóndeEstá + 1);
+    	movPosibles.add(dóndeEstá + 9 - 1);
+    	movPosibles.add(dóndeEstá + 9);
+    	movPosibles.add(dóndeEstá + 9 + 1); 
+    	
+    	int j;
+    	
+    	for(int i = 0; i < movPosibles.size(); i++) {
+    		
+    		if(movPosibles.get(i) < 0 || movPosibles.get(i) >= 45) {
+    			
+    			j = movPosibles.remove(i);
+    			
+    		}
+    		else if(nodos[movPosibles.get(i)].estáAquí(f.getFacción())) {
+    			
+    			j = movPosibles.remove(i);
+    			
+    		}
+    		
+    	}
+    	
+    	return movPosibles;
+    	
+    }
+    
+    public List<Integer> quiénesPuedenMover(Facción fc) {
+    	
+    	//A esto hay que quitarle los que ya han movido dos (o si es el caballo tres) veces en este turno.
+    	List<Integer> movPosibles = new ArrayList<Integer>();
+    	
+    	for(int i = 0; i < 45; i++) {
+    		
+    		if(nodos[i].estáAquí(fc)) movPosibles.add(i);
+    		
+    	}
+    	
+    	return movPosibles;
+    	
+    }
+    
+    public Ficha quéFichaHay(Facción fc, int casilla) {
+    	
+    	if(nodos[casilla].estáAquí(fc)) {
+    		
+    		Ficha f;
+    		
+    		if((f = nodos[casilla].getFichaDefensora()).getFacción() == fc) return f;
+    		else return nodos[casilla].getFichaAtacante();
+    		
+    	}
+    	else return null;
+    	
+    }
 
 }
