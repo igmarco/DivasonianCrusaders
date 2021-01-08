@@ -436,6 +436,7 @@ public class TableroGrafico extends JFrame {
 
 				ClienteGUI frame = new ClienteGUI(false,tablero);
 				setVisible(false);
+				frame.setVisible(true);
 			}
 		});
 		btnMenu.setBackground(new Color(240, 230, 140));

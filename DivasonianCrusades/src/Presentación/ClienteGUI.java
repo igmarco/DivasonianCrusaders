@@ -118,11 +118,11 @@ public class ClienteGUI extends JFrame {
 			btNuevaPartida.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					btNuevaPartida.setIcon(new ImageIcon("Recursos\\ContinuarBotonS.png"));
+					btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida2.png"));
 				}
 				@Override
 				public void mouseExited(MouseEvent e) {
-					btNuevaPartida.setIcon(new ImageIcon("Recursos\\ContinuarBoton.png"));
+					btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida.png"));
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -145,15 +145,15 @@ public class ClienteGUI extends JFrame {
 			btNuevaPartida.setBorder(null);
 			panel.add(btNuevaPartida);
 		}else {
-			final JButton btNuevaPartida = new JButton("");
-			btNuevaPartida.addMouseListener(new MouseAdapter() {
+			final JButton btContinuarPartida = new JButton("");
+			btContinuarPartida.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida2.png"));
+					btContinuarPartida.setIcon(new ImageIcon("Recursos\\ContinuarBotonS.png"));
 				}
 				@Override
 				public void mouseExited(MouseEvent e) {
-					btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida.png"));
+					btContinuarPartida.setIcon(new ImageIcon("Recursos\\ContinuarBoton.png"));
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -165,15 +165,15 @@ public class ClienteGUI extends JFrame {
 							}
 				}
 			});
-			btNuevaPartida.setBackground(new Color(240, 230, 140));
-			btNuevaPartida.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
-			btNuevaPartida.setForeground(new Color(245, 245, 245));
+			btContinuarPartida.setBackground(new Color(240, 230, 140));
+			btContinuarPartida.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
+			btContinuarPartida.setForeground(new Color(245, 245, 245));
 			//btNuevaPartida.setBackground(new Color(240, 230, 140));
-			btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida.png"));
-			btNuevaPartida.setBounds(104, 125, 175, 47);
-			btNuevaPartida.setHorizontalTextPosition(SwingConstants.CENTER);
-			btNuevaPartida.setBorder(null);
-			panel.add(btNuevaPartida);
+			btContinuarPartida.setIcon(new ImageIcon("Recursos\\ContinuarBoton.png"));
+			btContinuarPartida.setBounds(104, 125, 175, 47);
+			btContinuarPartida.setHorizontalTextPosition(SwingConstants.CENTER);
+			btContinuarPartida.setBorder(null);
+			panel.add(btContinuarPartida);
 		}
 		
 		JLabel lblNewLabel = new JLabel("");
