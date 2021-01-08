@@ -1,8 +1,14 @@
 package Presentación;
 
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,12 +16,21 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.ImageIcon;
-import java.awt.SystemColor;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.Color;
-import java.awt.Font;
+
+import LN.Tablero;
+import MD_Tablero.Arquero;
+import MD_Tablero.Bárbaro;
+import MD_Tablero.Caballero;
+import MD_Tablero.Casilla;
+import MD_Tablero.Catapulta;
+import MD_Tablero.Colina;
+import MD_Tablero.Copa;
+import MD_Tablero.Curación;
+import MD_Tablero.Ficha;
+import MD_Tablero.Guerrero;
+import MD_Tablero.Lancero;
+import MD_Tablero.Nodo;
+import Utilidades.Facción;
 
 public class TableroGrafico extends JFrame {
 
@@ -23,11 +38,14 @@ public class TableroGrafico extends JFrame {
 	private JButton btnMenu;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
+	private Tablero tab;
+	private final JButton[] casillas = new JButton[45];
 
 	/**
 	 * Create the frame.
 	 */
 	public TableroGrafico() {
+		tab = new Tablero();
 		setResizable(false);
 		final TableroGrafico tablero= this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,8 +60,9 @@ public class TableroGrafico extends JFrame {
 		lblNewLabel.setBounds(42, 21, 618, 127);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(763, 21, 274, 127);
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("Recursos\\LogobienV2.png"));
+		lblNewLabel_1.setBounds(816, 21, 216, 102);
 		contentPane.add(lblNewLabel_1);
 		
 		JPanel panel = new JPanel();
@@ -51,22 +70,9 @@ public class TableroGrafico extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(new GridLayout(5, 9, 0, 0));
 		
+		
 		final JButton cas0 = new JButton("");
-		cas0.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				cas0.setBackground(Color.white);
-				cas0.setIcon(new ImageIcon("Recursos\\ArqueroAzulC.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				cas0.setBackground(new Color(245, 245, 220));
-				cas0.setIcon(new ImageIcon("Recursos\\ArqueroAzulBN.png"));
-			}
-		});
 		cas0.setBackground(new Color(245, 245, 220));
-		cas0.setIcon(new ImageIcon("Recursos\\ArqueroAzulBN.png"));
-		cas0.setBorder(null);
 		panel.add(cas0);
 
 		
@@ -75,7 +81,6 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas1);
 		
 		JButton cas2 = new JButton("");
-		cas2.setIcon(new ImageIcon("Recursos\\Curarse.png"));
 		cas2.setBackground(new Color(245, 245, 220));
 		panel.add(cas2);
 		
@@ -88,7 +93,6 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas4);
 		
 		JButton cas5 = new JButton("");
-		cas5.setIcon(new ImageIcon("Recursos\\Colina.png"));
 		cas5.setBackground(new Color(245, 245, 220));
 		panel.add(cas5);
 		
@@ -101,42 +105,10 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas7);
 		
 		final JButton cas8 = new JButton("");
-		cas8.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				cas8.setIcon(new ImageIcon("Recursos\\CaballeroRojoC.png"));
-				cas8.setBackground(Color.white);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				cas8.setIcon(new ImageIcon("Recursos\\CaballeroRojoBC.png"));
-				cas8.setBackground(new Color(245, 245, 220));
-			}
-		});
-		cas8.setIcon(new ImageIcon("Recursos\\CaballeroRojoBC.png"));
 		cas8.setBackground(new Color(245, 245, 220));
-		cas8.setBorder(null);
 		panel.add(cas8);
 		
-		final JButton cas17 = new JButton("");
-		cas17.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				cas17.setIcon(new ImageIcon("Recursos\\LanzeroAzulC.png"));
-				cas17.setBackground(Color.white);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				cas17.setBackground(new Color(245, 245, 220));
-				cas17.setIcon(new ImageIcon("Recursos\\LanzeroAzulBN.png"));
-			}
-		});
-		cas17.setBackground(new Color(245, 245, 220));
-		cas17.setIcon(new ImageIcon("Recursos\\LanzeroAzulBN.png"));
-		cas17.setBorder(null);
-		panel.add(cas17);
-		
-		JButton cas9 = new JButton("");
+		final JButton cas9 = new JButton("");
 		cas9.setBackground(new Color(245, 245, 220));
 		panel.add(cas9);
 		
@@ -164,62 +136,23 @@ public class TableroGrafico extends JFrame {
 		cas15.setBackground(new Color(245, 245, 220));
 		panel.add(cas15);
 		
-		final JButton cas16 = new JButton("");
-		cas16.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				cas16.setIcon(new ImageIcon("Recursos\\BarbaroRojoC.png"));
-				cas16.setBackground(Color.white);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				cas16.setIcon(new ImageIcon("Recursos\\BarbaroRojoBC.png"));
-				cas16.setBackground(new Color(245, 245, 220));
-			}
-		});
-		cas16.setIcon(new ImageIcon("Recursos\\BarbaroRojoBC.png"));
+		JButton cas16 = new JButton("");
 		cas16.setBackground(new Color(245, 245, 220));
-		cas16.setBorder(null);
 		panel.add(cas16);
 		
+		final JButton cas17 = new JButton("");
+		cas17.setBackground(new Color(245, 245, 220));
+		panel.add(cas17);
+		
 		final JButton cas18 = new JButton("");
-		cas18.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				cas18.setIcon(new ImageIcon("Recursos\\CoronaAzul.png"));
-				cas18.setBackground(Color.white);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				cas18.setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
-				cas18.setBackground(new Color(204, 204, 255));
-			}
-		});
-		cas18.setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
-		cas18.setBorder(null);
 		cas18.setBackground(new Color(204, 204, 255));
 		panel.add(cas18);
 		
 		final JButton cas19 = new JButton("");
-		cas19.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				cas19.setIcon(new ImageIcon("Recursos\\GuerreroAzulC.png"));
-				cas19.setBackground(Color.white);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				cas19.setIcon(new ImageIcon("Recursos\\GuerreroAzulBC.png"));
-				cas19.setBackground(new Color(245, 245, 220));
-			}
-		});
-		cas19.setIcon(new ImageIcon("Recursos\\GuerreroAzulBC.png"));
 		cas19.setBackground(new Color(245, 245, 220));
-		cas19.setBorder(null);
 		panel.add(cas19);
 		
-		JButton cas20 = new JButton("");
-		cas20.setIcon(new ImageIcon("Recursos\\CatapultaAzul.png"));
+		JButton cas20 = new JButton("");;
 		cas20.setBackground(new Color(245, 245, 220));
 		panel.add(cas20);
 		
@@ -228,21 +161,7 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas21);
 		
 		final JButton cas22 = new JButton("");
-		cas22.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				cas22.setIcon(new ImageIcon("Recursos\\HachaDivasonicaS.png"));
-				cas22.setBackground(Color.white);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				cas22.setIcon(new ImageIcon("Recursos\\HachaDivasonica.png"));
-				cas22.setBackground(new Color(245, 245, 220));
-			}
-		});
-		cas22.setIcon(new ImageIcon("Recursos\\HachaDivasonica.png"));
 		cas22.setBackground(new Color(245, 245, 220));
-		cas22.setBorder(null);
 		panel.add(cas22);
 		
 		JButton cas23 = new JButton("");
@@ -251,62 +170,19 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas23);
 		
 		JButton cas24 = new JButton("");
-		cas24.setIcon(new ImageIcon("Recursos\\CatapultaRoja.png"));
 		cas24.setBackground(new Color(245, 245, 220));
 		panel.add(cas24);
 		
 		final JButton cas25 = new JButton("");
-		cas25.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				cas25.setIcon(new ImageIcon("Recursos\\GuerreroRojoC.png"));
-				cas25.setBackground(Color.white);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				cas25.setIcon(new ImageIcon("Recursos\\GuerreroRojoBC.png"));
-				cas25.setBackground(new Color(245, 245, 220));
-			}
-		});
-		cas25.setIcon(new ImageIcon("Recursos\\GuerreroRojoBC.png"));
 		cas25.setBackground(new Color(245, 245, 220));
-		cas25.setBorder(null);
 		panel.add(cas25);
 		
 		final JButton cas26 = new JButton("");
-		cas26.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				cas26.setIcon(new ImageIcon("Recursos\\CoronaRojo.png"));
-				cas26.setBackground(Color.white);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				cas26.setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
-				cas26.setBackground(new Color(255, 204, 204));
-			}
-		});
-		cas26.setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
 		cas26.setBackground(new Color(255, 204, 204));
-		cas26.setBorder(null);
 		panel.add(cas26);
 		
 		final JButton cas27 = new JButton("");
-		cas27.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				cas27.setIcon(new ImageIcon("Recursos\\BarbaroAzulC.png"));
-				cas27.setBackground(Color.white);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				cas27.setIcon(new ImageIcon("Recursos\\BarbaroAzulBC.png"));
-				cas27.setBackground(new Color(245, 245, 220));
-			}
-		});
-		cas27.setIcon(new ImageIcon("Recursos\\BarbaroAzulBC.png"));
 		cas27.setBackground(new Color(245, 245, 220));
-		cas27.setBorder(null);
 		panel.add(cas27);
 		
 		JButton cas28 = new JButton("");
@@ -338,39 +214,11 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas34);
 		
 		final JButton cas35 = new JButton("");
-		cas35.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				cas35.setBackground(Color.white);
-				cas35.setIcon(new ImageIcon("Recursos\\LanzeroRojoC.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				cas35.setBackground(new Color(245, 245, 220));
-				cas35.setIcon(new ImageIcon("Recursos\\LanzeroRojoBN.png"));
-			}
-		});
 		cas35.setBackground(new Color(245, 245, 220));
-		cas35.setIcon(new ImageIcon("Recursos\\LanzeroRojoBN.png"));
-		cas35.setBorder(null);
 		panel.add(cas35);
 		
 		final JButton cas36 = new JButton("");
-		cas36.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				cas36.setIcon(new ImageIcon("Recursos\\CaballeroAzulC.png"));
-				cas36.setBackground(Color.white);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				cas36.setIcon(new ImageIcon("Recursos\\CaballeroAzulBC.png"));
-				cas36.setBackground(new Color(245, 245, 220));
-			}
-		});
-		cas36.setIcon(new ImageIcon("Recursos\\CaballeroAzulBC.png"));
 		cas36.setBackground(new Color(245, 245, 220));
-		cas36.setBorder(null);
 		panel.add(cas36);
 		
 		JButton cas37 = new JButton("");
@@ -382,7 +230,6 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas38);
 		
 		JButton cas39 = new JButton("");
-		cas39.setIcon(new ImageIcon("Recursos\\Colina.png"));
 		cas39.setBackground(new Color(245, 245, 220));
 		panel.add(cas39);
 		
@@ -395,7 +242,6 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas41);
 		
 		JButton cas42 = new JButton("");
-		cas42.setIcon(new ImageIcon("Recursos\\Curarse.png"));
 		cas42.setBackground(new Color(245, 245, 220));
 		panel.add(cas42);
 		
@@ -404,22 +250,121 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas43);
 		
 		final JButton cas44 = new JButton("");
-		cas44.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				cas44.setBackground(Color.white);
-				cas44.setIcon(new ImageIcon("Recursos\\ArqueroRojoC.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				cas44.setBackground(new Color(245, 245, 220));
-				cas44.setIcon(new ImageIcon("Recursos\\ArqueroRojoBN.png"));
-			}
-		});
-		cas44.setIcon(new ImageIcon("Recursos\\ArqueroRojoBN.png"));
 		cas44.setBackground(new Color(245, 245, 220));
-		cas44.setBorder(null);
 		panel.add(cas44);
+		
+		this.casillas[0] = cas0;
+		this.casillas[1] = cas1;
+		this.casillas[2] = cas2;
+		this.casillas[3] = cas3;
+		this.casillas[4] = cas4;
+		this.casillas[5] = cas5;
+		this.casillas[6] = cas6;
+		this.casillas[7] = cas7;
+		this.casillas[8] = cas8;
+		this.casillas[9] = cas9;
+		this.casillas[10] = cas10;
+		this.casillas[11] = cas11;
+		this.casillas[12] = cas12;
+		this.casillas[13] = cas13;
+		this.casillas[14] = cas14;
+		this.casillas[15] = cas15;
+		this.casillas[16] = cas16;
+		this.casillas[17] = cas17;
+		this.casillas[18] = cas18;
+		this.casillas[19] = cas19;
+		this.casillas[20] = cas20;
+		this.casillas[21] = cas21;
+		this.casillas[22] = cas22;
+		this.casillas[23] = cas23;
+		this.casillas[24] = cas24;
+		this.casillas[25] = cas25;
+		this.casillas[26] = cas26;
+		this.casillas[27] = cas27;
+		this.casillas[28] = cas28;
+		this.casillas[29] = cas29;
+		this.casillas[30] = cas30;
+		this.casillas[31] = cas31;
+		this.casillas[32] = cas32;
+		this.casillas[33] = cas33;
+		this.casillas[34] = cas34;
+		this.casillas[35] = cas35;
+		this.casillas[36] = cas36;
+		this.casillas[37] = cas37;
+		this.casillas[38] = cas38;
+		this.casillas[39] = cas39;
+		this.casillas[40] = cas40;
+		this.casillas[41] = cas41;
+		this.casillas[42] = cas42;
+		this.casillas[43] = cas43;
+		this.casillas[44] = cas44;
+		
+		Nodo[] nodos = tab.nodos;
+		for(int i=0 ; i<45; i++) {
+			final Integer x =i;
+			Casilla cas = nodos[i].getCasilla();
+			if(cas instanceof Catapulta) {
+				if(((Catapulta) cas).getIdentificador()==1)
+					this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaAzul.png"));
+				else
+					this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaRoja.png"));
+			}else if(cas instanceof Colina) {
+				this.casillas[i].setIcon(new ImageIcon("Recursos\\Colina.png"));
+			}else if(cas instanceof Curación) {
+				this.casillas[i].setIcon(new ImageIcon("Recursos\\Curarse.png"));
+			}else if(cas instanceof Copa) {
+				if(((Copa) cas).getFacción().equals(Facción.Facción1)) {
+					this.casillas[i].setIcon(new ImageIcon("Recursos\\CopaBC.png"));
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInCoronaAzul(x);
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutCoronaAzul(x);
+						}
+					});
+				}else {
+					this.casillas[i].setIcon(new ImageIcon("Recursos\\CopaBC.png"));
+				}
+				
+			}else {
+				Ficha f = nodos[i].getFichaDefensora();
+				if(f instanceof Arquero) {
+					if(f.getFacción().equals(Facción.Facción1))
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroAzulBC.png"));
+					else{
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroRojoBC.png"));
+					}
+				}else if(f instanceof Lancero) {
+					if(f.getFacción().equals(Facción.Facción1))
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\LanceroAzulBC.png"));
+					else{
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\LanceroRojoBC.png"));
+					}
+				}else if (f instanceof Guerrero) {
+					if(f.getFacción().equals(Facción.Facción1))
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\GuerreroAzulBC.png"));
+					else{
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\GuerreroRojoBC.png"));
+					}
+				}else if(f instanceof Bárbaro) {
+					if(f.getFacción().equals(Facción.Facción1))
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\BarbaroAzulBC.png"));
+					else{
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\BarbaroRojoBC.png"));
+					}
+				}else if(f instanceof Caballero) {
+					if(f.getFacción().equals(Facción.Facción1))
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\CaballeroAzulBC.png"));
+					else{
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\CaballeroRojoBC.png"));
+					}
+				}
+			}
+		}
+		
 		
 		
 		btnMenu = new JButton("");
@@ -447,11 +392,11 @@ public class TableroGrafico extends JFrame {
 		contentPane.add(btnMenu);
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBounds(460, 633, 93, 29);
+		lblNewLabel_2.setBounds(374, 633, 93, 29);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("New label");
-		lblNewLabel_2_1.setBounds(617, 633, 93, 29);
+		lblNewLabel_2_1.setBounds(605, 633, 93, 29);
 		contentPane.add(lblNewLabel_2_1);
 		
 		JSeparator separator = new JSeparator();
@@ -479,4 +424,15 @@ public class TableroGrafico extends JFrame {
 			lblNewLabel_4.setText("Oponente: "+nombre2+" (Azul)");
 		}
 	}
+
+	public void ratonInCoronaAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaAzul.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+	
+	public void ratonOutCoronaAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+	
 }
