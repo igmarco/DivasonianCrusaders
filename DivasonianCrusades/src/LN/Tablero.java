@@ -345,6 +345,86 @@ public class Tablero {
     	
     	int j;
     	
+    	if(whereIsTheArcher == 0) {
+			
+			j = posiciones.remove(8);
+			j = posiciones.remove(17);
+			
+		}
+		else if(whereIsTheArcher == 9) {
+			
+			j = posiciones.remove(8);
+			j = posiciones.remove(17);
+			j = posiciones.remove(26);
+			
+		}
+		else if(whereIsTheArcher == 18) {
+			
+			j = posiciones.remove(17);
+			j = posiciones.remove(26);
+			j = posiciones.remove(35);
+			
+		}
+		else if(whereIsTheArcher == 27) {
+			
+			j = posiciones.remove(26);
+			j = posiciones.remove(35);
+			j = posiciones.remove(44);
+			
+		}
+		else if(whereIsTheArcher == 36) {
+			
+			j = posiciones.remove(35);
+			j = posiciones.remove(44);
+			
+		}
+		else if(whereIsTheArcher == 8) {
+			
+			j = posiciones.remove(0);
+			j = posiciones.remove(1);
+			j = posiciones.remove(9);
+			j = posiciones.remove(10);
+			
+		}
+		else if(whereIsTheArcher == 17) {
+			
+			j = posiciones.remove(0);
+			j = posiciones.remove(1);
+			j = posiciones.remove(9);
+			j = posiciones.remove(10);
+			j = posiciones.remove(18);
+			j = posiciones.remove(19);
+			
+		}
+		else if(whereIsTheArcher == 26) {
+
+			j = posiciones.remove(9);
+			j = posiciones.remove(10);
+			j = posiciones.remove(18);
+			j = posiciones.remove(19);
+			j = posiciones.remove(27);
+			j = posiciones.remove(28);
+			
+		}
+		else if(whereIsTheArcher == 35) {
+			
+			j = posiciones.remove(18);
+			j = posiciones.remove(19);
+			j = posiciones.remove(27);
+			j = posiciones.remove(28);
+			j = posiciones.remove(36);
+			j = posiciones.remove(37);
+			
+		}
+		else if(whereIsTheArcher == 44) {
+			
+			j = posiciones.remove(27);
+			j = posiciones.remove(28);
+			j = posiciones.remove(36);
+			j = posiciones.remove(37);
+			
+		}
+    	
     	for(int i = 0; i < posiciones.size(); i++) {
     		
     		if(posiciones.get(i) < 0 || posiciones.get(i) >= 45) {
@@ -367,16 +447,63 @@ public class Tablero {
     	//Faltan cosas
     	int dóndeEstá = this.dóndeEstá(f);
     	
-    	movPosibles.add(dóndeEstá - 9 - 1);
     	movPosibles.add(dóndeEstá - 9);
-    	movPosibles.add(dóndeEstá - 9 + 1);
     	movPosibles.add(dóndeEstá - 1);
     	movPosibles.add(dóndeEstá + 1);
-    	movPosibles.add(dóndeEstá + 9 - 1);
     	movPosibles.add(dóndeEstá + 9);
-    	movPosibles.add(dóndeEstá + 9 + 1); 
     	
     	int j;
+    	
+    	if(dóndeEstá == 0) {
+			
+			j = movPosibles.remove(8);
+			
+		}
+		else if(dóndeEstá == 9) {
+			
+			j = movPosibles.remove(17);
+			
+		}
+		else if(dóndeEstá == 18) {
+			
+			j = movPosibles.remove(26);
+			
+		}
+		else if(dóndeEstá == 27) {
+			
+			j = movPosibles.remove(35);
+			
+		}
+		else if(dóndeEstá == 36) {
+			
+			j = movPosibles.remove(44);
+			
+		}
+		else if(dóndeEstá == 8) {
+			
+			j = movPosibles.remove(0);
+			
+		}
+		else if(dóndeEstá == 17) {
+			
+			j = movPosibles.remove(9);
+			
+		}
+		else if(dóndeEstá == 26) {
+
+			j = movPosibles.remove(18);
+			
+		}
+		else if(dóndeEstá == 35) {
+			
+			j = movPosibles.remove(27);
+			
+		}
+		else if(dóndeEstá == 44) {
+			
+			j = movPosibles.remove(36);
+			
+		}
     	
     	for(int i = 0; i < movPosibles.size(); i++) {
     		
