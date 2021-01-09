@@ -476,28 +476,46 @@ public class TableroGrafico extends JFrame {
 		txtFichaDef.setBounds(825, 617, 142, 63);
 		contentPane.add(txtFichaDef);
 		
-		JButton btnNewButton = new JButton("Mover");
-		btnNewButton.setBounds(823, 206, 179, 47);
-		contentPane.add(btnNewButton);
+		JButton Mover = new JButton("");
 		
-		JButton btnDisparar = new JButton("Disparar");
+		Mover.setBackground(new Color(240, 230, 140));
+		Mover.setIcon(new ImageIcon("Recursos\\Mover.png"));
+		Mover.setBorder(null);
+		Mover.setBounds(823, 206, 179, 47);
+		contentPane.add(Mover);
+		
+		JButton btnDisparar = new JButton("");
+		btnDisparar.setBackground(new Color(240, 230, 140));
+		btnDisparar.setIcon(new ImageIcon("Recursos\\Disparar.png"));
 		btnDisparar.setBounds(822, 264, 179, 47);
+		btnDisparar.setBorder(null);
 		contentPane.add(btnDisparar);
 		
-		JButton btnEsperar = new JButton("Esperar");
+		JButton btnEsperar = new JButton("");
+
+		btnEsperar.setIcon(new ImageIcon("Recursos\\Esperar.png"));
+		btnEsperar.setBackground(new Color(240, 230, 140));
+		btnEsperar.setBorder(null);
 		btnEsperar.setBounds(822, 322, 179, 47);
 		contentPane.add(btnEsperar);
 		
-		JButton btnCancelar = new JButton("Deshacer");
+		JButton btnCancelar = new JButton("");
+		btnCancelar.setBackground(new Color(240, 230, 140));
+		btnCancelar.setIcon(new ImageIcon("Recursos\\Deshacer.png"));
 		btnCancelar.setBounds(822, 380, 179, 47);
+		btnCancelar.setBorder(null);
 		contentPane.add(btnCancelar);
 		
-		JButton btnNewButton_3_1 = new JButton("Rendirse");
-		btnNewButton_3_1.setBounds(902, 448, 100, 29);
-		contentPane.add(btnNewButton_3_1);
+		JButton Rendirse = new JButton("");
+		Rendirse.setIcon(new ImageIcon("Recursos\\Rendirse.png"));
+		Rendirse.setBackground(new Color(240, 230, 140));
+		Rendirse.setBounds(902, 448, 100, 29);
+		Rendirse.setBorder(null);
+		contentPane.add(Rendirse);
 		
 		JLabel lb_Casilla_1 = new JLabel("Movs: 4/6");
-		lb_Casilla_1.setBounds(821, 455, 69, 14);
+		lb_Casilla_1.setFont(new Font("Consolas", Font.PLAIN, 13));
+		lb_Casilla_1.setBounds(827, 448, 77, 29);
 		contentPane.add(lb_Casilla_1);
 		
 		JButton btnSiguienteMovimiento = new JButton("Siguiente movimiento");
