@@ -65,8 +65,8 @@ public class Nombre extends JFrame {
 						System.out.println("Llegué sii...");
 						if(linea.compareTo("OK1")==0) {
 							azul = true;
-							linea = in.readLine();
 							lblNewLabel.setText("¡Oponente encontrado!");
+							linea = in.readLine();
 						}else {
 							azul=false;
 							lblNewLabel.setText("¡Oponente encontrado!");
