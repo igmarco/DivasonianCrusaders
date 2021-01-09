@@ -55,7 +55,7 @@ public class TableroGrafico extends JFrame {
 		setResizable(false);
 		final TableroGrafico tablero= this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1080, 720);
+		setBounds(100, 100, 1080, 735);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(240, 230, 140));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -427,16 +427,16 @@ public class TableroGrafico extends JFrame {
 		btnMenu.setBackground(new Color(240, 230, 140));
 		btnMenu.setIcon(new ImageIcon("Recursos\\Menu.png"));
 		btnMenu.setBorder(null);
-		btnMenu.setBounds(42, 615, 179, 47);
+		btnMenu.setBounds(42, 633, 179, 47);
 		contentPane.add(btnMenu);
 		
 		JLabel lblNewLabel_2 = new JLabel("Turno: 2");
-		lblNewLabel_2.setBounds(343, 633, 77, 29);
+		lblNewLabel_2.setBounds(249, 633, 64, 29);
 		contentPane.add(lblNewLabel_2);
 		
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(751, 206, 9, 456);
+		separator.setBounds(751, 206, 9, 474);
 		contentPane.add(separator);
 		
 		lblNewLabel_3 = new JLabel("");
@@ -450,7 +450,7 @@ public class TableroGrafico extends JFrame {
 		contentPane.add(lblNewLabel_4);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(770, 493, 294, 14);
+		separator_1.setBounds(770, 493, 278, 14);
 		contentPane.add(separator_1);
 		
 		JLabel lb_Casilla = new JLabel("Casilla:");
@@ -518,18 +518,22 @@ public class TableroGrafico extends JFrame {
 		lb_Casilla_1.setBounds(827, 448, 77, 29);
 		contentPane.add(lb_Casilla_1);
 		
-		JButton btnSiguienteMovimiento = new JButton("Siguiente movimiento");
-		btnSiguienteMovimiento.setBounds(543, 615, 191, 47);
+		JButton btnSiguienteMovimiento = new JButton("Siguiente");
+		btnSiguienteMovimiento.setBounds(555, 633, 179, 47);
 		contentPane.add(btnSiguienteMovimiento);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("Movimiento: 0");
-		lblNewLabel_2_1.setBounds(430, 633, 103, 29);
+		lblNewLabel_2_1.setBounds(249, 653, 89, 29);
 		contentPane.add(lblNewLabel_2_1);
 		
 		txtFichaAt = new JTextArea();
 		txtFichaAt.setFont(new Font("Monospaced", Font.PLAIN, 10));
 		txtFichaAt.setBounds(977, 615, 71, 65);
 		contentPane.add(txtFichaAt);
+		
+		JButton btnAnteriorMovimiento = new JButton("Anterior");
+		btnAnteriorMovimiento.setBounds(366, 633, 179, 47);
+		contentPane.add(btnAnteriorMovimiento);
 	}
 	
 	public void setNombre(String nombre1, String nombre2,boolean azul) {
