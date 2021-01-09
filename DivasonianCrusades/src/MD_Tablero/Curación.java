@@ -43,6 +43,12 @@ public class Curación extends Casilla {
     	
     }
     
+    public int getCuración() {
+    	
+    	return this.curación;
+    	
+    }
+    
     public boolean equals(Casilla c) {
 
     	//Si tiene el mismo tipo de casilla (en caso de la catapulta y la curación tiene que tener el identificador igual (o 0)).

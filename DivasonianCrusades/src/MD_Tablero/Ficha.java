@@ -12,12 +12,24 @@ public abstract class Ficha {
 
     protected HachaDivasónica hachaDivasónica;
 
-    protected Facción facción;
+	protected Facción facción;
     
     public boolean puedeMover;
     
+    public int getDaño() {
+		return daño;
+	}
+
+	public int getVida() {
+		return vida;
+	}
+    
     public HachaDivasónica getHachaDivasónica() {
 		return hachaDivasónica;
+	}
+    
+    public boolean tieneHacha() {
+		return (hachaDivasónica != null);
 	}
 
 	public Ficha(HachaDivasónica hachaDivasónica,

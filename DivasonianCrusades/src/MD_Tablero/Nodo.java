@@ -267,7 +267,7 @@ public class Nodo {
     	
     	if(this.fichaAtacante != null && this.fichaAtacante.estáMuerta()) {
     		
-    		if(fichaAtacante.getHachaDivasónica() != null && fichaDefensora.getHachaDivasónica() == null) {
+    		if(fichaAtacante.tieneHacha() && fichaDefensora.getHachaDivasónica() == null) {
     			
     			fichaDefensora.setHachaDivasónica(fichaAtacante.getHachaDivasónica());
     			
@@ -277,7 +277,7 @@ public class Nodo {
     	}
     	if(this.fichaDefensora != null && this.fichaDefensora.estáMuerta()) {
     		
-    		if(fichaDefensora.getHachaDivasónica() != null && casilla.getHachaDivasónica() == null) {
+    		if(fichaDefensora.tieneHacha() && casilla.getHachaDivasónica() == null) {
     			
     			casilla.setHachaDivasónica(fichaDefensora.getHachaDivasónica());
     			

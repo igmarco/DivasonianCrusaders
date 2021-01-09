@@ -43,6 +43,12 @@ public class Copa extends Casilla {
     	
     }
     
+    public int getVida() {
+    	
+    	return this.vida;
+    	
+    }
+    
     public boolean equals(Casilla c) {
 
     	//Si tiene el mismo tipo de casilla (en caso de la copa (este en concreto) tiene que ser de la misma facción).

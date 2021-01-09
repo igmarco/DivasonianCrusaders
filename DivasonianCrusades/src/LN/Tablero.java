@@ -20,7 +20,7 @@ import Utilidades.Dirección;
 import Utilidades.Facción;
 
 public class Tablero {
-    public Nodo[] nodos = new Nodo[45];
+    private Nodo[] nodos = new Nodo[45];
 
     public Tablero() {
     	nodos[18] = new Nodo(new Copa(Facción.Facción1));
@@ -618,4 +618,10 @@ public class Tablero {
     	
     }
 
+    public Nodo getNodo(int i) {
+    	
+    	return this.nodos[i];
+    	
+    }
+    
 }

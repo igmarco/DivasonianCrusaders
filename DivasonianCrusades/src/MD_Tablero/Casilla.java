@@ -2,19 +2,19 @@ package MD_Tablero;
 
 public abstract class Casilla {
 	protected HachaDivasónica hachaDivasónica;
-	protected boolean casillaDeCura;
+	protected int curaciónAuxiliar;
 	
 	public Casilla() {
 		
 		this.hachaDivasónica = null;
-		this.casillaDeCura = false;
+		this.curaciónAuxiliar = 0;
 		
 	}
 	
 	public Casilla(HachaDivasónica hachaDivasónica) {
 		
 		this.hachaDivasónica = hachaDivasónica;
-		this.casillaDeCura = false;
+		this.curaciónAuxiliar = 0;
 		
 	}
 
@@ -22,7 +22,9 @@ public abstract class Casilla {
 	public Casilla(HachaDivasónica hachaDivasónica, boolean casillaDeCura) {
 		
 		this.hachaDivasónica = hachaDivasónica;
-		this.casillaDeCura = casillaDeCura;
+		
+		if(casillaDeCura) {/* this.curaciónAuxiliar = ; */}
+		else this.curaciónAuxiliar = 0;
 		
 	}
 
@@ -32,7 +34,7 @@ public abstract class Casilla {
     	
     }
     
-public HachaDivasónica getHachaDivasónica() {
+    public HachaDivasónica getHachaDivasónica() {
     	
     	return hachaDivasónica;
     	
@@ -52,6 +54,18 @@ public HachaDivasónica getHachaDivasónica() {
     public boolean tieneHacha() {
     	
     	return (hachaDivasónica != null);
+    	
+    }
+    
+    public int getCuraciónAuxiliar() {
+    	
+    	return this.curaciónAuxiliar;
+    	
+    }
+    
+    public boolean casillaDeCura() {
+    	
+    	return (this.curaciónAuxiliar != 0);
     	
     }
 

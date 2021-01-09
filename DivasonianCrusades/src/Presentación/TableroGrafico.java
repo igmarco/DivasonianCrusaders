@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
@@ -29,10 +30,8 @@ import MD_Tablero.Curación;
 import MD_Tablero.Ficha;
 import MD_Tablero.Guerrero;
 import MD_Tablero.Lancero;
-import MD_Tablero.Nodo;
+import MD_Tablero.Normal;
 import Utilidades.Facción;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
 
 public class TableroGrafico extends JFrame {
 
@@ -44,6 +43,9 @@ public class TableroGrafico extends JFrame {
 	private String nombre;
 	private final JButton[] casillas = new JButton[45];
 	private boolean azul;
+	private JTextArea txtCasilla;
+	private JTextArea txtFichaDef;
+	private JTextArea txtFichaAt;
 
 	/**
 	 * Create the frame.
@@ -306,12 +308,11 @@ public class TableroGrafico extends JFrame {
 		this.casillas[43] = cas43;
 		this.casillas[44] = cas44;
 		
-		Nodo[] nodos = tab.nodos;
 		for(int i=0 ; i<45; i++) {
 			final Integer x =i;
-			Casilla cas = nodos[i].getCasilla();
-			Ficha f = nodos[i].getFichaDefensora();
-			Ficha fat = nodos[i].getFichaDefensora();
+			Casilla cas = this.tab.getNodo(i).getCasilla();
+			Ficha f = this.tab.getNodo(i).getFichaDefensora();
+			Ficha fat = this.tab.getNodo(i).getFichaDefensora();
 			if(cas instanceof Catapulta) {
 				if(((Catapulta) cas).getIdentificador()==1) {
 					if(f == null)
@@ -461,21 +462,19 @@ public class TableroGrafico extends JFrame {
 		contentPane.add(lb_Info);
 		
 		JLabel lb_Ficha = new JLabel("Ficha:");
-		lb_Ficha.setBounds(770, 600, 46, 14);
+		lb_Ficha.setBounds(770, 620, 46, 14);
 		contentPane.add(lb_Ficha);
 		
-		JTextArea txtrCopaFaccinFaccin = new JTextArea();
-		txtrCopaFaccinFaccin.setFont(new Font("Monospaced", Font.PLAIN, 11));
-		txtrCopaFaccinFaccin.setEditable(false);
-		txtrCopaFaccinFaccin.setText("Copa\r\nFacci\u00F3n: Facci\u00F3n1\r\nVida: 84\r\n");
-		txtrCopaFaccinFaccin.setBounds(825, 533, 207, 53);
-		contentPane.add(txtrCopaFaccinFaccin);
+		txtCasilla = new JTextArea();
+		txtCasilla.setFont(new Font("Monospaced", Font.PLAIN, 10));
+		txtCasilla.setEditable(false);
+		txtCasilla.setBounds(825, 533, 223, 68);
+		contentPane.add(txtCasilla);
 		
-		JTextArea txtrCaballeroFaccinFaccin = new JTextArea();
-		txtrCaballeroFaccinFaccin.setFont(new Font("Monospaced", Font.PLAIN, 11));
-		txtrCaballeroFaccinFaccin.setText("Caballero\r\nFacci\u00F3n: Facci\u00F3n2\r\nVida: 32\r\n");
-		txtrCaballeroFaccinFaccin.setBounds(825, 597, 207, 53);
-		contentPane.add(txtrCaballeroFaccinFaccin);
+		txtFichaDef = new JTextArea();
+		txtFichaDef.setFont(new Font("Monospaced", Font.PLAIN, 10));
+		txtFichaDef.setBounds(825, 617, 142, 63);
+		contentPane.add(txtFichaDef);
 		
 		JButton btnNewButton = new JButton("Mover");
 		btnNewButton.setBounds(823, 206, 179, 47);
@@ -508,6 +507,11 @@ public class TableroGrafico extends JFrame {
 		JLabel lblNewLabel_2_1 = new JLabel("Movimiento: 0");
 		lblNewLabel_2_1.setBounds(430, 633, 103, 29);
 		contentPane.add(lblNewLabel_2_1);
+		
+		txtFichaAt = new JTextArea();
+		txtFichaAt.setFont(new Font("Monospaced", Font.PLAIN, 10));
+		txtFichaAt.setBounds(977, 615, 71, 65);
+		contentPane.add(txtFichaAt);
 	}
 	
 	public void setNombre(String nombre1, String nombre2,boolean azul) {
@@ -522,13 +526,13 @@ public class TableroGrafico extends JFrame {
 		System.out.println(this.azul);
 		this.nombre=nombre1;
 	}
+	
+	
 
 	public void ratonInCoronaAzul(int i) {
 		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaAzul.png"));
 		this.casillas[i].setBackground(Color.white);
 	}
-	
-	
 	
 	public void ratonOutCoronaAzul(int i) {
 		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
@@ -553,5 +557,108 @@ public class TableroGrafico extends JFrame {
 	public void ratonOutArqueroRojo(int i) {
 		this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroRojoBC.png"));
 		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+	
+	
+	
+	
+	public void ratonInNodo(int i) {
+		
+		String casillaInfo = "";
+		String fichaDefInfo = "";
+		String fichaAtInfo = "";
+		
+		Casilla casilla = this.tab.getNodo(i).getCasilla();
+		Ficha fichaDef = this.tab.getNodo(i).getFichaDefensora();
+		Ficha fichaAt = this.tab.getNodo(i).getFichaAtacante();
+		
+		//Info. de la casilla
+		
+		casillaInfo += casilla.getClass() + "/r/n";
+		
+		if (casilla instanceof Copa) {
+			
+			casillaInfo += "Facción: " + ((Copa) casilla).getFacción() + "/r/n";
+			casillaInfo += "Vida: " + ((Copa) casilla).getVida() + "/r/n";
+			
+		}
+		else if (casilla instanceof Curación) {
+			
+			casillaInfo += "Identificador: " + ((Curación) casilla).getIdentificador() + "/r/n";
+			casillaInfo += "Curación: " + ((Curación) casilla).getCuración() + "/r/n";
+			
+		}
+		else if (casilla instanceof Catapulta) {
+			
+			casillaInfo += "Identificador: " + ((Catapulta) casilla).getIdentificador() + "/r/n";
+			casillaInfo += "Uso: ";
+			
+			if(fichaDef != null && fichaAt == null) {
+				
+				casillaInfo += fichaDef.getFacción() + "/r/n";
+				
+			}
+			
+		}
+		else if (casilla instanceof Colina) {
+			
+			casillaInfo += "Ataque defensivo: +" + ((Colina) casilla).getDañoExtra() + "/r/n";
+	
+		}
+		
+		if(casilla.tieneHacha()) {
+			
+			casillaInfo += "Hacha Divasónica: Daño: +" + casilla.getHachaDivasónica().getDañoExtra() + " Vida/turno: -" + casilla.getHachaDivasónica().getVidaPorTurno() + "/r/n";
+			
+		}
+		else {
+			
+			casillaInfo += "Hacha Divasónica: No" + "/r/n";
+			
+		}
+		
+		if(casilla.casillaDeCura()) {
+			
+			casillaInfo += "Curación (extra): +: " + casilla.getCuraciónAuxiliar();
+			
+		}
+		
+		//Info. de la/s ficha/s.
+		
+		fichaDefInfo += fichaDef.getClass();
+		if(fichaAt != null) {
+			
+			fichaDefInfo += "  vs." + "/r/n";
+			fichaAtInfo += fichaAt.getClass() + "/r/n";
+			
+		}
+		else fichaDefInfo += "/r/n";
+		
+		fichaDefInfo += "Facción: " + fichaDef.getFacción() + "/r/n";
+		if(fichaAt != null) fichaAtInfo += fichaAt.getFacción() + "/r/n";
+		
+		fichaDefInfo += "Vida: " + fichaDef.getVida() + "/r/n";
+		if(fichaAt != null) fichaAtInfo += fichaAt.getVida() + "/r/n";
+		
+		if(fichaDef.tieneHacha()) {
+			
+			fichaDefInfo += "Hacha: +" + fichaDef.getHachaDivasónica().getDañoExtra() + " -" + fichaDef.getHachaDivasónica().getVidaPorTurno() + "/r/n";
+			
+		}
+		else {
+			
+			casillaInfo += "Hacha Divasónica: No" + "/r/n";
+			
+		}
+		if(fichaAt != null) {
+			
+			if(fichaAt.tieneHacha()) fichaAtInfo += "Sí" + "/r/n";
+			else fichaAtInfo += "No" + "/r/n";
+			
+		}
+		
+		this.txtCasilla.setText(casillaInfo);
+		this.txtFichaDef.setText(fichaDefInfo);
+		this.txtFichaAt.setText(fichaAtInfo);
 	}
 }
