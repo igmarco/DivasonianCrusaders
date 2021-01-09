@@ -6,6 +6,20 @@ import Utilidades.Dirección;
 import Utilidades.Facción;
 
 public class Ejecutor {
+	
+	//--------------------------------------------------------
+	//--------------------------------------------------------
+	//----------------------- ATENCIÓN -----------------------
+	//--------------------------------------------------------
+	//--------------------------------------------------------
+	//
+	//ESTA CLASE YA NO ESTÁ EN USO. OFRECÍA FUNCIONALIDAD
+	//ADICIONAL A LA CLASE Tablero, POR LO QUE HEMOS INTEGRADO
+	//LOS MÉTODOS DE Ejecutor EN LA PROPIA CLASE Tablero.
+	//
+	//--------------------------------------------------------
+	//--------------------------------------------------------
+	
     public Tablero tablero;
     
     public Ejecutor(Tablero tablero) {

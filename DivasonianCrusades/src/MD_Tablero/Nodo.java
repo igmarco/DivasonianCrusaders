@@ -52,7 +52,8 @@ public class Nodo {
     	
     	boolean está = false;
     	
-    	if (f.equals(fichaDefensora) || f.equals(fichaAtacante)) está = true;
+    	if (f == null) está = false;
+    	else if (f.equals(fichaDefensora) || f.equals(fichaAtacante)) está = true;
     	
     	return está;
     	
@@ -62,7 +63,8 @@ public class Nodo {
     	
     	boolean está = false;
     	
-    	if (casilla.equals(c)) está = true;
+    	if (c == null) está = false;
+    	else if (casilla.equals(c)) está = true;
     	
     	return está;
     	
@@ -89,7 +91,7 @@ public class Nodo {
 //    		this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarCarga(this.fichaDefensora));
 //    		if(!this.fichaDefensora.estáMuerta()) {
 //    			
-//    			if(this.casilla.equals(new Colina())) this.fichaAtacante.sufrirDaño((this.fichaDefensora.realizarAtaque(this.fichaAtacante)) + ((Colina) this.casilla).getDañoExtra());
+//    			if(this.casilla instanceof Colina) this.fichaAtacante.sufrirDaño((this.fichaDefensora.realizarAtaque(this.fichaAtacante)) + ((Colina) this.casilla).getDañoExtra());
 //    			else this.fichaAtacante.sufrirDaño(this.fichaDefensora.realizarAtaque(this.fichaAtacante));
 //    			
 //    		}
@@ -102,6 +104,8 @@ public class Nodo {
     public Ficha quitarFicha(Ficha f) {
     	
     	Ficha freturn = null;
+    	
+    	if(f == null) return null;
     	
     	if(f.equals(this.fichaDefensora)) {
     		
@@ -192,7 +196,7 @@ public class Nodo {
 
     private void darCuración() {
     	
-    	if(this.casilla.equals(new Curación())) {
+    	if(this.casilla instanceof Curación) {
     		
     		this.fichaDefensora.curarse(((Curación) this.casilla).curar());
         	this.fichaAtacante.curarse(((Curación) this.casilla).curar());
@@ -241,7 +245,7 @@ public class Nodo {
     	this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarCarga(this.fichaDefensora));
 		if(!this.fichaDefensora.estáMuerta()) {
 			
-			if(this.casilla.equals(new Colina())) this.fichaAtacante.sufrirDaño((this.fichaDefensora.realizarAtaque(this.fichaAtacante)) + ((Colina) this.casilla).getDañoExtra());
+			if(this.casilla instanceof Colina) this.fichaAtacante.sufrirDaño((this.fichaDefensora.realizarAtaque(this.fichaAtacante)) + ((Colina) this.casilla).getDañoExtra());
 			else this.fichaAtacante.sufrirDaño(this.fichaDefensora.realizarAtaque(this.fichaAtacante));
 			
 		}
@@ -290,15 +294,20 @@ public class Nodo {
     //POR SI SE HA TRABADO EN COMBATE ESTE TURNETT.
     public void noPuedeMover(Ficha f) {
     	
-    	if(this.fichaAtacante.equals(f)) this.fichaAtacante.puedeMover = false;
-    	else if(this.fichaDefensora.equals(f)) this.fichaDefensora.puedeMover = false;
+    	if (f != null) {
+    		
+    		if(f.equals(this.fichaAtacante)) this.fichaAtacante.puedeMover = false;
+        	else if(f.equals(this.fichaDefensora)) this.fichaDefensora.puedeMover = false;
+    		
+    	}
     	
     }
     
     public boolean puedeMover(Ficha f) {
     	
-    	if(this.fichaAtacante.equals(f)) return this.fichaAtacante.puedeMover;
-    	else if(this.fichaDefensora.equals(f)) return this.fichaDefensora.puedeMover;
+    	if (f == null) return false;
+    	if(f.equals(this.fichaAtacante)) return this.fichaAtacante.puedeMover;
+    	else if(f.equals(this.fichaDefensora)) return this.fichaDefensora.puedeMover;
     	else return false;
     }
     

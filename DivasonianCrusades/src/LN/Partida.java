@@ -24,7 +24,7 @@ public class Partida implements Runnable {
 	private Instrucción instrucciónFacción1;
 	private Instrucción instrucciónFacción2;
 
-	private Ejecutor ejecutor;
+	private Tablero tablero;
 	
 	ObjectOutputStream oos1 = null;
 	ObjectOutputStream oos2 = null;
@@ -40,7 +40,7 @@ public class Partida implements Runnable {
     	
     	turno = 0;
     	
-    	ejecutor = new Ejecutor();
+    	tablero = new Tablero();
     	
     }
     
@@ -76,8 +76,11 @@ public class Partida implements Runnable {
 				
 			}
 			
+			oos1.writeObject(this.tablero.getGanador());
+			oos2.writeObject(this.tablero.getGanador());
+			
 			//Esto habrá que quitarlo, pero de momento lo voy a dejar porque siempre está bien que el señor del servidor cotillee quién gana y quién pierde.
-			if(this.ejecutor.getGanador() == Facción.Facción1) System.out.println("¡Enhorabuena! Ha ganado el azul " + nombre1);
+			if(this.tablero.getGanador() == Facción.Facción1) System.out.println("¡Enhorabuena! Ha ganado el azul " + nombre1);
 			else System.out.println("¡Nada mal! Ha ganado el rojo " + nombre2);
 			
 		} catch (IOException e) {
@@ -120,12 +123,12 @@ public class Partida implements Runnable {
     			//Hace cosas solo el 2
     			if(op2 instanceof Movimiento) {
     				
-    				this.ejecutor.moverFicha(((Movimiento) op2).getFicha(), ((Movimiento) op2).getDirección());
+    				this.tablero.moverFicha(((Movimiento) op2).getFicha(), ((Movimiento) op2).getDirección());
     				
     			}
     			else if(op2 instanceof Disparo) {
     				
-    				this.ejecutor.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY());
+    				this.tablero.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY());
     				
     			}
     			
@@ -137,12 +140,12 @@ public class Partida implements Runnable {
     		//Hace cosas solo el 1
     		if(op1 instanceof Movimiento) {
 				
-				this.ejecutor.moverFicha(((Movimiento) op1).getFicha(), ((Movimiento) op1).getDirección());
+				this.tablero.moverFicha(((Movimiento) op1).getFicha(), ((Movimiento) op1).getDirección());
 				
 			}
 			else if(op1 instanceof Disparo) {
 				
-				this.ejecutor.dispararProyectiles(((Disparo) op1).getCatapulta(), ((Disparo) op1).getX(), ((Disparo) op1).getY());
+				this.tablero.dispararProyectiles(((Disparo) op1).getCatapulta(), ((Disparo) op1).getX(), ((Disparo) op1).getY());
 				
 			}
     		
@@ -152,17 +155,17 @@ public class Partida implements Runnable {
     		//Hacen cosas los dos
 			if(op2 instanceof Disparo) {
 				
-				this.ejecutor.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY());
+				this.tablero.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY());
 				
 				//Ahora hace cosas el 1
 				if(op1 instanceof Movimiento) {
 					
-					this.ejecutor.moverFicha(((Movimiento) op1).getFicha(), ((Movimiento) op1).getDirección());
+					this.tablero.moverFicha(((Movimiento) op1).getFicha(), ((Movimiento) op1).getDirección());
 					
 				}
 				else if(op1 instanceof Disparo) {
 					
-					this.ejecutor.dispararProyectiles(((Disparo) op1).getCatapulta(), ((Disparo) op1).getX(), ((Disparo) op1).getY());
+					this.tablero.dispararProyectiles(((Disparo) op1).getCatapulta(), ((Disparo) op1).getX(), ((Disparo) op1).getY());
 					
 				}
 				
@@ -172,12 +175,12 @@ public class Partida implements Runnable {
 				//Ahora hace cosas el 2
 				if(op2 instanceof Movimiento) {
 					
-					this.ejecutor.moverFicha(((Movimiento) op2).getFicha(), ((Movimiento) op2).getDirección());
+					this.tablero.moverFicha(((Movimiento) op2).getFicha(), ((Movimiento) op2).getDirección());
 					
 				}
 				else if(op2 instanceof Disparo) {
 					
-					this.ejecutor.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY());
+					this.tablero.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY());
 					
 				}
 				
@@ -185,7 +188,7 @@ public class Partida implements Runnable {
 			else {
 				
 				//Los dos hacen movimientos
-				this.ejecutor.moverFichasALaVez(((Movimiento) op1).getFicha(), ((Movimiento) op1).getDirección(), ((Movimiento) op2).getFicha(), ((Movimiento) op2).getDirección());
+				this.tablero.moverFichasALaVez(((Movimiento) op1).getFicha(), ((Movimiento) op1).getDirección(), ((Movimiento) op2).getFicha(), ((Movimiento) op2).getDirección());
 				
 			}
     		
@@ -204,20 +207,20 @@ public class Partida implements Runnable {
 
     public boolean haTerminado() {
     	
-    	return ejecutor.haTerminado();
+    	return tablero.haTerminado();
     	
     }
 
     public Facción getGanador() {
     	
-    	return ejecutor.getGanador();
+    	return tablero.getGanador();
     	
     }
 
     public void resolverTurno() {
     	
     	//Imagino que será solo esto:
-    	ejecutor.resolverTurno();
+    	tablero.resolverTurno();
     	
     }
 
@@ -227,11 +230,11 @@ public class Partida implements Runnable {
     	
     	try {
     		
-			oos1.writeObject(this.ejecutor.tablero);
-			oos2.writeObject(this.ejecutor.tablero);
+			oos1.writeObject(this.tablero);
+			oos2.writeObject(this.tablero);
 			
-			oos1.writeObject(this.ejecutor.haTerminado());
-			oos2.writeObject(this.ejecutor.haTerminado());
+			oos1.writeObject(this.tablero.haTerminado());
+			oos2.writeObject(this.tablero.haTerminado());
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
