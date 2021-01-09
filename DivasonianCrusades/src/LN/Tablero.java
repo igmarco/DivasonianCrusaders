@@ -16,6 +16,7 @@ import MD_Tablero.HachaDivasónica;
 import MD_Tablero.Lancero;
 import MD_Tablero.Nodo;
 import MD_Tablero.Normal;
+import Utilidades.Dirección;
 import Utilidades.Facción;
 
 public class Tablero {
@@ -100,6 +101,21 @@ public class Tablero {
     	
     }
     
+    //VIENE DEL ANTIGUO Ejecutor, SIRVE PARA MOVER CON UNA DIRECCIÓN EN LUGAR DE CON LOS intS.
+    public void moverFicha(Ficha f, Dirección d) {
+    		
+    		int desde = this.dóndeEstá(f);
+    		int hasta; //Ojito porque aquí hay que pasar de coordenadas a posición en el vector.
+    		
+    		if(d == Dirección.derecha) hasta = desde + 1;
+    		else if(d == Dirección.izquierda) hasta = desde - 1;
+    		else if(d == Dirección.abajo) hasta = desde + 9;
+    		else hasta = desde - 9;
+    		
+    		this.moverFicha(f, desde, hasta);
+    	
+    }
+    
 	public void moverFicha(Ficha f, int casillaOrigen, int casillaDestino) {
 		
 		//Mueve y resuelve combate
@@ -113,6 +129,47 @@ public class Tablero {
 			
 		}
 		
+    }
+	
+	//VIENE DEL ANTIGUO Ejecutor, SIRVE PARA MOVER CON UNA DIRECCIÓN EN LUGAR DE CON LOS intS.
+	//EN CASO DE QUE UNA MUEVA Y OTRA HAGA OTRA COSA USAMOS moverFicha(), Y SI HAY QUE MOVER DOS ENTONCES LE METEMOS A moverFichasALaVez()
+    public void moverFichasALaVez(Ficha f1, Dirección d1, Ficha f2, Dirección d2) {
+    		
+    		int desde1 = this.dóndeEstá(f1);
+    		int hasta1;
+    		
+    		if(d1 == Dirección.derecha) hasta1 = desde1 + 1;
+    		else if(d1 == Dirección.izquierda) hasta1 = desde1 - 1;
+    		else if(d1 == Dirección.abajo) hasta1 = desde1 + 9;
+    		else hasta1 = desde1 - 9;
+    		
+    		int desde2 = this.dóndeEstá(f2);
+    		int hasta2;
+    		
+    		if(d2 == Dirección.derecha) hasta2 = desde2 + 1;
+    		else if(d2 == Dirección.izquierda) hasta2 = desde2 - 1;
+    		else if(d2 == Dirección.abajo) hasta2 = desde2 + 9;
+    		else hasta2 = desde2 - 9;
+    		
+    		//Comrpobaciones y órdenes
+    		if(hasta1 == desde2) {
+    			
+    			this.moverFicha(f2, desde2, hasta2);
+    			this.moverFicha(f1, desde1, hasta1);
+    			
+    		}
+    		else if(hasta2 == desde1) {
+    			
+    			this.moverFicha(f1, desde1, hasta1);
+    			this.moverFicha(f2, desde2, hasta2);
+    			
+    		}
+    		else if(hasta1 == hasta2) {
+    			
+    			this.moverFichasALaMismaCasilla(f1, f2, desde1, desde2, hasta1);
+    			
+    		}
+    	
     }
 	
 	//NUEVO MÉTODO, PARA CUANDO DOS FICHAS SE MUEVEN A UNA SOLA CASILLA COMÚN
@@ -253,6 +310,13 @@ public class Tablero {
     	
     }
     
+  //VIENE DEL ANTIGUO Ejecutor, SIRVE PARA MOVER CON UNA DIRECCIÓN EN LUGAR DE CON LOS intS.
+    public void dispararProyectiles(Catapulta c, int x, int y) {
+    	
+    	this.dispararProyectiles(c, (5-y)*9 + x-1);
+    	
+    }
+    
     public void dispararProyectiles(Catapulta catapulta, int casillaObjetivo) {
     	
     	//Hace daño de catapulta a los bichos que haya en la casilla casillaObjetivo.
@@ -284,6 +348,8 @@ public class Tablero {
     	
     	//Devuelve una lista de enteros que representan las posiciones de las casillas a las que le llega el rango la catapulta dada.
     	List<Integer> posiciones = new ArrayList<Integer>();
+    	
+    	if(cp == null) return posiciones;
     	
     	if(cp.getIdentificador() == 1) {
     		

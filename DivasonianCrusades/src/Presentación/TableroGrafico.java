@@ -31,6 +31,8 @@ import MD_Tablero.Guerrero;
 import MD_Tablero.Lancero;
 import MD_Tablero.Nodo;
 import Utilidades.Facción;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
 
 public class TableroGrafico extends JFrame {
 
@@ -427,17 +429,13 @@ public class TableroGrafico extends JFrame {
 		btnMenu.setBounds(42, 615, 179, 47);
 		contentPane.add(btnMenu);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBounds(374, 633, 93, 29);
+		JLabel lblNewLabel_2 = new JLabel("Turno: 2");
+		lblNewLabel_2.setBounds(343, 633, 77, 29);
 		contentPane.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_2_1 = new JLabel("New label");
-		lblNewLabel_2_1.setBounds(605, 633, 93, 29);
-		contentPane.add(lblNewLabel_2_1);
 		
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(751, 206, 9, 390);
+		separator.setBounds(751, 206, 9, 456);
 		contentPane.add(separator);
 		
 		lblNewLabel_3 = new JLabel("");
@@ -449,6 +447,67 @@ public class TableroGrafico extends JFrame {
 		lblNewLabel_4.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblNewLabel_4.setBounds(249, 170, 196, 14);
 		contentPane.add(lblNewLabel_4);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(770, 493, 294, 14);
+		contentPane.add(separator_1);
+		
+		JLabel lb_Casilla = new JLabel("Casilla:");
+		lb_Casilla.setBounds(770, 533, 46, 14);
+		contentPane.add(lb_Casilla);
+		
+		JLabel lb_Info = new JLabel("Informaci\u00F3n:");
+		lb_Info.setBounds(770, 508, 89, 14);
+		contentPane.add(lb_Info);
+		
+		JLabel lb_Ficha = new JLabel("Ficha:");
+		lb_Ficha.setBounds(770, 600, 46, 14);
+		contentPane.add(lb_Ficha);
+		
+		JTextArea txtrCopaFaccinFaccin = new JTextArea();
+		txtrCopaFaccinFaccin.setFont(new Font("Monospaced", Font.PLAIN, 11));
+		txtrCopaFaccinFaccin.setEditable(false);
+		txtrCopaFaccinFaccin.setText("Copa\r\nFacci\u00F3n: Facci\u00F3n1\r\nVida: 84\r\n");
+		txtrCopaFaccinFaccin.setBounds(825, 533, 207, 53);
+		contentPane.add(txtrCopaFaccinFaccin);
+		
+		JTextArea txtrCaballeroFaccinFaccin = new JTextArea();
+		txtrCaballeroFaccinFaccin.setFont(new Font("Monospaced", Font.PLAIN, 11));
+		txtrCaballeroFaccinFaccin.setText("Caballero\r\nFacci\u00F3n: Facci\u00F3n2\r\nVida: 32\r\n");
+		txtrCaballeroFaccinFaccin.setBounds(825, 597, 207, 53);
+		contentPane.add(txtrCaballeroFaccinFaccin);
+		
+		JButton btnNewButton = new JButton("Mover");
+		btnNewButton.setBounds(823, 206, 179, 47);
+		contentPane.add(btnNewButton);
+		
+		JButton btnDisparar = new JButton("Disparar");
+		btnDisparar.setBounds(822, 264, 179, 47);
+		contentPane.add(btnDisparar);
+		
+		JButton btnEsperar = new JButton("Esperar");
+		btnEsperar.setBounds(822, 322, 179, 47);
+		contentPane.add(btnEsperar);
+		
+		JButton btnCancelar = new JButton("Deshacer");
+		btnCancelar.setBounds(822, 380, 179, 47);
+		contentPane.add(btnCancelar);
+		
+		JButton btnNewButton_3_1 = new JButton("Rendirse");
+		btnNewButton_3_1.setBounds(902, 448, 100, 29);
+		contentPane.add(btnNewButton_3_1);
+		
+		JLabel lb_Casilla_1 = new JLabel("Movs: 4/6");
+		lb_Casilla_1.setBounds(821, 455, 69, 14);
+		contentPane.add(lb_Casilla_1);
+		
+		JButton btnSiguienteMovimiento = new JButton("Siguiente movimiento");
+		btnSiguienteMovimiento.setBounds(543, 615, 191, 47);
+		contentPane.add(btnSiguienteMovimiento);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("Movimiento: 0");
+		lblNewLabel_2_1.setBounds(430, 633, 103, 29);
+		contentPane.add(lblNewLabel_2_1);
 	}
 	
 	public void setNombre(String nombre1, String nombre2,boolean azul) {
@@ -495,5 +554,4 @@ public class TableroGrafico extends JFrame {
 		this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroRojoBC.png"));
 		this.casillas[i].setBackground(new Color(245, 245, 220));
 	}
-	
 }
