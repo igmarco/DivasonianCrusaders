@@ -26,13 +26,13 @@ public class HachaDivasónica {
 		this.vidaPorTurnoVariable = vidaPorTurnoVariable;
 	}
 
-	public int getDañoExtra() {
+	public int sumarDaño() {
     	
     	return dañoExtra + (int) Math.floor(Math.random()*2*(dañoExtraVariable)-1);
     	
     }
 
-    public int getVidaPorTurno() {
+    public int sufrirDañoPorTurno() {
     	
     	return vidaPorTurno + (int) Math.floor(Math.random()*2*(vidaPorTurnoVariable)-1);
     	

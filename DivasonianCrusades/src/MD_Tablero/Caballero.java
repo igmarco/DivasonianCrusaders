@@ -24,7 +24,9 @@ public class Caballero extends Ficha {
     
     public int realizarCarga(Ficha f) {
     	
-    	return dañoCarga + (int) Math.floor(Math.random()*2*(dañoVariable)-1);
+    	int hd = 0;
+    	if(hachaDivasónica != null) hd = hachaDivasónica.sumarDaño();
+    	return (int) Math.floor((dañoCarga + (int) Math.floor(Math.random()*2*(dañoVariable)-dañoVariable) + hd)*1.2);
     	
     }
 

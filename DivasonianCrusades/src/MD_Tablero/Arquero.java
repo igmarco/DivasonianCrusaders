@@ -32,7 +32,7 @@ public class Arquero extends Ficha {
 
     public int realizarDisparo() {
     	
-    	return dañoFlechas + (int) Math.floor(Math.random()*2*(dañoFlechasVariable)-1);
+    	return dañoFlechas + (int) Math.floor(Math.random()*2*(dañoFlechasVariable)-dañoFlechasVariable);
     	
     }
 

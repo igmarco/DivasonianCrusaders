@@ -25,8 +25,10 @@ public class Lancero extends Ficha {
 	
 	public int realizarAtaque(Ficha f) {
     	
-		if(f instanceof Caballero) return dañoACaballería + (int) Math.floor(Math.random()*2*(dañoVariable)-1);
-		else return daño + (int) Math.floor(Math.random()*2*(dañoVariable)-1);
+		int hd = 0;
+    	if(hachaDivasónica != null) hd = hachaDivasónica.sumarDaño();
+		if(f instanceof Caballero) return dañoACaballería + (int) Math.floor(Math.random()*2*(dañoVariable)-dañoVariable) + hd;
+		else return daño + (int) Math.floor(Math.random()*2*(dañoVariable)-dañoVariable) + hd;
     	
     }
 	

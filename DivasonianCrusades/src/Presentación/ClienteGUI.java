@@ -42,7 +42,7 @@ public class ClienteGUI extends JFrame {
 		final ClienteGUI main = this;
 		tablero = new TableroGrafico();
 		setResizable(false);
-		setBounds(100, 100, 395, 399);
+		setBounds(100, 100, 395, 444);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(255, 250, 205));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -51,7 +51,7 @@ public class ClienteGUI extends JFrame {
 		
 		final JPanel panel = new JPanel();
 		panel.setBackground(new Color(240, 230, 140));
-		panel.setBounds(0, 0, 389, 370);
+		panel.setBounds(0, 0, 389, 417);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -70,7 +70,7 @@ public class ClienteGUI extends JFrame {
 		btCargarPartida.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
 		btCargarPartida.setBackground(new Color(240, 230, 140));
 		btCargarPartida.setIcon(new ImageIcon("Recursos\\CargarPartida.png"));
-		btCargarPartida.setBounds(104, 174, 175, 47);
+		btCargarPartida.setBounds(104, 221, 175, 47);
 		btCargarPartida.setHorizontalTextPosition(SwingConstants.CENTER);
 		btCargarPartida.setBorder(null);
 		panel.add(btCargarPartida);
@@ -88,7 +88,7 @@ public class ClienteGUI extends JFrame {
 		});
 		btGuardarPartida.setBackground(new Color(240, 230, 140));
 		btGuardarPartida.setIcon(new ImageIcon("Recursos\\GuardarPartida.png"));
-		btGuardarPartida.setBounds(104, 222, 175, 47);
+		btGuardarPartida.setBounds(104, 269, 175, 47);
 		btGuardarPartida.setHorizontalTextPosition(SwingConstants.CENTER);
 		btGuardarPartida.setBorder(null);
 		panel.add(btGuardarPartida);
@@ -109,7 +109,7 @@ public class ClienteGUI extends JFrame {
 		});
 		btSalir.setIcon(new ImageIcon("Recursos\\Salir2.png"));
 		btSalir.setBackground(new Color(240, 230, 140));
-		btSalir.setBounds(104, 295, 175, 47);
+		btSalir.setBounds(104, 342, 175, 47);
 		btSalir.setBorder(null);
 		panel.add(btSalir);
 	

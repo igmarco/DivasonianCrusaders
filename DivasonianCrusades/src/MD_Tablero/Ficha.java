@@ -52,13 +52,17 @@ public abstract class Ficha {
     
     public int realizarAtaque() {
     	
-    	return daño + (int) Math.floor(Math.random()*2*(dañoVariable)-1);
+    	int hd = 0;
+    	if(hachaDivasónica != null) hd = hachaDivasónica.sumarDaño();
+    	return daño + (int) Math.floor(Math.random()*2*(dañoVariable)-dañoVariable) + hd;
     	
     }
 
     public int realizarAtaque(Ficha f) {
     	
-    	return daño + (int) Math.floor(Math.random()*2*(dañoVariable)-1);
+    	int hd = 0;
+    	if(hachaDivasónica != null) hd = hachaDivasónica.sumarDaño();
+    	return daño + (int) Math.floor(Math.random()*2*(dañoVariable)-dañoVariable) + hd;
     	
     }
 
@@ -70,7 +74,7 @@ public abstract class Ficha {
 
 	public boolean estáMuerta() {
     	
-    	return (vida<=0);
+    	return (vida <= 0);
     	
     }
 
@@ -84,7 +88,7 @@ public abstract class Ficha {
     	
     	if(hachaDivasónica != null) {
     		
-    		vida = vida - hachaDivasónica.getVidaPorTurno();
+    		vida = vida - hachaDivasónica.sufrirDañoPorTurno();
     		
     	}
     	
@@ -118,7 +122,7 @@ public abstract class Ficha {
 
     public int realizarCarga(Ficha f) {
     	
-    	return this.realizarAtaque(f);
+    	return (int) Math.floor(this.realizarAtaque(f)*1.2);
     	
     }
     
