@@ -119,13 +119,23 @@ public class Tablero {
 	public void moverFicha(Ficha f, int casillaOrigen, int casillaDestino) {
 		
 		//Mueve y resuelve combate
-		Ficha freal = nodos[casillaOrigen].quitarFicha(f);
-		nodos[casillaDestino].ponerFicha(freal);
-		
-		if(nodos[casillaDestino].hayDosFichas()) {
+		if(nodos[casillaOrigen].hayDosFichas()) {
 			
-			nodos[casillaDestino].ejecutarCrga();
-			nodos[casillaDestino].noPuedeMover(f); //En caso de que haya muerto este método no hará nada.
+			nodos[casillaOrigen].ejecutarAtaqueContraHuida(f);
+			
+		}
+		
+		if(nodos[casillaOrigen].estáAquí(f)) {
+			
+			Ficha freal = nodos[casillaOrigen].quitarFicha(f);
+			nodos[casillaDestino].ponerFicha(freal);
+			
+			if(nodos[casillaDestino].hayDosFichas()) {
+				
+				nodos[casillaDestino].ejecutarCrga();
+				nodos[casillaDestino].noPuedeMover(f); //En caso de que haya muerto este método no hará nada.
+				
+			}
 			
 		}
 		
@@ -176,16 +186,44 @@ public class Tablero {
 	public void moverFichasALaMismaCasilla(Ficha f1, Ficha f2, int casillaOrigen1, int casillaOrigen2, int casillaDestino) {
 		
 		//Mueve y resuelve combate
-		Ficha freal1 = nodos[casillaOrigen1].quitarFicha(f1);
-		nodos[casillaDestino].ponerFicha(freal1);
+		if(nodos[casillaOrigen1].hayDosFichas()) {
+			
+			nodos[casillaOrigen1].ejecutarAtaqueContraHuida(f1);
+			
+		}
 		
-		Ficha freal2 = nodos[casillaOrigen2].quitarFicha(f2);
-		nodos[casillaDestino].ponerFicha(freal2);
+		if(nodos[casillaOrigen2].hayDosFichas()) {
+			
+			nodos[casillaOrigen2].ejecutarAtaqueContraHuida(f2);
+			
+		}
 		
-		nodos[casillaDestino].ejecutarCrgasRespectivas();
-		
-		nodos[casillaDestino].noPuedeMover(f1); //En caso de que haya muerto este método no hará nada.
-		nodos[casillaDestino].noPuedeMover(f2); //En caso de que haya muerto este método no hará nada.
+		if(nodos[casillaOrigen1].estáAquí(f1) && nodos[casillaOrigen2].estáAquí(f2)) {
+			
+			Ficha freal1 = nodos[casillaOrigen1].quitarFicha(f1);
+			nodos[casillaDestino].ponerFicha(freal1);
+			
+			Ficha freal2 = nodos[casillaOrigen2].quitarFicha(f2);
+			nodos[casillaDestino].ponerFicha(freal2);
+			
+			nodos[casillaDestino].ejecutarCrgasRespectivas();
+			
+			nodos[casillaDestino].noPuedeMover(f1); //En caso de que haya muerto este método no hará nada.
+			nodos[casillaDestino].noPuedeMover(f2); //En caso de que haya muerto este método no hará nada.
+			
+		}
+		else if(nodos[casillaOrigen1].estáAquí(f1)) {
+			
+			Ficha freal1 = nodos[casillaOrigen1].quitarFicha(f1);
+			nodos[casillaDestino].ponerFicha(freal1);
+			
+		}
+		else if(nodos[casillaOrigen2].estáAquí(f2)) {
+			
+			Ficha freal2 = nodos[casillaOrigen2].quitarFicha(f2);
+			nodos[casillaDestino].ponerFicha(freal2);
+			
+		}
 		
     }
 

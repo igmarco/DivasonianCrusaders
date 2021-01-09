@@ -122,6 +122,12 @@ public abstract class Ficha {
     	
     }
     
+    public int realizarAtaqueContraHuida(Ficha f) {
+    	
+    	return this.realizarAtaque(f)/2;
+    	
+    }
+    
     public void setHachaDivasónica(HachaDivasónica h) {
     	
     	this.hachaDivasónica = h;

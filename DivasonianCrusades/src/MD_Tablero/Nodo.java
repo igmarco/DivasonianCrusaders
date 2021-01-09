@@ -263,6 +263,20 @@ public class Nodo {
     	
     }
     
+    public void ejecutarAtaqueContraHuida(Ficha f) {
+    	//OJO, f ES LA FICHA QUE HUYE!! NO LA QUE ATACA
+    	
+    	if(f != null) {
+    		
+    		if(f.equals(this.fichaDefensora)) this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarCarga(this.fichaDefensora));
+    		else if(f.equals(this.fichaAtacante)) this.fichaAtacante.sufrirDaño(this.fichaDefensora.realizarCarga(this.fichaAtacante));
+    		
+    		this.comprobarMuertes();
+    		
+    	}
+    	
+    }
+    
     private void comprobarMuertes() {
     	
     	if(this.fichaAtacante != null && this.fichaAtacante.estáMuerta()) {
