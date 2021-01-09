@@ -44,6 +44,19 @@ public class Partida implements Runnable {
     	
     }
     
+    public Partida(Socket s1, Socket s2, String nombre1, String nombre2, Tablero tablero, int turno) {
+    	
+    	this.s1 = s1;
+    	this.s2 = s2;
+    	this.nombre1 = nombre1;
+    	this.nombre2 = nombre2;
+    	
+    	this.turno = turno;
+    	
+    	this.tablero = tablero;
+    	
+    }
+    
     public void run() {
 		
 		try {
@@ -79,9 +92,12 @@ public class Partida implements Runnable {
 			oos1.writeObject(this.tablero.getGanador());
 			oos2.writeObject(this.tablero.getGanador());
 			
+			
+			
 			//Esto habrá que quitarlo, pero de momento lo voy a dejar porque siempre está bien que el señor del servidor cotillee quién gana y quién pierde.
-			if(this.tablero.getGanador() == Facción.Facción1) System.out.println("¡Enhorabuena! Ha ganado el azul " + nombre1);
-			else System.out.println("¡Nada mal! Ha ganado el rojo " + nombre2);
+			if(this.tablero.getGanador() == Facción.Facción1) System.out.println("¡Enhorabuena! Ha ganado el azul " + nombre1 + " en el turno " + turno);
+			else System.out.println("¡Nada mal! Ha ganado el rojo " + nombre2 + " en el turno " + turno);
+			
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
