@@ -79,7 +79,6 @@ public class Nombre extends JFrame {
 							azul=false;
 							lblEstado.setText("¡Oponente encontrado!");
 						}
-						Aceptar.setEnabled(false);
 						out.writeBytes(textField.getText()+"\r\n");
 						out.flush();
 						String name = in.readLine();

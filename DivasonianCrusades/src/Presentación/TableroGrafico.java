@@ -7,7 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -36,21 +40,42 @@ import Utilidades.Facción;
 public class TableroGrafico extends JFrame {
 
 	private JPanel contentPane;
+	
 	private JButton btnMenu;
+	private final JButton btnDisparar= new JButton("");
+	private final JButton Mover= new JButton("");
+	private final JButton btnEsperar= new JButton("");
+	private final JButton btnCancelar= new JButton("");
+	
+	private ActionListener al;
+	
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
+	
 	private Tablero tab;
+	
 	private String nombre;
+	
 	private final JButton[] casillas = new JButton[45];
+	
 	private boolean azul;
+	
 	private JTextArea txtCasilla;
 	private JTextArea txtFichaDef;
 	private JTextArea txtFichaAt;
+	
+	private Facción faccion;
+	
+	private Socket s;
+	
+	private ObjectOutputStream out;
+	private ObjectInputStream  in;
 
 	/**
 	 * Create the frame.
 	 */
 	public TableroGrafico(final ClienteGUI menu, Socket s) {
+		this.s=s;
 		tab = new Tablero();
 		setResizable(false);
 		final TableroGrafico tablero = this;
@@ -61,6 +86,7 @@ public class TableroGrafico extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+	
 
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setBounds(42, 21, 618, 127);
@@ -389,8 +415,12 @@ public class TableroGrafico extends JFrame {
 		txtFichaDef.setFont(new Font("Consolas", Font.PLAIN, 11));
 		txtFichaDef.setBounds(832, 609, 135, 71);
 		contentPane.add(txtFichaDef);
+		Mover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				moverClick();
+			}
+		});
 
-		final JButton Mover = new JButton("");
 		Mover.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -408,7 +438,6 @@ public class TableroGrafico extends JFrame {
 		Mover.setBounds(823, 206, 179, 47);
 		contentPane.add(Mover);
 
-		final JButton btnDisparar = new JButton("");
 		btnDisparar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -425,7 +454,6 @@ public class TableroGrafico extends JFrame {
 		btnDisparar.setBorder(null);
 		contentPane.add(btnDisparar);
 
-		final JButton btnEsperar = new JButton("");
 		btnEsperar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -443,7 +471,6 @@ public class TableroGrafico extends JFrame {
 		btnEsperar.setBounds(822, 322, 179, 47);
 		contentPane.add(btnEsperar);
 
-		final JButton btnCancelar = new JButton("");
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -531,9 +558,11 @@ public class TableroGrafico extends JFrame {
 		if (azul) {
 			lblNewLabel_3.setText("Tú: " + nombre1 + " (Azul)");
 			lblNewLabel_4.setText("Oponente: " + nombre2 + " (Rojo)");
+			this.faccion = Facción.Facción1;
 		} else {
 			lblNewLabel_3.setText("Tú: " + nombre1 + " (Rojo)");
 			lblNewLabel_4.setText("Oponente: " + nombre2 + " (Azul)");
+			this.faccion = Facción.Facción2;
 		}
 		this.azul = azul;
 		System.out.println(this.azul);
@@ -875,7 +904,7 @@ public class TableroGrafico extends JFrame {
     	
     	//Representar gráficamente el tablero tab
     	for (int i = 0; i < 45; i++) {
-    		
+    		this.casillas[i].setEnabled(true);
 			final Integer x = i;
 			Casilla cas = this.tab.getNodo(i).getCasilla();
 			Ficha f = this.tab.getNodo(i).getFichaDefensora();
@@ -1933,6 +1962,99 @@ public class TableroGrafico extends JFrame {
 					});
 				}
 			}
+		}
+    }
+    
+    public void rendirse() {
+    	try {
+    		out.writeBytes("SURR-El oponente se ha rendido.\r\n");
+    		out.flush();
+    	}catch(IOException ex) {
+    		ex.printStackTrace();
+    	}
+    }
+    
+    public void moverClick() {
+    	List<Integer> casAModificar = this.tab.quiénesPuedenMover(this.faccion);
+    	
+    	for(Integer posicion: casAModificar) {
+    		final Integer x = posicion;
+    		al = new ActionListener() {
+        		@Override
+        		public void actionPerformed(ActionEvent arg0) {
+        			botonesMoverFase2(false,tab.getNodo(x).getFicha(faccion));
+        			botonesClicarFase2(tab.getNodo(x).getFicha(faccion));
+        			btnCancelar.addActionListener(new ActionListener() {
+        				public void actionPerformed(ActionEvent arg0) {
+        	    			botonesDesClicarFase2(tab.getNodo(x).getFicha(faccion));
+        	    			pintar(tab);
+        					}	
+        	    		});
+        			}
+        		};
+    		this.casillas[posicion].addActionListener(al);
+    	}
+    	this.botonesMoverFase1(false);
+    	this.btnCancelar.addActionListener(new ActionListener() {
+    		
+			public void actionPerformed(ActionEvent arg0) {
+    			botonesMoverFase1(true);
+    			for( JButton boton : casillas) {
+    				for(ActionListener al : boton.getActionListeners()) {
+    					boton.removeActionListener( al );
+    				}
+    			}
+    		}
+    	});
+    }
+    
+    public void botonesMoverFase1(boolean estado) {
+	    	this.btnDisparar.setEnabled(estado);
+	    	this.btnEsperar.setEnabled(estado);
+	    	this.Mover.setEnabled(estado);
+	    	List<Integer> casAModificar = this.tab.quiénesNOPuedenMover(this.faccion);
+	    	for(Integer posicion : casAModificar) {
+	    		this.casillas[posicion].setEnabled(estado);
+	    	} 	
+    }
+    
+    public void botonesMoverFase2(boolean estado, Ficha f) {
+	    	this.btnDisparar.setEnabled(estado);
+	    	this.btnEsperar.setEnabled(estado);
+	    	this.Mover.setEnabled(estado);
+    		List<Integer> casAModificar = this.tab.dóndePuedeMover(f);
+    		for(int i=0; i<45; i++) {
+    			this.casillas[i].setEnabled(estado);
+    		}
+    		for(Integer posicion : casAModificar) {
+    			this.casillas[posicion].setEnabled(!estado);
+    		}
+    	
+    }
+    
+    public void botonesClicarFase2(Ficha f) {
+    	
+		List<Integer> casAModificar = tab.dóndePuedeMover(f);
+		for(Integer posicion : casAModificar) {
+			System.out.println(posicion);
+			this.casillas[posicion].setBackground(Color.white);
+		}
+    }
+    
+    public void botonesDesClicarFase2(Ficha f) {
+    	
+		List<Integer> casAModificar = tab.dóndePuedeMover(f);
+		for(Integer posicion : casAModificar) {
+			this.casillas[posicion].setBackground(new Color(245, 245, 220));
+		}
+    }
+    
+    public void conseguirStreams() {
+		try {
+			out= new ObjectOutputStream(s.getOutputStream());
+			in= new ObjectInputStream(s.getInputStream());
+		}catch(IOException ex){
+			ex.printStackTrace();
 		}
     }
 }

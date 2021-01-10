@@ -358,5 +358,15 @@ public class Nodo {
 	public void setFichaAtacante(Ficha fichaAtacante) {
 		this.fichaAtacante = fichaAtacante;
 	}
+	
+	public Ficha getFicha(Facción faccion) {
+		Ficha f=null;
+		if(this.getFichaDefensora().getFacción() == faccion) {
+			f = this.getFichaDefensora();
+		}else if(this.getFichaAtacante().getFacción() == faccion) {
+			f = this.getFichaAtacante();
+		}
+		return f;
+	}
 
 }

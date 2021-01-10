@@ -575,67 +575,118 @@ public class Tablero {
     
     //PARA ASISTIR EL MOVIMIENTO DENTRO DEL CLIENTE
     public List<Integer> dóndePuedeMover(Ficha f) {
-    	
     	List<Integer> movPosibles = new ArrayList<Integer>();
-    	
+		Integer x;
     	//Faltan cosas
     	int dóndeEstá = this.dóndeEstá(f);
     	
-    	movPosibles.add(dóndeEstá - 9);
-    	movPosibles.add(dóndeEstá - 1);
-    	movPosibles.add(dóndeEstá + 1);
-    	movPosibles.add(dóndeEstá + 9);
+    	if(dóndeEstá -9 >=0)
+    		movPosibles.add(dóndeEstá - 9);
+    	
+    	if(dóndeEstá -8 >=0)
+    		movPosibles.add(dóndeEstá - 8);
+    	
+    	if(dóndeEstá -10 >=0)
+    		movPosibles.add(dóndeEstá - 10);
+    	
+    	if(dóndeEstá -1 >=0)
+    		movPosibles.add(dóndeEstá - 1);
+    	
+    	if(dóndeEstá +9 <45)
+    		movPosibles.add(dóndeEstá + 9);
+    	
+    	if(dóndeEstá +8 <45)
+    		movPosibles.add(dóndeEstá + 8);
+    	
+    	if(dóndeEstá +10 <45)
+    		movPosibles.add(dóndeEstá + 10);
+    	
+    	if(dóndeEstá +1 <45)
+    		movPosibles.add(dóndeEstá + 1);
     	
     	int j;
     	
     	if(dóndeEstá == 0) {
-			
-			j = movPosibles.remove(8);
+			x = 8;
+			movPosibles.remove(x);
+			x = 17;
+			movPosibles.remove(x);
+			x = 26;
+			movPosibles.remove(x);
 			
 		}
 		else if(dóndeEstá == 9) {
-			
-			j = movPosibles.remove(17);
+			x = 17;
+			movPosibles.remove(x);
+			x = 8;
+			movPosibles.remove(x);
+			x = 26;
+			movPosibles.remove(x);
+			x = 35;
+			movPosibles.remove(x);
 			
 		}
 		else if(dóndeEstá == 18) {
-			
-			j = movPosibles.remove(26);
+			x = 26;
+			movPosibles.remove(x);
+			x = 17;
+			movPosibles.remove(x);
+			x = 35;
+			movPosibles.remove(x);
 			
 		}
 		else if(dóndeEstá == 27) {
-			
-			j = movPosibles.remove(35);
-			
+			x = 35;
+			movPosibles.remove(x);
+			x = 26;
+			movPosibles.remove(x);
+			x = 44;
+			movPosibles.remove(x);
 		}
 		else if(dóndeEstá == 36) {
-			
-			j = movPosibles.remove(44);
-			
+			x = 44;
+			movPosibles.remove(x);
+			x=35;
+			movPosibles.remove(x);
 		}
 		else if(dóndeEstá == 8) {
-			
-			j = movPosibles.remove(0);
-			
+			x = 0;
+			movPosibles.remove(x);
+			x=9;
+			movPosibles.remove(x);
+			x = 18;
+			movPosibles.remove(x);
 		}
 		else if(dóndeEstá == 17) {
-			
-			j = movPosibles.remove(9);
+			x=9;
+			movPosibles.remove(x);
+			x = 18;
+			movPosibles.remove(x);
+			x = 27;
+			movPosibles.remove(x);
 			
 		}
 		else if(dóndeEstá == 26) {
-
-			j = movPosibles.remove(18);
-			
+			x = 18;
+			movPosibles.remove(x);
+			x = 9;
+			movPosibles.remove(x);
+			x = 27;
+			movPosibles.remove(x);
 		}
 		else if(dóndeEstá == 35) {
-			
-			j = movPosibles.remove(27);
-			
+			x = 27;
+			movPosibles.remove(x);
+			x = 18;
+			movPosibles.remove(x);
+			x = 36;
+			movPosibles.remove(x);
 		}
 		else if(dóndeEstá == 44) {
-			
-			j = movPosibles.remove(36);
+			x = 36;
+			movPosibles.remove(x);
+			x = 27;
+			movPosibles.remove(x);
 			
 		}
     	
@@ -666,6 +717,21 @@ public class Tablero {
     	for(int i = 0; i < 45; i++) {
     		
     		if(nodos[i].estáAquí(fc)) movPosibles.add(i);
+    		
+    	}
+    	
+    	return movPosibles;
+    	
+    }
+    
+   public List<Integer> quiénesNOPuedenMover(Facción fc) {
+    	
+    	//A esto hay que quitarle los que ya han movido dos (o si es el caballo tres) veces en este turno.
+    	List<Integer> movPosibles = new ArrayList<Integer>();
+    	
+    	for(int i = 0; i < 45; i++) {
+    		
+    		if(!nodos[i].estáAquí(fc)) movPosibles.add(i);
     		
     	}
     	

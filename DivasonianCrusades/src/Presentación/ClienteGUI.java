@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ClienteGUI extends JFrame {
 
@@ -153,6 +155,16 @@ public class ClienteGUI extends JFrame {
 //		}
 //		else {
 			btContinuarPartida = new JButton("");
+			btContinuarPartida.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					try {
+						setVisible(false);
+						/*T*/ tablero.setVisible(true);
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
 			btContinuarPartida.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseEntered(MouseEvent e) {
@@ -161,15 +173,6 @@ public class ClienteGUI extends JFrame {
 				@Override
 				public void mouseExited(MouseEvent e) {
 					btContinuarPartida.setIcon(new ImageIcon("Recursos\\ContinuarBoton.png"));
-				}
-				@Override
-				public void mouseClicked(MouseEvent e) {
-							try {
-								setVisible(false);
-								/*T*/ tablero.setVisible(true);
-							} catch (Exception ex) {
-								ex.printStackTrace();
-							}
 				}
 			});
 			btContinuarPartida.setBackground(new Color(240, 230, 140));
