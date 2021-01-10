@@ -209,8 +209,6 @@ public class Partida implements Runnable {
     		//Hacen cosas los dos
 			if(op2 instanceof Disparo) {
 				
-				this.tablero.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY());
-				
 				//Ahora hace cosas el 1
 				if(op1 instanceof Movimiento) {
 					
@@ -223,6 +221,9 @@ public class Partida implements Runnable {
 					
 				}
 				
+				//Y después caen los disparos
+				this.tablero.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY());
+				
 			}
 			else if(op1 instanceof Disparo) {
 				
@@ -234,9 +235,13 @@ public class Partida implements Runnable {
 				}
 				else if(op2 instanceof Disparo) {
 					
+					//No entrará aquí, pero dejamos el código para recordar cuál es el modo de completar la casuística de Operaciones.
 					this.tablero.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY());
 					
 				}
+				
+				//Y después caen los disparos
+				this.tablero.dispararProyectiles(((Disparo) op1).getCatapulta(), ((Disparo) op1).getX(), ((Disparo) op1).getY());
 				
 			}
 			else {
