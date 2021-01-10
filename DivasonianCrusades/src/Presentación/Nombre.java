@@ -89,7 +89,7 @@ public class Nombre extends JFrame {
 						tablero.setVisible(true);
 						menu.habilitarContinuar();
 						setVisible(false);
-					}catch(IOException ex) {
+					}catch(IOException ex) { 
 						lblEstado.setText("Error al conectar");
 					}
 				}

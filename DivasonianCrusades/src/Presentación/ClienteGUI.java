@@ -161,7 +161,7 @@ public class ClienteGUI extends JFrame {
 			btContinuarPartida.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						setVisible(false);
+						setVisible(false); 
 						/*T*/ tablero.setVisible(true);
 					} catch (Exception ex) {
 						ex.printStackTrace();
