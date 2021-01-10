@@ -33,7 +33,7 @@ public class Tablero {
 		nodos[24] = new Nodo(new Catapulta(2));
 		
 		nodos[2] = new Nodo(new Curación(1));
-		nodos[42] = new Nodo(new Curación(2));
+		nodos[42] = new Nodo(new Curación(2)); 
 		
 		nodos[22] = new Nodo(new Normal(new HachaDivasónica()));
 		

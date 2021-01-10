@@ -19,7 +19,7 @@ public class Partida implements Runnable {
 	private int movimiento;
     
 	private String nombre1;
-	private String nombre2;
+	private String nombre2; 
 	
 	private boolean rendición1;
 	private boolean rendición2;

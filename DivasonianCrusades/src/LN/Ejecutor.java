@@ -47,7 +47,7 @@ public class Ejecutor {
     		else if(d == Dirección.abajo) hasta = desde + 9;
     		else hasta = desde - 9;
     		 
-    		tablero.moverFicha(f, desde, hasta);
+    		tablero.moverFicha(f, desde, hasta); 
     		
 //    	}
     	
