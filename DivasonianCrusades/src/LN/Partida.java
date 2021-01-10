@@ -162,8 +162,8 @@ public class Partida implements Runnable {
     public void ejecutarOperación() {
     	
     	//Hacemos lo que haya que hacer con el ejecutor.
-    	Operación op1 = instrucciónFacción1.getOperacion(movimiento);
-    	Operación op2 = instrucciónFacción2.getOperacion(movimiento);
+    	Operación op1 = (Operación) instrucciónFacción1.getOperacion(movimiento);
+    	Operación op2 = (Operación) instrucciónFacción2.getOperacion(movimiento);
     	
     	if(op1 == null) {
     		

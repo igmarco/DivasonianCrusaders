@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -25,6 +26,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import LN.Tablero;
+import MD_Instrucción.Instrucción;
+import MD_Instrucción.Movimiento;
+import MD_Instrucción.Operación;
 import MD_Tablero.Arquero;
 import MD_Tablero.Bárbaro;
 import MD_Tablero.Caballero;
@@ -36,6 +40,7 @@ import MD_Tablero.Curación;
 import MD_Tablero.Ficha;
 import MD_Tablero.Guerrero;
 import MD_Tablero.Lancero;
+import Utilidades.Dirección;
 import Utilidades.Facción;
 
 public class TableroGrafico extends JFrame {
@@ -49,6 +54,8 @@ public class TableroGrafico extends JFrame {
 	private final JButton btnCancelar= new JButton("");
 	
 	private ActionListener al;
+	
+	private List<Tablero> tableros;
 	
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
@@ -67,6 +74,8 @@ public class TableroGrafico extends JFrame {
 	
 	private Facción faccion;
 	
+	private Instrucción inst;
+	
 	private Socket s;
 	
 	private ObjectOutputStream out;
@@ -77,7 +86,10 @@ public class TableroGrafico extends JFrame {
 	 */
 	public TableroGrafico(final ClienteGUI menu, Socket s) {
 		this.s=s;
+		this.tableros = new ArrayList<Tablero>();
+		this.inst = new Instrucción();
 		tab = new Tablero();
+		this.tableros.add(tab);
 		setResizable(false);
 		final TableroGrafico tablero = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -505,7 +517,7 @@ public class TableroGrafico extends JFrame {
 		Rendirse.setBorder(null);
 		contentPane.add(Rendirse);
 
-		JLabel lb_Casilla_1 = new JLabel("Movs: 4/6");
+		JLabel lb_Casilla_1 = new JLabel("Movs: "+this.inst.size()+"/6");
 		lb_Casilla_1.setFont(new Font("Consolas", Font.PLAIN, 13));
 		lb_Casilla_1.setBounds(825, 438, 77, 29);
 		contentPane.add(lb_Casilla_1);
@@ -1985,7 +1997,7 @@ public class TableroGrafico extends JFrame {
         		@Override
         		public void actionPerformed(ActionEvent arg0) {
         			botonesMoverFase2(false,tab.getNodo(x).getFicha(faccion));
-        			botonesClicarFase2(tab.getNodo(x).getFicha(faccion));
+        			botonesClicarFase2(tab.getNodo(x).getFicha(faccion),x);
         			btnCancelar.addActionListener(new ActionListener() {
         				public void actionPerformed(ActionEvent arg0) {
         	    			pintar(tab);
@@ -2033,16 +2045,65 @@ public class TableroGrafico extends JFrame {
     	
     }
     
-    public void botonesClicarFase2(Ficha f) {
+    public void botonesClicarFase2(Ficha f, int j) {
     	
 		List<Integer> casAModificar = tab.dóndePuedeMover(f);
 		for(Integer posicion : casAModificar) {
-			System.out.println(posicion);
+			final Ficha efe = f;
+			final int x = posicion;
+			final int y = j;
 			this.casillas[posicion].setBackground(Color.white);
+			this.casillas[posicion].addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent arg0) {
+					moverEnSí(efe,y,x);
+				}
+			});
 			for(MouseListener ms : this.casillas[posicion].getMouseListeners()) {
 				this.casillas[posicion].removeMouseListener(ms);
 			}
 		}
+    }
+    
+    public void moverEnSí(Ficha f, int j , int posicion) {
+    	int resta =j-posicion;
+    	Dirección direccion = null;
+		switch(resta) {
+			case -9:{
+				direccion = Dirección.norte;
+				break;
+			}
+			case 9:{
+				direccion = Dirección.sur;
+				break;
+			}
+			case -1:{
+				direccion = Dirección.oeste;
+				break;
+			}
+			case 1:{
+				direccion = Dirección.este;
+				break;
+			}
+			case 8:{
+				direccion = Dirección.suroeste;
+				break;
+			}
+			case 10:{
+				direccion = Dirección.sureste;
+				break;
+			}
+			case -8:{
+				direccion = Dirección.noreste;
+				break;
+			}
+			case -10:{
+				direccion = Dirección.noroeste;
+				break;
+			}
+				
+		}
+    	Movimiento mov = new Movimiento(f,direccion);
+    	this.inst.add((this.inst.size()-1), mov);
     }
     
     public void conseguirStreams() {

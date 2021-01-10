@@ -1,28 +1,16 @@
 package MD_Instrucción;
 
-public class Instrucción {
-	private Operación[] operaciones = new Operación[6];
+import java.util.ArrayList;
+import java.util.List;
+
+public class Instrucción<Operación> extends ArrayList<Operación> {
 	
 	public Instrucción() {
-		
-		for(int i = 0; i<6; i++) {
-			
-			operaciones[i] = null;
-			
-		}
-		
+		super();
 	}
 	
-	public Instrucción(Operación[] operaciones) {
-		
-		this.operaciones = operaciones;
-		
+	public Operación getOperacion(int x) {
+		return this.get(x);
 	}
-
-    public Operación getOperacion(int n) {
-    	
-    	return operaciones[n];
-    	
-    }
-
+	
 }
