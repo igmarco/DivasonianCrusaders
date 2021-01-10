@@ -47,6 +47,14 @@ public class Nodo {
     	this.fichaAtacante = fichaAtacante;
     	
     }
+    
+    public Nodo(Ficha fichaDefensora, Ficha fichaAtacante) {
+    	
+    	this.casilla = new Normal();
+    	this.fichaDefensora = fichaDefensora;
+    	this.fichaAtacante = fichaAtacante;
+    	
+    }
 
     public boolean estáAquí(Ficha f) {
     	

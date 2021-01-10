@@ -438,7 +438,7 @@ public class TableroGrafico extends JFrame {
 
 		txtFichaAt = new JTextArea();
 		txtFichaAt.setFont(new Font("Monospaced", Font.PLAIN, 11));
-		txtFichaAt.setBounds(977, 607, 71, 73);
+		txtFichaAt.setBounds(977, 609, 71, 71);
 		contentPane.add(txtFichaAt);
 
 		JButton btnAnteriorMovimiento = new JButton("Anterior");
@@ -629,13 +629,13 @@ public class TableroGrafico extends JFrame {
 		this.casillas[i].setBackground(new Color(245, 245, 220));
 	}
 	
-	public void ratonInConflicto(int i, String color, String atacante, String defensor) {
+	public void ratonInConflicto(int i, String color, String defensor, String atacante) {
 		String todo = "Recursos\\"+defensor+"v"+atacante+color+"C.png";
 		this.casillas[i].setIcon(new ImageIcon(todo));
 		this.casillas[i].setBackground(Color.white);
 	}
 	
-	public void ratonOutConflicto(int i, String color, String atacante, String defensor) {
+	public void ratonOutConflicto(int i, String color, String defensor, String atacante) {
 		String todo = "Recursos\\"+defensor+"v"+atacante+color+"BC.png";
 		this.casillas[i].setIcon(new ImageIcon(todo));
 		this.casillas[i].setBackground(Color.white);
@@ -658,6 +658,12 @@ public class TableroGrafico extends JFrame {
 		// Info. de la casilla
 
 		casillaInfo += casilla.getClass().getCanonicalName().split("\\.")[casilla.getClass().getCanonicalName().split("\\.").length-1] + "\r\n";
+		
+		if(casillaInfo.equals("Copa")) {
+		
+			casillaInfo = "Corona";
+			
+		}
 
 		if (casilla instanceof Copa) {
 
@@ -665,18 +671,31 @@ public class TableroGrafico extends JFrame {
 			casillaInfo += "Vida: " + ((Copa) casilla).getVida() + "\r\n";
 
 		} else if (casilla instanceof Curación) {
-
+			
 			casillaInfo += "Identificador: " + ((Curación) casilla).getIdentificador() + "\r\n";
 			casillaInfo += "Curación: " + ((Curación) casilla).getCuración() + "\r\n";
 
 		} else if (casilla instanceof Catapulta) {
 
-			casillaInfo += "Identificador: " + ((Catapulta) casilla).getIdentificador() + "\r\n";
+			if(((Catapulta) casilla).getIdentificador() == 1)
+				
+				casillaInfo += "Identificador: Azul \r\n";
+			
+			else
+				
+				casillaInfo += "Identificador: Rojo \r\n";
+			
 			casillaInfo += "Uso: ";
 
 			if (fichaDef != null && fichaAt == null) {
+				
+				if(fichaDef.getFacción().equals(Facción.Facción1))
 
-				casillaInfo += fichaDef.getFacción() + "\r\n";
+					casillaInfo += "Azul" + "\r\n";
+				
+				else
+					
+					casillaInfo += "Rojo" + "\r\n";
 
 			}
 
@@ -720,9 +739,25 @@ public class TableroGrafico extends JFrame {
 			} else
 				fichaDefInfo += "\r\n";
 
-			fichaDefInfo += "Facción: " + fichaDef.getFacción() + "\r\n";
-			if (fichaAt != null)
-				fichaAtInfo += fichaAt.getFacción() + "\r\n";
+			if(fichaDef.getFacción().equals(Facción.Facción1))
+
+				fichaDefInfo += "Facción: Azul" + "\r\n";
+			
+			else
+				
+				fichaDefInfo += "Facción: Rojo" + "\r\n";
+			
+			if (fichaAt != null) {
+				
+				if(fichaAt.getFacción().equals(Facción.Facción1))
+
+					fichaAtInfo += "Azul" + "\r\n";
+				
+				else
+					
+					fichaAtInfo += "Rojo" + "\r\n";
+				
+			}
 
 			fichaDefInfo += "Vida: " + fichaDef.getVida() + "\r\n";
 			if (fichaAt != null)
@@ -730,11 +765,11 @@ public class TableroGrafico extends JFrame {
 
 			if (fichaDef.tieneHacha()) {
 
-				fichaDefInfo += "Hacha Divasónica: Sí" + "\r\n";
+				fichaDefInfo += "Hacha Div.: Sí" + "\r\n";
 
 			} else {
 
-				fichaDefInfo += "Hacha Divasónica: No" + "\r\n";
+				fichaDefInfo += "Hacha Div.: No" + "\r\n";
 
 			}
 			if (fichaAt != null) {
