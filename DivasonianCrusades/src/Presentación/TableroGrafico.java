@@ -1376,79 +1376,445 @@ public class TableroGrafico extends JFrame {
 				final String color = "A";
 				if(f1 instanceof Arquero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\GvFABC.png"));
+					final String atacante = "F";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Bárbaro) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\GvBABC.png"));
+					final String atacante = "B";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Caballero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\GvCABC.png"));
+					final String atacante = "C";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Guerrero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\GvGABC.png"));
+					final String atacante = "G";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Lancero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\GvLABC.png"));
+					final String atacante = "L";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}
 			}else {
 				final String color = "R";
 				if(f1 instanceof Arquero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\GvFRBC.png"));
+					final String atacante = "F";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Bárbaro) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\GvBRBC.png"));
+					final String atacante = "B";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Caballero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\GvCRBC.png"));
+					final String atacante = "C";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Guerrero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\GvGRBC.png"));
+					final String atacante = "G";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Lancero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\gvLRBC.png"));
+					final String atacante = "L";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}
 			}
 		} else if (f2 instanceof Lancero) {
-			if (f2.getFacción().equals(Facción.Facción1))
+			final String defensor= "L";
+			if (f2.getFacción().equals(Facción.Facción1)) {
+				final String color = "A";
 				if(f1 instanceof Arquero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\LvFABC.png"));
+					final String atacante = "F";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Bárbaro) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\LvBABC.png"));
+					final String atacante = "B";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Caballero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\LvCABC.png"));
+					final String atacante = "C";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Guerrero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\LvGaBC.png"));
+					final String atacante = "G";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Lancero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\LvLABC.png"));
+					final String atacante = "L";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}
-			else {
+			}else {
+				final String color = "R";
 				if(f1 instanceof Arquero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\LvFRBC.png"));
+					final String atacante = "F";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Bárbaro) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\LvBRBC.png"));
+					final String atacante = "B";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Caballero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\LvCRBC.png"));
+					final String atacante = "C";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Guerrero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\LvGRBC.png"));
+					final String atacante = "G";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Lancero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\LvLRBC.png"));
+					final String atacante = "L";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}
 			}
 		} else if (f2 instanceof Caballero) {
-			if (f2.getFacción().equals(Facción.Facción1))
+			final String defensor= "C";
+			if (f2.getFacción().equals(Facción.Facción1)) {
+				final String color = "A";
 				if(f1 instanceof Arquero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\CvFABC.png"));
+					final String atacante = "F";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Bárbaro) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\CvBABC.png"));
+					final String atacante = "B";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Caballero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\CvCABC.png"));
+					final String atacante = "C";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Guerrero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\CvGaBC.png"));
+					final String atacante = "G";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Lancero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\CvLABC.png"));
+					final String atacante = "L";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}
-			else {
+			}else {
+				final String color = "R";
 				if(f1 instanceof Arquero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\CvFRBC.png"));
+					final String atacante = "F";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Bárbaro) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\CvBRBC.png"));
+					final String atacante = "B";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Caballero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\CvCRBC.png"));
+					final String atacante = "C";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Guerrero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\CvGRBC.png"));
+					final String atacante = "G";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}else if(f1 instanceof Lancero) {
 					this.casillas[i].setIcon(new ImageIcon("Recursos\\CvLRBC.png"));
+					final String atacante = "L";
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInConflicto(x, color, defensor, atacante);
+						}	
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutConflicto(x, color, defensor, atacante);
+						}
+					});
 				}
 			}
 		}
