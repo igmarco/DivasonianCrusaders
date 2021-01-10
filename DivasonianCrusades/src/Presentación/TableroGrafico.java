@@ -153,7 +153,7 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas17);
 
 		final JButton cas18 = new JButton("");
-		cas18.setBackground(new Color(204, 204, 255));
+		cas18.setBackground(new Color(245, 245, 220));
 		panel.add(cas18);
 
 		final JButton cas19 = new JButton("");
@@ -186,7 +186,7 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas25);
 
 		final JButton cas26 = new JButton("");
-		cas26.setBackground(new Color(255, 204, 204));
+		cas26.setBackground(new Color(245, 245, 220));
 		panel.add(cas26);
 
 		final JButton cas27 = new JButton("");
@@ -466,7 +466,7 @@ public class TableroGrafico extends JFrame {
 
 	public void ratonOutCoronaAzul(int i) {
 		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
-		this.casillas[i].setBackground(new Color(204, 204, 255));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
 	}
 	
 	public void ratonInCoronaRojo(int i) {
@@ -476,7 +476,7 @@ public class TableroGrafico extends JFrame {
 
 	public void ratonOutCoronaRojo(int i) {
 		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
-		this.casillas[i].setBackground(new Color(255, 204, 204));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
 	}
 	
 	public void ratonInCatapultaAzul(int i) {
