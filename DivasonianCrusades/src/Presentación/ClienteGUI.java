@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.Socket;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,7 +18,8 @@ import javax.swing.border.EmptyBorder;
 public class ClienteGUI extends JFrame {
 
 	private JPanel contentPane;
-	private final TableroGrafico tablero;
+	private /*final*/ TableroGrafico tablero;
+	private final JButton btContinuarPartida;
 
 	/**
 	 * Launch the application.
@@ -26,7 +28,7 @@ public class ClienteGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ClienteGUI frame = new ClienteGUI(true,null);
+					ClienteGUI frame = new ClienteGUI(/*true,null*/);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,9 +40,9 @@ public class ClienteGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ClienteGUI(boolean nuevo, final TableroGrafico Tablero) {
+	public ClienteGUI(/*boolean nuevo, final TableroGrafico Tablero*/) {
 		final ClienteGUI main = this;
-		tablero = new TableroGrafico(main);
+//		tablero = new TableroGrafico();
 		setResizable(false);
 		setBounds(100, 100, 395, 444);
 		contentPane = new JPanel();
@@ -113,7 +115,7 @@ public class ClienteGUI extends JFrame {
 		btSalir.setBorder(null);
 		panel.add(btSalir);
 	
-		if(nuevo) {
+//		if(nuevo) {
 			final JButton btNuevaPartida = new JButton("");
 			btNuevaPartida.addMouseListener(new MouseAdapter() {
 				@Override
@@ -128,7 +130,12 @@ public class ClienteGUI extends JFrame {
 				public void mouseClicked(MouseEvent e) {
 							try {
 								setVisible(false);
-								Nombre nom = new Nombre(tablero);
+								Socket s = new Socket("localhost",58000);
+								//Habilitamos el botón continuar partida, ya que ahora hay una partida que continuar.
+								//OJO, en caso de que el jugador se eche para atrás no tiene sentido haber creado el TableroGrafico, no? eso hay que revisarlo.
+								btContinuarPartida.setEnabled(true); 
+								tablero = new TableroGrafico(main);
+								Nombre nom = new Nombre(main, tablero, s);
 								nom.setVisible(true);
 							} catch (Exception ex) {
 								ex.printStackTrace();
@@ -144,8 +151,9 @@ public class ClienteGUI extends JFrame {
 			btNuevaPartida.setHorizontalTextPosition(SwingConstants.CENTER);
 			btNuevaPartida.setBorder(null);
 			panel.add(btNuevaPartida);
-		}else {
-			final JButton btContinuarPartida = new JButton("");
+//		}
+//		else {
+			btContinuarPartida = new JButton("");
 			btContinuarPartida.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseEntered(MouseEvent e) {
@@ -159,7 +167,7 @@ public class ClienteGUI extends JFrame {
 				public void mouseClicked(MouseEvent e) {
 							try {
 								setVisible(false);
-								Tablero.setVisible(true);
+								/*T*/ tablero.setVisible(true);
 							} catch (Exception ex) {
 								ex.printStackTrace();
 							}
@@ -170,11 +178,12 @@ public class ClienteGUI extends JFrame {
 			btContinuarPartida.setForeground(new Color(245, 245, 245));
 			//btNuevaPartida.setBackground(new Color(240, 230, 140));
 			btContinuarPartida.setIcon(new ImageIcon("Recursos\\ContinuarBoton.png"));
-			btContinuarPartida.setBounds(104, 125, 175, 47);
+			btContinuarPartida.setBounds(104, 173, 175, 47);
 			btContinuarPartida.setHorizontalTextPosition(SwingConstants.CENTER);
 			btContinuarPartida.setBorder(null);
+			/**/ btContinuarPartida.setEnabled(false);
 			panel.add(btContinuarPartida);
-		}
+//		}
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Recursos\\LogoD.png"));

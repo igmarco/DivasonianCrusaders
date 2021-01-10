@@ -23,12 +23,14 @@ public class Nombre extends JFrame {
 	private JTextField textField;
 	private JLabel lblNewLabel;
 	private JButton Aceptar;
+	/**/ private Socket s;
 
 
 	/**
 	 * Create the frame.
 	 */
-	public Nombre(final TableroGrafico tablero) {
+	public Nombre(final ClienteGUI menu, final TableroGrafico tablero, final Socket s) {
+		/**/ this.s = s;
 		setResizable(false);
 		try {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,7 +59,7 @@ public class Nombre extends JFrame {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					try {
-						Socket s = new Socket("localhost",58000);
+//						Socket s = new Socket("localhost",58000);
 						boolean azul;
 						DataInputStream in = new DataInputStream( s.getInputStream());
 						DataOutputStream out = new DataOutputStream(s.getOutputStream());
@@ -106,3 +108,4 @@ public class Nombre extends JFrame {
 
 	
 }
+
