@@ -517,7 +517,7 @@ public class TableroGrafico extends JFrame {
 		Rendirse.setBorder(null);
 		contentPane.add(Rendirse);
 
-		JLabel lb_Casilla_1 = new JLabel("Movs: "+this.inst.size()+"/6");
+		JLabel lb_Casilla_1 = new JLabel("Ops.: "+this.inst.size()+"/6");
 		lb_Casilla_1.setFont(new Font("Consolas", Font.PLAIN, 13));
 		lb_Casilla_1.setBounds(825, 438, 77, 29);
 		contentPane.add(lb_Casilla_1);
@@ -539,7 +539,7 @@ public class TableroGrafico extends JFrame {
 		btnSiguienteMovimiento.setBounds(555, 633, 179, 47);
 		contentPane.add(btnSiguienteMovimiento);
 
-		JLabel lblNewLabel_2_1 = new JLabel("Movimiento: 0");
+		JLabel lblNewLabel_2_1 = new JLabel("Maniobra: 0");
 		lblNewLabel_2_1.setFont(new Font("Consolas", Font.PLAIN, 14));
 		lblNewLabel_2_1.setBounds(231, 651, 119, 29);
 		contentPane.add(lblNewLabel_2_1);
@@ -1993,7 +1993,7 @@ public class TableroGrafico extends JFrame {
     	
     	for(Integer posicion: casAModificar) {
     		final Integer x = posicion;
-    		al = new ActionListener() {
+    		ActionListener al2 = new ActionListener() {
         		@Override
         		public void actionPerformed(ActionEvent arg0) {
         			botonesMoverFase2(false,tab.getNodo(x).getFicha(faccion));
@@ -2005,7 +2005,7 @@ public class TableroGrafico extends JFrame {
         	    		});
         			}
         		};
-    		this.casillas[posicion].addActionListener(al);
+    		this.casillas[posicion].addActionListener(al2);
     	}
     	this.botonesMoverFase1(false);
     	this.btnCancelar.addActionListener(new ActionListener() {
@@ -2053,18 +2053,23 @@ public class TableroGrafico extends JFrame {
 			final int x = posicion;
 			final int y = j;
 			this.casillas[posicion].setBackground(Color.white);
-			this.casillas[posicion].addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent arg0) {
-					moverEnSí(efe,y,x);
-				}
-			});
+			this.casillas[posicion].enable(true);
 			for(MouseListener ms : this.casillas[posicion].getMouseListeners()) {
 				this.casillas[posicion].removeMouseListener(ms);
 			}
+			this.casillas[posicion].addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					System.out.println("Entré");
+					moverEnSí(efe,y,x);
+				}
+			});
+				
 		}
     }
     
     public void moverEnSí(Ficha f, int j , int posicion) {
+    	System.out.println("He entrado en mover en sí");
     	int resta =j-posicion;
     	Dirección direccion = null;
 		switch(resta) {
@@ -2077,11 +2082,11 @@ public class TableroGrafico extends JFrame {
 				break;
 			}
 			case -1:{
-				direccion = Dirección.oeste;
+				direccion = Dirección.este;
 				break;
 			}
 			case 1:{
-				direccion = Dirección.este;
+				direccion = Dirección.oeste;
 				break;
 			}
 			case 8:{
@@ -2103,7 +2108,19 @@ public class TableroGrafico extends JFrame {
 				
 		}
     	Movimiento mov = new Movimiento(f,direccion);
-    	this.inst.add((this.inst.size()-1), mov);
+    	this.inst.add((this.inst.size()), mov);
+    	Tablero tab2 = tab;
+    	tab2.moverFicha(f, direccion);
+    	this.tableros.add(tab2);
+		botonesMoverFase1(true);
+		this.tab.getNodo(j).quitarFicha(f);
+		for(int i=0; i<45;i++) {
+			this.casillas[i].setIcon(null);
+			for(MouseListener ac : this.casillas[i].getMouseListeners()) {
+				this.casillas[i].removeMouseListener(ac);
+			}
+		}
+		pintar(tab2);
     }
     
     public void conseguirStreams() {
