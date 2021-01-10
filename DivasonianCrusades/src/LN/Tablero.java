@@ -130,6 +130,9 @@ public class Tablero {
 			Ficha freal = nodos[casillaOrigen].quitarFicha(f);
 			nodos[casillaDestino].ponerFicha(freal);
 			
+			//Si se pone en una cercana al arquero enemigo le dispara
+			
+			
 			if(nodos[casillaDestino].hayDosFichas()) {
 				
 				nodos[casillaDestino].ejecutarCrga();
@@ -349,16 +352,21 @@ public class Tablero {
     }
     
   //VIENE DEL ANTIGUO Ejecutor, SIRVE PARA MOVER CON UNA DIRECCIÓN EN LUGAR DE CON LOS intS.
-    public void dispararProyectiles(Catapulta c, int x, int y) {
+    public void dispararProyectiles(Catapulta c, int x, int y, Ficha f) {
     	
-    	this.dispararProyectiles(c, (5-y)*9 + x-1);
+    	this.dispararProyectiles(c, (5-y)*9 + x-1, f);
     	
     }
     
-    public void dispararProyectiles(Catapulta catapulta, int casillaObjetivo) {
+    public void dispararProyectiles(Catapulta catapulta, int casillaObjetivo, Ficha f) {
     	
     	//Hace daño de catapulta a los bichos que haya en la casilla casillaObjetivo.
-    	nodos[casillaObjetivo].recibirDisparo(catapulta.realizarDisparo());
+    	//Ojo! Solo en caso de que la ficha siga ahí o no se haya trabado en combate.
+    	if(f != null && f.equals(this.nodos[this.dóndeEstá(catapulta)].getFichaDefensora()) && !this.nodos[this.dóndeEstá(catapulta)].hayDosFichas()) {
+    		
+    		nodos[casillaObjetivo].recibirDisparo(catapulta.realizarDisparo());
+    		
+    	}
     	
     }
 

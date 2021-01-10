@@ -52,9 +52,9 @@ public class Ejecutor {
 //    	}
     	
     }
-    public void dispararProyectiles(Catapulta c, int x, int y) {
+    public void dispararProyectiles(Catapulta c, int x, int y, Ficha f) {
     	
-    	tablero.dispararProyectiles(c, (5-y)*9 + x-1);
+    	tablero.dispararProyectiles(c, (5-y)*9 + x-1, f);
     	
     }
 

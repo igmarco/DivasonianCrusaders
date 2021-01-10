@@ -76,8 +76,8 @@ public class Partida implements Runnable {
 			
 			while(!haTerminado) {
 				
-				rendición1 = (boolean) ois1.readObject();
-				rendición2 = (boolean) ois2.readObject();
+				rendición1 = ois1.readLine().split("-")[0].equals("SURR");
+				rendición2 = ois2.readLine().split("-")[0].equals("SURR");
 				
 				if(rendición1 && rendición2) {
 					
@@ -182,7 +182,7 @@ public class Partida implements Runnable {
     			}
     			else if(op2 instanceof Disparo) {
     				
-    				this.tablero.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY());
+    				this.tablero.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY(), ((Disparo) op2).getFicha());
     				
     			}
     			
@@ -199,7 +199,7 @@ public class Partida implements Runnable {
 			}
 			else if(op1 instanceof Disparo) {
 				
-				this.tablero.dispararProyectiles(((Disparo) op1).getCatapulta(), ((Disparo) op1).getX(), ((Disparo) op1).getY());
+				this.tablero.dispararProyectiles(((Disparo) op1).getCatapulta(), ((Disparo) op1).getX(), ((Disparo) op1).getY(), ((Disparo) op1).getFicha());
 				
 			}
     		
@@ -217,12 +217,12 @@ public class Partida implements Runnable {
 				}
 				else if(op1 instanceof Disparo) {
 					
-					this.tablero.dispararProyectiles(((Disparo) op1).getCatapulta(), ((Disparo) op1).getX(), ((Disparo) op1).getY());
+					this.tablero.dispararProyectiles(((Disparo) op1).getCatapulta(), ((Disparo) op1).getX(), ((Disparo) op1).getY(), ((Disparo) op1).getFicha());
 					
 				}
 				
 				//Y después caen los disparos
-				this.tablero.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY());
+				this.tablero.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY(), ((Disparo) op2).getFicha());
 				
 			}
 			else if(op1 instanceof Disparo) {
@@ -236,12 +236,12 @@ public class Partida implements Runnable {
 				else if(op2 instanceof Disparo) {
 					
 					//No entrará aquí, pero dejamos el código para recordar cuál es el modo de completar la casuística de Operaciones.
-					this.tablero.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY());
+					this.tablero.dispararProyectiles(((Disparo) op2).getCatapulta(), ((Disparo) op2).getX(), ((Disparo) op2).getY(), ((Disparo) op2).getFicha());
 					
 				}
 				
 				//Y después caen los disparos
-				this.tablero.dispararProyectiles(((Disparo) op1).getCatapulta(), ((Disparo) op1).getX(), ((Disparo) op1).getY());
+				this.tablero.dispararProyectiles(((Disparo) op1).getCatapulta(), ((Disparo) op1).getX(), ((Disparo) op1).getY(), ((Disparo) op1).getFicha());
 				
 			}
 			else {
