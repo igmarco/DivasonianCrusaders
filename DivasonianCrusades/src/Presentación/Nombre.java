@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Component;
 
 public class Nombre extends JFrame {
 
@@ -34,6 +35,7 @@ public class Nombre extends JFrame {
 	 * Create the frame.
 	 */
 	public Nombre(final ClienteGUI menu, final TableroGrafico tablero, final Socket s) {
+		setTitle("Introducir nombre para la partida");
 		final Nombre main = this;
 		/**/ this.s = s;
 		setResizable(false);
@@ -69,8 +71,9 @@ public class Nombre extends JFrame {
 						boolean azul;
 						DataInputStream in = new DataInputStream( s.getInputStream());
 						DataOutputStream out = new DataOutputStream(s.getOutputStream());
+						lblEstado.setText("Buscando oponente...");
 						String linea = in.readLine();
-						System.out.println("Llegué sii...");
+						//System.out.println("Llegué sii...");
 						if(linea.compareTo("OK1")==0) {
 							azul = true;
 							lblEstado.setText("¡Oponente encontrado!");
@@ -102,9 +105,10 @@ public class Nombre extends JFrame {
 			Aceptar.setBounds(237, 158, 175, 47);
 			Aceptar.setBorder(null);
 			contentPane.add(Aceptar);
-			lblEstado = new JLabel("Creando la partida");
+			lblEstado = new JLabel("Creando la partida.");
+			lblEstado.setHorizontalAlignment(SwingConstants.CENTER);
 			lblEstado.setBounds(30, 38, 388, 28);
-			lblEstado.setFont(new Font("Consolas", Font.PLAIN, 23));
+			lblEstado.setFont(new Font("Consolas", Font.PLAIN, 27));
 			contentPane.add(lblEstado);
 			
 			Cancelar = new JButton("");
