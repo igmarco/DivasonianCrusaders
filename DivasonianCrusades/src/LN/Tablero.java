@@ -232,13 +232,33 @@ public class Tablero {
 
     public void resolverTurno() {
     	
-    	//Resuelve el turno, haciendo en cada nodo lo que deba.
+    	//Resuelve el turno, haciendo en cada nodo lo que debe.
+    	
+    	List<Integer> dóndeDisparar1 = this.dóndeDispararFlechas(Facción.Facción1);
+    	List<Integer> dóndeDisparar2 = this.dóndeDispararFlechas(Facción.Facción2);
+    	
+    	int i = 0;
+    	
     	for(Nodo n : nodos) {
     		
+    		//No hay temor de que dispare un arquero inexistente (muerto), ya que en ese caso dóndeDispararX no contendría i.
+    		if(dóndeDisparar1.contains(i) && !n.hayDosFichas() && n.estáAquí(Facción.Facción2)) {
+    			
+    			n.recibirDisparo(((Arquero) (nodos[this.dóndeEstá(new Arquero(Facción.Facción1))].getFichaDefensora())).realizarDisparo());
+    			
+    		}
+    		if(dóndeDisparar2.contains(i) && !n.hayDosFichas() && n.estáAquí(Facción.Facción1)) {
+    			
+    			n.recibirDisparo(((Arquero) (nodos[this.dóndeEstá(new Arquero(Facción.Facción2))].getFichaDefensora())).realizarDisparo());
+    			
+    		}
     		n.resolverTurno();
+    		
+    		i++;
     		
     	}
     	//Así? un poco simple en demasía, no creo que con esto esté todo.
+    	//No, faltaba añadir el hecho de que hay que disparar a quien hay que disparar
     	
     }
 
@@ -426,10 +446,13 @@ public class Tablero {
     
     public List<Integer> dóndeDispararFlechas(Facción fc) {
     	
-    	//Devuelve una lista de enteros que representan las posiciones de las casillas a las que le llega el rango la catapulta dada.
+    	//Devuelve una lista de enteros que representan las posiciones de las casillas a las que le llega el rango el arquero de la facción dada.
     	List<Integer> posiciones = new ArrayList<Integer>();
     	
     	int whereIsTheArcher = this.dóndeEstá(new Arquero(fc));
+    	
+    	//En caso de que el arquero no esté (haya muerto) o que esté trabado en combate: No dispara a ningún sitio: F
+    	if(whereIsTheArcher == -1 || nodos[whereIsTheArcher].hayDosFichas()) return posiciones;
     	
     	posiciones.add(whereIsTheArcher - 9 - 1);
     	posiciones.add(whereIsTheArcher - 9);
