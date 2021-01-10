@@ -133,7 +133,6 @@ public class ClienteGUI extends JFrame {
 								Socket s = new Socket("localhost",58000);
 								//Habilitamos el botón continuar partida, ya que ahora hay una partida que continuar.
 								//OJO, en caso de que el jugador se eche para atrás no tiene sentido haber creado el TableroGrafico, no? eso hay que revisarlo.
-								btContinuarPartida.setEnabled(true); 
 								tablero = new TableroGrafico(main);
 								Nombre nom = new Nombre(main, tablero, s);
 								nom.setVisible(true);
@@ -189,5 +188,11 @@ public class ClienteGUI extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon("Recursos\\LogoD.png"));
 		lblNewLabel.setBounds(48, 5, 303, 113);
 		panel.add(lblNewLabel);
+	}
+	
+	public void habilitarContinuar() {
+		
+		btContinuarPartida.setEnabled(true); 
+		
 	}
 }

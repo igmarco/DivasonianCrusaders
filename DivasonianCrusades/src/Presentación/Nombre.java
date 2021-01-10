@@ -16,13 +16,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class Nombre extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JLabel lblNewLabel;
+	private JLabel lblEstado;
 	private JButton Aceptar;
+	private JButton Cancelar;
 	/**/ private Socket s;
 
 
@@ -30,11 +32,12 @@ public class Nombre extends JFrame {
 	 * Create the frame.
 	 */
 	public Nombre(final ClienteGUI menu, final TableroGrafico tablero, final Socket s) {
+		final Nombre main = this;
 		/**/ this.s = s;
 		setResizable(false);
 		try {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setBounds(100, 100, 450, 258);
+			setBounds(100, 100, 463, 272);
 			contentPane = new JPanel();
 			contentPane.setBackground(new Color(240, 230, 140));
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -42,13 +45,14 @@ public class Nombre extends JFrame {
 			contentPane.setLayout(null);
 			
 			JLabel lblNewLabel_1 = new JLabel("Introduzca su nombre:");	
+			lblNewLabel_1.setVerticalAlignment(SwingConstants.BOTTOM);
 			lblNewLabel_1.setFont(new Font("Consolas", Font.PLAIN, 20));
-			lblNewLabel_1.setBounds(10, 105, 251, 28);
+			lblNewLabel_1.setBounds(20, 101, 238, 28);
 			contentPane.add(lblNewLabel_1);
 			
 			textField = new JTextField();
 			textField.setFont(new Font("Consolas", Font.PLAIN, 20));
-			textField.setBounds(258, 101, 166, 28);
+			textField.setBounds(268, 101, 166, 28);
 			contentPane.add(textField);
 			textField.setColumns(10);
 			
@@ -67,11 +71,11 @@ public class Nombre extends JFrame {
 						System.out.println("Llegué sii...");
 						if(linea.compareTo("OK1")==0) {
 							azul = true;
-							lblNewLabel.setText("¡Oponente encontrado!");
+							lblEstado.setText("¡Oponente encontrado!");
 							linea = in.readLine();
 						}else {
 							azul=false;
-							lblNewLabel.setText("¡Oponente encontrado!");
+							lblEstado.setText("¡Oponente encontrado!");
 						}
 						Aceptar.setEnabled(false);
 						out.writeBytes(textField.getText()+"\r\n");
@@ -79,9 +83,10 @@ public class Nombre extends JFrame {
 						String name = in.readLine();
 						tablero.setNombre(textField.getText(), name,azul);
 						tablero.setVisible(true);
+						menu.habilitarContinuar();
 						setVisible(false);
 					}catch(IOException ex) {
-						lblNewLabel.setText("Error al conectar");
+						lblEstado.setText("Error al conectar");
 					}
 				}
 				@Override
@@ -93,19 +98,42 @@ public class Nombre extends JFrame {
 					Aceptar.setIcon(new ImageIcon("Recursos\\Conectar.png"));
 				}
 			});
-			Aceptar.setBounds(136, 148, 175, 47);
+			Aceptar.setBounds(237, 158, 175, 47);
 			Aceptar.setBorder(null);
 			contentPane.add(Aceptar);
-			lblNewLabel = new JLabel("Estableciendo Conexion...");
-			lblNewLabel.setBounds(85, 35, 289, 28);
-			lblNewLabel.setFont(new Font("Consolas", Font.PLAIN, 20));
-			contentPane.add(lblNewLabel);
+			lblEstado = new JLabel("Creando la partida");
+			lblEstado.setBounds(30, 38, 388, 28);
+			lblEstado.setFont(new Font("Consolas", Font.PLAIN, 23));
+			contentPane.add(lblEstado);
+			
+			Cancelar = new JButton("");
+			Cancelar.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					
+					menu.setVisible(true);
+					setVisible(false);
+					
+				}
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					Cancelar.setIcon(new ImageIcon("Recursos\\ConectarS.png"));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					Cancelar.setIcon(new ImageIcon("Recursos\\Conectar.png"));
+				}
+			});
+			Cancelar.setIcon(new ImageIcon("Recursos\\Conectar.png"));
+			Cancelar.setBorder(null);
+			Cancelar.setBackground(new Color(240, 230, 140));
+			Cancelar.setBounds(30, 158, 175, 47);
+			
+			contentPane.add(Cancelar);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
-
-	
 }
 
