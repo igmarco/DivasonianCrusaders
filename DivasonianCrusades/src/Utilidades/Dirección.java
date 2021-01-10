@@ -1,8 +1,12 @@
 package Utilidades;
 
 public enum Dirección {
-    izquierda,
-    derecha,
-    arriba,
-    abajo;
+    norte,
+    sur,
+    este,
+    oeste,
+	noreste,
+	noroeste,
+	sureste,
+	suroeste;
 }

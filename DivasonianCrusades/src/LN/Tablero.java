@@ -107,10 +107,14 @@ public class Tablero {
     		int desde = this.dóndeEstá(f);
     		int hasta; //Ojito porque aquí hay que pasar de coordenadas a posición en el vector.
     		
-    		if(d == Dirección.derecha) hasta = desde + 1;
-    		else if(d == Dirección.izquierda) hasta = desde - 1;
-    		else if(d == Dirección.abajo) hasta = desde + 9;
-    		else hasta = desde - 9;
+    		if(d == Dirección.norte) hasta = desde - 9;
+    		else if(d == Dirección.sur) hasta = desde + 9;
+    		else if(d == Dirección.este) hasta = desde + 1;
+    		else if(d == Dirección.oeste) hasta = desde - 1;
+    		else if(d == Dirección.noreste) hasta = desde - 8;
+    		else if(d == Dirección.noroeste) hasta = desde - 10;
+    		else if(d == Dirección.sureste) hasta = desde + 10;
+    		else /*if(d == Dirección.suroeste)*/ hasta = desde - 8;
     		
     		this.moverFicha(f, desde, hasta);
     	
@@ -151,18 +155,26 @@ public class Tablero {
     		int desde1 = this.dóndeEstá(f1);
     		int hasta1;
     		
-    		if(d1 == Dirección.derecha) hasta1 = desde1 + 1;
-    		else if(d1 == Dirección.izquierda) hasta1 = desde1 - 1;
-    		else if(d1 == Dirección.abajo) hasta1 = desde1 + 9; 
-    		else hasta1 = desde1 - 9;
+    		if(d1 == Dirección.norte) hasta1 = desde1 - 9;
+    		else if(d1 == Dirección.sur) hasta1 = desde1 + 9;
+    		else if(d1 == Dirección.este) hasta1 = desde1 + 1;
+    		else if(d1 == Dirección.oeste) hasta1 = desde1 - 1;
+    		else if(d1 == Dirección.noreste) hasta1 = desde1 - 8;
+    		else if(d1 == Dirección.noroeste) hasta1 = desde1 - 10;
+    		else if(d1 == Dirección.sureste) hasta1 = desde1 + 10;
+    		else /*if(d == Dirección.suroeste)*/ hasta1 = desde1 - 8;
     		
     		int desde2 = this.dóndeEstá(f2);
     		int hasta2;
     		
-    		if(d2 == Dirección.derecha) hasta2 = desde2 + 1;
-    		else if(d2 == Dirección.izquierda) hasta2 = desde2 - 1;
-    		else if(d2 == Dirección.abajo) hasta2 = desde2 + 9;
-    		else hasta2 = desde2 - 9;
+    		if(d2 == Dirección.norte) hasta2 = desde2 - 9;
+    		else if(d2 == Dirección.sur) hasta2 = desde2 + 9;
+    		else if(d2 == Dirección.este) hasta2 = desde2 + 1;
+    		else if(d2 == Dirección.oeste) hasta2 = desde2 - 1;
+    		else if(d2 == Dirección.noreste) hasta2 = desde2 - 8;
+    		else if(d2 == Dirección.noroeste) hasta2 = desde2 - 10;
+    		else if(d2 == Dirección.sureste) hasta2 = desde2 + 10;
+    		else /*if(d == Dirección.suroeste)*/ hasta2 = desde2 - 8;
     		
     		//Comrpobaciones y órdenes
     		if(hasta1 == desde2) {
