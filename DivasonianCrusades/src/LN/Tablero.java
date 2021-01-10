@@ -114,7 +114,7 @@ public class Tablero {
     		else if(d == Dirección.noreste) hasta = desde - 8;
     		else if(d == Dirección.noroeste) hasta = desde - 10;
     		else if(d == Dirección.sureste) hasta = desde + 10;
-    		else /*if(d == Dirección.suroeste)*/ hasta = desde - 8;
+    		else /*if(d == Dirección.suroeste)*/ hasta = desde + 8;
     		
     		this.moverFicha(f, desde, hasta);
     	
@@ -162,7 +162,7 @@ public class Tablero {
     		else if(d1 == Dirección.noreste) hasta1 = desde1 - 8;
     		else if(d1 == Dirección.noroeste) hasta1 = desde1 - 10;
     		else if(d1 == Dirección.sureste) hasta1 = desde1 + 10;
-    		else /*if(d == Dirección.suroeste)*/ hasta1 = desde1 - 8;
+    		else /*if(d == Dirección.suroeste)*/ hasta1 = desde1 + 8;
     		
     		int desde2 = this.dóndeEstá(f2);
     		int hasta2;
@@ -174,7 +174,7 @@ public class Tablero {
     		else if(d2 == Dirección.noreste) hasta2 = desde2 - 8;
     		else if(d2 == Dirección.noroeste) hasta2 = desde2 - 10;
     		else if(d2 == Dirección.sureste) hasta2 = desde2 + 10;
-    		else /*if(d == Dirección.suroeste)*/ hasta2 = desde2 - 8;
+    		else /*if(d == Dirección.suroeste)*/ hasta2 = desde2 + 8;
     		
     		//Comrpobaciones y órdenes
     		if(hasta1 == desde2) {
