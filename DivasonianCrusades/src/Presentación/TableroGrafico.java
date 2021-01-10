@@ -341,7 +341,8 @@ public class TableroGrafico extends JFrame {
 		contentPane.add(btnMenu);
 
 		JLabel lblNewLabel_2 = new JLabel("Turno: 2");
-		lblNewLabel_2.setBounds(249, 633, 64, 29);
+		lblNewLabel_2.setFont(new Font("Consolas", Font.PLAIN, 14));
+		lblNewLabel_2.setBounds(231, 633, 119, 29);
 		contentPane.add(lblNewLabel_2);
 
 		JSeparator separator = new JSeparator();
@@ -364,29 +365,42 @@ public class TableroGrafico extends JFrame {
 		contentPane.add(separator_1);
 
 		JLabel lb_Casilla = new JLabel("Casilla:");
-		lb_Casilla.setBounds(770, 514, 46, 14);
+		lb_Casilla.setFont(new Font("Consolas", Font.PLAIN, 12));
+		lb_Casilla.setBounds(769, 516, 77, 20);
 		contentPane.add(lb_Casilla);
 
 		JLabel lb_Info = new JLabel("Informaci\u00F3n:");
-		lb_Info.setBounds(770, 489, 89, 14);
+		lb_Info.setFont(new Font("Consolas", Font.PLAIN, 12));
+		lb_Info.setBounds(770, 489, 89, 20);
 		contentPane.add(lb_Info);
 
 		JLabel lb_Ficha = new JLabel("Ficha:");
+		lb_Ficha.setFont(new Font("Consolas", Font.PLAIN, 12));
 		lb_Ficha.setBounds(770, 612, 46, 14);
 		contentPane.add(lb_Ficha);
 
 		txtCasilla = new JTextArea();
-		txtCasilla.setFont(new Font("Monospaced", Font.PLAIN, 11));
+		txtCasilla.setFont(new Font("Consolas", Font.PLAIN, 11));
 		txtCasilla.setEditable(false);
-		txtCasilla.setBounds(825, 514, 223, 82);
+		txtCasilla.setBounds(832, 514, 216, 82);
 		contentPane.add(txtCasilla);
 
 		txtFichaDef = new JTextArea();
-		txtFichaDef.setFont(new Font("Monospaced", Font.PLAIN, 11));
-		txtFichaDef.setBounds(825, 609, 142, 71);
+		txtFichaDef.setFont(new Font("Consolas", Font.PLAIN, 11));
+		txtFichaDef.setBounds(832, 609, 135, 71);
 		contentPane.add(txtFichaDef);
 
-		JButton Mover = new JButton("");
+		final JButton Mover = new JButton("");
+		Mover.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				Mover.setIcon(new ImageIcon("Recursos\\MoverS.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				Mover.setIcon(new ImageIcon("Recursos\\Mover.png"));
+			}
+		});
 
 		Mover.setBackground(new Color(240, 230, 140));
 		Mover.setIcon(new ImageIcon("Recursos\\Mover.png"));
@@ -394,14 +408,34 @@ public class TableroGrafico extends JFrame {
 		Mover.setBounds(823, 206, 179, 47);
 		contentPane.add(Mover);
 
-		JButton btnDisparar = new JButton("");
+		final JButton btnDisparar = new JButton("");
+		btnDisparar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnDisparar.setIcon(new ImageIcon("Recursos\\DispararS.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnDisparar.setIcon(new ImageIcon("Recursos\\Disparar.png"));
+			}
+		});
 		btnDisparar.setBackground(new Color(240, 230, 140));
 		btnDisparar.setIcon(new ImageIcon("Recursos\\Disparar.png"));
 		btnDisparar.setBounds(822, 264, 179, 47);
 		btnDisparar.setBorder(null);
 		contentPane.add(btnDisparar);
 
-		JButton btnEsperar = new JButton("");
+		final JButton btnEsperar = new JButton("");
+		btnEsperar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnEsperar.setIcon(new ImageIcon("Recursos\\EsperarS.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnEsperar.setIcon(new ImageIcon("Recursos\\Esperar.png"));
+			}
+		});
 
 		btnEsperar.setIcon(new ImageIcon("Recursos\\Esperar.png"));
 		btnEsperar.setBackground(new Color(240, 230, 140));
@@ -409,17 +443,37 @@ public class TableroGrafico extends JFrame {
 		btnEsperar.setBounds(822, 322, 179, 47);
 		contentPane.add(btnEsperar);
 
-		JButton btnCancelar = new JButton("");
+		final JButton btnCancelar = new JButton("");
+		btnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnCancelar.setIcon(new ImageIcon("Recursos\\DeshacerS.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnCancelar.setIcon(new ImageIcon("Recursos\\Deshacer.png"));
+			}
+		});
 		btnCancelar.setBackground(new Color(240, 230, 140));
 		btnCancelar.setIcon(new ImageIcon("Recursos\\Deshacer.png"));
 		btnCancelar.setBounds(822, 380, 179, 47);
 		btnCancelar.setBorder(null);
 		contentPane.add(btnCancelar);
 
-		JButton Rendirse = new JButton("");
+		final JButton Rendirse = new JButton("");
+		Rendirse.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				Rendirse.setIcon(new ImageIcon("Recursos\\RendirseS.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				Rendirse.setIcon(new ImageIcon("Recursos\\Rendirse.png"));
+			}
+		});
 		Rendirse.setIcon(new ImageIcon("Recursos\\Rendirse.png"));
 		Rendirse.setBackground(new Color(240, 230, 140));
-		Rendirse.setBounds(900, 438, 100, 29);
+		Rendirse.setBounds(902, 438, 100, 29);
 		Rendirse.setBorder(null);
 		contentPane.add(Rendirse);
 
@@ -428,21 +482,48 @@ public class TableroGrafico extends JFrame {
 		lb_Casilla_1.setBounds(825, 438, 77, 29);
 		contentPane.add(lb_Casilla_1);
 
-		JButton btnSiguienteMovimiento = new JButton("Siguiente");
+		final JButton btnSiguienteMovimiento = new JButton("");
+		btnSiguienteMovimiento.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnSiguienteMovimiento.setIcon(new ImageIcon("Recursos\\SiguienteS.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnSiguienteMovimiento.setIcon(new ImageIcon("Recursos\\Siguiente.png"));
+			}
+		});
+		btnSiguienteMovimiento.setBackground(new Color(240, 230, 140));
+		btnSiguienteMovimiento.setIcon(new ImageIcon("Recursos\\Siguiente.png"));
+		btnSiguienteMovimiento.setBorder(null);
 		btnSiguienteMovimiento.setBounds(555, 633, 179, 47);
 		contentPane.add(btnSiguienteMovimiento);
 
 		JLabel lblNewLabel_2_1 = new JLabel("Movimiento: 0");
-		lblNewLabel_2_1.setBounds(249, 653, 89, 29);
+		lblNewLabel_2_1.setFont(new Font("Consolas", Font.PLAIN, 14));
+		lblNewLabel_2_1.setBounds(231, 651, 119, 29);
 		contentPane.add(lblNewLabel_2_1);
 
 		txtFichaAt = new JTextArea();
-		txtFichaAt.setFont(new Font("Monospaced", Font.PLAIN, 11));
+		txtFichaAt.setFont(new Font("Consolas", Font.PLAIN, 11));
 		txtFichaAt.setBounds(977, 609, 71, 71);
 		contentPane.add(txtFichaAt);
 
-		JButton btnAnteriorMovimiento = new JButton("Anterior");
+		final JButton btnAnteriorMovimiento = new JButton("");
+		btnAnteriorMovimiento.setBackground(new Color(240, 230, 140));
+		btnAnteriorMovimiento.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnAnteriorMovimiento.setIcon(new ImageIcon("Recursos\\AnteriorS.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnAnteriorMovimiento.setIcon(new ImageIcon("Recursos\\Anterior.png"));
+			}
+		});
+		btnAnteriorMovimiento.setIcon(new ImageIcon("Recursos\\Anterior.png"));
 		btnAnteriorMovimiento.setBounds(366, 633, 179, 47);
+		btnAnteriorMovimiento.setBorder(null);
 		contentPane.add(btnAnteriorMovimiento);
 	}
 
