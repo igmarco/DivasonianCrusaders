@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.Socket;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,7 +31,6 @@ import MD_Tablero.Curación;
 import MD_Tablero.Ficha;
 import MD_Tablero.Guerrero;
 import MD_Tablero.Lancero;
-import MD_Tablero.Normal;
 import Utilidades.Facción;
 
 public class TableroGrafico extends JFrame {
@@ -50,7 +50,7 @@ public class TableroGrafico extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TableroGrafico(final ClienteGUI menu) {
+	public TableroGrafico(final ClienteGUI menu, Socket s) {
 		tab = new Tablero();
 		setResizable(false);
 		final TableroGrafico tablero = this;

@@ -133,7 +133,7 @@ public class ClienteGUI extends JFrame {
 								Socket s = new Socket("localhost",58000);
 								//Habilitamos el botón continuar partida, ya que ahora hay una partida que continuar.
 								//OJO, en caso de que el jugador se eche para atrás no tiene sentido haber creado el TableroGrafico, no? eso hay que revisarlo.
-								tablero = new TableroGrafico(main);
+								tablero = new TableroGrafico(main, s);
 								Nombre nom = new Nombre(main, tablero, s);
 								nom.setVisible(true);
 							} catch (Exception ex) {
