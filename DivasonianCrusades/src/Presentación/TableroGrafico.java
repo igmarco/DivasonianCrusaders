@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -905,6 +906,7 @@ public class TableroGrafico extends JFrame {
     	//Representar gráficamente el tablero tab
     	for (int i = 0; i < 45; i++) {
     		this.casillas[i].setEnabled(true);
+    		this.casillas[i].setBackground(new Color(245, 245, 220));
 			final Integer x = i;
 			Casilla cas = this.tab.getNodo(i).getCasilla();
 			Ficha f = this.tab.getNodo(i).getFichaDefensora();
@@ -1986,7 +1988,6 @@ public class TableroGrafico extends JFrame {
         			botonesClicarFase2(tab.getNodo(x).getFicha(faccion));
         			btnCancelar.addActionListener(new ActionListener() {
         				public void actionPerformed(ActionEvent arg0) {
-        	    			botonesDesClicarFase2(tab.getNodo(x).getFicha(faccion));
         	    			pintar(tab);
         					}	
         	    		});
@@ -2038,14 +2039,9 @@ public class TableroGrafico extends JFrame {
 		for(Integer posicion : casAModificar) {
 			System.out.println(posicion);
 			this.casillas[posicion].setBackground(Color.white);
-		}
-    }
-    
-    public void botonesDesClicarFase2(Ficha f) {
-    	
-		List<Integer> casAModificar = tab.dóndePuedeMover(f);
-		for(Integer posicion : casAModificar) {
-			this.casillas[posicion].setBackground(new Color(245, 245, 220));
+			for(MouseListener ms : this.casillas[posicion].getMouseListeners()) {
+				this.casillas[posicion].removeMouseListener(ms);
+			}
 		}
     }
     
