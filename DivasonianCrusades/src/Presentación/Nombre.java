@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Nombre extends JFrame {
 
@@ -107,6 +109,10 @@ public class Nombre extends JFrame {
 			contentPane.add(lblEstado);
 			
 			Cancelar = new JButton("");
+			Cancelar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+				}
+			});
 			Cancelar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -117,14 +123,14 @@ public class Nombre extends JFrame {
 				}
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					Cancelar.setIcon(new ImageIcon("Recursos\\ConectarS.png"));
+					Cancelar.setIcon(new ImageIcon("Recursos\\CancelarS.png"));
 				}
 				@Override
 				public void mouseExited(MouseEvent e) {
-					Cancelar.setIcon(new ImageIcon("Recursos\\Conectar.png"));
+					Cancelar.setIcon(new ImageIcon("Recursos\\Cancelar.png"));
 				}
 			});
-			Cancelar.setIcon(new ImageIcon("Recursos\\Conectar.png"));
+			Cancelar.setIcon(new ImageIcon("Recursos\\Cancelar.png"));
 			Cancelar.setBorder(null);
 			Cancelar.setBackground(new Color(240, 230, 140));
 			Cancelar.setBounds(30, 158, 175, 47);
