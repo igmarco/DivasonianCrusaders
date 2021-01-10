@@ -40,7 +40,7 @@ public class ClienteGUI extends JFrame {
 	 */
 	public ClienteGUI(boolean nuevo, final TableroGrafico Tablero) {
 		final ClienteGUI main = this;
-		tablero = new TableroGrafico();
+		tablero = new TableroGrafico(main);
 		setResizable(false);
 		setBounds(100, 100, 395, 444);
 		contentPane = new JPanel();
