@@ -20,6 +20,9 @@ public class Partida implements Runnable {
     
 	private String nombre1;
 	private String nombre2;
+	
+	private boolean rendición1;
+	private boolean rendición2;
 
 	private Instrucción instrucciónFacción1;
 	private Instrucción instrucciónFacción2;
@@ -37,6 +40,9 @@ public class Partida implements Runnable {
     	this.s2 = s2;
     	this.nombre1 = nombre1;
     	this.nombre2 = nombre2;
+    	
+    	this.rendición1 = false;
+    	this.rendición1 = false;
     	
     	turno = 0;
     	
@@ -70,22 +76,54 @@ public class Partida implements Runnable {
 			
 			while(!haTerminado) {
 				
-				instrucciónFacción1 = (Instrucción) ois1.readObject();
-				instrucciónFacción2 = (Instrucción) ois2.readObject();
+				rendición1 = (boolean) ois1.readObject();
+				rendición2 = (boolean) ois2.readObject();
 				
-				for(movimiento = 0; movimiento < 6; movimiento++) {
+				if(rendición1 && rendición2) {
 					
-					this.ejecutarOperación();
+					haTerminado = true;
+					
+					oos1.writeBytes("SURR-El oponente se ha rendido.\r\n");
+					oos2.writeBytes("SURR-El oponente se ha rendido.\r\n");
+					
+				}
+				else if(rendición1) {
+					
+					haTerminado = true;
+					oos2.writeBytes("SURR-El oponente se ha rendido.\r\n");
+					
+				}
+				else if(rendición2) {
+					
+					haTerminado = true;
+					oos1.writeBytes("SURR-El oponente se ha rendido.\r\n");
+					
+				}
+				else {
+					
+					oos1.writeBytes("OK-La partida continúa.\r\n");
+					oos2.writeBytes("OK-La partida continúa.\r\n");
+					
+					instrucciónFacción1 = (Instrucción) ois1.readObject();
+					instrucciónFacción2 = (Instrucción) ois2.readObject();
+					
+					for(movimiento = 0; movimiento < 6; movimiento++) {
+						
+						this.ejecutarOperación();
+						
+						this.mandarTableros(oos1, oos2);
+						
+					}
+					
+					turno++;
+					
+					this.resolverTurno();
+					
+					haTerminado = this.tablero.haTerminado();
 					
 					this.mandarTableros(oos1, oos2);
 					
 				}
-				
-				turno++;
-				
-				this.resolverTurno();
-				
-				this.mandarTableros(oos1, oos2);
 				
 			}
 			

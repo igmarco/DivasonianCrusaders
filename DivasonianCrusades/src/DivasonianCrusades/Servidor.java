@@ -28,12 +28,14 @@ public class Servidor {
 			while(true) {
 				
 				Socket s1 = ss.accept();
+				s1.setKeepAlive(true); //Creo que con esto se evita el hecho de que se pierda la conexión con tiempo de espera.
 				dos1 = new DataOutputStream(s1.getOutputStream());
 				dis1 = new DataInputStream(s1.getInputStream());
 				dos1.writeBytes("OK1\r\n");
 				dos1.flush();
 				
 				Socket s2 = ss.accept();
+				s2.setKeepAlive(true); //Creo que con esto se evita el hecho de que se pierda la conexión con tiempo de espera.
 				dos2 = new DataOutputStream(s2.getOutputStream());
 				dos1.writeBytes("OK2\r\n");
 				dos2.writeBytes("OK2\r\n");

@@ -50,7 +50,7 @@ public class TableroGrafico extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TableroGrafico() {
+	public TableroGrafico(final ClienteGUI menu) {
 		tab = new Tablero();
 		setResizable(false);
 		final TableroGrafico tablero = this;
@@ -306,114 +306,12 @@ public class TableroGrafico extends JFrame {
 		this.casillas[42] = cas42;
 		this.casillas[43] = cas43;
 		this.casillas[44] = cas44;
-
-		for (int i = 0; i < 45; i++) {
-			final Integer x = i;
-			Casilla cas = this.tab.getNodo(i).getCasilla();
-			Ficha f = this.tab.getNodo(i).getFichaDefensora();
-			Ficha fat = this.tab.getNodo(i).getFichaDefensora();
-			if (cas instanceof Catapulta) {
-				if (((Catapulta) cas).getIdentificador() == 1) {
-					if (f == null)
-						this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaAzul.png"));
-					else {
-
-					}
-				} else {
-					if (f == null) {
-						this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaRoja.png"));
-					} else {
-
-					}
-				}
-			} else if (cas instanceof Colina) {
-				this.casillas[i].setIcon(new ImageIcon("Recursos\\Colina.png"));
-			} else if (cas instanceof Curación) {
-				this.casillas[i].setIcon(new ImageIcon("Recursos\\Curarse.png"));
-			} else if (cas instanceof Copa) {
-				if (((Copa) cas).getFacción().equals(Facción.Facción1)) {
-					this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
-					this.casillas[i].addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseEntered(MouseEvent e) {
-							ratonInCoronaAzul(x);
-						}
-
-						@Override
-						public void mouseExited(MouseEvent e) {
-							ratonOutCoronaAzul(x);
-						}
-					});
-				} else {
-					this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
-				}
-
-			} else {
-				if (f instanceof Arquero) {
-					System.out.println("Mi color es: " + this.azul);
-					if (f.getFacción().equals(Facción.Facción1)) {
-						this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroAzulBC.png"));
-						this.casillas[i].addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseEntered(MouseEvent e) {
-								ratonInArqueroAzul(x);
-							}
-
-							@Override
-							public void mouseExited(MouseEvent e) {
-								ratonOutArqueroAzul(x);
-							}
-						});
-					} else {
-						this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroRojoBC.png"));
-						this.casillas[i].addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseEntered(MouseEvent e) {
-								ratonInArqueroRojo(x);
-							}
-
-							@Override
-							public void mouseExited(MouseEvent e) {
-								ratonOutArqueroRojo(x);
-							}
-						});
-					}
-				} else if (f instanceof Lancero) {
-					if (f.getFacción().equals(Facción.Facción1))
-						this.casillas[i].setIcon(new ImageIcon("Recursos\\LanceroAzulBC.png"));
-					else {
-						this.casillas[i].setIcon(new ImageIcon("Recursos\\LanceroRojoBC.png"));
-					}
-				} else if (f instanceof Guerrero) {
-					if (f.getFacción().equals(Facción.Facción1))
-						this.casillas[i].setIcon(new ImageIcon("Recursos\\GuerreroAzulBC.png"));
-					else {
-						this.casillas[i].setIcon(new ImageIcon("Recursos\\GuerreroRojoBC.png"));
-					}
-				} else if (f instanceof Bárbaro) {
-					if (f.getFacción().equals(Facción.Facción1))
-						this.casillas[i].setIcon(new ImageIcon("Recursos\\BarbaroAzulBC.png"));
-					else {
-						this.casillas[i].setIcon(new ImageIcon("Recursos\\BarbaroRojoBC.png"));
-					}
-				} else if (f instanceof Caballero) {
-					if (f.getFacción().equals(Facción.Facción1))
-						this.casillas[i].setIcon(new ImageIcon("Recursos\\CaballeroAzulBC.png"));
-					else {
-						this.casillas[i].setIcon(new ImageIcon("Recursos\\CaballeroRojoBC.png"));
-					}
-				}
-			}
-			
-			this.casillas[i].addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					
-					ratonInNodo(x);
-					
-				}
-			});
-		}
+		
+		//-------------------------------------- MÉTODO Pintar() ---------------
+		
+		this.pintar(tab);
+		
+		//-------------------------------------- AQUÍ TERMINA ------------------
 
 		btnMenu = new JButton("");
 		btnMenu.addMouseListener(new MouseAdapter() {
@@ -430,9 +328,10 @@ public class TableroGrafico extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				ClienteGUI frame = new ClienteGUI(false, tablero);
+//				ClienteGUI frame = new ClienteGUI(false, tablero);
 				setVisible(false);
-				frame.setVisible(true);
+//				frame.setVisible(true);
+				/**/ menu.setVisible(true);
 			}
 		});
 		btnMenu.setBackground(new Color(240, 230, 140));
@@ -699,4 +598,119 @@ public class TableroGrafico extends JFrame {
 		this.txtFichaDef.setText(fichaDefInfo);
 		this.txtFichaAt.setText(fichaAtInfo);
 	}
+
+    public void pintar(Tablero tab) {
+    	
+    	//Representar gráficamente el tablero tab
+    	for (int i = 0; i < 45; i++) {
+    		
+			final Integer x = i;
+			Casilla cas = this.tab.getNodo(i).getCasilla();
+			Ficha f = this.tab.getNodo(i).getFichaDefensora();
+			Ficha fat = this.tab.getNodo(i).getFichaAtacante();
+			if (cas instanceof Catapulta) {
+				if (((Catapulta) cas).getIdentificador() == 1) {
+					if (f == null)
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaAzul.png"));
+					else {
+
+					}
+				} else {
+					if (f == null) {
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaRoja.png"));
+					} else {
+
+					}
+				}
+			} else if (cas instanceof Colina) {
+				this.casillas[i].setIcon(new ImageIcon("Recursos\\Colina.png"));
+			} else if (cas instanceof Curación) {
+				this.casillas[i].setIcon(new ImageIcon("Recursos\\Curarse.png"));
+			} else if (cas instanceof Copa) {
+				if (((Copa) cas).getFacción().equals(Facción.Facción1)) {
+					this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
+					this.casillas[i].addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							ratonInCoronaAzul(x);
+						}
+
+						@Override
+						public void mouseExited(MouseEvent e) {
+							ratonOutCoronaAzul(x);
+						}
+					});
+				} else {
+					this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
+				}
+
+			} else {
+				if (f instanceof Arquero) {
+					System.out.println("Mi color es: " + this.azul);
+					if (f.getFacción().equals(Facción.Facción1)) {
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroAzulBC.png"));
+						this.casillas[i].addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseEntered(MouseEvent e) {
+								ratonInArqueroAzul(x);
+							}
+
+							@Override
+							public void mouseExited(MouseEvent e) {
+								ratonOutArqueroAzul(x);
+							}
+						});
+					} else {
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroRojoBC.png"));
+						this.casillas[i].addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseEntered(MouseEvent e) {
+								ratonInArqueroRojo(x);
+							}
+
+							@Override
+							public void mouseExited(MouseEvent e) {
+								ratonOutArqueroRojo(x);
+							}
+						});
+					}
+				} else if (f instanceof Lancero) {
+					if (f.getFacción().equals(Facción.Facción1))
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\LanceroAzulBC.png"));
+					else {
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\LanceroRojoBC.png"));
+					}
+				} else if (f instanceof Guerrero) {
+					if (f.getFacción().equals(Facción.Facción1))
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\GuerreroAzulBC.png"));
+					else {
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\GuerreroRojoBC.png"));
+					}
+				} else if (f instanceof Bárbaro) {
+					if (f.getFacción().equals(Facción.Facción1))
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\BarbaroAzulBC.png"));
+					else {
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\BarbaroRojoBC.png"));
+					}
+				} else if (f instanceof Caballero) {
+					if (f.getFacción().equals(Facción.Facción1))
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\CaballeroAzulBC.png"));
+					else {
+						this.casillas[i].setIcon(new ImageIcon("Recursos\\CaballeroRojoBC.png"));
+					}
+				}
+			}
+			
+			this.casillas[i].addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					
+					ratonInNodo(x);
+					
+				}
+			});
+			
+		}
+    	
+    }
 }
