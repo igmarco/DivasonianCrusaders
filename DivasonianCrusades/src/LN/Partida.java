@@ -24,7 +24,7 @@ public class Partida implements Runnable {
 	private boolean rendición1;
 	private boolean rendición2;
 
-	private Instrucción instrucciónFacción1;
+	private Instrucción instrucciónFacción1; 
 	private Instrucción instrucciónFacción2;
 
 	private Tablero tablero;

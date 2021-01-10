@@ -153,7 +153,7 @@ public class Tablero {
     		
     		if(d1 == Dirección.derecha) hasta1 = desde1 + 1;
     		else if(d1 == Dirección.izquierda) hasta1 = desde1 - 1;
-    		else if(d1 == Dirección.abajo) hasta1 = desde1 + 9;
+    		else if(d1 == Dirección.abajo) hasta1 = desde1 + 9; 
     		else hasta1 = desde1 - 9;
     		
     		int desde2 = this.dóndeEstá(f2);
