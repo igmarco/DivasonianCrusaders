@@ -71,7 +71,7 @@ public class Nombre extends JFrame {
 						boolean azul;
 						DataInputStream in = new DataInputStream( s.getInputStream());
 						DataOutputStream out = new DataOutputStream(s.getOutputStream());
-						lblEstado.setText("Buscando oponente...");
+						lblEstado.setText("Buscando oponente..."); //T.T
 						String linea = in.readLine();
 						//System.out.println("Llegué sii...");
 						if(linea.compareTo("OK1")==0) {
