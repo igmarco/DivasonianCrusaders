@@ -147,6 +147,18 @@ public class Partida implements Runnable {
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+
+			try {
+				oos1.writeBytes("AB-Un jugador ha abandonado!\r\n");
+			} catch (IOException e2) {
+				//Uno de los dos hará saltar una excepción.
+			}
+			try {
+				oos2.writeBytes("AB-Un jugador ha abandonado!\r\n");
+			} catch (IOException e1) {
+				//Uno de los dos hará saltar una excepción.
+			}
+			
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
