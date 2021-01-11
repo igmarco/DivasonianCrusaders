@@ -29,5 +29,11 @@ public class Caballero extends Ficha {
     	return (int) Math.floor((dañoCarga + (int) Math.floor(Math.random()*2*(dañoVariable)-dañoVariable) + hd)*1.2);
     	
     }
+    
+    public int getMovs() {
+    	
+    	return 3;
+    	
+    }
 
 }

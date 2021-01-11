@@ -137,5 +137,11 @@ public abstract class Ficha {
     	this.hachaDivasónica = h;
     	
     }
+    
+    public int getMovs() {
+    	
+    	return 2;
+    	
+    }
 
 }
