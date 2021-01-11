@@ -21,7 +21,7 @@ public class Disparo extends Operación {
 		
 	}
 	
-	public Disparo(Ficha f, Catapulta catapulta, int x, int y) {
+	public Disparo(Ficha f, Catapulta catapulta, int x, int y) { 
 		
 		super(f);
 		this.catapulta = catapulta;

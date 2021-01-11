@@ -396,7 +396,7 @@ public class Tablero {
     	//Ojo! Solo en caso de que la ficha siga ahí o no se haya trabado en combate.
     	if(f != null && f.equals(this.nodos[this.dóndeEstá(catapulta)].getFichaDefensora()) && !this.nodos[this.dóndeEstá(catapulta)].hayDosFichas()) {
     		
-    		nodos[casillaObjetivo].recibirDisparo(catapulta.realizarDisparo());
+    		nodos[casillaObjetivo].recibirDisparo(catapulta.realizarDisparo()); 
     		
     	}
     	
