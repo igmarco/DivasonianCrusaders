@@ -77,9 +77,11 @@ public class TableroGrafico extends JFrame {
 	private JTextArea txtFichaDef;
 	private JTextArea txtFichaAt;
 	
+	private Integer movsF=0,movsC=0,movsB=0,movsG=0,movsL =0;
+	
 	private Facción faccion;
 	
-	private Instrucción inst;
+	private Instrucción<Operación> inst;
 	
 	private Socket s;
 	
@@ -154,10 +156,6 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas7);
 
 		final JButton cas8 = new JButton("");
-		cas8.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		cas8.setBackground(new Color(245, 245, 220));
 		panel.add(cas8);
 
@@ -421,18 +419,18 @@ public class TableroGrafico extends JFrame {
 
 		JLabel lb_Ficha = new JLabel("Ficha:");
 		lb_Ficha.setFont(new Font("Consolas", Font.PLAIN, 12));
-		lb_Ficha.setBounds(770, 606, 46, 14);
+		lb_Ficha.setBounds(770, 612, 46, 14);
 		contentPane.add(lb_Ficha);
 
 		txtCasilla = new JTextArea();
-		txtCasilla.setFont(new Font("Consolas", Font.PLAIN, 12));
+		txtCasilla.setFont(new Font("Consolas", Font.PLAIN, 11));
 		txtCasilla.setEditable(false);
-		txtCasilla.setBounds(832, 514, 216, 78);
+		txtCasilla.setBounds(832, 514, 216, 82);
 		contentPane.add(txtCasilla);
 
 		txtFichaDef = new JTextArea();
-		txtFichaDef.setFont(new Font("Consolas", Font.PLAIN, 12));
-		txtFichaDef.setBounds(832, 603, 135, 77);
+		txtFichaDef.setFont(new Font("Consolas", Font.PLAIN, 11));
+		txtFichaDef.setBounds(832, 609, 135, 71);
 		contentPane.add(txtFichaDef);
 		Mover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -472,6 +470,17 @@ public class TableroGrafico extends JFrame {
 		btnDisparar.setBounds(822, 264, 179, 47);
 		btnDisparar.setBorder(null);
 		contentPane.add(btnDisparar);
+		btnEsperar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				inst.add(null);
+				Operaciones.setText("Ops.: "+inst.size()+"/6");
+				if(inst.size()==6) {
+		    		btnDisparar.setEnabled(false);
+			    	btnEsperar.setEnabled(false);
+			    	Mover.setEnabled(false);
+				}
+			}
+		});
 
 		btnEsperar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -551,8 +560,8 @@ public class TableroGrafico extends JFrame {
 		contentPane.add(Maniobra);
 
 		txtFichaAt = new JTextArea();
-		txtFichaAt.setFont(new Font("Consolas", Font.PLAIN, 12));
-		txtFichaAt.setBounds(977, 603, 71, 77);
+		txtFichaAt.setFont(new Font("Consolas", Font.PLAIN, 11));
+		txtFichaAt.setBounds(977, 609, 71, 71);
 		contentPane.add(txtFichaAt);
 
 		final JButton btnAnteriorMovimiento = new JButton("");
@@ -796,7 +805,13 @@ public class TableroGrafico extends JFrame {
 
 		if (casilla instanceof Copa) {
 
+			if(((Copa) casilla).getFacción()== Facción.Facción1)
 
+				casillaInfo += "Azul" + "\r\n";
+			
+			else
+				
+				casillaInfo += "Rojo" + "\r\n";
 			
 			casillaInfo += "Vida: " + ((Copa) casilla).getVida() + "\r\n";
 
@@ -1997,7 +2012,6 @@ public class TableroGrafico extends JFrame {
     
     public void moverClick() {
 	    	List<Integer> casAModificar = this.tab.quiénesPuedenMover(this.faccion);
-	    	
 	    	for(Integer posicion: casAModificar) {
 	    		final Integer x = posicion;
 	    		this.casillas[posicion].addMouseListener(new MouseAdapter() {
@@ -2038,7 +2052,32 @@ public class TableroGrafico extends JFrame {
 	    	List<Integer> casAModificar = this.tab.quiénesNOPuedenMover(this.faccion);
 	    	for(Integer posicion : casAModificar) {
 	    		this.casillas[posicion].setEnabled(estado);
-	    	} 	
+	    	}
+	    	casAModificar = this.tab.quiénesPuedenMover(this.faccion);
+	    	for(Integer posicion : casAModificar) {
+	    		Ficha efarda = this.tab.getNodo(posicion).getFicha(faccion);
+	    		if(efarda instanceof Arquero) {
+	    			if(this.movsF == this.tab.getNodo(posicion).getFicha(faccion).getMovs()) {
+	    				this.casillas[posicion].setEnabled(estado);
+	    			}
+	    		}
+	    		if(efarda instanceof Caballero) {
+	    			if(this.movsC == this.tab.getNodo(posicion).getFicha(faccion).getMovs())
+	    				this.casillas[posicion].setEnabled(estado);
+	    		}
+	    		if(efarda instanceof Bárbaro) {
+	    			if(this.movsB == this.tab.getNodo(posicion).getFicha(faccion).getMovs())
+	    				this.casillas[posicion].setEnabled(estado);
+	    		}
+	    		if(efarda instanceof Guerrero) {
+	    			if(this.movsG == this.tab.getNodo(posicion).getFicha(faccion).getMovs())
+	    				this.casillas[posicion].setEnabled(estado);
+	    		}
+	    		if(efarda instanceof Lancero) {
+	    			if(this.movsL == this.tab.getNodo(posicion).getFicha(faccion).getMovs())
+	    				this.casillas[posicion].setEnabled(estado);
+	    		}
+	    	}
     }
     
     public void botonesMoverFase2(boolean estado, Ficha f) {
@@ -2123,8 +2162,6 @@ public class TableroGrafico extends JFrame {
     	tab2.moverFicha(f, direccion);
     	this.tableros.add(tab2);
 		botonesMoverFase1(true);
-		System.out.println(this.tab.getNodo(posicion).getFichaAtacante());
-		System.out.println(this.tab.getNodo(posicion).getFichaDefensora());
 		for(int i=0; i<45;i++) {
 			this.casillas[i].setIcon(null);
 			for(MouseListener ac : this.casillas[i].getMouseListeners()) {
@@ -2141,6 +2178,21 @@ public class TableroGrafico extends JFrame {
 		pintar(tab2);
 		for(ActionListener ac : this.btnCancelar.getActionListeners()) {
 			this.btnCancelar.removeActionListener(ac);
+		}
+		if(f instanceof Arquero) {
+			this.movsF++;
+		}
+		if(f instanceof Caballero) {
+			this.movsC++;
+		}
+		if(f instanceof Bárbaro) {
+			this.movsB++;
+		}
+		if(f instanceof Guerrero) {
+			this.movsG++;
+		}
+		if(f instanceof Lancero) {
+			this.movsL++;
 		}
     }
     

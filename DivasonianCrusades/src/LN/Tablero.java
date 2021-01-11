@@ -645,7 +645,8 @@ public class Tablero {
 			movPosibles.remove(x);
 			x = 35;
 			movPosibles.remove(x);
-			
+			x = 8;
+			movPosibles.remove(x);
 		}
 		else if(dóndeEstá == 27) {
 			x = 35;
@@ -684,6 +685,10 @@ public class Tablero {
 			x = 9;
 			movPosibles.remove(x);
 			x = 27;
+			movPosibles.remove(x);
+			x= 0;
+			movPosibles.remove(x);
+			x = 36;
 			movPosibles.remove(x);
 		}
 		else if(dóndeEstá == 35) {
