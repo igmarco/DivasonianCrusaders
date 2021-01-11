@@ -386,7 +386,7 @@ public class Tablero {
   //VIENE DEL ANTIGUO Ejecutor, SIRVE PARA MOVER CON UNA DIRECCIÓN EN LUGAR DE CON LOS intS.
     public void dispararProyectiles(Catapulta c, int x, int y, Ficha f) {
     	
-    	this.dispararProyectiles(c, (5-y)*9 + x-1, f);
+    	this.dispararProyectiles(c, (4-y)*9 + x, f);
     	
     }
     

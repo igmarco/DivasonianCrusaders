@@ -11,6 +11,16 @@ public class Disparo extends Operación {
 
 	private int y;
 	
+	public Disparo(Ficha f, Catapulta catapulta, int posTablero) {
+		
+		super(f);
+		this.catapulta = catapulta;
+		
+		this.x = posTablero%9;
+		this.y = 4-posTablero/9;
+		
+	}
+	
 	public Disparo(Ficha f, Catapulta catapulta, int x, int y) {
 		
 		super(f);
