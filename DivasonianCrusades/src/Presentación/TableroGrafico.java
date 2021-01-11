@@ -2134,7 +2134,6 @@ public class TableroGrafico extends JFrame {
     	tab2.moverFicha(f, direccion);
     	this.tableros.add(tab2);
 		botonesMoverFase1(true);
-		this.tab.getNodo(j).quitarFicha(f);
 		System.out.println(this.tab.getNodo(posicion).getFichaAtacante());
 		System.out.println(this.tab.getNodo(posicion).getFichaDefensora());
 		for(int i=0; i<45;i++) {
