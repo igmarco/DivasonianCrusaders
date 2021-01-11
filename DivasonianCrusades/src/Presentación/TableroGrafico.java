@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
@@ -78,7 +79,7 @@ public class TableroGrafico extends JFrame {
 	private JTextArea txtFichaDef;
 	private JTextArea txtFichaAt;
 	
-	private boolean catA,catR;
+	private boolean catA=true,catR=true;
 	
 	private Integer movsF=0,movsC=0,movsB=0,movsG=0,movsL =0;
 	
@@ -467,7 +468,7 @@ public class TableroGrafico extends JFrame {
 						}
 					});
 				}else {
-					//Aqui ignacio ->> GORDO
+					JOptionPane.showMessageDialog(null, "Ninguna de sus fichas están en una catapulta", "Atención", JOptionPane.WARNING_MESSAGE);
 					
 				}
 			}
@@ -491,6 +492,8 @@ public class TableroGrafico extends JFrame {
 		btnEsperar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				inst.add(null);
+				Tablero tab2 = tab;
+				tableros.add(tab2);
 				Operaciones.setText("Ops.: "+inst.size()+"/6");
 				if(inst.size()==6) {
 		    		btnDisparar.setEnabled(false);
@@ -2280,7 +2283,7 @@ public class TableroGrafico extends JFrame {
     		}
     }
     
-    public void pintarCasillasDisparo(boolean estado, List<Integer> catapulta) {
+    public void pintarCasillasDisparo(boolean estado, final List<Integer> catapulta) {
     	if(estado) {
 	    	if(catapulta.size()==2) {
 	    		List<Integer> casillasCat1 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(0)).getCasilla());
@@ -2306,7 +2309,7 @@ public class TableroGrafico extends JFrame {
 					}
 					final Ficha f = this.tab.getNodo(cat1).getFichaDefensora();
 					final Integer x = cat1;
-					final Catapulta cas = (Catapulta) this.tab.getNodo(cat1).getCasilla();
+					final Catapulta cas = (Catapulta) this.tab.getNodo(catapulta.get(0)).getCasilla();
 					this.casillas[cat1].addMouseListener( new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
@@ -2316,6 +2319,10 @@ public class TableroGrafico extends JFrame {
 					    		btnDisparar.setEnabled(false);
 						    	btnEsperar.setEnabled(false);
 						    	Mover.setEnabled(false);
+							}else {
+					    		btnDisparar.setEnabled(true);
+						    	btnEsperar.setEnabled(true);
+						    	Mover.setEnabled(true);
 							}
 							for(ActionListener ac : btnCancelar.getActionListeners()) {
 								btnCancelar.removeActionListener(ac);
@@ -2326,12 +2333,14 @@ public class TableroGrafico extends JFrame {
 									casillas[i].removeMouseListener(ac);
 								}
 							}
-							if(cat1 ==24) {
+							if(catapulta.get(0)==24) {
 								catR=false;
 							}else {
 								catA=false;
 							}
+							System.out.println(inst.size());
 							Tablero tab2 = tab;
+							Operaciones.setText("Ops.: "+inst.size()+"/6");
 							tableros.add(tab2);
 							pintar(tab2);
 						}
