@@ -11,45 +11,35 @@ public class Catapulta extends Casilla {
 	
 	public Catapulta() {
 		super();
-//		this.dañoProyectiles = ;
-//		this.dañoProyectilesVariable = ;
-//		this.rango = ;
+		this.dañoProyectiles = 15;
+		this.dañoProyectilesVariable = 7;
 		this.identificador = 0;
 	}
 	
 	public Catapulta(int identificador) {
 		super();
-//		this.dañoProyectiles = ;
-//		this.dañoProyectilesVariable = ;
-//		this.rango = ;
+		this.dañoProyectiles = 15;
+		this.dañoProyectilesVariable = 7;
 		this.identificador = identificador;
 	}
 	
 	public Catapulta(int identificador, boolean casillaDeCuración) {
 		super(null, casillaDeCuración);
-//		this.dañoProyectiles = ;
-//		this.dañoProyectilesVariable = ;
-//		this.rango = ;
+		this.dañoProyectiles = 15;
+		this.dañoProyectilesVariable = 7;
 		this.identificador = identificador;
 	}
     
-    public Catapulta(int dañoProyectiles, int dañoProyectilesVariable, int rango, HachaDivasónica hachaDivasónica, int identificador, boolean casillaDeCuración) {
+    public Catapulta(int dañoProyectiles, int dañoProyectilesVariable, HachaDivasónica hachaDivasónica, int identificador, boolean casillaDeCuración) {
 		super(hachaDivasónica);
 		this.dañoProyectiles = dañoProyectiles;
 		this.dañoProyectilesVariable = dañoProyectilesVariable;
-		this.rango = rango;
 		this.identificador = identificador;
 	}
 
     public int realizarDisparo() {
     	
     	return dañoProyectiles + (int) Math.floor(Math.random()*2*(dañoProyectilesVariable)-1);
-    	
-    }
-
-    public int getRango() {
-    	
-    	return this.rango;
     	
     }
     

@@ -11,10 +11,10 @@ public class HachaDivasónica {
     
     public HachaDivasónica() {
     	
-//    	dañoExtra = ;
-//        dañoExtraVariable = ;
-//        vidaPorTurno = ;
-//        vidaPorTurnoVariable = ;
+    	dañoExtra = 10;
+        dañoExtraVariable = 7;
+        vidaPorTurno = 5;
+        vidaPorTurnoVariable = 4;
     	
     }
 

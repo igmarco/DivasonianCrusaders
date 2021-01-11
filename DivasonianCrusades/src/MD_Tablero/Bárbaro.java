@@ -7,10 +7,10 @@ public class Bárbaro extends Ficha {
 	public Bárbaro(Facción f) {
 		
 		super(null, f);
-//		super.daño =
-//		super.vida =
-//		super.vidaMáxima =
-//		super.dañoVariable =
+		super.daño = 30;
+		super.vida = 100;
+		super.vidaMáxima = 100;
+		super.dañoVariable = 15;
 		
 	}
 	

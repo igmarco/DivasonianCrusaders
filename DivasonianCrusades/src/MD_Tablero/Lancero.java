@@ -9,11 +9,11 @@ public class Lancero extends Ficha {
     public Lancero(Facción f) {
 		
 		super(null, f);
-//		super.daño =
-//		super.vida =
-//		super.vidaMáxima =
-//		super.dañoVariable =
-//		this.dañoACaballería =
+		super.daño = 15;
+		super.vida = 100;
+		super.vidaMáxima = 100;
+		super.dañoVariable = 5;
+		this.dañoACaballería = 35;
 		
 	}
 	
@@ -32,6 +32,6 @@ public class Lancero extends Ficha {
     	
     }
 	
-	//Creo que no hay por qué redefinir realizarCarga() porque en Ficha hace referencia a realizarAtaque().
+//	Creo que no hay por qué redefinir realizarCarga() porque en Ficha hace referencia a realizarAtaque().
     
 }

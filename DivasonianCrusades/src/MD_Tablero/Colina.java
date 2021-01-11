@@ -5,7 +5,7 @@ public class Colina extends Casilla {
 
 	public Colina() {
 		super();
-//		this.dañoExtra = 
+		this.dañoExtra = 10;
 	}
 	
 	public Colina(int dañoExtra, HachaDivasónica hachaDivasónica) {

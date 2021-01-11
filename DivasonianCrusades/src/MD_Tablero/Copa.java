@@ -9,14 +9,14 @@ public class Copa extends Casilla {
     
     public Copa() {
 		super();
-//		this.facción = 
-//		this.vida = 
+		this.facción = Facción.Ambos;
+		this.vida = 50;
 	}
     
     public Copa(Facción facción) {
 		super();
 		this.facción = facción;
-//		this.vida = 
+		this.vida = 50;
 	}
     
     public Copa(Facción facción, int vida, HachaDivasónica hachaDivasónica) {

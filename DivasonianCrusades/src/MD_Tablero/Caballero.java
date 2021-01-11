@@ -8,11 +8,11 @@ public class Caballero extends Ficha {
     public Caballero(Facción f) {
 		
 		super(null, f);
-//		super.daño =
-//		super.vida =
-//		super.vidaMáxima =
-//		super.dañoVariable =
-//		this.dañoCarga =
+		super.daño = 20;
+		super.vida = 100;
+		super.vidaMáxima = 100;
+		super.dañoVariable = 10;
+		this.dañoCarga = 30;
 		
 	}
 	

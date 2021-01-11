@@ -11,16 +11,16 @@ public class Curación extends Casilla {
 	public Curación() {
     	
 		super();
-//		this.curación = ;
-//		this.curaciónVariable = ;
+		this.curación = 10;
+		this.curaciónVariable = 5;
 		this.identificador = 0;
 	}
 
     public Curación(int identificador) {
     	
 		super();
-//		this.curación = ;
-//		this.curaciónVariable = ;
+		this.curación = 10;
+		this.curaciónVariable = 5;
 		this.identificador = identificador;
 	}
     
