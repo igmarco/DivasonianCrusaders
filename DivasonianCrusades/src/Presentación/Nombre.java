@@ -85,9 +85,9 @@ public class Nombre extends JFrame {
 						out.writeBytes(textField.getText()+"\r\n");
 						out.flush();
 						String name = in.readLine();
+						menu.habilitarContinuar();
 						tablero.setNombre(textField.getText(), name,azul);
 						tablero.setVisible(true);
-						menu.habilitarContinuar();
 						setVisible(false);
 					}catch(IOException ex) { 
 						lblEstado.setText("Error al conectar");

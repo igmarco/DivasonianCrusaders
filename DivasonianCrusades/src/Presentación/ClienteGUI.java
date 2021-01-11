@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -22,6 +23,7 @@ public class ClienteGUI extends JFrame {
 	private JPanel contentPane;
 	private /*final*/ TableroGrafico tablero;
 	private final JButton btContinuarPartida;
+	private final JButton btRendirse;
 
 	/**
 	 * Launch the application.
@@ -47,7 +49,7 @@ public class ClienteGUI extends JFrame {
 		final ClienteGUI main = this;
 //		tablero = new TableroGrafico();
 		setResizable(false);
-		setBounds(100, 100, 395, 444);
+		setBounds(100, 100, 395, 491);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(255, 250, 205));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -56,7 +58,7 @@ public class ClienteGUI extends JFrame {
 		
 		final JPanel panel = new JPanel();
 		panel.setBackground(new Color(240, 230, 140));
-		panel.setBounds(0, 0, 389, 417);
+		panel.setBounds(0, 0, 389, 465);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -101,7 +103,26 @@ public class ClienteGUI extends JFrame {
 		final JButton btSalir = new JButton("");
 		btSalir.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				System.exit(0);
+				
+				boolean salir = true;
+				
+				if(tablero != null) {
+					
+					int resp = JOptionPane.showConfirmDialog(null, "Salir eliminará la partida en curso. ¿Está seguro?", "Atención", JOptionPane.YES_NO_OPTION);
+					
+					if(resp == JOptionPane.NO_OPTION) {
+						
+						salir = false;
+						
+					}
+					
+				}
+				
+				if(salir) { 
+					
+					System.exit(0);
+					
+				}
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -114,7 +135,7 @@ public class ClienteGUI extends JFrame {
 		});
 		btSalir.setIcon(new ImageIcon("Recursos\\Salir2.png"));
 		btSalir.setBackground(new Color(240, 230, 140));
-		btSalir.setBounds(104, 342, 175, 47);
+		btSalir.setBounds(104, 391, 175, 47);
 		btSalir.setBorder(null);
 		panel.add(btSalir);
 	
@@ -132,15 +153,35 @@ public class ClienteGUI extends JFrame {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 							try {
-								setVisible(false);
-								Socket s = new Socket("localhost",58000);
-								//Deshabilitamos el botón continuar partida, ya que rompemos la partida que teníamos. Luego lo habilitamos al meter el nombre.
-								btContinuarPartida.setEnabled(false);
-								//OJO, en caso de que el jugador se eche para atrás no tiene sentido haber creado el TableroGrafico, no? eso hay que revisarlo.
-								//Ya está revisado
-								tablero = new TableroGrafico(main, s);
-								Nombre nom = new Nombre(main, tablero, s);
-								nom.setVisible(true);
+								
+								boolean continuar = true;
+								
+								if(tablero != null) {
+									
+									int resp = JOptionPane.showConfirmDialog(null, "Crear una nueva partida eliminará la partida en curso. ¿Está seguro?", "Atención", JOptionPane.YES_NO_OPTION);
+									
+									if(resp == JOptionPane.NO_OPTION) {
+										
+										continuar = false;
+										
+									}
+									
+								}
+								
+								if(continuar) {
+									
+									setVisible(false);
+									Socket s = new Socket("localhost",58000);
+									//Deshabilitamos el botón continuar partida, ya que rompemos la partida que teníamos. Luego lo habilitamos al meter el nombre.
+									btContinuarPartida.setEnabled(false);
+									//OJO, en caso de que el jugador se eche para atrás no tiene sentido haber creado el TableroGrafico, no? eso hay que revisarlo.
+									//Ya está revisado
+									tablero = new TableroGrafico(main, s);
+									Nombre nom = new Nombre(main, tablero, s);
+									nom.setVisible(true);
+									
+								}
+								
 							} catch (Exception ex) {
 								ex.printStackTrace();
 							}
@@ -194,6 +235,39 @@ public class ClienteGUI extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon("Recursos\\LogoD.png"));
 		lblNewLabel.setBounds(48, 5, 303, 113);
 		panel.add(lblNewLabel);
+		
+		btRendirse = new JButton("");
+		btRendirse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					btContinuarPartida.setEnabled(false);
+					btRendirse.setEnabled(false);
+					tablero.rendirse();
+					tablero = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
+		btRendirse.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btRendirse.setIcon(new ImageIcon("Recursos\\RendirseBotonS.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btRendirse.setIcon(new ImageIcon("Recursos\\RendirseBoton.png"));
+			}
+		});
+		btRendirse.setBackground(new Color(240, 230, 140));
+		btRendirse.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
+		btRendirse.setForeground(new Color(245, 245, 245));
+		btRendirse.setIcon(new ImageIcon("Recursos\\RendirseBoton.png"));
+		btRendirse.setBounds(104, 343, 175, 47);
+		btRendirse.setHorizontalTextPosition(SwingConstants.CENTER);
+		btRendirse.setBorder(null);
+		/**/ btRendirse.setEnabled(false);
+		panel.add(btRendirse);
 	}
 	
 	public void habilitarContinuar() {
