@@ -78,7 +78,7 @@ public class Nombre extends JFrame {
 							azul = true;
 							lblEstado.setText("¡Oponente encontrado!");
 							linea = in.readLine();
-						}else {
+						}else { 
 							azul=false;
 							lblEstado.setText("¡Oponente encontrado!");
 						}
