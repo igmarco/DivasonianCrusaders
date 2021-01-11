@@ -163,7 +163,7 @@ public class ClienteGUI extends JFrame {
 									
 									if(resp == JOptionPane.NO_OPTION) {
 										
-										continuar = false;
+										continuar = false; 
 										
 									}
 									

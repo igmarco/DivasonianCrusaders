@@ -136,7 +136,7 @@ public class Partida implements Runnable {
 			}
 			
 			oos1.writeObject(this.tablero.getGanador());
-			oos2.writeObject(this.tablero.getGanador());
+			oos2.writeObject(this.tablero.getGanador()); 
 			
 			
 			
