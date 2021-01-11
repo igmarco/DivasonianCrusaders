@@ -421,18 +421,18 @@ public class TableroGrafico extends JFrame {
 
 		JLabel lb_Ficha = new JLabel("Ficha:");
 		lb_Ficha.setFont(new Font("Consolas", Font.PLAIN, 12));
-		lb_Ficha.setBounds(770, 612, 46, 14);
+		lb_Ficha.setBounds(770, 606, 46, 14);
 		contentPane.add(lb_Ficha);
 
 		txtCasilla = new JTextArea();
-		txtCasilla.setFont(new Font("Consolas", Font.PLAIN, 11));
+		txtCasilla.setFont(new Font("Consolas", Font.PLAIN, 12));
 		txtCasilla.setEditable(false);
-		txtCasilla.setBounds(832, 514, 216, 82);
+		txtCasilla.setBounds(832, 514, 216, 78);
 		contentPane.add(txtCasilla);
 
 		txtFichaDef = new JTextArea();
-		txtFichaDef.setFont(new Font("Consolas", Font.PLAIN, 11));
-		txtFichaDef.setBounds(832, 609, 135, 71);
+		txtFichaDef.setFont(new Font("Consolas", Font.PLAIN, 12));
+		txtFichaDef.setBounds(832, 603, 135, 77);
 		contentPane.add(txtFichaDef);
 		Mover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -551,8 +551,8 @@ public class TableroGrafico extends JFrame {
 		contentPane.add(Maniobra);
 
 		txtFichaAt = new JTextArea();
-		txtFichaAt.setFont(new Font("Consolas", Font.PLAIN, 11));
-		txtFichaAt.setBounds(977, 609, 71, 71);
+		txtFichaAt.setFont(new Font("Consolas", Font.PLAIN, 12));
+		txtFichaAt.setBounds(977, 603, 71, 77);
 		contentPane.add(txtFichaAt);
 
 		final JButton btnAnteriorMovimiento = new JButton("");

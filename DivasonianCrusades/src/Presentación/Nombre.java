@@ -27,7 +27,7 @@ public class Nombre extends JFrame {
 	private JTextField textField;
 	private JLabel lblEstado;
 	private JButton Aceptar;
-	private JButton Cancelar;
+	private JButton Cancelar; 
 	/**/ private Socket s;
 
 

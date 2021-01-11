@@ -101,7 +101,7 @@ public class ClienteGUI extends JFrame {
 		panel.add(btGuardarPartida);
 		
 		final JButton btSalir = new JButton("");
-		btSalir.addMouseListener(new MouseAdapter() {
+		btSalir.addMouseListener(new MouseAdapter() { 
 			public void mouseClicked(MouseEvent e) {
 				
 				boolean salir = true;
