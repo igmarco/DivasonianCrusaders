@@ -2045,14 +2045,7 @@ public class TableroGrafico extends JFrame {
 	        			botonesClicarFase2(tab.getNodo(x).getFicha(faccion),x);
 	        			btnCancelar.addActionListener(new ActionListener() {
 	        				public void actionPerformed(ActionEvent arg0) {
-	        	    			pintar(tab);
-	        	    			/**/
-	        	    			for( JButton boton : casillas) {
-	        	    				for(ActionListener al : boton.getActionListeners()) {
-	        	    					boton.removeActionListener( al );
-	        	    				}
-	        	    			}
-	        	    			/**/
+	        	    				pintar(tab);
 	        					}
 	        	    		});
 	        			for(MouseListener ac : casillas[x].getMouseListeners()) {
@@ -2402,7 +2395,19 @@ public class TableroGrafico extends JFrame {
 					}
 					
 				}
-				else introducirOperacionEnCurso = false;
+				else {
+					
+					//ESTA ES UNA SOLUCIÓN PARA ELIMINAR TODOS LOS CAPTURADORES DE EVENTOS AL DESHACER:
+					
+//					for(int i=0; i<45;i++) {
+//						for(MouseListener ac : casillas[i].getMouseListeners()) {
+//							casillas[i].removeMouseListener(ac);
+//						}
+//					}
+					
+					introducirOperacionEnCurso = false;
+					
+				}
 				
 			}
 		});
