@@ -1,6 +1,6 @@
 package MD_Tablero;
 
-public abstract class Casilla {
+public abstract class Casilla implements Cloneable {
 	protected HachaDivasónica hachaDivasónica;
 	protected int curaciónAuxiliar;
 	
@@ -66,6 +66,21 @@ public abstract class Casilla {
     public boolean casillaDeCura() {
     	
     	return (this.curaciónAuxiliar != 0);
+    	
+    }
+    
+    public Object clone() {
+    	
+    	Object clone = null;
+    	
+    	try {
+    		clone = super.clone();
+    	} catch (CloneNotSupportedException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+    	
+    	return clone;
     	
     }
 

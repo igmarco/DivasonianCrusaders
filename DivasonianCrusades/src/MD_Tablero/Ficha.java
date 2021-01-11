@@ -1,7 +1,7 @@
 package MD_Tablero;
 import Utilidades.Facción;
 
-public abstract class Ficha {
+public abstract class Ficha implements Cloneable {
     protected int daño;
 
     protected int vida;
@@ -141,6 +141,21 @@ public abstract class Ficha {
     public int getMovs() {
     	 
     	return 2;
+    	
+    }
+    
+    public Object clone() {
+    	
+    	Object clone = null;
+    	
+    	try {
+    		clone = super.clone();
+    	} catch (CloneNotSupportedException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+    	
+    	return clone;
     	
     }
 

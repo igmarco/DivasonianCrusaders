@@ -1,7 +1,7 @@
 package MD_Tablero;
 import Utilidades.Facción;
 
-public class Nodo {
+public class Nodo implements Cloneable{
     private Casilla casilla;
 
     private Ficha fichaDefensora;
@@ -368,5 +368,23 @@ public class Nodo {
 		}
 		return f;
 	}
+	
+	public Object clone() {
+    	
+    	Object clone = null;
+    	
+    	Casilla c = null;
+    	Ficha fD = null;
+    	Ficha fA = null;
+    	
+    	if(this.casilla != null) c = (Casilla) this.casilla.clone();
+    	if(this.fichaDefensora != null) fD = (Ficha) this.fichaDefensora.clone();
+    	if(this.fichaAtacante != null) fA = (Ficha) this.fichaAtacante.clone();
+    	
+    	clone = new Nodo(c, fD, fA);
+    	
+    	return clone;
+    	
+    }
 
 }

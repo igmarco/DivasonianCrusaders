@@ -621,187 +621,6 @@ public class TableroGrafico extends JFrame {
 		this.nombre = nombre1;
 	}
 
-	public void ratonInCoronaAzul(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaAzul.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutCoronaAzul(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-	
-	public void ratonInCoronaRojo(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaRojo.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutCoronaRojo(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-	
-	public void ratonInCatapultaAzul(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaAzulC.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutCatapultaAzul(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaAzul.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-	
-	public void ratonInCatapultaRojo(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaRojaC.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutCatapultaRojo(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaRoja.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-	
-	public void ratonInColina(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\ColinaC.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutColina(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\Colina.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-	
-	public void ratonInCurarse(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\CurarseC.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutCurarse(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\Curarse.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-	
-	public void ratonInHacha(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\HachaDivasonicaS.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutHacha(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\HachaDivasonica.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-
-	public void ratonInArqueroAzul(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroAzulC.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutArqueroAzul(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroAzulBC.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-
-	public void ratonInArqueroRojo(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroRojoC.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutArqueroRojo(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroRojoBC.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-	
-	public void ratonInBarbaroAzul(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\BarbaroAzulC.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutBarbaroAzul(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\BarbaroAzulBC.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-
-	public void ratonInBarbaroRojo(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\BarbaroRojoC.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutBarbaroRojo(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\BarbaroRojoBC.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-	
-	public void ratonInCaballeroAzul(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\CaballeroAzulC.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutCaballeroAzul(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\CaballeroAzulBC.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-
-	public void ratonInCaballeroRojo(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\CaballeroRojoC.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutCaballeroRojo(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\CaballeroRojoBC.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-	
-	public void ratonInGuerreroAzul(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\GuerreroAzulC.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutGuerreroAzul(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\GuerreroAzulBC.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-
-	public void ratonInGuerreroRojo(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\GuerreroRojoC.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutGuerreroRojo(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\GuerreroRojoBC.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-	
-	public void ratonInLanceroAzul(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\LanceroAzulC.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutLanceroAzul(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\LanceroAzulBC.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-
-	public void ratonInLanceroRojo(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\LanceroRojoC.png"));
-		this.casillas[i].setBackground(Color.white);
-	}
-
-	public void ratonOutLanceroRojo(int i) {
-		this.casillas[i].setIcon(new ImageIcon("Recursos\\LanceroRojoBC.png"));
-		this.casillas[i].setBackground(new Color(245, 245, 220));
-	}
-	
-	public void ratonInConflicto(int i, String color, String defensor, String atacante) {
-		String todo = "Recursos\\"+defensor+"v"+atacante+color+"C.png";
-		this.casillas[i].setIcon(new ImageIcon(todo));
-		this.casillas[i].setBackground(Color.white);
-	}
-	
-	public void ratonOutConflicto(int i, String color, String defensor, String atacante) {
-		String todo = "Recursos\\"+defensor+"v"+atacante+color+"BC.png";
-		this.casillas[i].setIcon(new ImageIcon(todo));
-		this.casillas[i].setBackground(Color.white);
-	}
 	
 	
 	
@@ -963,12 +782,17 @@ public class TableroGrafico extends JFrame {
     	
     	//Representar gráficamente el tablero tab
     	for (int i = 0; i < 45; i++) {
+    		
+    		//Con esto limpia lo que hay
+    		this.casillas[i].setIcon(null);
+    		
+    		
     		this.casillas[i].setEnabled(true);
     		this.casillas[i].setBackground(new Color(245, 245, 220));
 			final Integer x = i;
-			Casilla cas = this.tab.getNodo(i).getCasilla();
-			Ficha f = this.tab.getNodo(i).getFichaDefensora();
-			Ficha fat = this.tab.getNodo(i).getFichaAtacante();
+			Casilla cas = tab.getNodo(i).getCasilla();
+			Ficha f = tab.getNodo(i).getFichaDefensora();
+			Ficha fat = tab.getNodo(i).getFichaAtacante();
 			if (cas instanceof Catapulta) {
 				if (((Catapulta) cas).getIdentificador() == 1) {
 					if (f == null) {
@@ -2141,6 +1965,7 @@ public class TableroGrafico extends JFrame {
 		}
     }
     
+    //
     public void moverEnSí(Ficha f, int j , int posicion) {
     	System.out.println("He entrado en mover en sí");
     	int resta =posicion-j;
@@ -2183,7 +2008,9 @@ public class TableroGrafico extends JFrame {
     	Movimiento mov = new Movimiento(f,direccion);
     	this.inst.add(mov);
     	/**/ introducirOperacionEnCurso = false;
-    	Tablero tab2 = tab;
+//    	Tablero tab2 = tab;
+    	/**/ Tablero tab2 = (Tablero) tab.clone();
+    	this.tab = tab2;
     	tab2.moverFicha(f, direccion);
     	this.tableros.add(tab2);
 		botonesMoverFase1(true);
@@ -2222,6 +2049,7 @@ public class TableroGrafico extends JFrame {
 		}
     }
     
+    //Obtiene Object streams de la conexión con el servidor.
     public void conseguirStreams() {
 		try {
 			out= new ObjectOutputStream(s.getOutputStream());
@@ -2231,6 +2059,7 @@ public class TableroGrafico extends JFrame {
 		}
     }
     
+    //
     public void bloquearCasillasDisparo(boolean estado, final List<Integer> catapultas) {
     	this.btnDisparar.setEnabled(estado);
     	this.btnEsperar.setEnabled(estado);
@@ -2288,8 +2117,10 @@ public class TableroGrafico extends JFrame {
     		}
     }
     
+    //Pintar o no las casillas a las que se puede disparar con las catapultas.
     public void pintarCasillasDisparo(boolean estado, final List<Integer> catapulta) {
     	if(estado) {
+    		//Si son dos casillas de catapulta con las que puede disparar.
 	    	if(catapulta.size()==2) {
 	    		List<Integer> casillasCat1 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(0)).getCasilla());
 	    		for(Integer cat1 : casillasCat1) {
@@ -2305,6 +2136,7 @@ public class TableroGrafico extends JFrame {
 						casillas[cat2].removeMouseListener(ac);
 					}
 	    		}
+	    	//Si es solo una (o ninguna?)
 	    	}else {
 	    		List<Integer> casillasCat1 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(0)).getCasilla());
 	    		for(final Integer cat1 : casillasCat1) {
@@ -2354,6 +2186,7 @@ public class TableroGrafico extends JFrame {
 					});
 	    		}
 	    	}
+	//Devuelve a los botones a la situación original.
     }else {
     	if(catapulta.size()==2) {
     		List<Integer> casillasCat1 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(0)).getCasilla());
@@ -2373,6 +2206,7 @@ public class TableroGrafico extends JFrame {
     	}
     }
     
+    //Restaura la funcionalidad original (deshacer la última operación) del botón Deshacer.
     private void agregarFuncionalidadOriginalBtnCancelar() {
     	
     	/**/ btnCancelar.addActionListener(new ActionListener() {
@@ -2384,6 +2218,7 @@ public class TableroGrafico extends JFrame {
 						
 						inst.remove(inst.size()-1);
 						tableros.remove(tableros.size()-1);
+						tab = tableros.get(tableros.size()-1);
 						pintar(tableros.get(tableros.size()-1));
 						Operaciones.setText("Ops.:" + inst.size() + "/6");
 						
@@ -2413,4 +2248,196 @@ public class TableroGrafico extends JFrame {
 		});
     	
     }
+
+
+    
+    
+    // -------------------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------------------
+    // --------------------------- RATÓN ENTRA O SALE DE CASILLAS (BRILLO EN LAS IMÁGENES) -------------------------
+    // -------------------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------------------
+    
+    public void ratonInCoronaAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaAzul.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutCoronaAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+	
+	public void ratonInCoronaRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaRojo.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutCoronaRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaBC.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+	
+	public void ratonInCatapultaAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaAzulC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutCatapultaAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaAzul.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+	
+	public void ratonInCatapultaRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaRojaC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutCatapultaRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaRoja.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+	
+	public void ratonInColina(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\ColinaC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutColina(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\Colina.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+	
+	public void ratonInCurarse(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\CurarseC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutCurarse(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\Curarse.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+	
+	public void ratonInHacha(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\HachaDivasonicaS.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutHacha(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\HachaDivasonica.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+
+	public void ratonInArqueroAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroAzulC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutArqueroAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroAzulBC.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+
+	public void ratonInArqueroRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroRojoC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutArqueroRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\ArqueroRojoBC.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+	
+	public void ratonInBarbaroAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\BarbaroAzulC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutBarbaroAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\BarbaroAzulBC.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+
+	public void ratonInBarbaroRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\BarbaroRojoC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutBarbaroRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\BarbaroRojoBC.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+	
+	public void ratonInCaballeroAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\CaballeroAzulC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutCaballeroAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\CaballeroAzulBC.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+
+	public void ratonInCaballeroRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\CaballeroRojoC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutCaballeroRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\CaballeroRojoBC.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+	
+	public void ratonInGuerreroAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\GuerreroAzulC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutGuerreroAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\GuerreroAzulBC.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+
+	public void ratonInGuerreroRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\GuerreroRojoC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutGuerreroRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\GuerreroRojoBC.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+	
+	public void ratonInLanceroAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\LanceroAzulC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutLanceroAzul(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\LanceroAzulBC.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+
+	public void ratonInLanceroRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\LanceroRojoC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutLanceroRojo(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\LanceroRojoBC.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
+	}
+	
+	public void ratonInConflicto(int i, String color, String defensor, String atacante) {
+		String todo = "Recursos\\"+defensor+"v"+atacante+color+"C.png";
+		this.casillas[i].setIcon(new ImageIcon(todo));
+		this.casillas[i].setBackground(Color.white);
+	}
+	
+	public void ratonOutConflicto(int i, String color, String defensor, String atacante) {
+		String todo = "Recursos\\"+defensor+"v"+atacante+color+"BC.png";
+		this.casillas[i].setIcon(new ImageIcon(todo));
+		this.casillas[i].setBackground(Color.white);
+	}
+	
 }

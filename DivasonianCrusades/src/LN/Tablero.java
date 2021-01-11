@@ -19,7 +19,7 @@ import MD_Tablero.Normal;
 import Utilidades.Dirección;
 import Utilidades.Facción;
 
-public class Tablero {
+public class Tablero implements Cloneable{
     private Nodo[] nodos = new Nodo[45];
 
     public Tablero() {
@@ -786,6 +786,24 @@ public class Tablero {
     public Nodo getNodo(int i) {
     	
     	return this.nodos[i];
+    	
+    }
+    
+    public Object clone() {
+    	
+    	Object clone = null;
+    	
+    	Nodo[] nodosClonados = new Nodo[45];
+    	
+    	for(int i = 0; i < 45; i++) {
+    		
+    		nodosClonados[i] = (Nodo) this.nodos[i].clone();
+    		
+    	}
+    	
+    	clone = new Tablero(nodosClonados);
+    	
+    	return clone;
     	
     }
     
