@@ -26,6 +26,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import LN.Tablero;
+import MD_Instrucción.Disparo;
 import MD_Instrucción.Instrucción;
 import MD_Instrucción.Movimiento;
 import MD_Instrucción.Operación;
@@ -76,6 +77,8 @@ public class TableroGrafico extends JFrame {
 	private JTextArea txtCasilla;
 	private JTextArea txtFichaDef;
 	private JTextArea txtFichaAt;
+	
+	private boolean catA,catR;
 	
 	private Integer movsF=0,movsC=0,movsB=0,movsG=0,movsL =0;
 	
@@ -204,7 +207,6 @@ public class TableroGrafico extends JFrame {
 		panel.add(cas19);
 
 		JButton cas20 = new JButton("");
-		;
 		cas20.setBackground(new Color(245, 245, 220));
 		panel.add(cas20);
 
@@ -2228,12 +2230,31 @@ public class TableroGrafico extends JFrame {
     	for(int i=0; i<45; i++) {
     		if(catapultas.size()==2) {
     			if(this.casillas[i].equals(this.casillas[catapultas.get(0)])||this.casillas[i].equals(this.casillas[catapultas.get(1)])){
-    					
+					if((catapultas.get(0)==20 && catA)&&(catapultas.get(1)==24&&catR)||(catapultas.get(1)==20 && catA)&&(catapultas.get(0)==24&&catR))
+					this.casillas[i].addMouseListener( new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							pintarCasillasDisparo(true,catapultas);
+						}
+					});
+					this.btnCancelar.addActionListener( new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							pintarCasillasDisparo(false,catapultas);
+							for(int i=0; i<45;i++) {
+								casillas[i].setIcon(null);
+								for(MouseListener ac : casillas[i].getMouseListeners()) {
+									casillas[i].removeMouseListener(ac);
+								}
+							}
+							pintar(tab);
+						}
+					});		
     			}else {
     				this.casillas[i].setEnabled(estado);
     			}
     		}else {
     				if(this.casillas[i].equals(this.casillas[catapultas.get(0)])) {
+    					if((catapultas.get(0)==20 && catA)||(catapultas.get(0)==24&&catR))
     					this.casillas[i].addMouseListener( new MouseAdapter() {
     						@Override
     						public void mouseClicked(MouseEvent e) {
@@ -2278,11 +2299,43 @@ public class TableroGrafico extends JFrame {
 	    		}
 	    	}else {
 	    		List<Integer> casillasCat1 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(0)).getCasilla());
-	    		for(Integer cat1 : casillasCat1) {
+	    		for(final Integer cat1 : casillasCat1) {
 	    			this.casillas[cat1].setBackground(Color.white);
 					for(MouseListener ac : casillas[cat1].getMouseListeners()) {
 						casillas[cat1].removeMouseListener(ac);
 					}
+					final Ficha f = this.tab.getNodo(cat1).getFichaDefensora();
+					final Integer x = cat1;
+					final Catapulta cas = (Catapulta) this.tab.getNodo(cat1).getCasilla();
+					this.casillas[cat1].addMouseListener( new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							Disparo disp = new Disparo(f,cas,x);
+							inst.add(disp);
+							if(inst.size()==6) {
+					    		btnDisparar.setEnabled(false);
+						    	btnEsperar.setEnabled(false);
+						    	Mover.setEnabled(false);
+							}
+							for(ActionListener ac : btnCancelar.getActionListeners()) {
+								btnCancelar.removeActionListener(ac);
+							}
+							for(int i=0; i<45;i++) {
+								casillas[i].setIcon(null);
+								for(MouseListener ac : casillas[i].getMouseListeners()) {
+									casillas[i].removeMouseListener(ac);
+								}
+							}
+							if(cat1 ==24) {
+								catR=false;
+							}else {
+								catA=false;
+							}
+							Tablero tab2 = tab;
+							tableros.add(tab2);
+							pintar(tab2);
+						}
+					});
 	    		}
 	    	}
     }else {
