@@ -32,7 +32,7 @@ public class Caballero extends Ficha {
     
     public int getMovs() {
     	
-    	return 3;
+    	return 3; 
     	
     }
 

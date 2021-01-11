@@ -139,7 +139,7 @@ public abstract class Ficha {
     }
     
     public int getMovs() {
-    	
+    	 
     	return 2;
     	
     }
