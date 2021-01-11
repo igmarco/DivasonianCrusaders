@@ -3,8 +3,11 @@ package Presentación;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.Socket;
 
 import javax.swing.ImageIcon;
@@ -15,8 +18,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class ClienteGUI extends JFrame {
 
@@ -170,8 +171,9 @@ public class ClienteGUI extends JFrame {
 								
 								if(continuar) {
 									
-									setVisible(false);
 									Socket s = new Socket("localhost",58000);
+									
+									setVisible(false);
 									//Deshabilitamos el botón continuar partida, ya que rompemos la partida que teníamos. Luego lo habilitamos al meter el nombre.
 									btContinuarPartida.setEnabled(false);
 									//OJO, en caso de que el jugador se eche para atrás no tiene sentido haber creado el TableroGrafico, no? eso hay que revisarlo.
@@ -181,8 +183,14 @@ public class ClienteGUI extends JFrame {
 									nom.setVisible(true);
 									
 								}
+
+								
+							} catch (IOException ex) {
+
+								JOptionPane.showMessageDialog(null, "Imposibilidad de entrar en una nueva partida: El servidor no se encuentra disponible.", "Atención", JOptionPane.WARNING_MESSAGE);
 								
 							} catch (Exception ex) {
+								
 								ex.printStackTrace();
 							}
 				}
@@ -252,17 +260,17 @@ public class ClienteGUI extends JFrame {
 		btRendirse.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				btRendirse.setIcon(new ImageIcon("Recursos\\RendirseBotonS.png"));
+				btRendirse.setIcon(new ImageIcon("Recursos\\RendirseS.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				btRendirse.setIcon(new ImageIcon("Recursos\\RendirseBoton.png"));
+				btRendirse.setIcon(new ImageIcon("Recursos\\Rendirse.png"));
 			}
 		});
 		btRendirse.setBackground(new Color(240, 230, 140));
 		btRendirse.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
 		btRendirse.setForeground(new Color(245, 245, 245));
-		btRendirse.setIcon(new ImageIcon("Recursos\\RendirseBoton.png"));
+		btRendirse.setIcon(new ImageIcon("Recursos\\Rendirse.png"));
 		btRendirse.setBounds(104, 343, 175, 47);
 		btRendirse.setHorizontalTextPosition(SwingConstants.CENTER);
 		btRendirse.setBorder(null);
