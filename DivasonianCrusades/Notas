@@ -1,0 +1,2 @@
+Mensajes de alerta:
+	JOptionPane.showMessageDialog(null, "Mensaje dentro de la ventana", "Mensaje en la barra de titulo", JOptionPane.WARNING_MESSAGE);
