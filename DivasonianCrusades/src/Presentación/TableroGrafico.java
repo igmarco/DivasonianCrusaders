@@ -796,7 +796,8 @@ public class TableroGrafico extends JFrame {
 
 		if (casilla instanceof Copa) {
 
-			casillaInfo += "Facción: " + ((Copa) casilla).getFacción() + "\r\n";
+
+			
 			casillaInfo += "Vida: " + ((Copa) casilla).getVida() + "\r\n";
 
 		} else if (casilla instanceof Curación) {
@@ -1999,18 +2000,6 @@ public class TableroGrafico extends JFrame {
 	    	
 	    	for(Integer posicion: casAModificar) {
 	    		final Integer x = posicion;
-	//    		ActionListener al2 = new ActionListener() {
-	//        		@Override
-	//        		public void actionPerformed(ActionEvent arg0) {
-	//        			botonesMoverFase2(false,tab.getNodo(x).getFicha(faccion));
-	//        			botonesClicarFase2(tab.getNodo(x).getFicha(faccion),x);
-	//        			btnCancelar.addActionListener(new ActionListener() {
-	//        				public void actionPerformed(ActionEvent arg0) {
-	//        	    			pintar(tab);
-	//        					}	
-	//        	    		});
-	//        			}
-	//        		};
 	    		this.casillas[posicion].addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -2150,6 +2139,9 @@ public class TableroGrafico extends JFrame {
 	    	this.Mover.setEnabled(false);
 		}
 		pintar(tab2);
+		for(ActionListener ac : this.btnCancelar.getActionListeners()) {
+			this.btnCancelar.removeActionListener(ac);
+		}
     }
     
     public void conseguirStreams() {
