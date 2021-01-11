@@ -54,6 +54,7 @@ public class TableroGrafico extends JFrame {
 	private final JButton Mover= new JButton("");
 	private final JButton btnEsperar= new JButton("");
 	private final JButton btnCancelar= new JButton("");
+	/**/ private boolean introducirOperacionEnCurso= false;
 	
 	private ActionListener al;
 	
@@ -437,6 +438,7 @@ public class TableroGrafico extends JFrame {
 		contentPane.add(txtFichaDef);
 		Mover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				/**/ introducirOperacionEnCurso = true;
 				moverClick();
 			}
 		});
@@ -459,6 +461,7 @@ public class TableroGrafico extends JFrame {
 		contentPane.add(Mover);
 		btnDisparar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				/**/ introducirOperacionEnCurso = true;
 				final List<Integer> catapultas = tab.catapultasQuePuedesDisparar(faccion);
 				if(catapultas.size()>0) {
 					bloquearCasillasDisparo(false,catapultas);
@@ -469,7 +472,6 @@ public class TableroGrafico extends JFrame {
 					});
 				}else {
 					JOptionPane.showMessageDialog(null, "Ninguna de sus fichas están en una catapulta", "Atención", JOptionPane.WARNING_MESSAGE);
-					
 				}
 			}
 		});
@@ -519,6 +521,7 @@ public class TableroGrafico extends JFrame {
 		btnEsperar.setBorder(null);
 		btnEsperar.setBounds(822, 322, 179, 47);
 		contentPane.add(btnEsperar);
+		this.agregarFuncionalidadOriginalBtnCancelar();
 
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -575,7 +578,7 @@ public class TableroGrafico extends JFrame {
 		btnSiguienteMovimiento.setBounds(555, 633, 179, 47);
 		contentPane.add(btnSiguienteMovimiento);
 
-		Maniobra = new JLabel("Maniobra: "+this.inst.size());
+		Maniobra = new JLabel("Maniobra: "+/*this.inst.size()*/ "0");
 		Maniobra.setFont(new Font("Consolas", Font.PLAIN, 14));
 		Maniobra.setBounds(231, 651, 119, 29);
 		contentPane.add(Maniobra);
@@ -2043,7 +2046,14 @@ public class TableroGrafico extends JFrame {
 	        			btnCancelar.addActionListener(new ActionListener() {
 	        				public void actionPerformed(ActionEvent arg0) {
 	        	    			pintar(tab);
-	        					}	
+	        	    			/**/
+	        	    			for( JButton boton : casillas) {
+	        	    				for(ActionListener al : boton.getActionListeners()) {
+	        	    					boton.removeActionListener( al );
+	        	    				}
+	        	    			}
+	        	    			/**/
+	        					}
 	        	    		});
 	        			for(MouseListener ac : casillas[x].getMouseListeners()) {
 	        				casillas[x].removeMouseListener(ac);
@@ -2179,6 +2189,7 @@ public class TableroGrafico extends JFrame {
 		}
     	Movimiento mov = new Movimiento(f,direccion);
     	this.inst.add(mov);
+    	/**/ introducirOperacionEnCurso = false;
     	Tablero tab2 = tab;
     	tab2.moverFicha(f, direccion);
     	this.tableros.add(tab2);
@@ -2200,6 +2211,7 @@ public class TableroGrafico extends JFrame {
 		for(ActionListener ac : this.btnCancelar.getActionListeners()) {
 			this.btnCancelar.removeActionListener(ac);
 		}
+		this.agregarFuncionalidadOriginalBtnCancelar();
 		if(f instanceof Arquero) {
 			this.movsF++;
 		}
@@ -2315,6 +2327,7 @@ public class TableroGrafico extends JFrame {
 						public void mouseClicked(MouseEvent e) {
 							Disparo disp = new Disparo(f,cas,x);
 							inst.add(disp);
+							/**/ introducirOperacionEnCurso = false;
 							if(inst.size()==6) {
 					    		btnDisparar.setEnabled(false);
 						    	btnEsperar.setEnabled(false);
@@ -2327,6 +2340,7 @@ public class TableroGrafico extends JFrame {
 							for(ActionListener ac : btnCancelar.getActionListeners()) {
 								btnCancelar.removeActionListener(ac);
 							}
+							agregarFuncionalidadOriginalBtnCancelar();
 							for(int i=0; i<45;i++) {
 								casillas[i].setIcon(null);
 								for(MouseListener ac : casillas[i].getMouseListeners()) {
@@ -2364,5 +2378,34 @@ public class TableroGrafico extends JFrame {
     			}
     		}
     	}
+    }
+    
+    private void agregarFuncionalidadOriginalBtnCancelar() {
+    	
+    	/**/ btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				if(introducirOperacionEnCurso == false) {
+					
+					if(inst.size()>0) {
+						
+						inst.remove(inst.size()-1);
+						tableros.remove(tableros.size()-1);
+						pintar(tableros.get(tableros.size()-1));
+						Operaciones.setText("Ops.:" + inst.size() + "/6");
+						
+					}
+					else {
+						
+						JOptionPane.showMessageDialog(null, "No hay ninguna operación por deshacer.", "Atención", JOptionPane.WARNING_MESSAGE);
+						
+					}
+					
+				}
+				else introducirOperacionEnCurso = false;
+				
+			}
+		});
+    	
     }
 }
