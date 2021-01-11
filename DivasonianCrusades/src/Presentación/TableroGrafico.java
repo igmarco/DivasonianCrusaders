@@ -61,7 +61,7 @@ public class TableroGrafico extends JFrame {
 	
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
-	private JLabel Maniobra;
+	private JLabel lblManiobra;
 	private JLabel Operaciones;
 	
 	private Tablero tab;
@@ -383,10 +383,10 @@ public class TableroGrafico extends JFrame {
 		btnMenu.setBounds(42, 633, 179, 47);
 		contentPane.add(btnMenu);
 
-		JLabel lblNewLabel_2 = new JLabel("Turno: "+this.turno);
-		lblNewLabel_2.setFont(new Font("Consolas", Font.PLAIN, 14));
-		lblNewLabel_2.setBounds(231, 633, 119, 29);
-		contentPane.add(lblNewLabel_2);
+		JLabel lblTurno = new JLabel("Turno: "+ this.turno);
+		lblTurno.setFont(new Font("Consolas", Font.PLAIN, 14));
+		lblTurno.setBounds(231, 633, 119, 29);
+		contentPane.add(lblTurno);
 
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
@@ -554,10 +554,10 @@ public class TableroGrafico extends JFrame {
 		btnSiguienteMovimiento.setBounds(555, 633, 179, 47);
 		contentPane.add(btnSiguienteMovimiento);
 
-		Maniobra = new JLabel("Maniobra: "+this.inst.size());
-		Maniobra.setFont(new Font("Consolas", Font.PLAIN, 14));
-		Maniobra.setBounds(231, 651, 119, 29);
-		contentPane.add(Maniobra);
+		lblManiobra = new JLabel("Maniobra: "+this.inst.size());
+		lblManiobra.setFont(new Font("Consolas", Font.PLAIN, 14));
+		lblManiobra.setBounds(231, 651, 119, 29);
+		contentPane.add(lblManiobra);
 
 		txtFichaAt = new JTextArea();
 		txtFichaAt.setFont(new Font("Consolas", Font.PLAIN, 11));

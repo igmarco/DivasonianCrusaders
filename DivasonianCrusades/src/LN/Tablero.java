@@ -421,7 +421,12 @@ public class Tablero {
     	
     }
     
-    //ESTE MÉTODO NO CREO QUE LO UTILICEMOS. F
+    public List<Integer> catapultasQuePuedesDisparar(Facción fc){
+    	
+    	
+    	
+    }
+    
     public List<Integer> dóndeDispararProyectiles(Catapulta cp) {
     	
     	//Devuelve una lista de enteros que representan las posiciones de las casillas a las que le llega el rango la catapulta dada.
