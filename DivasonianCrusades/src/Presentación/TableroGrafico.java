@@ -61,7 +61,7 @@ public class TableroGrafico extends JFrame {
 	
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
-	private JLabel lblManiobra;
+	private JLabel Maniobra;
 	private JLabel Operaciones;
 	
 	private Tablero tab;
@@ -383,10 +383,10 @@ public class TableroGrafico extends JFrame {
 		btnMenu.setBounds(42, 633, 179, 47);
 		contentPane.add(btnMenu);
 
-		JLabel lblTurno = new JLabel("Turno: "+ this.turno);
-		lblTurno.setFont(new Font("Consolas", Font.PLAIN, 14));
-		lblTurno.setBounds(231, 633, 119, 29);
-		contentPane.add(lblTurno);
+		JLabel lblNewLabel_2 = new JLabel("Turno: "+this.turno);
+		lblNewLabel_2.setFont(new Font("Consolas", Font.PLAIN, 14));
+		lblNewLabel_2.setBounds(231, 633, 119, 29);
+		contentPane.add(lblNewLabel_2);
 
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
@@ -456,7 +456,18 @@ public class TableroGrafico extends JFrame {
 		contentPane.add(Mover);
 		btnDisparar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				final List<Integer> catapultas = tab.catapultasQuePuedesDisparar(faccion);
+				if(catapultas.size()>0) {
+					bloquearCasillasDisparo(false,catapultas);
+					btnCancelar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							bloquearCasillasDisparo(true,catapultas);
+						}
+					});
+				}else {
+					//Aqui ignacio ->> GORDO
+					
+				}
 			}
 		});
 
@@ -559,10 +570,10 @@ public class TableroGrafico extends JFrame {
 		btnSiguienteMovimiento.setBounds(555, 633, 179, 47);
 		contentPane.add(btnSiguienteMovimiento);
 
-		lblManiobra = new JLabel("Maniobra: "+this.inst.size());
-		lblManiobra.setFont(new Font("Consolas", Font.PLAIN, 14));
-		lblManiobra.setBounds(231, 651, 119, 29);
-		contentPane.add(lblManiobra);
+		Maniobra = new JLabel("Maniobra: "+this.inst.size());
+		Maniobra.setFont(new Font("Consolas", Font.PLAIN, 14));
+		Maniobra.setBounds(231, 651, 119, 29);
+		contentPane.add(Maniobra);
 
 		txtFichaAt = new JTextArea();
 		txtFichaAt.setFont(new Font("Consolas", Font.PLAIN, 11));
@@ -2208,5 +2219,88 @@ public class TableroGrafico extends JFrame {
 		}catch(IOException ex){
 			ex.printStackTrace();
 		}
+    }
+    
+    public void bloquearCasillasDisparo(boolean estado, final List<Integer> catapultas) {
+    	this.btnDisparar.setEnabled(estado);
+    	this.btnEsperar.setEnabled(estado);
+    	this.Mover.setEnabled(estado);
+    	for(int i=0; i<45; i++) {
+    		if(catapultas.size()==2) {
+    			if(this.casillas[i].equals(this.casillas[catapultas.get(0)])||this.casillas[i].equals(this.casillas[catapultas.get(1)])){
+    					
+    			}else {
+    				this.casillas[i].setEnabled(estado);
+    			}
+    		}else {
+    				if(this.casillas[i].equals(this.casillas[catapultas.get(0)])) {
+    					this.casillas[i].addMouseListener( new MouseAdapter() {
+    						@Override
+    						public void mouseClicked(MouseEvent e) {
+    							pintarCasillasDisparo(true,catapultas);
+    						}
+    					});
+    					this.btnCancelar.addActionListener( new ActionListener() {
+    						public void actionPerformed(ActionEvent arg0) {
+    							pintarCasillasDisparo(false,catapultas);
+    							for(int i=0; i<45;i++) {
+    								casillas[i].setIcon(null);
+    								for(MouseListener ac : casillas[i].getMouseListeners()) {
+    									casillas[i].removeMouseListener(ac);
+    								}
+    							}
+    							pintar(tab);
+    						}
+    					});
+    				}else {
+    					this.casillas[i].setEnabled(estado);
+    				}
+    			}
+    		}
+    }
+    
+    public void pintarCasillasDisparo(boolean estado, List<Integer> catapulta) {
+    	if(estado) {
+	    	if(catapulta.size()==2) {
+	    		List<Integer> casillasCat1 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(0)).getCasilla());
+	    		for(Integer cat1 : casillasCat1) {
+	    			this.casillas[cat1].setBackground(Color.white);
+					for(MouseListener ac : casillas[cat1].getMouseListeners()) {
+						casillas[cat1].removeMouseListener(ac);
+					}
+	    		}
+	    		List<Integer> casillasCat2 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(1)).getCasilla());
+	    		for(Integer cat2 : casillasCat2) {
+	    			this.casillas[cat2].setBackground(Color.white);
+					for(MouseListener ac : casillas[cat2].getMouseListeners()) {
+						casillas[cat2].removeMouseListener(ac);
+					}
+	    		}
+	    	}else {
+	    		List<Integer> casillasCat1 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(0)).getCasilla());
+	    		for(Integer cat1 : casillasCat1) {
+	    			this.casillas[cat1].setBackground(Color.white);
+					for(MouseListener ac : casillas[cat1].getMouseListeners()) {
+						casillas[cat1].removeMouseListener(ac);
+					}
+	    		}
+	    	}
+    }else {
+    	if(catapulta.size()==2) {
+    		List<Integer> casillasCat1 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(0)).getCasilla());
+    		for(Integer cat1 : casillasCat1) {
+    			btnEsperar.setBackground(new Color(240, 230, 140));
+    		}
+    		List<Integer> casillasCat2 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(1)).getCasilla());
+    		for(Integer cat2 : casillasCat2) {
+    			btnEsperar.setBackground(new Color(240, 230, 140));
+    		}
+    	}else {
+    		List<Integer> casillasCat1 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(0)).getCasilla());
+    		for(Integer cat1 : casillasCat1) {
+    			btnEsperar.setBackground(new Color(240, 230, 140));
+    			}
+    		}
+    	}
     }
 }
