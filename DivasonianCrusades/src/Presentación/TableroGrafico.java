@@ -454,6 +454,11 @@ public class TableroGrafico extends JFrame {
 		Mover.setBorder(null);
 		Mover.setBounds(823, 206, 179, 47);
 		contentPane.add(Mover);
+		btnDisparar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 
 		btnDisparar.addMouseListener(new MouseAdapter() {
 			@Override

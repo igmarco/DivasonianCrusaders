@@ -8,7 +8,7 @@ public class Guerrero extends Ficha {
 		
 		super(null, f);
 //		super.daño =
-//		super.vida =
+//		super.vida = 
 //		super.vidaMáxima =
 //		super.dañoVariable =
 		
