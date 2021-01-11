@@ -421,7 +421,20 @@ public class Tablero {
     	
     }
     
-    //ESTE MÉTODO NO CREO QUE LO UTILICEMOS. F
+    public List<Integer> catapultasQuePuedesDisparar(Facción fc){
+    	
+    	List<Integer> listaCasillas = new ArrayList<Integer>();
+    	
+    	int dóndeCata1 = this.dóndeEstá(new Catapulta(1));
+    	int dóndeCata2 = this.dóndeEstá(new Catapulta(2));
+    	
+    	if(this.nodos[dóndeCata1].estáAquí(fc) && !this.nodos[dóndeCata1].hayDosFichas()) listaCasillas.add(dóndeCata1);
+    	if(this.nodos[dóndeCata2].estáAquí(fc) && !this.nodos[dóndeCata2].hayDosFichas()) listaCasillas.add(dóndeCata2);
+    	
+    	return listaCasillas;
+    	
+    }
+    
     public List<Integer> dóndeDispararProyectiles(Catapulta cp) {
     	
     	//Devuelve una lista de enteros que representan las posiciones de las casillas a las que le llega el rango la catapulta dada.

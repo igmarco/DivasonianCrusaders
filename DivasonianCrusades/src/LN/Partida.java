@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 import MD_Instrucción.Disparo;
 import MD_Instrucción.Instrucción;
@@ -64,6 +66,8 @@ public class Partida implements Runnable {
     }
     
     public void run() {
+    	
+    	List<Tablero> tablerosDelTurno = new ArrayList<Tablero>();
 		
 		try {
 			
@@ -107,11 +111,13 @@ public class Partida implements Runnable {
 					instrucciónFacción1 = (Instrucción) ois1.readObject();
 					instrucciónFacción2 = (Instrucción) ois2.readObject();
 					
+					tablerosDelTurno.clear();
+					
 					for(movimiento = 0; movimiento < 6; movimiento++) {
 						
 						this.ejecutarOperación();
 						
-						this.mandarTableros(oos1, oos2);
+						tablerosDelTurno.add(this.tablero);
 						
 					}
 					
@@ -119,9 +125,11 @@ public class Partida implements Runnable {
 					
 					this.resolverTurno();
 					
-					haTerminado = this.tablero.haTerminado();
+					tablerosDelTurno.add(this.tablero);
 					
-					this.mandarTableros(oos1, oos2);
+					this.mandarTableros(oos1, oos2, tablerosDelTurno);
+					
+					haTerminado = this.tablero.haTerminado();
 					
 				}
 				
@@ -283,14 +291,14 @@ public class Partida implements Runnable {
     	
     }
 
-    public void mandarTableros(ObjectOutputStream oos1, ObjectOutputStream oos2) {
+    public void mandarTableros(ObjectOutputStream oos1, ObjectOutputStream oos2, List<Tablero> tablerosDelTurno) {
     	
     	//Abran sus sockets que les vamos a meter tremendos tableros
     	
     	try {
     		
-			oos1.writeObject(this.tablero);
-			oos2.writeObject(this.tablero);
+			oos1.writeObject(tablerosDelTurno);
+			oos2.writeObject(tablerosDelTurno);
 			
 			oos1.writeObject(this.tablero.haTerminado());
 			oos2.writeObject(this.tablero.haTerminado());
