@@ -423,7 +423,15 @@ public class Tablero {
     
     public List<Integer> catapultasQuePuedesDisparar(Facción fc){
     	
+    	List<Integer> listaCasillas = new ArrayList<Integer>();
     	
+    	int dóndeCata1 = this.dóndeEstá(new Catapulta(1));
+    	int dóndeCata2 = this.dóndeEstá(new Catapulta(2));
+    	
+    	if(this.nodos[dóndeCata1].estáAquí(fc) && !this.nodos[dóndeCata1].hayDosFichas()) listaCasillas.add(dóndeCata1);
+    	if(this.nodos[dóndeCata2].estáAquí(fc) && !this.nodos[dóndeCata2].hayDosFichas()) listaCasillas.add(dóndeCata2);
+    	
+    	return listaCasillas;
     	
     }
     
