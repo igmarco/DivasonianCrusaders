@@ -1858,195 +1858,402 @@ public class TableroGrafico extends JFrame {
     	}
     }
     
+//    public void moverClick() {
+//	    	List<Integer> casAModificar = this.tab.quiénesPuedenMover(this.faccion);
+//	    	for(Integer posicion: casAModificar) {
+//	    		final Integer x = posicion;
+//	    		this.casillas[posicion].addMouseListener(new MouseAdapter() {
+//					@Override
+//					public void mouseClicked(MouseEvent e) {
+//	        			botonesMoverFase2(false,tab.getNodo(x).getFicha(faccion));
+//	        			botonesClicarFase2(tab.getNodo(x).getFicha(faccion),x);
+//	        			btnCancelar.addActionListener(new ActionListener() {
+//	        				public void actionPerformed(ActionEvent arg0) {
+//	        	    				pintar(tab);
+//	        					}
+//	        	    		});
+//	        			for(MouseListener ac : casillas[x].getMouseListeners()) {
+//	        				casillas[x].removeMouseListener(ac);
+//	        			}
+//					}
+//	    		});
+//	    	}
+//	    	this.botonesMoverFase1(false);
+//	    	this.btnCancelar.addActionListener(new ActionListener() {
+//	    		
+//				public void actionPerformed(ActionEvent arg0) {
+//	    			botonesMoverFase1(true);
+//	    			for( JButton boton : casillas) {
+//	    				for(ActionListener al : boton.getActionListeners()) {
+//	    					boton.removeActionListener( al );
+//	    				}
+//	    			}
+//	    		}
+//	    	});
+//
+//    }
+//    
+//    public void botonesMoverFase1(boolean estado) {
+//	    	this.btnDisparar.setEnabled(estado);
+//	    	this.btnEsperar.setEnabled(estado);
+//	    	this.Mover.setEnabled(estado);
+//	    	List<Integer> casAModificar = this.tab.quiénesNOPuedenMover(this.faccion);
+//	    	for(Integer posicion : casAModificar) {
+//	    		this.casillas[posicion].setEnabled(estado);
+//	    	}
+//	    	casAModificar = this.tab.quiénesPuedenMover(this.faccion);
+//	    	for(Integer posicion : casAModificar) {
+//	    		Ficha efarda = this.tab.getNodo(posicion).getFicha(faccion);
+//	    		if(efarda instanceof Arquero) {
+//	    			if(this.movsF == this.tab.getNodo(posicion).getFicha(faccion).getMovs()) {
+//	    				this.casillas[posicion].setEnabled(estado);
+//	    			}
+//	    		}
+//	    		if(efarda instanceof Caballero) {
+//	    			if(this.movsC == this.tab.getNodo(posicion).getFicha(faccion).getMovs())
+//	    				this.casillas[posicion].setEnabled(estado);
+//	    		}
+//	    		if(efarda instanceof Bárbaro) {
+//	    			if(this.movsB == this.tab.getNodo(posicion).getFicha(faccion).getMovs())
+//	    				this.casillas[posicion].setEnabled(estado);
+//	    		}
+//	    		if(efarda instanceof Guerrero) {
+//	    			if(this.movsG == this.tab.getNodo(posicion).getFicha(faccion).getMovs())
+//	    				this.casillas[posicion].setEnabled(estado);
+//	    		}
+//	    		if(efarda instanceof Lancero) {
+//	    			if(this.movsL == this.tab.getNodo(posicion).getFicha(faccion).getMovs())
+//	    				this.casillas[posicion].setEnabled(estado);
+//	    		}
+//	    	}
+//    }
+//    
+//    public void botonesMoverFase2(boolean estado, Ficha f) {
+//	    	this.btnDisparar.setEnabled(estado);
+//	    	this.btnEsperar.setEnabled(estado);
+//	    	this.Mover.setEnabled(estado);
+//    		List<Integer> casAModificar = this.tab.dóndePuedeMover(f);
+//    		for(int i=0; i<45; i++) {
+//    			this.casillas[i].setEnabled(estado);
+//    		}
+//    		for(Integer posicion : casAModificar) {
+//    			this.casillas[posicion].setEnabled(!estado);
+//    		}
+//    	
+//    }
+//    
+//    public void botonesClicarFase2(Ficha f, int j) {
+//    	
+//		List<Integer> casAModificar = tab.dóndePuedeMover(f);
+//		for(Integer posicion : casAModificar) {
+//			final Ficha efe = f;
+//			final int x = posicion;
+//			final int y = j;
+//			this.casillas[posicion].setBackground(Color.white);
+//			this.casillas[posicion].enable(true);
+//			for(MouseListener ms : this.casillas[posicion].getMouseListeners()) {
+//				this.casillas[posicion].removeMouseListener(ms);
+//			}
+//			this.casillas[posicion].addMouseListener(new MouseAdapter() {
+//				@Override
+//				public void mouseClicked(MouseEvent e) {
+//					System.out.println("Entré");
+//					moverEnSí(efe,y,x);
+//				}
+//			});
+//				
+//		}
+//    }
+//    
+//    //
+//    public void moverEnSí(Ficha f, int j , int posicion) {
+//    	System.out.println("He entrado en mover en sí");
+//    	int resta =posicion-j;
+//    	Dirección direccion = null;
+//		switch(resta) {
+//			case -9:{
+//				direccion = Dirección.norte;
+//				break;
+//			}
+//			case 9:{
+//				direccion = Dirección.sur;
+//				break;
+//			}
+//			case -1:{
+//				direccion = Dirección.oeste;
+//				break;
+//			}
+//			case 1:{
+//				direccion = Dirección.este;
+//				break;
+//			}
+//			case 8:{
+//				direccion = Dirección.suroeste;
+//				break;
+//			}
+//			case 10:{
+//				direccion = Dirección.sureste;
+//				break;
+//			}
+//			case -8:{
+//				direccion = Dirección.noreste;
+//				break;
+//			}
+//			case -10:{
+//				direccion = Dirección.noroeste;
+//				break;
+//			}
+//				
+//		}
+//    	Movimiento mov = new Movimiento(f,direccion);
+//    	this.inst.add(mov);
+//    	/**/ introducirOperacionEnCurso = false;
+////    	Tablero tab2 = tab;
+//    	/**/ Tablero tab2 = (Tablero) tab.clone();
+//    	this.tab = tab2;
+//    	tab2.moverFicha(f, direccion);
+//    	this.tableros.add(tab2);
+//		botonesMoverFase1(true);
+//		for(int i=0; i<45;i++) {
+//			this.casillas[i].setIcon(null);
+//			for(MouseListener ac : this.casillas[i].getMouseListeners()) {
+//				this.casillas[i].removeMouseListener(ac);
+//			}
+//		}
+//		System.out.println(this.inst.size());
+//		Operaciones.setText("Ops.: "+this.inst.size()+"/6");
+//		if(this.inst.size()==6) {
+//    		this.btnDisparar.setEnabled(false);
+//	    	this.btnEsperar.setEnabled(false);
+//	    	this.Mover.setEnabled(false);
+//		}
+//		pintar(tab2);
+//		for(ActionListener ac : this.btnCancelar.getActionListeners()) {
+//			this.btnCancelar.removeActionListener(ac);
+//		}
+//		this.agregarFuncionalidadOriginalBtnCancelar();
+//		if(f instanceof Arquero) {
+//			this.movsF++;
+//		}
+//		if(f instanceof Caballero) {
+//			this.movsC++;
+//		}
+//		if(f instanceof Bárbaro) {
+//			this.movsB++;
+//		}
+//		if(f instanceof Guerrero) {
+//			this.movsG++;
+//		}
+//		if(f instanceof Lancero) {
+//			this.movsL++;
+////		}
+//    }
+    
     public void moverClick() {
-	    	List<Integer> casAModificar = this.tab.quiénesPuedenMover(this.faccion);
-	    	for(Integer posicion: casAModificar) {
-	    		final Integer x = posicion;
-	    		this.casillas[posicion].addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-	        			botonesMoverFase2(false,tab.getNodo(x).getFicha(faccion));
-	        			botonesClicarFase2(tab.getNodo(x).getFicha(faccion),x);
-	        			btnCancelar.addActionListener(new ActionListener() {
-	        				public void actionPerformed(ActionEvent arg0) {
-	        	    				pintar(tab);
-	        					}
-	        	    		});
-	        			for(MouseListener ac : casillas[x].getMouseListeners()) {
-	        				casillas[x].removeMouseListener(ac);
-	        			}
-					}
-	    		});
-	    	}
-	    	this.botonesMoverFase1(false);
-	    	this.btnCancelar.addActionListener(new ActionListener() {
-	    		
-				public void actionPerformed(ActionEvent arg0) {
-	    			botonesMoverFase1(true);
-	    			for( JButton boton : casillas) {
-	    				for(ActionListener al : boton.getActionListeners()) {
-	    					boton.removeActionListener( al );
-	    				}
-	    			}
-	    		}
-	    	});
-
-    }
-    
-    public void botonesMoverFase1(boolean estado) {
-	    	this.btnDisparar.setEnabled(estado);
-	    	this.btnEsperar.setEnabled(estado);
-	    	this.Mover.setEnabled(estado);
-	    	List<Integer> casAModificar = this.tab.quiénesNOPuedenMover(this.faccion);
-	    	for(Integer posicion : casAModificar) {
-	    		this.casillas[posicion].setEnabled(estado);
-	    	}
-	    	casAModificar = this.tab.quiénesPuedenMover(this.faccion);
-	    	for(Integer posicion : casAModificar) {
-	    		Ficha efarda = this.tab.getNodo(posicion).getFicha(faccion);
-	    		if(efarda instanceof Arquero) {
-	    			if(this.movsF == this.tab.getNodo(posicion).getFicha(faccion).getMovs()) {
-	    				this.casillas[posicion].setEnabled(estado);
-	    			}
-	    		}
-	    		if(efarda instanceof Caballero) {
-	    			if(this.movsC == this.tab.getNodo(posicion).getFicha(faccion).getMovs())
-	    				this.casillas[posicion].setEnabled(estado);
-	    		}
-	    		if(efarda instanceof Bárbaro) {
-	    			if(this.movsB == this.tab.getNodo(posicion).getFicha(faccion).getMovs())
-	    				this.casillas[posicion].setEnabled(estado);
-	    		}
-	    		if(efarda instanceof Guerrero) {
-	    			if(this.movsG == this.tab.getNodo(posicion).getFicha(faccion).getMovs())
-	    				this.casillas[posicion].setEnabled(estado);
-	    		}
-	    		if(efarda instanceof Lancero) {
-	    			if(this.movsL == this.tab.getNodo(posicion).getFicha(faccion).getMovs())
-	    				this.casillas[posicion].setEnabled(estado);
-	    		}
-	    	}
-    }
-    
-    public void botonesMoverFase2(boolean estado, Ficha f) {
-	    	this.btnDisparar.setEnabled(estado);
-	    	this.btnEsperar.setEnabled(estado);
-	    	this.Mover.setEnabled(estado);
-    		List<Integer> casAModificar = this.tab.dóndePuedeMover(f);
-    		for(int i=0; i<45; i++) {
-    			this.casillas[i].setEnabled(estado);
-    		}
-    		for(Integer posicion : casAModificar) {
-    			this.casillas[posicion].setEnabled(!estado);
-    		}
+    	this.botonesCasillasMover(false);
+    	this.introducirOperacionEnCurso=true;
+    	this.btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				botonesCasillasMover(true);
+			}
+    	});
+    	
+    	
     	
     }
     
-    public void botonesClicarFase2(Ficha f, int j) {
-    	
-		List<Integer> casAModificar = tab.dóndePuedeMover(f);
-		for(Integer posicion : casAModificar) {
-			final Ficha efe = f;
-			final int x = posicion;
-			final int y = j;
-			this.casillas[posicion].setBackground(Color.white);
-			this.casillas[posicion].enable(true);
-			for(MouseListener ms : this.casillas[posicion].getMouseListeners()) {
-				this.casillas[posicion].removeMouseListener(ms);
-			}
-			this.casillas[posicion].addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					System.out.println("Entré");
-					moverEnSí(efe,y,x);
-				}
-			});
-				
-		}
+    public void botonesCasillasMover(boolean estado) {
+    	this.btnDisparar.setEnabled(estado);
+    	this.btnEsperar.setEnabled(estado);
+    	this.Mover.setEnabled(estado);
+    	List<Integer> casAModificar = this.tab.quiénesNOPuedenMover(this.faccion);
+    	for(Integer posicion : casAModificar) {
+    		this.casillas[posicion].setEnabled(estado);
+    	}
+    	List<Integer> casFichas = this.tab.quiénesPuedenMover(this.faccion);
+    	for(final Integer posicion : casFichas) {
+    		if(!this.botonFichaPuedeMover(posicion)) {
+    				this.casillas[posicion].setEnabled(estado);
+    		}else {
+    	    	ActionListener eventoFicha = new ActionListener() {
+    				public void actionPerformed(ActionEvent arg0) {
+    					botonesCasillasAMover(tab.getNodo(posicion).getFicha(faccion),true);
+    					deshabilitarTodoMenosI(posicion,false);
+    					btnCancelar.addActionListener(new ActionListener() {
+    						@Override
+    						public void actionPerformed(ActionEvent arg0) {
+    							deshabilitarTodoMenosI(posicion,true);
+    							botonesCasillasAMover(tab.getNodo(posicion).getFicha(faccion),false);
+    						}
+    			    	});
+    				}
+    	    	};
+    			if(!estado) {
+    				this.casillas[posicion].addActionListener(eventoFicha);
+    				System.out.println(this.casillas[posicion].getActionListeners().length);
+    			}else {
+    				this.casillas[posicion].removeActionListener(eventoFicha);
+    			}
+    		}
+    	}
+    	if(!estado) {
+    		this.limpiarActionDeshacer();
+    	}
     }
     
-    //
-    public void moverEnSí(Ficha f, int j , int posicion) {
-    	System.out.println("He entrado en mover en sí");
-    	int resta =posicion-j;
-    	Dirección direccion = null;
-		switch(resta) {
-			case -9:{
-				direccion = Dirección.norte;
-				break;
-			}
-			case 9:{
-				direccion = Dirección.sur;
-				break;
-			}
-			case -1:{
-				direccion = Dirección.oeste;
-				break;
-			}
-			case 1:{
-				direccion = Dirección.este;
-				break;
-			}
-			case 8:{
-				direccion = Dirección.suroeste;
-				break;
-			}
-			case 10:{
-				direccion = Dirección.sureste;
-				break;
-			}
-			case -8:{
-				direccion = Dirección.noreste;
-				break;
-			}
-			case -10:{
-				direccion = Dirección.noroeste;
-				break;
-			}
-				
+    public void deshabilitarTodoMenosI (int i,boolean estado) {
+    	List<Integer> casFichas = this.tab.quiénesPuedenMover(this.faccion);
+    	for(Integer pos: casFichas) {
+    		if(pos!=i) {
+    			this.casillas[pos].setEnabled(estado);
+    		}
+    	}
+    }
+    
+    public boolean botonFichaPuedeMover(int i){
+    	Ficha f = this.tab.getNodo(i).getFicha(faccion);
+		if(f instanceof Arquero) {
+			if(this.movsF == this.tab.getNodo(i).getFicha(faccion).getMovs())
+				return false;
+		}else if(f instanceof Caballero) {
+			if(this.movsC == this.tab.getNodo(i).getFicha(faccion).getMovs())
+				return false;
+		}else if(f instanceof Bárbaro) {
+			if(this.movsB == this.tab.getNodo(i).getFicha(faccion).getMovs())
+				return false;
+		}else if(f instanceof Guerrero) {
+			if(this.movsG == this.tab.getNodo(i).getFicha(faccion).getMovs())
+				return false;
+		}else if(f instanceof Lancero) {
+			if(this.movsL == this.tab.getNodo(i).getFicha(faccion).getMovs())
+				return false;
 		}
-    	Movimiento mov = new Movimiento(f,direccion);
-    	this.inst.add(mov);
-    	/**/ introducirOperacionEnCurso = false;
-//    	Tablero tab2 = tab;
-    	/**/ Tablero tab2 = (Tablero) tab.clone();
-    	this.tab = tab2;
-    	tab2.moverFicha(f, direccion);
-    	this.tableros.add(tab2);
-		botonesMoverFase1(true);
-		for(int i=0; i<45;i++) {
-			this.casillas[i].setIcon(null);
-			for(MouseListener ac : this.casillas[i].getMouseListeners()) {
-				this.casillas[i].removeMouseListener(ac);
-			}
+		return true;
+    }
+    
+    public void botonesCasillasAMover(Ficha f,boolean estado) {
+    	List<Integer> posiciones = this.tab.dóndePuedeMover(f);
+    	final Movimiento mov;
+    	final Ficha fFinal = f;
+    	final int posicionFicha = this.tab.dóndeEstá(f);
+    	for(final Integer pos : posiciones) {
+    		MouseListener eventoCasilla = new MouseAdapter() {
+    			@Override
+    			public void mouseClicked(MouseEvent e) {
+    					añadirMov(fFinal,calcularDireccion(posicionFicha,pos)); 					
+    				}
+    			};
+    		if(estado) {
+	    		this.casillas[pos].setBackground(Color.white);
+	    		for(MouseListener ml :this.casillas[pos].getMouseListeners()) {
+	    			this.casillas[pos].removeMouseListener(ml);
+	    		}
+	    		this.casillas[pos].addMouseListener(eventoCasilla);
+    		}else {
+    			this.casillas[pos].setBackground(new Color(245, 245, 220));
+    			this.casillas[pos].removeMouseListener(eventoCasilla);
+    		}
+    	}
+    	if(!estado) {
+			this.limpiarActionFichas();
+			this.limpiarActionDeshacer();
+    	}
+    }
+    
+    public void añadirMov (Ficha f, Dirección direccion) {
+    	this.inst.add(new Movimiento(f,direccion));
+    	this.Operaciones.setText("Ops.: "+this.inst.size()+"/6");
+    	Tablero tabCopia = (Tablero)this.tab.clone();
+    	tabCopia.moverFicha(f, direccion);
+    	this.tableros.add(tabCopia);
+    	this.tab = tabCopia;
+		if(this.inst.size()!=6) {
+			this.btnDisparar.setEnabled(true);
+    		this.btnEsperar.setEnabled(true);
+    		this.Mover.setEnabled(true);
 		}
-		System.out.println(this.inst.size());
-		Operaciones.setText("Ops.: "+this.inst.size()+"/6");
-		if(this.inst.size()==6) {
-    		this.btnDisparar.setEnabled(false);
-	    	this.btnEsperar.setEnabled(false);
-	    	this.Mover.setEnabled(false);
-		}
-		pintar(tab2);
-		for(ActionListener ac : this.btnCancelar.getActionListeners()) {
-			this.btnCancelar.removeActionListener(ac);
-		}
-		this.agregarFuncionalidadOriginalBtnCancelar();
+    	this.limpiarActions();
+		this.pintar(tabCopia);
 		if(f instanceof Arquero) {
 			this.movsF++;
-		}
-		if(f instanceof Caballero) {
+		}else if(f instanceof Caballero) {
 			this.movsC++;
-		}
-		if(f instanceof Bárbaro) {
+		}else if(f instanceof Bárbaro) {
 			this.movsB++;
-		}
-		if(f instanceof Guerrero) {
+		}else if(f instanceof Guerrero) {
 			this.movsG++;
-		}
-		if(f instanceof Lancero) {
+		}else if(f instanceof Lancero) {
 			this.movsL++;
 		}
+		this.limpiarActionDeshacer();
+		this.limpiarActionFichas();
+		this.introducirOperacionEnCurso=false;
+    }
+    
+    public void limpiarActionFichas() {
+		List<Integer> posFichas = this.tab.quiénesPuedenMover(this.faccion);
+		for(Integer posficha : posFichas) {
+			for(ActionListener al : this.casillas[posficha].getActionListeners()) {
+				this.casillas[posficha].removeActionListener(al);
+			}
+		}
+    }
+    
+    public void limpiarActionDeshacer() {
+		for(ActionListener al : this.btnCancelar.getActionListeners()) {
+			this.btnCancelar.removeActionListener(al);
+		}
+		this.agregarFuncionalidadOriginalBtnCancelar();
+    }
+    
+    public void limpiarActions() {
+    	for(int i = 0 ; i<45; i++) {
+    		this.casillas[i].setEnabled(true);
+    		for(MouseListener al : this.casillas[i].getMouseListeners()) {
+    			this.casillas[i].removeMouseListener(al);
+    		}
+    	}
+    }
+    
+    public Dirección calcularDireccion(int posicionFicha, int posicionCasilla) {
+    	int resta =posicionCasilla-posicionFicha;
+    	Dirección direccion = null;
+		switch(resta) {
+		case -9:{
+			direccion = Dirección.norte;
+			break;
+		}
+		case 9:{
+			direccion = Dirección.sur;
+			break;
+		}
+		case -1:{
+			direccion = Dirección.oeste;
+			break;
+		}
+		case 1:{
+			direccion = Dirección.este;
+			break;
+		}
+		case 8:{
+			direccion = Dirección.suroeste;
+			break;
+		}
+		case 10:{
+			direccion = Dirección.sureste;
+			break;
+		}
+		case -8:{
+			direccion = Dirección.noreste;
+			break;
+		}
+		case -10:{
+			direccion = Dirección.noroeste;
+			break;
+		}
+			
+		}
+		return direccion;
     }
     
     //Obtiene Object streams de la conexión con el servidor.
@@ -2219,6 +2426,7 @@ public class TableroGrafico extends JFrame {
 						inst.remove(inst.size()-1);
 						tableros.remove(tableros.size()-1);
 						tab = tableros.get(tableros.size()-1);
+						limpiarActions();
 						pintar(tableros.get(tableros.size()-1));
 						Operaciones.setText("Ops.:" + inst.size() + "/6");
 						
