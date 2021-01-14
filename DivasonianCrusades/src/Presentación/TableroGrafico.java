@@ -82,7 +82,7 @@ public class TableroGrafico extends JFrame {
 	
 	private boolean catA=true,catR=true;
 	
-	private Integer movsF=0,movsC=0,movsB=0,movsG=0,movsL =0;
+	private Integer movsF=0,movsC=0,movsB=3,movsG=0,movsL =0;
 	
 	private Facción faccion;
 	
@@ -462,14 +462,38 @@ public class TableroGrafico extends JFrame {
 		btnDisparar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				/**/ introducirOperacionEnCurso = true;
+				boolean catVal = true;
 				final List<Integer> catapultas = tab.catapultasQuePuedesDisparar(faccion);
 				if(catapultas.size()>0) {
-					bloquearCasillasDisparo(false,catapultas);
-					btnCancelar.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							bloquearCasillasDisparo(true,catapultas);
+					if(catapultas.size()==2) {
+						if(((catapultas.get(0)==20||catapultas.get(1)==20)&&!catA)&&((catapultas.get(0)==24||catapultas.get(1)==24)&&!catR)) {
+							catVal=false;
+							JOptionPane.showMessageDialog(null, "Ninguna de sus fichas están en una catapulta Válida", "Atención", JOptionPane.WARNING_MESSAGE);
 						}
-					});
+		    			if((catapultas.get(0)==20||catapultas.get(1)==20) && !catA) {
+		    				casillas[20].setEnabled(false);
+		    				catapultas.remove(new Integer(20));
+		    			}else if((catapultas.get(0)==24||catapultas.get(1)==24) && !catR) {
+		    				casillas[24].setEnabled(false);
+		    				catapultas.remove(new Integer(24));
+		    			}
+					}else if(catapultas.size()==1){
+						if(catapultas.get(0)==20&&!catA) {
+							catVal=false;
+							JOptionPane.showMessageDialog(null, "Ninguna de sus fichas están en una catapulta Válida", "Atención", JOptionPane.WARNING_MESSAGE);
+						}else if(catapultas.get(0)==24&&!catR){
+							catVal=false;
+							JOptionPane.showMessageDialog(null, "Ninguna de sus fichas están en una catapulta Válida", "Atención", JOptionPane.WARNING_MESSAGE);
+						}
+					}
+					if(catVal) {
+						bloquearCasillasDisparo(false,catapultas);
+						btnCancelar.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								bloquearCasillasDisparo(true,catapultas);
+							}
+						});
+					}
 				}else {
 					JOptionPane.showMessageDialog(null, "Ninguna de sus fichas están en una catapulta", "Atención", JOptionPane.WARNING_MESSAGE);
 				}
@@ -2269,55 +2293,56 @@ public class TableroGrafico extends JFrame {
 		}
     }
     
+    public void peinarEventos(int i) {
+    	for(MouseListener ls : this.casillas[i].getMouseListeners()) {
+    		this.casillas[i].removeMouseListener(ls);
+    	}
+    }
+    
     //
     public void bloquearCasillasDisparo(boolean estado, final List<Integer> catapultas) {
     	this.btnDisparar.setEnabled(estado);
     	this.btnEsperar.setEnabled(estado);
     	this.Mover.setEnabled(estado);
-    	for(int i=0; i<45; i++) {
     		if(catapultas.size()==2) {
-    			if(this.casillas[i].equals(this.casillas[catapultas.get(0)])||this.casillas[i].equals(this.casillas[catapultas.get(1)])){
-					if((catapultas.get(0)==20 && catA)&&(catapultas.get(1)==24&&catR)||(catapultas.get(1)==20 && catA)&&(catapultas.get(0)==24&&catR))
-					this.casillas[i].addMouseListener( new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							pintarCasillasDisparo(true,catapultas);
-						}
-					});
-					this.btnCancelar.addActionListener( new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							pintarCasillasDisparo(false,catapultas);
-							for(int i=0; i<45;i++) {
-								casillas[i].setIcon(null);
-								for(MouseListener ac : casillas[i].getMouseListeners()) {
-									casillas[i].removeMouseListener(ac);
-								}
-							}
-							pintar(tab);
-						}
-					});		
-    			}else {
-    				this.casillas[i].setEnabled(estado);
-    			}
+    				for(int i=0; i<45; i++) {
+    					final int x = i;
+    					if(this.casillas[i].equals(this.casillas[catapultas.get(0)])||this.casillas[i].equals(this.casillas[catapultas.get(1)])){
+    	    				this.casillas[i].addMouseListener( new MouseAdapter() {
+    	    					@Override
+    	    					public void mouseClicked(MouseEvent e) {
+    	    						if(x==catapultas.get(0)) {
+    	    							casillas[catapultas.get(1)].setEnabled(false);
+    	    							peinarEventos(catapultas.get(1));
+    	    						}else {
+    	    							casillas[catapultas.get(0)].setEnabled(false);
+    	    							peinarEventos(catapultas.get(0));
+    	    						}
+    	    						pintarCasillasDisparo(true,x);
+    	    					}
+    	    				});
+    	    				this.btnCancelar.addActionListener( new ActionListener() {
+    	    					public void actionPerformed(ActionEvent arg0) {
+    	    						pintarCasillasDisparo(false,x);
+    	    					}
+    	    				});
+    					}else {
+    						this.casillas[i].setEnabled(estado);
+    	    			}
+    				}
     		}else {
+    			for(int i=0; i<45; i++) {
+    				final int x = i;
     				if(this.casillas[i].equals(this.casillas[catapultas.get(0)])) {
-    					if((catapultas.get(0)==20 && catA)||(catapultas.get(0)==24&&catR))
     					this.casillas[i].addMouseListener( new MouseAdapter() {
     						@Override
     						public void mouseClicked(MouseEvent e) {
-    							pintarCasillasDisparo(true,catapultas);
+    							pintarCasillasDisparo(true,x);
     						}
     					});
     					this.btnCancelar.addActionListener( new ActionListener() {
     						public void actionPerformed(ActionEvent arg0) {
-    							pintarCasillasDisparo(false,catapultas);
-    							for(int i=0; i<45;i++) {
-    								casillas[i].setIcon(null);
-    								for(MouseListener ac : casillas[i].getMouseListeners()) {
-    									casillas[i].removeMouseListener(ac);
-    								}
-    							}
-    							pintar(tab);
+    							pintarCasillasDisparo(false,x);
     						}
     					});
     				}else {
@@ -2328,27 +2353,9 @@ public class TableroGrafico extends JFrame {
     }
     
     //Pintar o no las casillas a las que se puede disparar con las catapultas.
-    public void pintarCasillasDisparo(boolean estado, final List<Integer> catapulta) {
+    public void pintarCasillasDisparo(boolean estado, final Integer posicionCat) {
     	if(estado) {
-    		//Si son dos casillas de catapulta con las que puede disparar.
-	    	if(catapulta.size()==2) {
-	    		List<Integer> casillasCat1 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(0)).getCasilla());
-	    		for(Integer cat1 : casillasCat1) {
-	    			this.casillas[cat1].setBackground(Color.white);
-					for(MouseListener ac : casillas[cat1].getMouseListeners()) {
-						casillas[cat1].removeMouseListener(ac);
-					}
-	    		}
-	    		List<Integer> casillasCat2 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(1)).getCasilla());
-	    		for(Integer cat2 : casillasCat2) {
-	    			this.casillas[cat2].setBackground(Color.white);
-					for(MouseListener ac : casillas[cat2].getMouseListeners()) {
-						casillas[cat2].removeMouseListener(ac);
-					}
-	    		}
-	    	//Si es solo una (o ninguna?)
-	    	}else {
-	    		List<Integer> casillasCat1 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(0)).getCasilla());
+	    		List<Integer> casillasCat1 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(posicionCat).getCasilla());
 	    		for(final Integer cat1 : casillasCat1) {
 	    			this.casillas[cat1].setBackground(Color.white);
 					for(MouseListener ac : casillas[cat1].getMouseListeners()) {
@@ -2356,64 +2363,60 @@ public class TableroGrafico extends JFrame {
 					}
 					final Ficha f = this.tab.getNodo(cat1).getFichaDefensora();
 					final Integer x = cat1;
-					final Catapulta cas = (Catapulta) this.tab.getNodo(catapulta.get(0)).getCasilla();
+					final Catapulta cas = (Catapulta) this.tab.getNodo(posicionCat).getCasilla();
 					this.casillas[cat1].addMouseListener( new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
-							Disparo disp = new Disparo(f,cas,x);
-							inst.add(disp);
-							/**/ introducirOperacionEnCurso = false;
-							if(inst.size()==6) {
-					    		btnDisparar.setEnabled(false);
-						    	btnEsperar.setEnabled(false);
-						    	Mover.setEnabled(false);
-							}else {
-					    		btnDisparar.setEnabled(true);
-						    	btnEsperar.setEnabled(true);
-						    	Mover.setEnabled(true);
-							}
-							for(ActionListener ac : btnCancelar.getActionListeners()) {
-								btnCancelar.removeActionListener(ac);
-							}
-							agregarFuncionalidadOriginalBtnCancelar();
-							for(int i=0; i<45;i++) {
-								casillas[i].setIcon(null);
-								for(MouseListener ac : casillas[i].getMouseListeners()) {
-									casillas[i].removeMouseListener(ac);
-								}
-							}
-							if(catapulta.get(0)==24) {
-								catR=false;
-							}else {
-								catA=false;
-							}
-							System.out.println(inst.size());
-							Tablero tab2 = tab;
-							Operaciones.setText("Ops.: "+inst.size()+"/6");
-							tableros.add(tab2);
-							pintar(tab2);
+							disparar(f,cas,x,posicionCat);
 						}
 					});
 	    		}
-	    	}
 	//Devuelve a los botones a la situación original.
     }else {
-    	if(catapulta.size()==2) {
-    		List<Integer> casillasCat1 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(0)).getCasilla());
-    		for(Integer cat1 : casillasCat1) {
-    			btnEsperar.setBackground(new Color(240, 230, 140));
-    		}
-    		List<Integer> casillasCat2 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(1)).getCasilla());
-    		for(Integer cat2 : casillasCat2) {
-    			btnEsperar.setBackground(new Color(240, 230, 140));
-    		}
-    	}else {
-    		List<Integer> casillasCat1 =this.tab.dóndeDispararProyectiles((Catapulta)this.tab.getNodo(catapulta.get(0)).getCasilla());
-    		for(Integer cat1 : casillasCat1) {
-    			btnEsperar.setBackground(new Color(240, 230, 140));
-    			}
-    		}
+		for(int i=0; i<45;i++) {
+				casillas[i].setIcon(null);
+				for(MouseListener ac : casillas[i].getMouseListeners()) {
+					casillas[i].removeMouseListener(ac);
+				}
+				this.casillas[i].setBackground(new Color(240, 230, 140));
+				this.casillas[i].setEnabled(!estado);
+		}
+		pintar(tab);
     	}
+    }
+    
+    public void disparar(Ficha f, Catapulta cas, int lugarDisparo, int posicion) {
+    	Disparo disp = new Disparo(f,cas,lugarDisparo);
+		inst.add(disp);
+		/**/ introducirOperacionEnCurso = false;
+		if(inst.size()==6) {
+    		btnDisparar.setEnabled(false);
+	    	btnEsperar.setEnabled(false);
+	    	Mover.setEnabled(false);
+		}else {
+    		btnDisparar.setEnabled(true);
+	    	btnEsperar.setEnabled(true);
+	    	Mover.setEnabled(true);
+		}
+		for(ActionListener ac : btnCancelar.getActionListeners()) {
+			btnCancelar.removeActionListener(ac);
+		}
+		agregarFuncionalidadOriginalBtnCancelar();
+		for(int i=0; i<45;i++) {
+			casillas[i].setIcon(null);
+			for(MouseListener ac : casillas[i].getMouseListeners()) {
+				casillas[i].removeMouseListener(ac);
+			}
+		}
+		if(posicion==24) {
+			catR=false;
+		}else {
+			catA=false;
+		}
+		Tablero tab2 = (Tablero)tab.clone();
+		Operaciones.setText("Ops.: "+inst.size()+"/6");
+		tableros.add(tab2);
+		pintar(tab2);
     }
     
     //Restaura la funcionalidad original (deshacer la última operación) del botón Deshacer.
@@ -2440,6 +2443,18 @@ public class TableroGrafico extends JFrame {
 							}else if(f instanceof Lancero) {
 								movsL--;
 							}
+						}else if(op instanceof Disparo) {
+							Disparo disp = (Disparo)inst.get(inst.size()-1);
+							if(disp.getCatapulta().getIdentificador()==1) {
+								catA=true;
+							}else if(disp.getCatapulta().getIdentificador()==2){
+								catR=true;
+							}
+						}
+						if(inst.size()==6) {
+				    		btnDisparar.setEnabled(true);
+					    	btnEsperar.setEnabled(true);
+					    	Mover.setEnabled(true);
 						}
 						inst.remove(inst.size()-1);
 						tableros.remove(tableros.size()-1);
