@@ -2075,8 +2075,9 @@ public class TableroGrafico extends JFrame {
     		if(!this.botonFichaPuedeMover(posicion)) {
     				this.casillas[posicion].setEnabled(estado);
     		}else {
-    	    	ActionListener eventoFicha = new ActionListener() {
-    				public void actionPerformed(ActionEvent arg0) {
+    	    	MouseListener eventoFicha = new MouseAdapter() {
+        			@Override
+        			public void mouseClicked(MouseEvent e) {
     					botonesCasillasAMover(tab.getNodo(posicion).getFicha(faccion),true);
     					deshabilitarTodoMenosI(posicion,false);
     					btnCancelar.addActionListener(new ActionListener() {
@@ -2089,10 +2090,9 @@ public class TableroGrafico extends JFrame {
     				}
     	    	};
     			if(!estado) {
-    				this.casillas[posicion].addActionListener(eventoFicha);
-    				System.out.println(this.casillas[posicion].getActionListeners().length);
+    				this.casillas[posicion].addMouseListener(eventoFicha);
     			}else {
-    				this.casillas[posicion].removeActionListener(eventoFicha);
+    				this.casillas[posicion].removeMouseListener(eventoFicha);
     			}
     		}
     	}
@@ -2106,6 +2106,9 @@ public class TableroGrafico extends JFrame {
     	for(Integer pos: casFichas) {
     		if(pos!=i) {
     			this.casillas[pos].setEnabled(estado);
+    			for(MouseListener ml :this.casillas[pos].getMouseListeners()) {
+    				this.casillas[pos].removeMouseListener(ml);
+    			}
     		}
     	}
     }
@@ -2157,6 +2160,7 @@ public class TableroGrafico extends JFrame {
     	if(!estado) {
 			this.limpiarActionFichas();
 			this.limpiarActionDeshacer();
+			this.pintar(tab);
     	}
     }
     
@@ -2186,15 +2190,14 @@ public class TableroGrafico extends JFrame {
 			this.movsL++;
 		}
 		this.limpiarActionDeshacer();
-		this.limpiarActionFichas();
 		this.introducirOperacionEnCurso=false;
     }
     
     public void limpiarActionFichas() {
 		List<Integer> posFichas = this.tab.quiénesPuedenMover(this.faccion);
 		for(Integer posficha : posFichas) {
-			for(ActionListener al : this.casillas[posficha].getActionListeners()) {
-				this.casillas[posficha].removeActionListener(al);
+			for(MouseListener al : this.casillas[posficha].getMouseListeners()) {
+				this.casillas[posficha].removeMouseListener(al);
 			}
 		}
     }
@@ -2422,7 +2425,22 @@ public class TableroGrafico extends JFrame {
 				if(introducirOperacionEnCurso == false) {
 					
 					if(inst.size()>0) {
-						
+						Operación op = inst.get(inst.size()-1);
+						if(op instanceof Movimiento) {
+							Movimiento mov = (Movimiento)inst.get(inst.size()-1);
+							Ficha f = mov.getFicha();
+							if(f instanceof Arquero) {
+								movsF--;
+							}else if(f instanceof Caballero) {
+								movsC--;
+							}else if(f instanceof Bárbaro) {
+								movsB--;
+							}else if(f instanceof Guerrero) {
+								movsG--;
+							}else if(f instanceof Lancero) {
+								movsL--;
+							}
+						}
 						inst.remove(inst.size()-1);
 						tableros.remove(tableros.size()-1);
 						tab = tableros.get(tableros.size()-1);
