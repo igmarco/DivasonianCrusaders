@@ -71,7 +71,7 @@ public class Nombre extends JFrame {
 					try {
 //						Socket s = new Socket("localhost",58000);
 						boolean azul;
-						ObjectInputStream in = new ObjectInputStream( s.getInputStream());
+						DataInputStream in = new DataInputStream( s.getInputStream());
 						DataOutputStream out = new DataOutputStream(s.getOutputStream());
 						lblEstado.setText("Buscando oponente..."); //T.T
 						String linea = in.readLine();
@@ -88,8 +88,11 @@ public class Nombre extends JFrame {
 						out.flush();
 						String name = in.readLine();
 						menu.habilitarContinuar();
+						/*/Esta puñetera orden vacia el buffer y parece que funciona/*/
+						in.skip(in.available());
+						
 						tablero.setNombre(textField.getText(), name,azul);
-						//tablero.setIn(in);
+						tablero.setIn(in);
 						tablero.setOut(out);
 						tablero.setVisible(true);
 						setVisible(false);

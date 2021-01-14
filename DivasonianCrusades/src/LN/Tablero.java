@@ -1,4 +1,5 @@
 package LN;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import MD_Tablero.Normal;
 import Utilidades.Dirección;
 import Utilidades.Facción;
 
-public class Tablero implements Cloneable{
+public class Tablero implements Cloneable,Serializable{
     private Nodo[] nodos = new Nodo[45];
 
     public Tablero() {

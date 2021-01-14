@@ -89,24 +89,30 @@ public class Partida implements Runnable {
 					
 					oos1.writeBytes("SURR-El oponente se ha rendido.\r\n");
 					oos2.writeBytes("SURR-El oponente se ha rendido.\r\n");
+					oos1.flush();
+					oos2.flush();
 					
 				}
 				else if(rendición1) {
 					
 					haTerminado = true;
 					oos2.writeBytes("SURR-El oponente se ha rendido.\r\n");
+					oos2.flush();
 					
 				}
 				else if(rendición2) {
 					
 					haTerminado = true;
 					oos1.writeBytes("SURR-El oponente se ha rendido.\r\n");
+					oos1.flush();
 					
 				}
 				else {
 					
 					oos1.writeBytes("OK-La partida continúa.\r\n");
 					oos2.writeBytes("OK-La partida continúa.\r\n");
+					oos1.flush();
+					oos2.flush();
 					
 					instrucciónFacción1 = (Instrucción) ois1.readObject();
 					instrucciónFacción2 = (Instrucción) ois2.readObject();
@@ -311,9 +317,13 @@ public class Partida implements Runnable {
     		
 			oos1.writeObject(tablerosDelTurno);
 			oos2.writeObject(tablerosDelTurno);
+			oos1.flush();
+			oos2.flush();
 			
 			oos1.writeObject(this.tablero.haTerminado());
 			oos2.writeObject(this.tablero.haTerminado());
+			oos1.flush();
+			oos2.flush();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

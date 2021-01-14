@@ -1,6 +1,8 @@
 package MD_Tablero;
 
-public abstract class Casilla implements Cloneable {
+import java.io.Serializable;
+
+public abstract class Casilla implements Cloneable, Serializable {
 	protected HachaDivasónica hachaDivasónica;
 	protected int curaciónAuxiliar;
 	

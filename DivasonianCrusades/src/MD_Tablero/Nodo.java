@@ -1,7 +1,9 @@
 package MD_Tablero;
+import java.io.Serializable;
+
 import Utilidades.Facción;
 
-public class Nodo implements Cloneable{
+public class Nodo implements Cloneable,Serializable{
     private Casilla casilla;
 
     private Ficha fichaDefensora;

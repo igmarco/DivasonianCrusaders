@@ -571,9 +571,21 @@ public class TableroGrafico extends JFrame {
 		final JButton Rendirse = new JButton("");
 		Rendirse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(inst.size()==6) {
+				boolean hacer = true;
+				if(inst.size()!=6) {
+					int resp = JOptionPane.showConfirmDialog(null, "Aún no ha realizado todas sus operaciones, ¿Está seguro?", "Atención", JOptionPane.YES_NO_OPTION);
+					if(resp == JOptionPane.YES_OPTION) {
+						for(int i = inst.size()-1; i<6;i++) {
+							inst.add(null);
+							tableros.add((Tablero)tab.clone());
+						}
+					}else {
+						hacer = false;
+					}
+				}
+					if(hacer) {
 					try {
-						out.writeBytes("OK-Todo bien bro");
+						out.writeBytes("OK-Todo bien bro\r\n");
 						out.flush();
 						String resultao = in.readLine();
 						String[] resultaos = resultao.split("-");
@@ -584,40 +596,13 @@ public class TableroGrafico extends JFrame {
 							out.flush();
 							tableros = (List<Tablero>)in.readObject();
 							tabI = 0;
+							acabado = (Boolean)in.readObject();
 						}
 					}catch(IOException ex) {
 						ex.printStackTrace();
 					} catch (ClassNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
-				}else {
-					int resp = JOptionPane.showConfirmDialog(null, "Aún no ha realizado todas sus operaciones, ¿Está seguro?", "Atención", JOptionPane.YES_NO_OPTION);
-					if(resp == JOptionPane.YES_OPTION) {
-						for(int i = inst.size()-1; i<6;i++) {
-							inst.add(null);
-							tableros.add((Tablero)tab.clone());
-						}
-
-						try {
-							out.writeBytes("OK-Todo bien bro");
-							out.flush();
-							String resultao = in.readLine();
-							String[] resultaos = resultao.split("-");
-							if(resultaos[0].equals("SURR")) {
-								acabado=true;
-							}else {
-								out.writeObject(inst);
-								out.flush();
-								tableros = (List<Tablero>)in.readObject();
-								tabI=0;
-							}
-						}catch(IOException ex) {
-							ex.printStackTrace();
-						} catch (ClassNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
 					}
 				}
 			}

@@ -1,7 +1,9 @@
 package MD_Tablero;
+import java.io.Serializable;
+
 import Utilidades.Facción;
 
-public abstract class Ficha implements Cloneable {
+public abstract class Ficha implements Cloneable, Serializable{
     protected int daño;
 
     protected int vida;
