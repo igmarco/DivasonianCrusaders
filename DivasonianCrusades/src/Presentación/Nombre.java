@@ -2,25 +2,25 @@ package Presentación;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Component;
+import javax.swing.border.EmptyBorder;
 
 public class Nombre extends JFrame {
 
@@ -30,6 +30,7 @@ public class Nombre extends JFrame {
 	private JButton Aceptar;
 	private JButton Cancelar; 
 	/**/ private Socket s;
+	
 
 
 	/**
@@ -70,7 +71,7 @@ public class Nombre extends JFrame {
 					try {
 //						Socket s = new Socket("localhost",58000);
 						boolean azul;
-						DataInputStream in = new DataInputStream( s.getInputStream());
+						ObjectInputStream in = new ObjectInputStream( s.getInputStream());
 						DataOutputStream out = new DataOutputStream(s.getOutputStream());
 						lblEstado.setText("Buscando oponente..."); //T.T
 						String linea = in.readLine();
@@ -88,10 +89,15 @@ public class Nombre extends JFrame {
 						String name = in.readLine();
 						menu.habilitarContinuar();
 						tablero.setNombre(textField.getText(), name,azul);
+						//tablero.setIn(in);
+						tablero.setOut(out);
 						tablero.setVisible(true);
 						setVisible(false);
 					}catch(IOException ex) { 
 						lblEstado.setText("Error al conectar");
+						ex.printStackTrace();
+						menu.setVisible(true);
+						setVisible(false);
 					}
 				}
 				@Override

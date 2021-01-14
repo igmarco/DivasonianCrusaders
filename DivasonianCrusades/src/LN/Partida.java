@@ -68,7 +68,7 @@ public class Partida implements Runnable {
     public void run() {
     	
     	List<Tablero> tablerosDelTurno = new ArrayList<Tablero>();
-		
+
 		try {
 			
 			oos1 = new ObjectOutputStream(s1.getOutputStream());

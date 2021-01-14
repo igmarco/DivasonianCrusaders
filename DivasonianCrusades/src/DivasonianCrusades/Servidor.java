@@ -30,7 +30,7 @@ public class Servidor {
 				Socket s1 = ss.accept();
 				s1.setKeepAlive(true); //Creo que con esto se evita el hecho de que se pierda la conexión con tiempo de espera.
 				dos1 = new DataOutputStream(s1.getOutputStream());
-				dis1 = new DataInputStream(s1.getInputStream());
+
 				dos1.writeBytes("OK1\r\n");
 				dos1.flush();
 				
@@ -42,7 +42,8 @@ public class Servidor {
 				dos1.flush();
 				dos2.flush();
 				
-				dis2 = new DataInputStream(s2.getInputStream());
+				dis2 = new DataInputStream(s2.getInputStream());				
+				dis1 = new DataInputStream(s1.getInputStream());
 				String nombre1 = dis1.readLine();
 				String nombre2 = dis2.readLine();
 				dos1.writeBytes(nombre2+"\n\r");

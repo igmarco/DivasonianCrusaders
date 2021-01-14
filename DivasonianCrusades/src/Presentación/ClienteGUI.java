@@ -180,6 +180,7 @@ public class ClienteGUI extends JFrame {
 									//Ya está revisado
 									tablero = new TableroGrafico(main, s);
 									Nombre nom = new Nombre(main, tablero, s);
+
 									nom.setVisible(true);
 									
 								}

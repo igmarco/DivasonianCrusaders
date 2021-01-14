@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -62,6 +64,8 @@ public class TableroGrafico extends JFrame {
 	
 	private int turno;
 	
+	private int tabI;
+	
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
 	private JLabel Maniobra;
@@ -75,6 +79,7 @@ public class TableroGrafico extends JFrame {
 	
 	private boolean azul;
 	
+	private boolean acabado=false;
 	
 	private JTextArea txtCasilla;
 	private JTextArea txtFichaDef;
@@ -564,6 +569,59 @@ public class TableroGrafico extends JFrame {
 		contentPane.add(btnCancelar);
 
 		final JButton Rendirse = new JButton("");
+		Rendirse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(inst.size()==6) {
+					try {
+						out.writeBytes("OK-Todo bien bro");
+						out.flush();
+						String resultao = in.readLine();
+						String[] resultaos = resultao.split("-");
+						if(resultaos[0].equals("SURR")) {
+							acabado=true;
+						}else {
+							out.writeObject(inst);
+							out.flush();
+							tableros = (List<Tablero>)in.readObject();
+							tabI = 0;
+						}
+					}catch(IOException ex) {
+						ex.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}else {
+					int resp = JOptionPane.showConfirmDialog(null, "Aún no ha realizado todas sus operaciones, ¿Está seguro?", "Atención", JOptionPane.YES_NO_OPTION);
+					if(resp == JOptionPane.YES_OPTION) {
+						for(int i = inst.size()-1; i<6;i++) {
+							inst.add(null);
+							tableros.add((Tablero)tab.clone());
+						}
+
+						try {
+							out.writeBytes("OK-Todo bien bro");
+							out.flush();
+							String resultao = in.readLine();
+							String[] resultaos = resultao.split("-");
+							if(resultaos[0].equals("SURR")) {
+								acabado=true;
+							}else {
+								out.writeObject(inst);
+								out.flush();
+								tableros = (List<Tablero>)in.readObject();
+								tabI=0;
+							}
+						}catch(IOException ex) {
+							ex.printStackTrace();
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		});
 		Rendirse.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -584,8 +642,25 @@ public class TableroGrafico extends JFrame {
 		Operaciones.setFont(new Font("Consolas", Font.PLAIN, 13));
 		Operaciones.setBounds(825, 438, 77, 29);
 		contentPane.add(Operaciones);
-
+		
+		
+		final JButton btnAnteriorMovimiento = new JButton("");
 		final JButton btnSiguienteMovimiento = new JButton("");
+		btnSiguienteMovimiento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(tabI!=6) {
+					Tablero actual = tableros.get(tabI+1);
+					if(tabI==0) {
+						btnAnteriorMovimiento.setEnabled(true);
+					}
+					pintar(actual);
+					tabI++;
+					if(tabI==6) {
+						btnSiguienteMovimiento.setEnabled(false);
+					}
+				}
+			}
+		});
 		btnSiguienteMovimiento.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -612,7 +687,21 @@ public class TableroGrafico extends JFrame {
 		txtFichaAt.setBounds(977, 609, 71, 71);
 		contentPane.add(txtFichaAt);
 
-		final JButton btnAnteriorMovimiento = new JButton("");
+		btnAnteriorMovimiento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(tabI!=0) {
+					Tablero actual = tableros.get(tabI-1);
+					if(tabI==6) {
+						btnSiguienteMovimiento.setEnabled(true);
+					}
+					pintar(actual);
+					tabI--;
+					if(tabI==0) {
+						btnAnteriorMovimiento.setEnabled(false);
+					}
+				}
+			}
+		});
 		btnAnteriorMovimiento.setBackground(new Color(240, 230, 140));
 		btnAnteriorMovimiento.addMouseListener(new MouseAdapter() {
 			@Override
@@ -2283,15 +2372,6 @@ public class TableroGrafico extends JFrame {
 		return direccion;
     }
     
-    //Obtiene Object streams de la conexión con el servidor.
-    public void conseguirStreams() {
-		try {
-			out= new ObjectOutputStream(s.getOutputStream());
-			in= new ObjectInputStream(s.getInputStream());
-		}catch(IOException ex){
-			ex.printStackTrace();
-		}
-    }
     
     public void peinarEventos(int i) {
     	for(MouseListener ls : this.casillas[i].getMouseListeners()) {
@@ -2679,6 +2759,22 @@ public class TableroGrafico extends JFrame {
 		String todo = "Recursos\\"+defensor+"v"+atacante+color+"BC.png";
 		this.casillas[i].setIcon(new ImageIcon(todo));
 		this.casillas[i].setBackground(Color.white);
+	}
+	
+	public void setIn(DataInputStream in) {
+		try {
+			this.in= new ObjectInputStream(in);
+		}catch(IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public void setOut(DataOutputStream out) {
+		try {
+			this.out= new ObjectOutputStream(out);
+		}catch(IOException ex) {
+			ex.printStackTrace();
+		}
 	}
 	
 }
