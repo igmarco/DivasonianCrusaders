@@ -1,6 +1,9 @@
 package MD_Tablero;
 import java.io.Serializable;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import Utilidades.Facción;
 
 public class Nodo implements Cloneable,Serializable{
@@ -388,5 +391,21 @@ public class Nodo implements Cloneable,Serializable{
     	return clone;
     	
     }
+	
+	public Element getElemento(Document doc) {
+
+		Element nodoE = doc.createElement("Nodo");
+		
+		Element casillaE = this.casilla.getElemento(doc);
+		Element fichaDefensoraE = this.fichaDefensora.getElemento(doc);
+		Element fichaAtacanteE = this.fichaAtacante.getElemento(doc);
+		
+		nodoE.appendChild(casillaE);
+		nodoE.appendChild(fichaDefensoraE);
+		nodoE.appendChild(fichaAtacanteE);
+		
+		return nodoE;
+		
+	}
 
 }

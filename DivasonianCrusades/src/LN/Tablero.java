@@ -3,6 +3,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import MD_Tablero.Arquero;
 import MD_Tablero.Bárbaro;
 import MD_Tablero.Caballero;
@@ -832,5 +835,19 @@ public class Tablero implements Cloneable,Serializable{
 		nodos[casillaDestino].ponerFicha(freal);
 		
     }
+	
+	public Element getElemento(Document doc) {
+		
+		Element tableroE = doc.createElement("Tablero");
+		
+		for(int i = 0; i < 45; i++) {
+			
+			tableroE.appendChild(this.nodos[i].getElemento(doc));
+			
+		}
+		
+		return tableroE;
+		
+	}
     
 }

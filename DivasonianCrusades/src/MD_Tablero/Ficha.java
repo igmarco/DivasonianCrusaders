@@ -1,6 +1,9 @@
 package MD_Tablero;
 import java.io.Serializable;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import Utilidades.Facción;
 
 public abstract class Ficha implements Cloneable, Serializable{
@@ -158,6 +161,44 @@ public abstract class Ficha implements Cloneable, Serializable{
  		}
     	
     	return clone;
+    	
+    }
+    
+    public Element getElemento(Document doc) {
+        
+        Element FichaE = doc.createElement("Ficha");
+		
+        Element dañoE = doc.createElement("daño");
+        dañoE.appendChild(doc.createTextNode("" + this.daño));
+        
+        Element vidaE = doc.createElement("vida");
+        vidaE.appendChild(doc.createTextNode("" + this.vida));
+        
+        Element vidaMáximaE = doc.createElement("vidaMáxima");
+        vidaMáximaE.appendChild(doc.createTextNode("" + this.vidaMáxima))
+        ;
+        Element dañoVariableE = doc.createElement("dañoVariable");
+        dañoVariableE.appendChild(doc.createTextNode("" + this.dañoVariable));
+        
+        Element hachaDivasónicaE = this.hachaDivasónica.getElemento(doc);
+        
+        Element facciónE = doc.createElement("facción");
+        if(this.facción == Facción.Ambos) dañoE.appendChild(doc.createTextNode("Ambos"));
+        else if(this.facción == Facción.Facción1) dañoE.appendChild(doc.createTextNode("Facción1"));
+        else /* if(this.facción == Facción.Facción2)*/ dañoE.appendChild(doc.createTextNode("Facción2"));
+        
+        Element puedeMoverE = doc.createElement("puedeMover");
+        dañoE.appendChild(doc.createTextNode("" + this.puedeMover));
+		
+        FichaE.appendChild(dañoE);
+        FichaE.appendChild(vidaE);
+        FichaE.appendChild(vidaMáximaE);
+        FichaE.appendChild(dañoVariableE);
+        FichaE.appendChild(hachaDivasónicaE);
+        FichaE.appendChild(facciónE);
+        FichaE.appendChild(puedeMoverE);
+		
+		return FichaE;
     	
     }
 

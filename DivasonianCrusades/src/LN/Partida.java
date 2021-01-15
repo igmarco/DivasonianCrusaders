@@ -4,7 +4,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
 
 import MD_Instrucción.Disparo;
 import MD_Instrucción.Instrucción;
@@ -67,7 +72,7 @@ public class Partida implements Runnable {
     
     public void run() {
     	
-    	Tablero[] tablerosDelTurno = new Tablero[7]; //Lo ideal sería que fuese una List serializable.
+    	ArrayList<Tablero> tablerosDelTurno = new ArrayList<Tablero>(); //Lo ideal sería que fuese una List serializable.
 
 		try {
 			
@@ -117,11 +122,13 @@ public class Partida implements Runnable {
 					instrucciónFacción1 = (Instrucción) ois1.readObject();
 					instrucciónFacción2 = (Instrucción) ois2.readObject();
 					
+					tablerosDelTurno.add(this.tablero); //Tablero inicial
+					
 					for(movimiento = 0; movimiento < 6; movimiento++) {
 						
 						this.ejecutarOperación();
 						
-						tablerosDelTurno[movimiento] = this.tablero;
+						tablerosDelTurno.add(this.tablero); //Tablero del turno "movimiento"
 						
 					}
 					
@@ -129,7 +136,7 @@ public class Partida implements Runnable {
 					
 					this.resolverTurno();
 					
-					tablerosDelTurno[6] = this.tablero;
+					tablerosDelTurno.add(this.tablero); //Tablero tras resolver el turno
 					
 					this.mandarTableros(oos1, oos2, tablerosDelTurno);
 					
@@ -309,7 +316,7 @@ public class Partida implements Runnable {
     	
     }
 
-    public void mandarTableros(ObjectOutputStream oos1, ObjectOutputStream oos2, Tablero[] tablerosDelTurno) {
+    public void mandarTableros(ObjectOutputStream oos1, ObjectOutputStream oos2, ArrayList<Tablero> tablerosDelTurno) {
     	
     	//Abran sus sockets que les vamos a meter tremendos tableros
     	
@@ -329,6 +336,24 @@ public class Partida implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	
+    }
+    
+    public void guardarPartida(Tablero tablero, int turno, String nombre1, String nombre2) throws ParserConfigurationException {
+    	
+    	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+    	DocumentBuilder db = dbf.newDocumentBuilder();
+    	Document doc = db.newDocument();
+    	
+    	doc.appendChild(tablero.getElemento(doc));
+    	
+    	//Aquí seguimos
+    	
+    }
+    
+    public void cargarPartida() {
+    	
+    	
     	
     }
 

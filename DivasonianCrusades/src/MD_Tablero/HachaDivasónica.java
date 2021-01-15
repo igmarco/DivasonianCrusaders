@@ -2,6 +2,9 @@ package MD_Tablero;
 
 import java.io.Serializable;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public class HachaDivasónica implements Serializable {
     public int dañoExtra;
     
@@ -39,5 +42,30 @@ public class HachaDivasónica implements Serializable {
     	return vidaPorTurno + (int) Math.floor(Math.random()*2*(vidaPorTurnoVariable)-1);
     	
     }
+    
+    public Element getElemento(Document doc) {
+
+		Element HachaDivasónicaE = doc.createElement("HachaDivasónica");
+		
+		Element dañoExtraE = doc.createElement("dañoExtra");
+		dañoExtraE.appendChild(doc.createTextNode("" + this.dañoExtra));
+        
+        Element dañoExtraVariableE = doc.createElement("dañoExtraVariableE");
+        dañoExtraVariableE.appendChild(doc.createTextNode("" + this.dañoExtraVariable));
+        
+        Element vidaPorTurnoE = doc.createElement("vidaPorTurno");
+        vidaPorTurnoE.appendChild(doc.createTextNode("" + this.vidaPorTurno));
+        
+        Element vidaPorTurnoVariableE = doc.createElement("vidaPorTurnoVariable");
+        vidaPorTurnoVariableE.appendChild(doc.createTextNode("" + this.vidaPorTurnoVariable));
+		
+        HachaDivasónicaE.appendChild(dañoExtraE);
+        HachaDivasónicaE.appendChild(dañoExtraVariableE);
+        HachaDivasónicaE.appendChild(vidaPorTurnoE);
+        HachaDivasónicaE.appendChild(vidaPorTurnoVariableE);
+		
+		return HachaDivasónicaE;
+		
+	}
 
 }

@@ -51,19 +51,21 @@ public class TableroGrafico extends JFrame {
 
 	private JPanel contentPane;
 	
+	private int turno;
+	private int maniobra;
+	
 	private JButton btnMenu;
 	private final JButton btnDisparar= new JButton("");
 	private final JButton Mover= new JButton("");
 	private final JButton btnEsperar= new JButton("");
 	private final JButton btnCancelar= new JButton("");
+	private final JButton Listo= new JButton("");
 	/**/ private boolean introducirOperacionEnCurso= false;
 	
 	private ActionListener al;
 	
 	private List<Tablero> tableros;
-	private Tablero[] tablerosRecibidos; //Lo ideal sería que se reutilizase la lista tableros.
-	
-	private int turno;
+//	/**/ private Tablero[] tablerosRecibidos; //Lo ideal sería que se reutilizase la lista tableros.
 	
 	private int tabI;
 	
@@ -104,9 +106,10 @@ public class TableroGrafico extends JFrame {
 	 */
 	public TableroGrafico(final ClienteGUI menu, Socket s) {
 		this.turno=0;
+		this.maniobra = 0;
 		this.s=s;
 		this.tableros = new ArrayList<Tablero>();
-		this.tablerosRecibidos = new Tablero[7];
+//		/**/ this.tablerosRecibidos = new Tablero[7];
 		this.inst = new Instrucción();
 		tab = new Tablero();
 		this.tableros.add(tab);
@@ -394,10 +397,10 @@ public class TableroGrafico extends JFrame {
 		btnMenu.setBounds(42, 633, 179, 47);
 		contentPane.add(btnMenu);
 
-		JLabel lblNewLabel_2 = new JLabel("Turno: "+this.turno);
-		lblNewLabel_2.setFont(new Font("Consolas", Font.PLAIN, 14));
-		lblNewLabel_2.setBounds(231, 633, 119, 29);
-		contentPane.add(lblNewLabel_2);
+		JLabel Turno = new JLabel("Turno: "+this.turno);
+		Turno.setFont(new Font("Consolas", Font.PLAIN, 14));
+		Turno.setBounds(231, 633, 119, 29);
+		contentPane.add(Turno);
 
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
@@ -570,7 +573,6 @@ public class TableroGrafico extends JFrame {
 		btnCancelar.setBorder(null);
 		contentPane.add(btnCancelar);
 
-		final JButton Listo = new JButton("");
 		Listo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean hacer = true;
@@ -599,20 +601,18 @@ public class TableroGrafico extends JFrame {
 						}else {
 							out.writeObject(inst);
 							out.flush();
-							tablerosRecibidos = (Tablero[])in.readObject();
+							/**/ tableros = (ArrayList<Tablero>) in.readObject();
 							tabI = 0;
 							acabado = (Boolean)in.readObject();
 							
-							if(!acabado) {
+							if(acabado) {
 								
-								entrarEnModoMostradorDeManiobras();
-								
-							}
-							else {
-								
-								
+								//AQUÍ HABRÁ QUE HACER COSAS. SI HA ACABADO NO PODEMOS VOLVER A LA SITUACIÓN DEL PRINCIPIO
+								//NAH, NO TE VOY A MENTIR, ANDO MÁS PERDIDO QUE AGUILAR EN EL BANQUETE DE UNA BODA
+								//BTW, Jose, SI LLEGAS A CARGAR JUSTO ESTE COMMIT ESPECÍFICO Y LLEGAS AQUÍ, QUE SEPAS QUE SABEMOS QUE ERAS PORTERO Y QUE ERES UN CRACK
 								
 							}
+								
 							
 						}
 					}catch(IOException ex) {
@@ -650,14 +650,14 @@ public class TableroGrafico extends JFrame {
 		final JButton btnSiguienteMovimiento = new JButton("");
 		btnSiguienteMovimiento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(tabI!=6) {
+				if(tabI!=7) {
 					Tablero actual = tableros.get(tabI+1);
 					if(tabI==0) {
 						btnAnteriorMovimiento.setEnabled(true);
 					}
 					pintar(actual);
 					tabI++;
-					if(tabI==6) {
+					if(tabI==7) {
 						btnSiguienteMovimiento.setEnabled(false);
 					}
 				}
@@ -679,7 +679,7 @@ public class TableroGrafico extends JFrame {
 		btnSiguienteMovimiento.setBounds(555, 633, 179, 47);
 		contentPane.add(btnSiguienteMovimiento);
 
-		Maniobra = new JLabel("Maniobra: "+/*this.inst.size()*/ "0");
+		Maniobra = new JLabel("Maniobra: "+/*this.inst.size()*/ this.maniobra);
 		Maniobra.setFont(new Font("Consolas", Font.PLAIN, 14));
 		Maniobra.setBounds(231, 651, 119, 29);
 		contentPane.add(Maniobra);
@@ -693,7 +693,7 @@ public class TableroGrafico extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if(tabI!=0) {
 					Tablero actual = tableros.get(tabI-1);
-					if(tabI==6) {
+					if(tabI==7) {
 						btnSiguienteMovimiento.setEnabled(true);
 					}
 					pintar(actual);
@@ -719,25 +719,6 @@ public class TableroGrafico extends JFrame {
 		btnAnteriorMovimiento.setBounds(366, 633, 179, 47);
 		btnAnteriorMovimiento.setBorder(null);
 		contentPane.add(btnAnteriorMovimiento);
-	}
-	
-	public void entrarEnModoMostradorDeManiobras() {
-		
-		//asdf
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 
 	public void setNombre(String nombre1, String nombre2, boolean azul) {

@@ -2,6 +2,11 @@ package MD_Tablero;
 
 import java.io.Serializable;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import Utilidades.Facción;
+
 public abstract class Casilla implements Cloneable, Serializable {
 	protected HachaDivasónica hachaDivasónica;
 	protected int curaciónAuxiliar;
@@ -83,6 +88,22 @@ public abstract class Casilla implements Cloneable, Serializable {
  		}
     	
     	return clone;
+    	
+    }
+    
+    public Element getElemento(Document doc) {
+        
+        Element CasillaE = doc.createElement("Ficha");;
+        
+        Element hachaDivasónicaE = this.hachaDivasónica.getElemento(doc);
+        
+        Element curaciónAuxiliarE = doc.createElement("curaciónAuxiliar");
+        curaciónAuxiliarE.appendChild(doc.createTextNode("" + this.curaciónAuxiliar));
+		
+        CasillaE.appendChild(hachaDivasónicaE);
+        CasillaE.appendChild(curaciónAuxiliarE);
+		
+		return CasillaE;
     	
     }
 
