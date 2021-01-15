@@ -170,7 +170,7 @@ public class Nodo implements Cloneable,Serializable{
     	
     	this.comprobarMuertes();
     	
-    	this.fichaAtacante.puedeMover = true;
+    	if(this.fichaAtacante != null) this.fichaAtacante.puedeMover = true;
     	
     	if(this.casilla.tieneHacha() && this.fichaDefensora != null && this.fichaAtacante == null) {
     		
@@ -208,8 +208,8 @@ public class Nodo implements Cloneable,Serializable{
     	
     	if(this.casilla instanceof Curación) {
     		
-    		this.fichaDefensora.curarse(((Curación) this.casilla).curar());
-        	this.fichaAtacante.curarse(((Curación) this.casilla).curar());
+    		if(this.fichaDefensora != null) this.fichaDefensora.curarse(((Curación) this.casilla).curar());
+    		if(this.fichaAtacante != null) this.fichaAtacante.curarse(((Curación) this.casilla).curar());
     		
     	}
     	
@@ -217,15 +217,15 @@ public class Nodo implements Cloneable,Serializable{
 
     private void sufrirHacha() {
     	
-    	this.fichaDefensora.sufrirHacha();
-    	this.fichaAtacante.sufrirHacha();
+    	if(this.fichaDefensora != null) this.fichaDefensora.sufrirHacha();
+    	if(this.fichaAtacante != null) this.fichaAtacante.sufrirHacha();
     	
     }
 
     public void recibirDisparo(int daño) {
     	
-    	this.fichaDefensora.sufrirDaño(daño);
-    	this.fichaAtacante.sufrirDaño(daño);
+    	if(this.fichaDefensora != null)this.fichaDefensora.sufrirDaño(daño);
+    	if(this.fichaAtacante != null)this.fichaAtacante.sufrirDaño(daño);
     	
     	this.comprobarMuertes();
     	

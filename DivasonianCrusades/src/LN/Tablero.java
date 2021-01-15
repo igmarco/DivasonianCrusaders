@@ -503,85 +503,83 @@ public class Tablero implements Cloneable,Serializable{
     		
     	}
     	
-    	int j;
-    	
     	if(whereIsTheArcher == 0) {
 			
-			j = posiciones.remove(8);
-			j = posiciones.remove(17);
+			posiciones.remove((Integer) 8);
+			posiciones.remove((Integer) 17);
 			
 		}
 		else if(whereIsTheArcher == 9) {
 			
-			j = posiciones.remove(8);
-			j = posiciones.remove(17);
-			j = posiciones.remove(26);
+			posiciones.remove((Integer) 8);
+			posiciones.remove((Integer) 17);
+			posiciones.remove((Integer) 26);
 			
 		}
 		else if(whereIsTheArcher == 18) {
 			
-			j = posiciones.remove(17);
-			j = posiciones.remove(26);
-			j = posiciones.remove(35);
+			posiciones.remove((Integer) 17);
+			posiciones.remove((Integer) 26);
+			posiciones.remove((Integer) 35);
 			
 		}
 		else if(whereIsTheArcher == 27) {
 			
-			j = posiciones.remove(26);
-			j = posiciones.remove(35);
-			j = posiciones.remove(44);
+			posiciones.remove((Integer) 26);
+			posiciones.remove((Integer) 35);
+			posiciones.remove((Integer) 44);
 			
 		}
 		else if(whereIsTheArcher == 36) {
 			
-			j = posiciones.remove(35);
-			j = posiciones.remove(44);
+			posiciones.remove((Integer) 35);
+			posiciones.remove((Integer) 44);
 			
 		}
 		else if(whereIsTheArcher == 8) {
 			
-			j = posiciones.remove(0);
-			j = posiciones.remove(1);
-			j = posiciones.remove(9);
-			j = posiciones.remove(10);
+			posiciones.remove((Integer) 0);
+			posiciones.remove((Integer) 1);
+			posiciones.remove((Integer) 9);
+			posiciones.remove((Integer) 10);
 			
 		}
 		else if(whereIsTheArcher == 17) {
 			
-			j = posiciones.remove(0);
-			j = posiciones.remove(1);
-			j = posiciones.remove(9);
-			j = posiciones.remove(10);
-			j = posiciones.remove(18);
-			j = posiciones.remove(19);
+			posiciones.remove((Integer) 0);
+			posiciones.remove((Integer) 1);
+			posiciones.remove((Integer) 9);
+			posiciones.remove((Integer) 10);
+			posiciones.remove((Integer) 18);
+			posiciones.remove((Integer) 19);
 			
 		}
 		else if(whereIsTheArcher == 26) {
 
-			j = posiciones.remove(9);
-			j = posiciones.remove(10);
-			j = posiciones.remove(18);
-			j = posiciones.remove(19);
-			j = posiciones.remove(27);
-			j = posiciones.remove(28);
+			posiciones.remove((Integer) 9);
+			posiciones.remove((Integer) 10);
+			posiciones.remove((Integer) 18);
+			posiciones.remove((Integer) 19);
+			posiciones.remove((Integer) 27);
+			posiciones.remove((Integer) 28);
 			
 		}
 		else if(whereIsTheArcher == 35) {
 			
-			j = posiciones.remove(18);
-			j = posiciones.remove(19);
-			j = posiciones.remove(27);
-			j = posiciones.remove(28);
-			j = posiciones.remove(36);
-			j = posiciones.remove(37);
+			posiciones.remove((Integer) 18);
+			posiciones.remove((Integer) 19);
+			posiciones.remove((Integer) 27);
+			posiciones.remove((Integer) 28);
+			posiciones.remove((Integer) 36);
+			posiciones.remove((Integer) 37);
 			
 		}
 		else if(whereIsTheArcher == 44) {
 			
-			j = posiciones.remove(27);
-			j = posiciones.remove(28);
-			j = posiciones.remove(36);
-			j = posiciones.remove(37);
+			posiciones.remove((Integer) 27);
+			posiciones.remove((Integer) 28);
+			posiciones.remove((Integer) 36);
+			posiciones.remove((Integer) 37);
 			
 		}
     	
@@ -589,7 +587,7 @@ public class Tablero implements Cloneable,Serializable{
     		
     		if(posiciones.get(i) < 0 || posiciones.get(i) >= 45) {
     			
-    			j = posiciones.remove(i);
+    			posiciones.remove((Integer) i);
     			
     		}
     		
@@ -806,6 +804,33 @@ public class Tablero implements Cloneable,Serializable{
     	
     	return clone;
     	
+    }
+    
+    //Métodos "mover" para que no se resulva la carga ni los daños:
+    
+    public void moverFichaGraficamente(Ficha f, Dirección d) {
+    		
+    		int desde = this.dóndeEstá(f);
+    		int hasta; //Ojito porque aquí hay que pasar de coordenadas a posición en el vector.
+    		
+    		if(d == Dirección.norte) hasta = desde - 9;
+    		else if(d == Dirección.sur) hasta = desde + 9;
+    		else if(d == Dirección.este) hasta = desde + 1;
+    		else if(d == Dirección.oeste) hasta = desde - 1;
+    		else if(d == Dirección.noreste) hasta = desde - 8;
+    		else if(d == Dirección.noroeste) hasta = desde - 10;
+    		else if(d == Dirección.sureste) hasta = desde + 10;
+    		else /*if(d == Dirección.suroeste)*/ hasta = desde + 8;
+    		
+    		this.moverFichaGraficamente(f, desde, hasta);
+    	
+    }
+    
+	public void moverFichaGraficamente(Ficha f, int casillaOrigen, int casillaDestino) {
+		
+		Ficha freal = nodos[casillaOrigen].quitarFicha(f);
+		nodos[casillaDestino].ponerFicha(freal);
+		
     }
     
 }

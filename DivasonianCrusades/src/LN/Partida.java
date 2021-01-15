@@ -67,7 +67,7 @@ public class Partida implements Runnable {
     
     public void run() {
     	
-    	List<Tablero> tablerosDelTurno = new ArrayList<Tablero>();
+    	Tablero[] tablerosDelTurno = new Tablero[7]; //Lo ideal sería que fuese una List serializable.
 
 		try {
 			
@@ -117,13 +117,11 @@ public class Partida implements Runnable {
 					instrucciónFacción1 = (Instrucción) ois1.readObject();
 					instrucciónFacción2 = (Instrucción) ois2.readObject();
 					
-					tablerosDelTurno.clear();
-					
 					for(movimiento = 0; movimiento < 6; movimiento++) {
 						
 						this.ejecutarOperación();
 						
-						tablerosDelTurno.add(this.tablero);
+						tablerosDelTurno[movimiento] = this.tablero;
 						
 					}
 					
@@ -131,9 +129,11 @@ public class Partida implements Runnable {
 					
 					this.resolverTurno();
 					
-					tablerosDelTurno.add(this.tablero);
+					tablerosDelTurno[6] = this.tablero;
 					
 					this.mandarTableros(oos1, oos2, tablerosDelTurno);
+					
+					System.out.println("Pum! Tableros mandados");
 					
 					haTerminado = this.tablero.haTerminado();
 					
@@ -309,7 +309,7 @@ public class Partida implements Runnable {
     	
     }
 
-    public void mandarTableros(ObjectOutputStream oos1, ObjectOutputStream oos2, List<Tablero> tablerosDelTurno) {
+    public void mandarTableros(ObjectOutputStream oos1, ObjectOutputStream oos2, Tablero[] tablerosDelTurno) {
     	
     	//Abran sus sockets que les vamos a meter tremendos tableros
     	

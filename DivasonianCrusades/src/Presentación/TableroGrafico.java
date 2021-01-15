@@ -61,6 +61,7 @@ public class TableroGrafico extends JFrame {
 	private ActionListener al;
 	
 	private List<Tablero> tableros;
+	private Tablero[] tablerosRecibidos; //Lo ideal sería que se reutilizase la lista tableros.
 	
 	private int turno;
 	
@@ -105,6 +106,7 @@ public class TableroGrafico extends JFrame {
 		this.turno=0;
 		this.s=s;
 		this.tableros = new ArrayList<Tablero>();
+		this.tablerosRecibidos = new Tablero[7];
 		this.inst = new Instrucción();
 		tab = new Tablero();
 		this.tableros.add(tab);
@@ -568,8 +570,8 @@ public class TableroGrafico extends JFrame {
 		btnCancelar.setBorder(null);
 		contentPane.add(btnCancelar);
 
-		final JButton Rendirse = new JButton("");
-		Rendirse.addActionListener(new ActionListener() {
+		final JButton Listo = new JButton("");
+		Listo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean hacer = true;
 				if(inst.size()!=6) {
@@ -591,12 +593,27 @@ public class TableroGrafico extends JFrame {
 						String[] resultaos = resultao.split("-");
 						if(resultaos[0].equals("SURR")) {
 							acabado=true;
+							
+							//HABRÁ QUE MANDAR UN MENSAJE DE VICTORIA O ALGO SIMILAR
+							
 						}else {
 							out.writeObject(inst);
 							out.flush();
-							tableros = (List<Tablero>)in.readObject();
+							tablerosRecibidos = (Tablero[])in.readObject();
 							tabI = 0;
 							acabado = (Boolean)in.readObject();
+							
+							if(!acabado) {
+								
+								entrarEnModoMostradorDeManiobras();
+								
+							}
+							else {
+								
+								
+								
+							}
+							
 						}
 					}catch(IOException ex) {
 						ex.printStackTrace();
@@ -607,21 +624,21 @@ public class TableroGrafico extends JFrame {
 				}
 			}
 		});
-		Rendirse.addMouseListener(new MouseAdapter() {
+		Listo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				Rendirse.setIcon(new ImageIcon("Recursos\\RendirseS.png"));
+				Listo.setIcon(new ImageIcon("Recursos\\RendirseS.png")); //ATENCIÓN, ESTO DEBERÍA SER ListoS
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				Rendirse.setIcon(new ImageIcon("Recursos\\Rendirse.png"));
+				Listo.setIcon(new ImageIcon("Recursos\\Rendirse.png")); //ATENCIÓN, ESTO DEBERÍA SER Listo
 			}
 		});
-		Rendirse.setIcon(new ImageIcon("Recursos\\Rendirse.png"));
-		Rendirse.setBackground(new Color(240, 230, 140));
-		Rendirse.setBounds(902, 438, 100, 29);
-		Rendirse.setBorder(null);
-		contentPane.add(Rendirse);
+		Listo.setIcon(new ImageIcon("Recursos\\Rendirse.png")); //ATENCIÓN, ESTO DEBERÍA SER Listo
+		Listo.setBackground(new Color(240, 230, 140));
+		Listo.setBounds(902, 438, 100, 29);
+		Listo.setBorder(null);
+		contentPane.add(Listo);
 
 		Operaciones = new JLabel("Ops.: "+this.inst.size()+"/6");
 		Operaciones.setFont(new Font("Consolas", Font.PLAIN, 13));
@@ -702,6 +719,25 @@ public class TableroGrafico extends JFrame {
 		btnAnteriorMovimiento.setBounds(366, 633, 179, 47);
 		btnAnteriorMovimiento.setBorder(null);
 		contentPane.add(btnAnteriorMovimiento);
+	}
+	
+	public void entrarEnModoMostradorDeManiobras() {
+		
+		//asdf
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 	public void setNombre(String nombre1, String nombre2, boolean azul) {
@@ -2109,7 +2145,7 @@ public class TableroGrafico extends JFrame {
 ////    	Tablero tab2 = tab;
 //    	/**/ Tablero tab2 = (Tablero) tab.clone();
 //    	this.tab = tab2;
-//    	tab2.moverFicha(f, direccion);
+//    	tab2.moverFichaGraficamente(f, direccion);
 //    	this.tableros.add(tab2);
 //		botonesMoverFase1(true);
 //		for(int i=0; i<45;i++) {
@@ -2190,12 +2226,14 @@ public class TableroGrafico extends JFrame {
     			if(!estado) {
     				this.casillas[posicion].addMouseListener(eventoFicha);
     			}else {
-    				this.casillas[posicion].removeMouseListener(eventoFicha);
+//    				this.casillas[posicion].removeMouseListener(eventoFicha);
     			}
     		}
     	}
-    	if(!estado) {
+    	if(/*!*/estado) {
+    		/**/ this.limpiarActionFichas(casFichas);
     		this.limpiarActionDeshacer();
+    		/**/ this.pintar(tab);
     	}
     }
     
@@ -2207,6 +2245,15 @@ public class TableroGrafico extends JFrame {
     			for(MouseListener ml :this.casillas[pos].getMouseListeners()) {
     				this.casillas[pos].removeMouseListener(ml);
     			}
+    		}
+    	}
+    }
+    
+    public void deshabilitarTodo (boolean estado) {
+    	for(Integer pos = 0; pos < 45; pos++) {
+    		this.casillas[pos].setEnabled(estado);
+    		for(MouseListener ml :this.casillas[pos].getMouseListeners()) {
+    			this.casillas[pos].removeMouseListener(ml);
     		}
     	}
     }
@@ -2256,7 +2303,8 @@ public class TableroGrafico extends JFrame {
     		}
     	}
     	if(!estado) {
-			this.limpiarActionFichas();
+//			this.limpiarActionFichas();
+			/**/ this.limpiarActionFichas(posiciones);
 			this.limpiarActionDeshacer();
 			this.pintar(tab);
     	}
@@ -2266,7 +2314,7 @@ public class TableroGrafico extends JFrame {
     	this.inst.add(new Movimiento(f,direccion));
     	this.Operaciones.setText("Ops.: "+this.inst.size()+"/6");
     	Tablero tabCopia = (Tablero)this.tab.clone();
-    	tabCopia.moverFicha(f, direccion);
+    	tabCopia.moverFichaGraficamente(f, direccion);
     	this.tableros.add(tabCopia);
     	this.tab = tabCopia;
 		if(this.inst.size()!=6) {
@@ -2294,6 +2342,15 @@ public class TableroGrafico extends JFrame {
     public void limpiarActionFichas() {
 		List<Integer> posFichas = this.tab.quiénesPuedenMover(this.faccion);
 		for(Integer posficha : posFichas) {
+			for(MouseListener al : this.casillas[posficha].getMouseListeners()) {
+				this.casillas[posficha].removeMouseListener(al);
+			}
+		}
+    }
+    
+    //Con el método anterior limpiabas la acción de las que pueden mover. Con este, a las que se puede mover (que es lo que deseamos).
+    public void limpiarActionFichas(List<Integer> posiciones) {
+		for(Integer posficha : posiciones) {
 			for(MouseListener al : this.casillas[posficha].getMouseListeners()) {
 				this.casillas[posficha].removeMouseListener(al);
 			}

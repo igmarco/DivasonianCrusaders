@@ -1,6 +1,8 @@
 package MD_Tablero;
 
-public class HachaDivasónica {
+import java.io.Serializable;
+
+public class HachaDivasónica implements Serializable {
     public int dañoExtra;
     
     public int dañoExtraVariable;
