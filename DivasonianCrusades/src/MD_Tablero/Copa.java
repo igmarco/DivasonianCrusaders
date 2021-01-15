@@ -1,4 +1,7 @@
 package MD_Tablero;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import Utilidades.Facción;
 
 public class Copa extends Casilla {
@@ -59,5 +62,24 @@ public class Copa extends Casilla {
 		else return true;
 		
 	}
+    
+    public Element getElemento(Document doc) {
+        
+        Element CasillaE = super.getElemento(doc);
+        
+        Element facciónE = doc.createElement("facción");
+        if(this.facción == Facción.Ambos) facciónE.appendChild(doc.createTextNode("Ambos"));
+        else if(this.facción == Facción.Facción1) facciónE.appendChild(doc.createTextNode("Facción1"));
+        else /* if(this.facción == Facción.Facción2)*/ facciónE.appendChild(doc.createTextNode("Facción2"));
+        
+        Element vidaE = doc.createElement("vida");
+        vidaE.appendChild(doc.createTextNode("" + this.vida));
+		
+        CasillaE.appendChild(vidaE);
+        CasillaE.appendChild(facciónE);
+		
+		return CasillaE;
+    	
+    }
 
 }

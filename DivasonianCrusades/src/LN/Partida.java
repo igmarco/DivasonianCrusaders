@@ -1,13 +1,21 @@
 package LN;
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 
@@ -72,7 +80,7 @@ public class Partida implements Runnable {
     
     public void run() {
     	
-    	ArrayList<Tablero> tablerosDelTurno = new ArrayList<Tablero>(); //Lo ideal sería que fuese una List serializable.
+    	ArrayList<Tablero> tablerosDelTurno = new ArrayList<Tablero>();
 
 		try {
 			
@@ -182,13 +190,13 @@ public class Partida implements Runnable {
 
 //    public void iniciarPartida(String nombre1, String nombre2) {
 //    	
-//    	//Preparamos los socketes y todo eso para iniciarse la partidella.
+//    	//Preparamos los socketes y todo para la partida.
 //    	
 //    }
 
 //    public void finalizarPartida() {
 //    	
-//    	//Cerrando el chiringuito y los sockets.
+//    	//Cerrando sockets.
 //    	
 //    }
 
@@ -206,7 +214,7 @@ public class Partida implements Runnable {
         		
         	}
     		else {
-    			
+    			 
     			//Hace cosas solo el 2
     			if(op2 instanceof Movimiento) {
     				
@@ -339,7 +347,7 @@ public class Partida implements Runnable {
     	
     }
     
-    public void guardarPartida(Tablero tablero, int turno, String nombre1, String nombre2) throws ParserConfigurationException {
+    public void guardarPartida(Tablero tablero, int turno, String nombre1, String nombre2, String nombrePartida) throws ParserConfigurationException, TransformerException {
     	
     	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
     	DocumentBuilder db = dbf.newDocumentBuilder();
@@ -347,7 +355,19 @@ public class Partida implements Runnable {
     	
     	doc.appendChild(tablero.getElemento(doc));
     	
-    	//Aquí seguimos
+    	TransformerFactory tf = TransformerFactory.newInstance();
+    	Transformer t = tf.newTransformer();
+    	DOMSource source = new DOMSource(doc);
+    	File carpeta = new File("PartidasGuardadas");
+    	if (!carpeta.exists()) {
+            if (carpeta.mkdirs()) {
+                System.out.println("Directorio creado");
+            } else {
+                System.out.println("Error al crear directorio");
+            }
+        }
+    	StreamResult result = new StreamResult(new File("PartidasGuardadas//" + nombrePartida + "_" + Calendar.getInstance().getTime().toString().replaceAll(" ", "_").replaceAll(":", "-") + ".xml"));
+    	t.transform(source , result);
     	
     }
     

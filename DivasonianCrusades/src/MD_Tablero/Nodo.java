@@ -188,7 +188,7 @@ public class Nodo implements Cloneable,Serializable{
     		
     	}
     	
-    	if (this.casilla instanceof Copa && this.fichaDefensora != null && this.fichaAtacante == null && this.fichaAtacante.getFacción() != ((Copa) this.casilla).getFacción()) {
+    	if (this.casilla instanceof Copa && this.fichaDefensora != null && this.fichaAtacante == null && this.fichaDefensora.getFacción() != ((Copa) this.casilla).getFacción()) { 
     		
     		((Copa) this.casilla).sufrirDaño(this.fichaDefensora.realizarAtaque());
     		
@@ -396,13 +396,20 @@ public class Nodo implements Cloneable,Serializable{
 
 		Element nodoE = doc.createElement("Nodo");
 		
-		Element casillaE = this.casilla.getElemento(doc);
-		Element fichaDefensoraE = this.fichaDefensora.getElemento(doc);
-		Element fichaAtacanteE = this.fichaAtacante.getElemento(doc);
+		if(this.casilla != null) {
+			Element casillaE = this.casilla.getElemento(doc);
+			nodoE.appendChild(casillaE);
+		}
 		
-		nodoE.appendChild(casillaE);
-		nodoE.appendChild(fichaDefensoraE);
-		nodoE.appendChild(fichaAtacanteE);
+		if(this.fichaDefensora != null) {
+			Element fichaDefensoraE = this.fichaDefensora.getElemento(doc);
+			nodoE.appendChild(fichaDefensoraE);
+		}
+		
+		if(this.fichaAtacante != null) {
+			Element fichaAtacanteE = this.fichaAtacante.getElemento(doc);
+			nodoE.appendChild(fichaAtacanteE);
+		}
 		
 		return nodoE;
 		

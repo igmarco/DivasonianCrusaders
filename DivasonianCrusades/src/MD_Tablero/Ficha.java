@@ -167,6 +167,8 @@ public abstract class Ficha implements Cloneable, Serializable{
     public Element getElemento(Document doc) {
         
         Element FichaE = doc.createElement("Ficha");
+        
+        FichaE.setAttribute("tipo", this.getClass().getSimpleName());
 		
         Element dañoE = doc.createElement("daño");
         dañoE.appendChild(doc.createTextNode("" + this.daño));
@@ -180,21 +182,23 @@ public abstract class Ficha implements Cloneable, Serializable{
         Element dañoVariableE = doc.createElement("dañoVariable");
         dañoVariableE.appendChild(doc.createTextNode("" + this.dañoVariable));
         
-        Element hachaDivasónicaE = this.hachaDivasónica.getElemento(doc);
+        if(this.hachaDivasónica != null) {
+        	Element hachaDivasónicaE = this.hachaDivasónica.getElemento(doc);
+        	FichaE.appendChild(hachaDivasónicaE);
+		}
         
         Element facciónE = doc.createElement("facción");
-        if(this.facción == Facción.Ambos) dañoE.appendChild(doc.createTextNode("Ambos"));
-        else if(this.facción == Facción.Facción1) dañoE.appendChild(doc.createTextNode("Facción1"));
-        else /* if(this.facción == Facción.Facción2)*/ dañoE.appendChild(doc.createTextNode("Facción2"));
+        if(this.facción == Facción.Ambos) facciónE.appendChild(doc.createTextNode("Ambos"));
+        else if(this.facción == Facción.Facción1) facciónE.appendChild(doc.createTextNode("Facción1"));
+        else /* if(this.facción == Facción.Facción2)*/ facciónE.appendChild(doc.createTextNode("Facción2"));
         
         Element puedeMoverE = doc.createElement("puedeMover");
-        dañoE.appendChild(doc.createTextNode("" + this.puedeMover));
+        puedeMoverE.appendChild(doc.createTextNode("" + this.puedeMover));
 		
         FichaE.appendChild(dañoE);
         FichaE.appendChild(vidaE);
         FichaE.appendChild(vidaMáximaE);
         FichaE.appendChild(dañoVariableE);
-        FichaE.appendChild(hachaDivasónicaE);
         FichaE.appendChild(facciónE);
         FichaE.appendChild(puedeMoverE);
 		

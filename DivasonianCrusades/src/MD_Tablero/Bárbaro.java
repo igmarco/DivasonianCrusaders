@@ -1,5 +1,8 @@
 package MD_Tablero;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import Utilidades.Facción;
 
 public class Bárbaro extends Ficha {

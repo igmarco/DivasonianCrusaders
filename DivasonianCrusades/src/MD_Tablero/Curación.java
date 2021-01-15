@@ -1,5 +1,8 @@
 package MD_Tablero;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public class Curación extends Casilla {
 
 	private int curación;
@@ -59,5 +62,26 @@ public class Curación extends Casilla {
 		else return true;
 		
 	}
+    
+    public Element getElemento(Document doc) {
+        
+        Element CasillaE = super.getElemento(doc);
+        
+        Element curaciónE = doc.createElement("curación");
+        curaciónE.appendChild(doc.createTextNode("" + this.curación));
+        
+        Element curaciónVariableE = doc.createElement("curaciónVariable");
+        curaciónVariableE.appendChild(doc.createTextNode("" + this.curaciónVariable));
+        
+        Element identificadorE = doc.createElement("identificador");
+        identificadorE.appendChild(doc.createTextNode("" + this.identificador));
+		
+        CasillaE.appendChild(curaciónE);
+        CasillaE.appendChild(curaciónVariableE);
+        CasillaE.appendChild(identificadorE);
+		
+		return CasillaE;
+    	
+    }
 
 }

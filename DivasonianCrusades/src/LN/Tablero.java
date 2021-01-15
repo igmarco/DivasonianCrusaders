@@ -106,21 +106,23 @@ public class Tablero implements Cloneable,Serializable{
     }
     
     //VIENE DEL ANTIGUO Ejecutor, SIRVE PARA MOVER CON UNA DIRECCIÓN EN LUGAR DE CON LOS intS.
-    public void moverFicha(Ficha f, Dirección d) {
+    public void moverFicha(Ficha f, Dirección d) { 
     		
-    		int desde = this.dóndeEstá(f);
-    		int hasta; //Ojito porque aquí hay que pasar de coordenadas a posición en el vector.
+//    	System.out.println(this.dóndeEstá(f) + " " + d);
+    	
+    	int desde = this.dóndeEstá(f);
+    	int hasta; //Ojito porque aquí hay que pasar de coordenadas a posición en el vector.
     		
-    		if(d == Dirección.norte) hasta = desde - 9;
-    		else if(d == Dirección.sur) hasta = desde + 9;
-    		else if(d == Dirección.este) hasta = desde + 1;
-    		else if(d == Dirección.oeste) hasta = desde - 1;
-    		else if(d == Dirección.noreste) hasta = desde - 8;
-    		else if(d == Dirección.noroeste) hasta = desde - 10;
-    		else if(d == Dirección.sureste) hasta = desde + 10;
-    		else /*if(d == Dirección.suroeste)*/ hasta = desde + 8;
+    	if(d == Dirección.norte) hasta = desde - 9;
+    	else if(d == Dirección.sur) hasta = desde + 9;
+    	else if(d == Dirección.este) hasta = desde + 1;
+    	else if(d == Dirección.oeste) hasta = desde - 1;
+    	else if(d == Dirección.noreste) hasta = desde - 8;
+    	else if(d == Dirección.noroeste) hasta = desde - 10;
+    	else if(d == Dirección.sureste) hasta = desde + 10;
+    	else /*if(d == Dirección.suroeste)*/ hasta = desde + 8;
     		
-    		this.moverFicha(f, desde, hasta);
+    	this.moverFicha(f, desde, hasta);
     	
     }
     

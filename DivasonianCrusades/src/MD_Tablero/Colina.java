@@ -1,5 +1,8 @@
 package MD_Tablero;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public class Colina extends Casilla {
 	private int dañoExtra;
 
@@ -21,6 +24,19 @@ public class Colina extends Casilla {
     public int getDañoExtra() {
     	
     	return this.dañoExtra;
+    	
+    }
+    
+    public Element getElemento(Document doc) {
+        
+        Element CasillaE = super.getElemento(doc);
+        
+        Element dañoExtraE = doc.createElement("dañoExtra");
+        dañoExtraE.appendChild(doc.createTextNode("" + this.dañoExtra));
+		
+        CasillaE.appendChild(dañoExtraE);
+		
+		return CasillaE;
     	
     }
 	

@@ -1,11 +1,12 @@
 package MD_Tablero;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public class Catapulta extends Casilla {
 	private int dañoProyectiles;
 
 	private int dañoProyectilesVariable;
-
-	private int rango;
 	
 	private int identificador;
 	
@@ -59,5 +60,26 @@ public class Catapulta extends Casilla {
 		else return true;
 		
 	}
+    
+    public Element getElemento(Document doc) {
+        
+        Element CasillaE = super.getElemento(doc);
+        
+        Element dañoProyectilesE = doc.createElement("dañoProyectiles");
+        dañoProyectilesE.appendChild(doc.createTextNode("" + this.dañoProyectiles));
+        
+        Element dañoProyectilesVariableE = doc.createElement("dañoProyectilesVariable");
+        dañoProyectilesVariableE.appendChild(doc.createTextNode("" + this.dañoProyectilesVariable));
+        
+        Element identificadorE = doc.createElement("identificador");
+        identificadorE.appendChild(doc.createTextNode("" + this.identificador));
+		
+        CasillaE.appendChild(dañoProyectilesE);
+        CasillaE.appendChild(dañoProyectilesVariableE);
+        CasillaE.appendChild(identificadorE);
+		
+		return CasillaE;
+    	
+    }
 
 }

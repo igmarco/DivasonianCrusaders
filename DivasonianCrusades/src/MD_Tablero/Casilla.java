@@ -30,7 +30,7 @@ public abstract class Casilla implements Cloneable, Serializable {
 		
 		this.hachaDivasónica = hachaDivasónica;
 		
-		if(casillaDeCura) {/* this.curaciónAuxiliar = ; */}
+		if(casillaDeCura) this.curaciónAuxiliar = 5;
 		else this.curaciónAuxiliar = 0;
 		
 	}
@@ -93,14 +93,18 @@ public abstract class Casilla implements Cloneable, Serializable {
     
     public Element getElemento(Document doc) {
         
-        Element CasillaE = doc.createElement("Ficha");;
+        Element CasillaE = doc.createElement("Casilla");
         
-        Element hachaDivasónicaE = this.hachaDivasónica.getElemento(doc);
+        CasillaE.setAttribute("tipo", this.getClass().getSimpleName());
+        
+        if(this.hachaDivasónica != null) {
+        	Element hachaDivasónicaE = this.hachaDivasónica.getElemento(doc);
+        	CasillaE.appendChild(hachaDivasónicaE);
+		}
         
         Element curaciónAuxiliarE = doc.createElement("curaciónAuxiliar");
         curaciónAuxiliarE.appendChild(doc.createTextNode("" + this.curaciónAuxiliar));
 		
-        CasillaE.appendChild(hachaDivasónicaE);
         CasillaE.appendChild(curaciónAuxiliarE);
 		
 		return CasillaE;

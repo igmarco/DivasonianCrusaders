@@ -1,11 +1,12 @@
 package MD_Tablero;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import Utilidades.Facción;
 
 public class Arquero extends Ficha {
     public int dañoFlechas;
-
-    public int rango;
 
     public int dañoFlechasVariable;
     
@@ -31,6 +32,23 @@ public class Arquero extends Ficha {
     public int realizarDisparo() {
     	
     	return dañoFlechas + (int) Math.floor(Math.random()*2*(dañoFlechasVariable)-dañoFlechasVariable);
+    	
+    }
+    
+    public Element getElemento(Document doc) {
+        
+        Element FichaE = super.getElemento(doc);
+		
+        Element dañoFlechasE = doc.createElement("dañoFlechas");
+        dañoFlechasE.appendChild(doc.createTextNode("" + this.dañoFlechas));
+        
+        Element dañoFlechasVariableE = doc.createElement("dañoFlechasVariable");
+        dañoFlechasVariableE.appendChild(doc.createTextNode("" + this.dañoFlechasVariable));
+        
+        FichaE.appendChild(dañoFlechasE);
+        FichaE.appendChild(dañoFlechasVariableE);
+		
+		return FichaE;
     	
     }
 

@@ -1,5 +1,8 @@
 package MD_Tablero;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import Utilidades.Facción;
 
 public class Caballero extends Ficha {
@@ -33,6 +36,19 @@ public class Caballero extends Ficha {
     public int getMovs() {
     	
     	return 3; 
+    	
+    }
+    
+    public Element getElemento(Document doc) {
+        
+        Element FichaE = super.getElemento(doc);
+		
+        Element dañoCargaE = doc.createElement("dañoCarga");
+        dañoCargaE.appendChild(doc.createTextNode("" + this.dañoCarga));
+        
+        FichaE.appendChild(dañoCargaE);
+		
+		return FichaE;
     	
     }
 

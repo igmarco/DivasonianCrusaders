@@ -599,6 +599,29 @@ public class TableroGrafico extends JFrame {
 							//HABRÁ QUE MANDAR UN MENSAJE DE VICTORIA O ALGO SIMILAR
 							
 						}else {
+							
+							
+							
+							
+							
+							
+							
+							
+							/**/ for(Operación o : inst) {
+								
+								if(o != null) System.out.println(o.getFicha().getClass());
+								if(o instanceof Movimiento) System.out.println(((Movimiento) o).getDirección());
+								
+							}
+							
+							
+							
+							
+							
+							
+							
+							
+							
 							out.writeObject(inst);
 							out.flush();
 							/**/ tableros = (ArrayList<Tablero>) in.readObject();
@@ -2186,6 +2209,7 @@ public class TableroGrafico extends JFrame {
     		this.casillas[posicion].setEnabled(estado);
     	}
     	List<Integer> casFichas = this.tab.quiénesPuedenMover(this.faccion);
+    	/**/ if(!estado)
     	for(final Integer posicion : casFichas) {
     		if(!this.botonFichaPuedeMover(posicion)) {
     				this.casillas[posicion].setEnabled(estado);
@@ -2204,7 +2228,7 @@ public class TableroGrafico extends JFrame {
     			    	});
     				}
     	    	};
-    			if(!estado) {
+    			if(!estado) { 
     				this.casillas[posicion].addMouseListener(eventoFicha);
     			}else {
 //    				this.casillas[posicion].removeMouseListener(eventoFicha);
@@ -2265,6 +2289,7 @@ public class TableroGrafico extends JFrame {
     	final Movimiento mov;
     	final Ficha fFinal = f;
     	final int posicionFicha = this.tab.dóndeEstá(f);
+    	/**/ if(estado)
     	for(final Integer pos : posiciones) {
     		MouseListener eventoCasilla = new MouseAdapter() {
     			@Override

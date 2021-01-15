@@ -1,5 +1,8 @@
 package MD_Tablero;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import Utilidades.Facción;
 
 public class Lancero extends Ficha {
@@ -33,5 +36,18 @@ public class Lancero extends Ficha {
     }
 	
 //	Creo que no hay por qué redefinir realizarCarga() porque en Ficha hace referencia a realizarAtaque().
+	
+	public Element getElemento(Document doc) {
+        
+        Element FichaE = super.getElemento(doc);
+		
+        Element dañoACaballeríaE = doc.createElement("dañoACaballería");
+        dañoACaballeríaE.appendChild(doc.createTextNode("" + this.dañoACaballería));
+        
+        FichaE.appendChild(dañoACaballeríaE);
+		
+		return FichaE;
+    	
+    }
     
 }
