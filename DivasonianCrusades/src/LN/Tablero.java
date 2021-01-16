@@ -108,7 +108,7 @@ public class Tablero implements Cloneable,Serializable{
     //VIENE DEL ANTIGUO Ejecutor, SIRVE PARA MOVER CON UNA DIRECCIÓN EN LUGAR DE CON LOS intS.
     public void moverFicha(Ficha f, Dirección d) { 
     		
-//    	System.out.println(this.dóndeEstá(f) + " " + d);
+//    	System.out.println(f.getClass().getSimpleName() + ": " + this.dóndeEstá(f) + " " + d);
     	
     	int desde = this.dóndeEstá(f);
     	int hasta; //Ojito porque aquí hay que pasar de coordenadas a posición en el vector.
@@ -158,6 +158,9 @@ public class Tablero implements Cloneable,Serializable{
 	//EN CASO DE QUE UNA MUEVA Y OTRA HAGA OTRA COSA USAMOS moverFicha(), Y SI HAY QUE MOVER DOS ENTONCES LE METEMOS A moverFichasALaVez()
     public void moverFichasALaVez(Ficha f1, Dirección d1, Ficha f2, Dirección d2) {
     		
+//    		System.out.println(f1.getClass().getSimpleName() + ": " + this.dóndeEstá(f1) + " " + d1);
+//    		System.out.println(f2.getClass().getSimpleName() + ": " + this.dóndeEstá(f2) + " " + d2);
+    	
     		int desde1 = this.dóndeEstá(f1);
     		int hasta1;
     		
@@ -181,6 +184,9 @@ public class Tablero implements Cloneable,Serializable{
     		else if(d2 == Dirección.noroeste) hasta2 = desde2 - 10;
     		else if(d2 == Dirección.sureste) hasta2 = desde2 + 10;
     		else /*if(d == Dirección.suroeste)*/ hasta2 = desde2 + 8;
+    		
+//    		System.out.println(f1.getClass().getSimpleName() + ": " + desde1 + " " + hasta1);
+//    		System.out.println(f2.getClass().getSimpleName() + ": " + desde2 + " " + hasta2);
     		
     		//Comrpobaciones y órdenes
     		if(hasta1 == desde2) {

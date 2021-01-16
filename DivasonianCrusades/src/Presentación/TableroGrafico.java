@@ -600,28 +600,6 @@ public class TableroGrafico extends JFrame {
 							
 						}else {
 							
-							
-							
-							
-							
-							
-							
-							
-							/**/ for(Operación o : inst) {
-								
-								if(o != null) System.out.println(o.getFicha().getClass());
-								if(o instanceof Movimiento) System.out.println(((Movimiento) o).getDirección());
-								
-							}
-							
-							
-							
-							
-							
-							
-							
-							
-							
 							out.writeObject(inst);
 							out.flush();
 							/**/ tableros = (ArrayList<Tablero>) in.readObject();
@@ -679,6 +657,7 @@ public class TableroGrafico extends JFrame {
 						btnAnteriorMovimiento.setEnabled(true);
 					}
 					pintar(actual);
+					/**/ tab = actual;
 					tabI++;
 					if(tabI==7) {
 						btnSiguienteMovimiento.setEnabled(false);
@@ -720,6 +699,7 @@ public class TableroGrafico extends JFrame {
 						btnSiguienteMovimiento.setEnabled(true);
 					}
 					pintar(actual);
+					/**/ tab = actual;
 					tabI--;
 					if(tabI==0) {
 						btnAnteriorMovimiento.setEnabled(false);
@@ -2478,6 +2458,11 @@ public class TableroGrafico extends JFrame {
     				}
     			}
     		}
+    		if(/*!*/estado) {
+        		/**/ this.limpiarActions();
+        		this.limpiarActionDeshacer();
+        		/**/ this.pintar(tab);
+        	}
     }
     
     //Pintar o no las casillas a las que se puede disparar con las catapultas.
@@ -2489,31 +2474,40 @@ public class TableroGrafico extends JFrame {
 					for(MouseListener ac : casillas[cat1].getMouseListeners()) {
 						casillas[cat1].removeMouseListener(ac);
 					}
-					final Ficha f = this.tab.getNodo(cat1).getFichaDefensora();
+					final Ficha f = this.tab.getNodo(/*cat1*/ posicionCat).getFichaDefensora();
 					final Integer x = cat1;
 					final Catapulta cas = (Catapulta) this.tab.getNodo(posicionCat).getCasilla();
 					this.casillas[cat1].addMouseListener( new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
+//							System.out.println("1. f es null? " + f == null);
 							disparar(f,cas,x,posicionCat);
 						}
 					});
 	    		}
 	//Devuelve a los botones a la situación original.
     }else {
-		for(int i=0; i<45;i++) {
-				casillas[i].setIcon(null);
-				for(MouseListener ac : casillas[i].getMouseListeners()) {
-					casillas[i].removeMouseListener(ac);
-				}
-				this.casillas[i].setBackground(new Color(240, 230, 140));
-				this.casillas[i].setEnabled(!estado);
-		}
-		pintar(tab);
+//		for(int i=0; i<45;i++) {
+//				casillas[i].setIcon(null);
+//				for(MouseListener ac : casillas[i].getMouseListeners()) {
+//					casillas[i].removeMouseListener(ac);
+//				}
+//				this.casillas[i].setBackground(new Color(240, 230, 140));
+//				this.casillas[i].setEnabled(!estado);
+//		}
+//		pintar(tab);
+    	
+    	if(!estado) {
+    		/**/ this.limpiarActions();
+    		this.limpiarActionDeshacer();
+    		/**/ this.pintar(tab);
     	}
+    	
+    }
     }
     
     public void disparar(Ficha f, Catapulta cas, int lugarDisparo, int posicion) {
+//    	System.out.println("2. f es null? " + f == null);
     	Disparo disp = new Disparo(f,cas,lugarDisparo);
 		inst.add(disp);
 		/**/ introducirOperacionEnCurso = false;

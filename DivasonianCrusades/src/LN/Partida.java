@@ -130,13 +130,13 @@ public class Partida implements Runnable {
 					instrucciónFacción1 = (Instrucción) ois1.readObject();
 					instrucciónFacción2 = (Instrucción) ois2.readObject();
 					
-					tablerosDelTurno.add(this.tablero); //Tablero inicial
+					tablerosDelTurno.add((Tablero) this.tablero.clone()); //Tablero inicial
 					
 					for(movimiento = 0; movimiento < 6; movimiento++) {
 						
 						this.ejecutarOperación();
 						
-						tablerosDelTurno.add(this.tablero); //Tablero del turno "movimiento"
+						tablerosDelTurno.add((Tablero) this.tablero.clone()); //Tablero del turno "movimiento"
 						
 					}
 					
