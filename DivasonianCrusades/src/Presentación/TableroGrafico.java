@@ -605,7 +605,8 @@ public class TableroGrafico extends JFrame {
 							
 						}else {
 							
-							out.writeObject(inst);
+							Instrucción inst2 = (Instrucción)inst.clone();
+							out.writeObject(inst2);
 							out.flush();
 							System.out.println(inst.toString());
 							inst.clear();
@@ -672,12 +673,12 @@ public class TableroGrafico extends JFrame {
 					}
 					limpiarActions();
 					pintar(actual);
-					/**/ tab = actual;
 					tabI++;
 					if(tabI==7) {
 						btnSiguienteMovimiento.setEnabled(false);
 						btnAnteriorMovimiento.setEnabled(false);
 						casillasMenu(true);
+						tab = (Tablero)actual.clone();
 					}
 				}
 			}

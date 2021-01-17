@@ -167,9 +167,13 @@ public class Partida implements Runnable {
 					
 					this.resolverTurno();
 					
-					tablerosDelTurno.add(this.tablero); //Tablero tras resolver el turno
+					tablerosDelTurno.add((Tablero)this.tablero.clone()); //Tablero tras resolver el turno
 					
-					this.mandarTableros(oos1, oos2, tablerosDelTurno);
+					ArrayList<Tablero> tablerosCopia = (ArrayList<Tablero>)tablerosDelTurno.clone();
+					
+					this.mandarTableros(oos1, oos2, tablerosCopia);
+					
+					
 					
 					System.out.println("Pum! Tableros mandados");
 					
