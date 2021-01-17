@@ -124,7 +124,7 @@ public class TableroGrafico extends JFrame {
 		setResizable(false);
 		final TableroGrafico tablero = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1080, 735);
+		setBounds(100, 100, 1080, 751);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(240, 230, 140));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -133,16 +133,17 @@ public class TableroGrafico extends JFrame {
 	
 
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(42, 21, 618, 127);
+		lblNewLabel.setIcon(new ImageIcon("Recursos\\LogoDivasonian.png"));
+		lblNewLabel.setBounds(60, 28, 618, 127);
 		contentPane.add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("Recursos\\LogobienV2.png"));
-		lblNewLabel_1.setBounds(816, 21, 216, 102);
+		lblNewLabel_1.setIcon(new ImageIcon("Recursos\\LogoBLS.png"));
+		lblNewLabel_1.setBounds(756, 21, 292, 156);
 		contentPane.add(lblNewLabel_1);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(32, 206, 702, 390);
+		panel.setBounds(30, 236, 702, 390);
 		contentPane.add(panel);
 		panel.setLayout(new GridLayout(5, 9, 0, 0));
 
@@ -407,27 +408,27 @@ public class TableroGrafico extends JFrame {
 		btnMenu.setBackground(new Color(240, 230, 140));
 		btnMenu.setIcon(new ImageIcon("Recursos\\Menu.png"));
 		btnMenu.setBorder(null);
-		btnMenu.setBounds(42, 633, 179, 47);
+		btnMenu.setBounds(35, 647, 179, 47);
 		contentPane.add(btnMenu);
 
 		JLabel Turno = new JLabel("Turno: "+this.turno);
 		Turno.setFont(new Font("Consolas", Font.PLAIN, 14));
-		Turno.setBounds(231, 633, 119, 29);
+		Turno.setBounds(231, 651, 119, 29);
 		contentPane.add(Turno);
 
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(751, 206, 9, 474);
+		separator.setBounds(751, 204, 9, 490);
 		contentPane.add(separator);
 
 		lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblNewLabel_3.setBounds(42, 170, 191, 14);
+		lblNewLabel_3.setFont(new Font("Consolas", Font.PLAIN, 15));
+		lblNewLabel_3.setBounds(40, 196, 196, 25);
 		contentPane.add(lblNewLabel_3);
 
 		lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblNewLabel_4.setBounds(249, 170, 196, 14);
+		lblNewLabel_4.setFont(new Font("Consolas", Font.PLAIN, 15));
+		lblNewLabel_4.setBounds(269, 196, 196, 25);
 		contentPane.add(lblNewLabel_4);
 
 		JSeparator separator_1 = new JSeparator();
@@ -706,12 +707,12 @@ public class TableroGrafico extends JFrame {
 		btnSiguienteMovimiento.setBackground(new Color(240, 230, 140));
 		btnSiguienteMovimiento.setIcon(new ImageIcon("Recursos\\Siguiente.png"));
 		btnSiguienteMovimiento.setBorder(null);
-		btnSiguienteMovimiento.setBounds(555, 633, 179, 47);
+		btnSiguienteMovimiento.setBounds(555, 647, 179, 47);
 		contentPane.add(btnSiguienteMovimiento);
 
 		Maniobra = new JLabel("Maniobra: "+/*this.inst.size()*/ this.maniobra);
 		Maniobra.setFont(new Font("Consolas", Font.PLAIN, 14));
-		Maniobra.setBounds(231, 651, 119, 29);
+		Maniobra.setBounds(231, 673, 119, 29);
 		contentPane.add(Maniobra);
 
 		txtFichaAt = new JTextArea();
@@ -747,7 +748,7 @@ public class TableroGrafico extends JFrame {
 			}
 		});
 		btnAnteriorMovimiento.setIcon(new ImageIcon("Recursos\\Anterior.png"));
-		btnAnteriorMovimiento.setBounds(366, 633, 179, 47);
+		btnAnteriorMovimiento.setBounds(366, 647, 179, 47);
 		btnAnteriorMovimiento.setBorder(null);
 		contentPane.add(btnAnteriorMovimiento);
 	}

@@ -46,12 +46,38 @@ public class Servidor {
 				dis1 = new DataInputStream(s1.getInputStream());
 				String nombre1 = dis1.readLine();
 				String nombre2 = dis2.readLine();
+//				boolean terminado1=false;
+//				boolean terminado2=false;
+//				if(nombre1.split("-").equals("AB")) {
+//					terminado1 = true;
+//				}
+//				if(nombre1.split("-").equals("AB")) {
+//					terminado2 = true;
+//				}
 				dos1.writeBytes(nombre2+"\n\r");
 				dos2.writeBytes(nombre1+"\r\n");
 				dos1.flush();
 				dos2.flush();
 				Partida p = new Partida(s1,s2, nombre1, nombre2);
 				pool.execute(p);
+//				if(!terminado1 && ! terminado2) {
+//					dos1.writeBytes(nombre2+"\n\r");
+//					dos2.writeBytes(nombre1+"\r\n");
+//					dos1.flush();
+//					dos2.flush();
+//					Partida p = new Partida(s1,s2, nombre1, nombre2);
+//					pool.execute(p);
+//				}else if(terminado1){
+//					dos2.writeBytes("Cagón");
+//					dos2.flush();
+//					dos2.writeBytes("SURR-El oponente se ha rendido.\r\n");
+//					dos2.flush();
+//				}else if(terminado2) {
+//					dos1.writeBytes("Cagón");
+//					dos1.flush();
+//					dos1.writeBytes("SURR-El oponente se ha rendido.\r\n");
+//					dos1.flush();
+//				}
 				
 			}
 			

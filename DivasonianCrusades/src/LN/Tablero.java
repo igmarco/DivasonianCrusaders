@@ -769,6 +769,8 @@ public class Tablero implements Cloneable,Serializable{
 			movPosibles.remove(x);
 		}
 		else if(dóndeEstá == 27) {
+			x = 17;
+			movPosibles.remove(x);
 			x = 35;
 			movPosibles.remove(x);
 			x = 26;
@@ -777,6 +779,8 @@ public class Tablero implements Cloneable,Serializable{
 			movPosibles.remove(x);
 		}
 		else if(dóndeEstá == 36) {
+			x = 26;
+			movPosibles.remove(x);
 			x = 44;
 			movPosibles.remove(x);
 			x=35;
