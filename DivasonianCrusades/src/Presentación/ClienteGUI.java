@@ -18,6 +18,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -102,6 +105,15 @@ public class ClienteGUI extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				btGuardarPartida.setIcon(new ImageIcon("Recursos\\GuardarPartida.png"));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					tablero.guardarPartida();
+				} catch (ParserConfigurationException | TransformerException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btGuardarPartida.setBackground(new Color(240, 230, 140));

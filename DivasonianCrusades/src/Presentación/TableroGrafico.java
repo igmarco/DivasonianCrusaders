@@ -92,6 +92,7 @@ public class TableroGrafico extends JFrame {
 	private Tablero tab;
 	
 	private String nombre;
+	private String oponente;
 	
 	private final JButton[] casillas = new JButton[45];
 	
@@ -424,7 +425,7 @@ public class TableroGrafico extends JFrame {
 		btnMenu.setBounds(35, 647, 179, 47);
 		contentPane.add(btnMenu);
 
-		JLabel Turno = new JLabel("Turno: "+this.turno);
+		final JLabel Turno = new JLabel("Turno: "+this.turno);
 		Turno.setFont(new Font("Consolas", Font.PLAIN, 14));
 		Turno.setBounds(231, 651, 119, 29);
 		contentPane.add(Turno);
@@ -629,6 +630,7 @@ public class TableroGrafico extends JFrame {
 							
 						}else {
 							
+							maniobra=0;
 							Instrucción inst2 = (Instrucción)inst.clone();
 							out.writeObject(inst2);
 							out.flush();
@@ -690,7 +692,7 @@ public class TableroGrafico extends JFrame {
 
 		btnSiguienteMovimiento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(tabI!=7) {
+				if(tabI<7) {
 					Tablero actual = tableros.get(tabI+1);
 					if(tabI==0) {
 						btnAnteriorMovimiento.setEnabled(true);
@@ -703,6 +705,13 @@ public class TableroGrafico extends JFrame {
 						btnAnteriorMovimiento.setEnabled(false);
 						casillasMenu(true);
 						tab = (Tablero)actual.clone();
+						turno++;
+						Turno.setText("Turno: "+turno);
+						maniobra=0;
+						Maniobra.setText("Maniobra: "+maniobra);
+					}else {
+						maniobra++;
+						Maniobra.setText("Maniobra: "+maniobra);
 					}
 				}
 			}
@@ -739,10 +748,14 @@ public class TableroGrafico extends JFrame {
 					Tablero actual = tableros.get(tabI-1);
 					if(tabI==7) {
 						btnSiguienteMovimiento.setEnabled(true);
+						turno--;
+						Turno.setText("Turno: "+turno);
 					}
 					pintar(actual);
 					/**/ tab = actual;
 					tabI--;
+					maniobra--;
+					Maniobra.setText("Maniobra: "+maniobra);
 					if(tabI==0) {
 						btnAnteriorMovimiento.setEnabled(false);
 					}
@@ -779,6 +792,7 @@ public class TableroGrafico extends JFrame {
 		this.azul = azul;
 		System.out.println(this.azul);
 		this.nombre = nombre1;
+		this.oponente = nombre2;
 	}
 
 	
@@ -2894,7 +2908,7 @@ public class TableroGrafico extends JFrame {
 		}
 	}
 	
-	public void guardarPartida(String nombrePartida) throws ParserConfigurationException, TransformerException {
+	public void guardarPartida() throws ParserConfigurationException, TransformerException {
     	
     	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
     	DocumentBuilder db = dbf.newDocumentBuilder();
@@ -2917,7 +2931,7 @@ public class TableroGrafico extends JFrame {
                 System.out.println("Error al crear directorio");
             }
         }
-    	StreamResult result = new StreamResult(new File("PartidasGuardadas//" + nombrePartida + "_" + Calendar.getInstance().getTime().toString().replaceAll(" ", "_").replaceAll(":", "-") + ".xml"));
+    	StreamResult result = new StreamResult(new File("PartidasGuardadas//" + this.nombre +"VS" +this.oponente + "_" + Calendar.getInstance().getTime().toString().replaceAll(" ", "_").replaceAll(":", "-") + ".xml"));
     	t.transform(source , result);
     	
     }
