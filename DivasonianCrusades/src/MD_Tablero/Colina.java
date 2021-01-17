@@ -21,6 +21,11 @@ public class Colina extends Casilla {
 		this.dañoExtra = dañoExtra;
 	}
     
+    public Colina(int dañoExtra, HachaDivasónica hachaDivasónica, int curaciónAuxiliar) {
+		super(hachaDivasónica, curaciónAuxiliar);
+		this.dañoExtra = dañoExtra;
+	}
+    
     public int getDañoExtra() {
     	
     	return this.dañoExtra;

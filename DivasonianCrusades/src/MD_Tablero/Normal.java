@@ -15,4 +15,10 @@ public class Normal extends Casilla {
 		super(hachaDivasónica, casillaDeCuración);
 	}
     
+    public Normal(HachaDivasónica hachaDivasónica, int curaciónAuxiliar) {
+		
+    	super(hachaDivasónica, curaciónAuxiliar);
+		
+	}
+    
 }

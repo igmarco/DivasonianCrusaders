@@ -32,7 +32,14 @@ public class Catapulta extends Casilla {
 	}
     
     public Catapulta(int dañoProyectiles, int dañoProyectilesVariable, HachaDivasónica hachaDivasónica, int identificador, boolean casillaDeCuración) {
-		super(hachaDivasónica);
+		super(hachaDivasónica, casillaDeCuración);
+		this.dañoProyectiles = dañoProyectiles;
+		this.dañoProyectilesVariable = dañoProyectilesVariable;
+		this.identificador = identificador;
+	}
+    
+    public Catapulta(int dañoProyectiles, int dañoProyectilesVariable, HachaDivasónica hachaDivasónica, int identificador, int curaciónAuxiliar) {
+		super(hachaDivasónica, curaciónAuxiliar);
 		this.dañoProyectiles = dañoProyectiles;
 		this.dañoProyectilesVariable = dañoProyectilesVariable;
 		this.identificador = identificador;

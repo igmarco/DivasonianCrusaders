@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import MD_Tablero.Arquero;
 import MD_Tablero.Bárbaro;
@@ -958,5 +960,30 @@ public class Tablero implements Cloneable,Serializable{
 		return tableroE;
 		
 	}
+	
+	public static Tablero getFromElemento(Element e) {
+        
+        NodeList hijos = e.getChildNodes();
+        Element hijo;
+        
+        Nodo[] nodos = new Nodo[45];
+        int index = 0;
+        
+        for(int i = 0; i < hijos.getLength(); i++) {
+        	
+        	if(hijos.item(i).getNodeType() == Node.ELEMENT_NODE) {
+        		
+        		hijo = (Element) hijos.item(i);
+        		
+        		nodos[index] = Nodo.getFromElemento(hijo);
+        		index++;
+        		
+        	}
+        	
+        }
+        
+        return new Tablero(nodos);
+    	
+    }
     
 }

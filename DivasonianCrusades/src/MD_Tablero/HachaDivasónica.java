@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import Utilidades.Facción;
 
 public class HachaDivasónica implements Serializable {
     public int dañoExtra;
@@ -67,5 +71,34 @@ public class HachaDivasónica implements Serializable {
 		return HachaDivasónicaE;
 		
 	}
+    
+    public static HachaDivasónica getFromElemento(Element e) {
+        
+        NodeList hijos = e.getChildNodes();
+        Element hijo;
+        
+        int dañoExtra = 0;
+        int dañoExtraVariable = 0;
+        int vidaPorTurno = 0;
+        int vidaPorTurnoVariable = 0;
+        
+        for(int i = 0; i < hijos.getLength(); i++) {
+        	
+        	if(hijos.item(i).getNodeType() == Node.ELEMENT_NODE) {
+        		
+        		hijo = (Element) hijos.item(i);
+        		
+        		if(hijo.getNodeName().equals("dañoExtra")) dañoExtra = Integer.parseInt(hijo.getFirstChild().getNodeValue());
+        		else if(hijo.getNodeName().equals("dañoExtraVariable")) dañoExtraVariable = Integer.parseInt(hijo.getFirstChild().getNodeValue());
+        		else if(hijo.getNodeName().equals("vidaPorTurno")) vidaPorTurno = Integer.parseInt(hijo.getFirstChild().getNodeValue());
+        		else if(hijo.getNodeName().equals("vidaPorTurnoVariable")) vidaPorTurnoVariable = Integer.parseInt(hijo.getFirstChild().getNodeValue());
+        		
+        	}
+        	
+        }
+        
+        return new HachaDivasónica(dañoExtra, dañoExtraVariable, vidaPorTurno, vidaPorTurnoVariable);
+    	
+    }
 
 }

@@ -3,6 +3,8 @@ import java.io.Serializable;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import Utilidades.Facción;
 
@@ -431,5 +433,37 @@ public class Nodo implements Cloneable,Serializable{
 		return nodoE;
 		
 	}
+	
+	public static Nodo getFromElemento(Element e) {
+        
+        NodeList hijos = e.getChildNodes();
+        Element hijo;
+        
+        Casilla casilla = null;
+        Ficha fichaDefensora = null;
+        Ficha fichaAtacante = null;
+        
+        for(int i = 0; i < hijos.getLength(); i++) {
+        	
+        	if(hijos.item(i).getNodeType() == Node.ELEMENT_NODE) {
+        		
+        		hijo = (Element) hijos.item(i);
+        		
+        		if(hijo.getNodeName().equals("Casilla")) casilla = Casilla.getFromElemento(hijo);
+        		
+        		else if(hijo.getNodeName().equals("Ficha")) {
+        			
+        			if(fichaDefensora == null) fichaDefensora = Ficha.getFromElemento(hijo);
+        			else if(fichaAtacante == null) fichaAtacante = Ficha.getFromElemento(hijo);
+        			
+        		}
+        		
+        	}
+        	
+        }
+        
+        return new Nodo(casilla, fichaDefensora, fichaAtacante);
+    	
+    }
 
 }

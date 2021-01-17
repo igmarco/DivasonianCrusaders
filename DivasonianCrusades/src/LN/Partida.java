@@ -11,13 +11,14 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 import MD_Instrucción.Disparo;
 import MD_Instrucción.Instrucción;
@@ -384,7 +385,11 @@ public class Partida implements Runnable {
     	DocumentBuilder db = dbf.newDocumentBuilder();
     	Document doc = db.newDocument();
     	
-    	doc.appendChild(tablero.getElemento(doc));
+    	Element tableroElemento = tablero.getElemento(doc);
+    	
+    	tableroElemento.setAttribute("turno", this.turno + "");
+    	
+    	doc.appendChild(tableroElemento);
     	
     	TransformerFactory tf = TransformerFactory.newInstance();
     	Transformer t = tf.newTransformer();
@@ -402,9 +407,16 @@ public class Partida implements Runnable {
     	
     }
     
-    public void cargarPartida() {
+    public Partida cargarPartida(Socket s1, Socket s2, String nombre1, String nombre2, String archivoPartida, boolean socket1EsElAzul) throws SAXException, IOException, ParserConfigurationException {
     	
+    	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+    	DocumentBuilder db = dbf.newDocumentBuilder();
+    	Document doc = db.parse(archivoPartida);
     	
+    	Element tableroElemento = doc.getDocumentElement();
+    	
+    	if(socket1EsElAzul) return new Partida(s1, s2, nombre1, nombre2, Tablero.getFromElemento(tableroElemento), Integer.parseInt(tableroElemento.getAttribute("turno")));
+    	else return new Partida(s2, s1, nombre1, nombre2, Tablero.getFromElemento(tableroElemento), Integer.parseInt(tableroElemento.getAttribute("turno")));
     	
     }
 

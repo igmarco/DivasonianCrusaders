@@ -207,5 +207,86 @@ public abstract class Ficha implements Cloneable, Serializable{
 		return FichaE;
     	
     }
+    
+    public static Ficha getFromElemento(Element e) {
+        
+        NodeList hijos = e.getChildNodes();
+        Element hijo;
+        
+        int daño = 0;
+        int vida = 0;
+        int vidaMáxima = 0;
+        int dañoVariable = 0;
+        HachaDivasónica hachaDivasónica = null;
+    	Facción facción = Facción.Ambos;
+        boolean puedeMover = true;
+        int dañoFlechas = 0;
+        int dañoFlechasVariable = 0;
+        int dañoCarga = 0;
+        int dañoACaballería = 0;
+        
+        for(int i = 0; i < hijos.getLength(); i++) {
+        	
+        	if(hijos.item(i).getNodeType() == Node.ELEMENT_NODE) {
+        		
+        		hijo = (Element) hijos.item(i);
+        		
+        		if(hijo.getNodeName().equals("daño")) daño = Integer.parseInt(hijo.getFirstChild().getNodeValue());
+        		else if(hijo.getNodeName().equals("vida")) vida = Integer.parseInt(hijo.getFirstChild().getNodeValue());
+        		else if(hijo.getNodeName().equals("vidaMáxima")) vidaMáxima = Integer.parseInt(hijo.getFirstChild().getNodeValue());
+        		else if(hijo.getNodeName().equals("dañoVariable")) dañoVariable = Integer.parseInt(hijo.getFirstChild().getNodeValue());
+        		
+        		else if(hijo.getNodeName().equals("hachaDivasónica")) hachaDivasónica = HachaDivasónica.getFromElemento(hijo);
+        		
+        		else if(hijo.getNodeName().equals("facción")) {
+        			
+        			if(hijo.getFirstChild().getNodeValue().equals("Ambos")) facción = Facción.Ambos;
+                    else if(hijo.getFirstChild().getNodeValue().equals("Facción1")) facción = Facción.Facción1;
+                    else /* if(hijo.getFirstChild().getNodeValue().equals("Ambos"))*/ facción = Facción.Facción2;
+        			
+        		}
+        		
+        		else if(hijo.getNodeName().equals("puedeMover")) puedeMover = Boolean.parseBoolean(hijo.getFirstChild().getNodeValue());
+        		else if(hijo.getNodeName().equals("dañoFlechas")) dañoFlechas = Integer.parseInt(hijo.getFirstChild().getNodeValue());
+        		else if(hijo.getNodeName().equals("dañoFlechasVariable")) dañoFlechasVariable = Integer.parseInt(hijo.getFirstChild().getNodeValue());
+        		else if(hijo.getNodeName().equals("dañoCarga")) dañoCarga = Integer.parseInt(hijo.getFirstChild().getNodeValue());
+        		else if(hijo.getNodeName().equals("dañoACaballería")) dañoACaballería = Integer.parseInt(hijo.getFirstChild().getNodeValue());
+        		
+        	}
+        	
+        }
+        
+        if(e.getAttribute("tipo").equals("Arquero")) {
+        	
+        	return new Arquero(daño, vida, vidaMáxima, dañoVariable, hachaDivasónica, facción, dañoFlechas, dañoFlechasVariable);
+        	
+        }
+        else if(e.getAttribute("tipo").equals("Bárbaro")) {
+        	
+        	return new Bárbaro(daño, vida, vidaMáxima, dañoVariable, hachaDivasónica, facción);
+        	
+        }
+        else if(e.getAttribute("tipo").equals("Caballero")) {
+        	
+        	return new Caballero(daño, vida, vidaMáxima, dañoVariable, hachaDivasónica, facción, dañoCarga);
+        	
+        }
+        else if(e.getAttribute("tipo").equals("Guerrero")) {
+	
+        	return new Guerrero(daño, vida, vidaMáxima, dañoVariable, hachaDivasónica, facción);
+	
+        }
+        else if(e.getAttribute("tipo").equals("Lancero")) {
+	
+        	return new Lancero(daño, vida, vidaMáxima, dañoVariable, hachaDivasónica, facción, dañoACaballería);
+	
+        }
+        else {
+        	
+        	return null;
+        	
+        }
+    	
+    }
 
 }
