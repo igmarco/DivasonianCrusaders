@@ -18,6 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class ClienteGUI extends JFrame {
 
@@ -46,6 +48,14 @@ public class ClienteGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public ClienteGUI(/*boolean nuevo, final TableroGrafico Tablero*/) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				if(tablero != null) {
+					tablero.salir();
+				}
+			}
+		});
 		setTitle("Divasonian Crusaders");
 		final ClienteGUI main = this;
 //		tablero = new TableroGrafico();
@@ -114,6 +124,10 @@ public class ClienteGUI extends JFrame {
 					if(resp == JOptionPane.NO_OPTION) {
 						
 						salir = false;
+						
+					}else {
+						
+						tablero.salir();
 						
 					}
 					
@@ -272,7 +286,7 @@ public class ClienteGUI extends JFrame {
 		btRendirse.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
 		btRendirse.setForeground(new Color(245, 245, 245));
 		btRendirse.setIcon(new ImageIcon("Recursos\\Rendirse.png"));
-		btRendirse.setBounds(104, 343, 175, 47);
+		btRendirse.setBounds(105, 333, 175, 47);
 		btRendirse.setHorizontalTextPosition(SwingConstants.CENTER);
 		btRendirse.setBorder(null);
 		/**/ btRendirse.setEnabled(false);
@@ -284,4 +298,23 @@ public class ClienteGUI extends JFrame {
 		btContinuarPartida.setEnabled(true); 
 		
 	}
+	
+	public void habilitarRendirse() {
+		
+		this.btRendirse.setEnabled(true);
+		
+	}
+	
+	public void deshabilitarContinuar() {
+		
+		btContinuarPartida.setEnabled(false); 
+		
+	}
+	
+	public void deshabilitarRendirse() {
+		
+		this.btRendirse.setEnabled(false);
+		
+	}
+	
 }

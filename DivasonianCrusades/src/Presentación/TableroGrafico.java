@@ -46,6 +46,8 @@ import MD_Tablero.Guerrero;
 import MD_Tablero.Lancero;
 import Utilidades.Dirección;
 import Utilidades.Facción;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class TableroGrafico extends JFrame {
 
@@ -105,6 +107,12 @@ public class TableroGrafico extends JFrame {
 	 * Create the frame.
 	 */
 	public TableroGrafico(final ClienteGUI menu, Socket s) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				salir();
+			}
+		});
 		this.turno=0;
 		this.maniobra = 0;
 		this.s=s;
@@ -600,7 +608,9 @@ public class TableroGrafico extends JFrame {
 						String[] resultados = resultado.split("-");
 						if(resultados[0].equals("SURR")) {
 							acabado=true;
-							
+							Victoria vic = new Victoria(nombre,menu,tablero);
+							vic.setVisible(true);
+							setVisible(false);
 							//HABRÁ QUE MANDAR UN MENSAJE DE VICTORIA O ALGO SIMILAR
 							
 						}else {
@@ -644,14 +654,14 @@ public class TableroGrafico extends JFrame {
 		Listo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				Listo.setIcon(new ImageIcon("Recursos\\RendirseS.png")); //ATENCIÓN, ESTO DEBERÍA SER ListoS
+				Listo.setIcon(new ImageIcon("Recursos\\ConfirmarS.png")); //ATENCIÓN, ESTO DEBERÍA SER ListoS
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				Listo.setIcon(new ImageIcon("Recursos\\Rendirse.png")); //ATENCIÓN, ESTO DEBERÍA SER Listo
+				Listo.setIcon(new ImageIcon("Recursos\\Confirmar.png")); //ATENCIÓN, ESTO DEBERÍA SER Listo
 			}
 		});
-		Listo.setIcon(new ImageIcon("Recursos\\Rendirse.png")); //ATENCIÓN, ESTO DEBERÍA SER Listo
+		Listo.setIcon(new ImageIcon("Recursos\\Confirmar.png")); //ATENCIÓN, ESTO DEBERÍA SER Listo
 		Listo.setBackground(new Color(240, 230, 140));
 		Listo.setBounds(902, 438, 100, 29);
 		Listo.setBorder(null);
@@ -1987,7 +1997,7 @@ public class TableroGrafico extends JFrame {
     
     public void rendirse() {
     	try {
-    		out.writeBytes("SURR-El oponente se ha rendido.\r\n");
+    		out.writeBytes("SURR-Me he rendido.\r\n");
     		out.flush();
     	}catch(IOException ex) {
     		ex.printStackTrace();
@@ -2424,6 +2434,15 @@ public class TableroGrafico extends JFrame {
     public void peinarEventos(int i) {
     	for(MouseListener ls : this.casillas[i].getMouseListeners()) {
     		this.casillas[i].removeMouseListener(ls);
+    	}
+    }
+    
+    public void salir() {
+    	try {
+    		out.writeBytes("AB-Me he rendido.\r\n");
+    		out.flush();
+    	}catch(IOException ex) {
+    		ex.printStackTrace();
     	}
     }
     

@@ -9,8 +9,6 @@ import java.awt.event.MouseEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import javax.swing.ImageIcon;
@@ -20,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
 
 public class Nombre extends JFrame {
@@ -65,44 +64,92 @@ public class Nombre extends JFrame {
 			Aceptar = new JButton("");
 			Aceptar.setBackground(new Color(240, 230, 140));
 			Aceptar.setIcon(new ImageIcon("Recursos\\Conectar.png"));
-			Aceptar.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					try {
-//						Socket s = new Socket("localhost",58000);
-						boolean azul;
-						DataInputStream in = new DataInputStream( s.getInputStream());
-						DataOutputStream out = new DataOutputStream(s.getOutputStream());
-						lblEstado.setText("Buscando oponente..."); //T.T
-						String linea = in.readLine();
-						//System.out.println("Llegué sii...");
-						if(linea.compareTo("OK1")==0) {
-							azul = true;
-							lblEstado.setText("¡Oponente encontrado!");
-							linea = in.readLine();
-						}else { 
-							azul=false;
-							lblEstado.setText("¡Oponente encontrado!");
+			Aceptar.addActionListener(new ActionListener() {
+			@Override
+				public void actionPerformed(ActionEvent arg0) {
+				final SwingWorker worker = new SwingWorker() {
+					@Override
+					protected Object doInBackground() throws Exception {
+						try {
+//							Socket s = new Socket("localhost",58000);
+							boolean azul;
+							DataInputStream in = new DataInputStream( s.getInputStream());
+							DataOutputStream out = new DataOutputStream(s.getOutputStream());
+							lblEstado.setText("Buscando oponente..."); //T.T
+							String linea = in.readLine();
+							//System.out.println("Llegué sii...");
+							if(linea.compareTo("OK1")==0) {
+								azul = true;
+								lblEstado.setText("Conexión establecida");
+								linea = in.readLine();
+							}else { 
+								azul=false;
+								lblEstado.setText("Conexión establecida");
+							}
+							out.writeBytes(textField.getText()+"\r\n");
+							out.flush();
+							String name = in.readLine();
+							menu.habilitarContinuar();
+							menu.habilitarRendirse();
+							/*/Esta puñetera orden vacia el buffer y parece que funciona/*/
+							in.skip(in.available());
+							
+							tablero.setNombre(textField.getText(), name,azul);
+							tablero.setIn(in);
+							tablero.setOut(out);
+							tablero.setVisible(true);
+							setVisible(false);
+						}catch(IOException ex) { 
+							lblEstado.setText("Error al conectar");
+							ex.printStackTrace();
+							menu.setVisible(true);
+							setVisible(false);
 						}
-						out.writeBytes(textField.getText()+"\r\n");
-						out.flush();
-						String name = in.readLine();
-						menu.habilitarContinuar();
-						/*/Esta puñetera orden vacia el buffer y parece que funciona/*/
-						in.skip(in.available());
-						
-						tablero.setNombre(textField.getText(), name,azul);
-						tablero.setIn(in);
-						tablero.setOut(out);
-						tablero.setVisible(true);
-						setVisible(false);
-					}catch(IOException ex) { 
-						lblEstado.setText("Error al conectar");
-						ex.printStackTrace();
-						menu.setVisible(true);
-						setVisible(false);
+						return null;
 					}
-				}
+				};
+					// TODO Auto-generated method stub
+					worker.execute();
+				}});
+			Aceptar.addMouseListener(new MouseAdapter() {
+//				@Override
+//				public void mouseClicked(MouseEvent e) {
+//					try {
+////						Socket s = new Socket("localhost",58000);
+//						boolean azul;
+//						DataInputStream in = new DataInputStream( s.getInputStream());
+//						DataOutputStream out = new DataOutputStream(s.getOutputStream());
+//						lblEstado.setText("Buscando oponente..."); //T.T
+//						String linea = in.readLine();
+//						//System.out.println("Llegué sii...");
+//						if(linea.compareTo("OK1")==0) {
+//							azul = true;
+//							lblEstado.setText("¡Oponente encontrado!");
+//							linea = in.readLine();
+//						}else { 
+//							azul=false;
+//							lblEstado.setText("¡Oponente encontrado!");
+//						}
+//						out.writeBytes(textField.getText()+"\r\n");
+//						out.flush();
+//						String name = in.readLine();
+//						menu.habilitarContinuar();
+//						menu.habilitarRendirse();
+//						/*/Esta puñetera orden vacia el buffer y parece que funciona/*/
+//						in.skip(in.available());
+//						
+//						tablero.setNombre(textField.getText(), name,azul);
+//						tablero.setIn(in);
+//						tablero.setOut(out);
+//						tablero.setVisible(true);
+//						setVisible(false);
+//					}catch(IOException ex) { 
+//						lblEstado.setText("Error al conectar");
+//						ex.printStackTrace();
+//						menu.setVisible(true);
+//						setVisible(false);
+//					}
+//				}
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					Aceptar.setIcon(new ImageIcon("Recursos\\ConectarS.png"));
@@ -122,10 +169,6 @@ public class Nombre extends JFrame {
 			contentPane.add(lblEstado);
 			
 			Cancelar = new JButton("");
-			Cancelar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-				}
-			});
 			Cancelar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {

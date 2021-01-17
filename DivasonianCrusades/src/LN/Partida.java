@@ -98,8 +98,12 @@ public class Partida implements Runnable {
 			
 			while(!haTerminado) {
 				tablerosDelTurno.clear();
-				rendición1 = ois1.readLine().split("-")[0].equals("SURR");
-				rendición2 = ois2.readLine().split("-")[0].equals("SURR");
+				String[] lineasCliente1 = ois1.readLine().split("-");
+				String[] lineasCliente2 = ois2.readLine().split("-");
+				if(lineasCliente1[0].equals("SURR")||lineasCliente1[0].equals("AB"))
+					rendición1 = true;
+				if(lineasCliente2[0].equals("SURR")||lineasCliente2[0].equals("AB"))
+					rendición2 = true;
 				
 				if(rendición1 && rendición2) {
 					
