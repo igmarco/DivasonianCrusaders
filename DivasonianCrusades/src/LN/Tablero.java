@@ -740,12 +740,12 @@ public class Tablero implements Cloneable,Serializable{
     	
     	for(int i = 0; i < movPosibles.size(); i++) {
     		
-    		if(movPosibles.get(i) < 0 || movPosibles.get(i) >= 45) {
-    			
-    			j = movPosibles.remove(i);
-    			
-    		}
-    		else if(nodos[movPosibles.get(i)].estáAquí(f.getFacción())) {
+//    		if(movPosibles.get(i) < 0 || movPosibles.get(i) >= 45) {
+//    			
+//    			j = movPosibles.remove(i);
+//    			
+//    		}
+/*    		else */ if(nodos[movPosibles.get(i)].estáAquí(f.getFacción())) {
     			
     			j = movPosibles.remove(i);
     			

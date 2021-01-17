@@ -17,5 +17,9 @@ public class Operación implements Serializable{
     	return ficha;
     	
     }
+    
+    public String toString() {
+    	return this.getClass().getCanonicalName()+" Ficha: "+this.getFicha().getClass().getCanonicalName();
+    }
 
 }

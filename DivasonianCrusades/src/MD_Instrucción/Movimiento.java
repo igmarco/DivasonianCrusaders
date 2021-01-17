@@ -17,5 +17,9 @@ public class Movimiento extends Operación {
     	return dirección;
     	
     }
+    
+    public String toString() {
+    	return super.toString()+" "+this.getDirección().toString();
+    }
 
 }

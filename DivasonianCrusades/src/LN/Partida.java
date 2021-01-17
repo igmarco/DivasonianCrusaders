@@ -39,8 +39,8 @@ public class Partida implements Runnable {
 	private boolean rendición1;
 	private boolean rendición2;
 
-	private Instrucción instrucciónFacción1; 
-	private Instrucción instrucciónFacción2;
+	private Instrucción instrucciónFacción1 = new Instrucción(); 
+	private Instrucción instrucciónFacción2 = new Instrucción();
 
 	private Tablero tablero;
 	
@@ -92,7 +92,7 @@ public class Partida implements Runnable {
 			boolean haTerminado = false;
 			
 			while(!haTerminado) {
-				
+				tablerosDelTurno.clear();
 				rendición1 = ois1.readLine().split("-")[0].equals("SURR");
 				rendición2 = ois2.readLine().split("-")[0].equals("SURR");
 				
@@ -127,8 +127,11 @@ public class Partida implements Runnable {
 					oos1.flush();
 					oos2.flush();
 					
-					instrucciónFacción1 = (Instrucción) ois1.readObject();
-					instrucciónFacción2 = (Instrucción) ois2.readObject();
+					this.instrucciónFacción1.clear();
+					this.instrucciónFacción2.clear();
+					
+					instrucciónFacción1.addAll((Instrucción) ois1.readObject());
+					instrucciónFacción2.addAll((Instrucción) ois2.readObject());
 					
 					tablerosDelTurno.add((Tablero) this.tablero.clone()); //Tablero inicial
 					

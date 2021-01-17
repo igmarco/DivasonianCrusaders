@@ -370,6 +370,11 @@ public class TableroGrafico extends JFrame {
 		
 		//-------------------------------------- AQUÍ TERMINA ------------------
 
+		final JButton btnAnteriorMovimiento = new JButton("");
+		final JButton btnSiguienteMovimiento = new JButton("");
+		btnAnteriorMovimiento.setEnabled(false);
+		btnSiguienteMovimiento.setEnabled(false);
+		
 		btnMenu = new JButton("");
 		btnMenu.addMouseListener(new MouseAdapter() {
 			@Override
@@ -602,10 +607,20 @@ public class TableroGrafico extends JFrame {
 							
 							out.writeObject(inst);
 							out.flush();
+							System.out.println(inst.toString());
+							inst.clear();
 							/**/ tableros = (ArrayList<Tablero>) in.readObject();
 							tabI = 0;
 							acabado = (Boolean)in.readObject();
-							
+							tab = tableros.get(0);
+							Operaciones.setText("Ops.:" + inst.size() + "/6");
+							limpiarActions();
+							pintar(tab);
+							btnSiguienteMovimiento.setEnabled(true);
+							resetearMovs();
+							casillasMenu(false);
+							resetearCatapultas();
+							System.out.println("nuevo turno -------------------");
 							if(acabado) {
 								
 								//AQUÍ HABRÁ QUE HACER COSAS. SI HA ACABADO NO PODEMOS VOLVER A LA SITUACIÓN DEL PRINCIPIO
@@ -647,8 +662,7 @@ public class TableroGrafico extends JFrame {
 		contentPane.add(Operaciones);
 		
 		
-		final JButton btnAnteriorMovimiento = new JButton("");
-		final JButton btnSiguienteMovimiento = new JButton("");
+
 		btnSiguienteMovimiento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(tabI!=7) {
@@ -656,11 +670,14 @@ public class TableroGrafico extends JFrame {
 					if(tabI==0) {
 						btnAnteriorMovimiento.setEnabled(true);
 					}
+					limpiarActions();
 					pintar(actual);
 					/**/ tab = actual;
 					tabI++;
 					if(tabI==7) {
 						btnSiguienteMovimiento.setEnabled(false);
+						btnAnteriorMovimiento.setEnabled(false);
+						casillasMenu(true);
 					}
 				}
 			}
@@ -2360,6 +2377,7 @@ public class TableroGrafico extends JFrame {
     }
     
     public Dirección calcularDireccion(int posicionFicha, int posicionCasilla) {
+    	System.out.println(posicionFicha+" "+posicionCasilla);
     	int resta =posicionCasilla-posicionFicha;
     	Dirección direccion = null;
 		switch(resta) {
@@ -2397,6 +2415,7 @@ public class TableroGrafico extends JFrame {
 		}
 			
 		}
+		System.out.println(direccion.toString());
 		return direccion;
     }
     
@@ -2610,6 +2629,28 @@ public class TableroGrafico extends JFrame {
 			}
 		});
     	
+    }
+    
+    
+    public void resetearMovs() {
+    	this.movsB=0;
+    	this.movsF=0;
+    	this.movsC=0;
+    	this.movsG=0;
+    	this.movsL=0;
+    }
+    
+    public void casillasMenu(boolean estado) {
+    	this.btnCancelar.setEnabled(estado);
+    	this.btnDisparar.setEnabled(estado);
+    	this.btnEsperar.setEnabled(estado);
+    	this.Mover.setEnabled(estado);
+    	this.Listo.setEnabled(estado);
+    }
+    
+    public void resetearCatapultas() {
+    	this.catA =true;
+    	this.catR =true;
     }
 
 
