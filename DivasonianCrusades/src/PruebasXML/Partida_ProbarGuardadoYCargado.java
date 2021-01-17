@@ -17,6 +17,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 import LN.Tablero;
 import MD_Instrucción.Disparo;
@@ -75,6 +77,34 @@ public class Partida_ProbarGuardadoYCargado implements Runnable {
     	this.turno = turno;
     	
     	this.tablero = tablero;
+    	
+    }
+    
+    //Para cargar partida
+    public Partida_ProbarGuardadoYCargado(Socket s1, Socket s2, String nombre1, String nombre2, String archivoPartida, boolean socket1EsElAzul) throws SAXException, IOException, ParserConfigurationException {
+    	
+    	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+    	DocumentBuilder db = dbf.newDocumentBuilder();
+    	Document doc = db.parse(archivoPartida);
+    	
+    	Element tableroElemento = doc.getDocumentElement();
+    	
+    	if(socket1EsElAzul) {
+    		this.s1 = s1;
+        	this.s2 = s2;
+    	}
+    	else {
+    		this.s1 = s2;
+        	this.s2 = s1;
+    	}
+    	this.nombre1 = nombre1;
+    	this.nombre2 = nombre2;
+    	
+    	this.turno = Integer.parseInt(tableroElemento.getAttribute("tipo"));
+    	
+    	this.tablero = Tablero.getFromElemento(tableroElemento);
+    	instrucciónFacción1 = new Instrucción(); 
+    	instrucciónFacción2 = new Instrucción();
     	
     }
     

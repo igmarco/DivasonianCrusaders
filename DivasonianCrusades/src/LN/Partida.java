@@ -50,6 +50,7 @@ public class Partida implements Runnable {
 	ObjectInputStream ois1 = null;
 	ObjectInputStream ois2 = null;
     
+	//Para una nueva partida
     public Partida(Socket s1, Socket s2, String nombre1, String nombre2) {
     	
     	this.s1 = s1;
@@ -69,6 +70,7 @@ public class Partida implements Runnable {
     	
     }
     
+    //Por si hiciera falta
     public Partida(Socket s1, Socket s2, String nombre1, String nombre2, Tablero tablero, int turno) {
     	
     	this.s1 = s1;
@@ -79,6 +81,34 @@ public class Partida implements Runnable {
     	this.turno = turno;
     	
     	this.tablero = tablero;
+    	instrucciónFacción1 = new Instrucción(); 
+    	instrucciónFacción2 = new Instrucción();
+    	
+    }
+    
+    //Para cargar partida
+    public Partida(Socket s1, Socket s2, String nombre1, String nombre2, String archivoPartida, boolean socket1EsElAzul) throws SAXException, IOException, ParserConfigurationException {
+    	
+    	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+    	DocumentBuilder db = dbf.newDocumentBuilder();
+    	Document doc = db.parse(archivoPartida);
+    	
+    	Element tableroElemento = doc.getDocumentElement();
+    	
+    	if(socket1EsElAzul) {
+    		this.s1 = s1;
+        	this.s2 = s2;
+    	}
+    	else {
+    		this.s1 = s2;
+        	this.s2 = s1;
+    	}
+    	this.nombre1 = nombre1;
+    	this.nombre2 = nombre2;
+    	
+    	this.turno = Integer.parseInt(tableroElemento.getAttribute("tipo"));
+    	
+    	this.tablero = Tablero.getFromElemento(tableroElemento);
     	instrucciónFacción1 = new Instrucción(); 
     	instrucciónFacción2 = new Instrucción();
     	
@@ -99,12 +129,8 @@ public class Partida implements Runnable {
 			
 			while(!haTerminado) {
 				tablerosDelTurno.clear();
-				String[] lineasCliente1 = ois1.readLine().split("-");
-				String[] lineasCliente2 = ois2.readLine().split("-");
-				if(lineasCliente1[0].equals("SURR")||lineasCliente1[0].equals("AB"))
-					rendición1 = true;
-				if(lineasCliente2[0].equals("SURR")||lineasCliente2[0].equals("AB"))
-					rendición2 = true;
+				rendición1 = ois1.readLine().split("-")[0].equals("SURR");
+				rendición2 = ois2.readLine().split("-")[0].equals("SURR");
 				
 				if(rendición1 && rendición2) {
 					
@@ -404,19 +430,6 @@ public class Partida implements Runnable {
         }
     	StreamResult result = new StreamResult(new File("PartidasGuardadas//" + nombrePartida + "_" + Calendar.getInstance().getTime().toString().replaceAll(" ", "_").replaceAll(":", "-") + ".xml"));
     	t.transform(source , result);
-    	
-    }
-    
-    public Partida cargarPartida(Socket s1, Socket s2, String nombre1, String nombre2, String archivoPartida, boolean socket1EsElAzul) throws SAXException, IOException, ParserConfigurationException {
-    	
-    	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-    	DocumentBuilder db = dbf.newDocumentBuilder();
-    	Document doc = db.parse(archivoPartida);
-    	
-    	Element tableroElemento = doc.getDocumentElement();
-    	
-    	if(socket1EsElAzul) return new Partida(s1, s2, nombre1, nombre2, Tablero.getFromElemento(tableroElemento), Integer.parseInt(tableroElemento.getAttribute("turno")));
-    	else return new Partida(s2, s1, nombre1, nombre2, Tablero.getFromElemento(tableroElemento), Integer.parseInt(tableroElemento.getAttribute("turno")));
     	
     }
 
