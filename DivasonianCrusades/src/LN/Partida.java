@@ -405,32 +405,32 @@ public class Partida implements Runnable {
     	
     }
     
-    public void guardarPartida(Tablero tablero, int turno, String nombre1, String nombre2, String nombrePartida) throws ParserConfigurationException, TransformerException {
-    	
-    	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-    	DocumentBuilder db = dbf.newDocumentBuilder();
-    	Document doc = db.newDocument();
-    	
-    	Element tableroElemento = tablero.getElemento(doc);
-    	
-    	tableroElemento.setAttribute("turno", this.turno + "");
-    	
-    	doc.appendChild(tableroElemento);
-    	
-    	TransformerFactory tf = TransformerFactory.newInstance();
-    	Transformer t = tf.newTransformer();
-    	DOMSource source = new DOMSource(doc);
-    	File carpeta = new File("PartidasGuardadas");
-    	if (!carpeta.exists()) {
-            if (carpeta.mkdirs()) {
-                System.out.println("Directorio creado");
-            } else {
-                System.out.println("Error al crear directorio");
-            }
-        }
-    	StreamResult result = new StreamResult(new File("PartidasGuardadas//" + nombrePartida + "_" + Calendar.getInstance().getTime().toString().replaceAll(" ", "_").replaceAll(":", "-") + ".xml"));
-    	t.transform(source , result);
-    	
-    }
+//    public void guardarPartida(Tablero tablero, int turno, String nombrePartida) throws ParserConfigurationException, TransformerException {
+//    	
+//    	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+//    	DocumentBuilder db = dbf.newDocumentBuilder();
+//    	Document doc = db.newDocument();
+//    	
+//    	Element tableroElemento = tablero.getElemento(doc);
+//    	
+//    	tableroElemento.setAttribute("turno", this.turno + "");
+//    	
+//    	doc.appendChild(tableroElemento);
+//    	
+//    	TransformerFactory tf = TransformerFactory.newInstance();
+//    	Transformer t = tf.newTransformer();
+//    	DOMSource source = new DOMSource(doc);
+//    	File carpeta = new File("PartidasGuardadas");
+//    	if (!carpeta.exists()) {
+//            if (carpeta.mkdirs()) {
+//                System.out.println("Directorio creado");
+//            } else {
+//                System.out.println("Error al crear directorio");
+//            }
+//        }
+//    	StreamResult result = new StreamResult(new File("PartidasGuardadas//" + nombrePartida + "_" + Calendar.getInstance().getTime().toString().replaceAll(" ", "_").replaceAll(":", "-") + ".xml"));
+//    	t.transform(source , result);
+//    	
+//    }
 
 }

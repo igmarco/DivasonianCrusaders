@@ -10,11 +10,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -27,6 +29,17 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import LN.Tablero;
 import MD_Instrucción.Disparo;
@@ -2880,5 +2893,33 @@ public class TableroGrafico extends JFrame {
 			ex.printStackTrace();
 		}
 	}
+	
+	public void guardarPartida(String nombrePartida) throws ParserConfigurationException, TransformerException {
+    	
+    	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+    	DocumentBuilder db = dbf.newDocumentBuilder();
+    	Document doc = db.newDocument();
+    	
+    	Element tableroElemento = this.tableros.get(0).getElemento(doc);
+    	
+    	tableroElemento.setAttribute("turno", this.turno + "");
+    	
+    	doc.appendChild(tableroElemento);
+    	
+    	TransformerFactory tf = TransformerFactory.newInstance();
+    	Transformer t = tf.newTransformer();
+    	DOMSource source = new DOMSource(doc);
+    	File carpeta = new File("PartidasGuardadas");
+    	if (!carpeta.exists()) {
+            if (carpeta.mkdirs()) {
+                System.out.println("Directorio creado");
+            } else {
+                System.out.println("Error al crear directorio");
+            }
+        }
+    	StreamResult result = new StreamResult(new File("PartidasGuardadas//" + nombrePartida + "_" + Calendar.getInstance().getTime().toString().replaceAll(" ", "_").replaceAll(":", "-") + ".xml"));
+    	t.transform(source , result);
+    	
+    }
 	
 }
