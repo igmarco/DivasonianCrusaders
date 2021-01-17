@@ -256,12 +256,9 @@ public class Nodo implements Cloneable,Serializable{
     public void ejecutarCrga() {
     	
     	this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarCarga(this.fichaDefensora));
-		if(!this.fichaDefensora.estáMuerta()) {
-			
-			if(this.casilla instanceof Colina) this.fichaAtacante.sufrirDaño((this.fichaDefensora.realizarAtaque(this.fichaAtacante)) + ((Colina) this.casilla).getDañoExtra());
-			else this.fichaAtacante.sufrirDaño(this.fichaDefensora.realizarAtaque(this.fichaAtacante));
-			
-		}
+    	
+		if(this.casilla instanceof Colina) this.fichaAtacante.sufrirDaño((this.fichaDefensora.realizarAtaque(this.fichaAtacante)) + ((Colina) this.casilla).getDañoExtra());
+		else this.fichaAtacante.sufrirDaño(this.fichaDefensora.realizarAtaque(this.fichaAtacante));
 
 		this.comprobarMuertes();
     	
@@ -287,6 +284,19 @@ public class Nodo implements Cloneable,Serializable{
     		this.comprobarMuertes();
     		
     	}
+    	
+    }
+    
+    public void ejecutarAtaquesDeHuidas() {
+    	
+    	if(this.hayDosFichas()) {
+    		
+    		this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarCarga(this.fichaDefensora));
+        	this.fichaAtacante.sufrirDaño(this.fichaDefensora.realizarCarga(this.fichaAtacante));
+    		
+    	}
+    		
+    	this.comprobarMuertes();
     	
     }
     
@@ -327,6 +337,13 @@ public class Nodo implements Cloneable,Serializable{
         	else if(f.equals(this.fichaDefensora)) this.fichaDefensora.puedeMover = false;
     		
     	}
+    	
+    }
+    
+    public void noPuedenMover() {
+    	
+    	if(this.fichaAtacante != null) this.fichaAtacante.puedeMover = false;
+    	if(this.fichaDefensora != null) this.fichaDefensora.puedeMover = false;
     	
     }
     

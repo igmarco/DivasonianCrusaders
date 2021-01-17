@@ -148,7 +148,7 @@ public class Tablero implements Cloneable,Serializable{
 			if(nodos[casillaDestino].hayDosFichas()) {
 				
 				nodos[casillaDestino].ejecutarCrga();
-				nodos[casillaDestino].noPuedeMover(f); //En caso de que haya muerto este método no hará nada.
+				nodos[casillaDestino].noPuedenMover(); //En caso de que haya muerto este método no hará nada.
 				
 			}
 			
@@ -191,7 +191,18 @@ public class Tablero implements Cloneable,Serializable{
     		System.out.println(f2.getClass().getSimpleName() + ": " + desde2 + " " + hasta2);
     		
     		//Comrpobaciones y órdenes
-    		if(hasta1 == desde2) {
+    		
+    		if(desde1 == desde2) {
+    			
+    			moverFichasDeLaMismaCasilla(f1, f2, desde1, hasta1, hasta1);
+    			
+    		}
+    		else if(hasta1 == desde2 && hasta2 == desde1) {
+    			
+    			cruzarFichas(f1, f2, desde1, desde2); 
+    			
+    		}
+    		else if(hasta1 == desde2) {
     			
     			this.moverFicha(f2, desde2, hasta2);
     			this.moverFicha(f1, desde1, hasta1);
@@ -243,8 +254,7 @@ public class Tablero implements Cloneable,Serializable{
 			
 			nodos[casillaDestino].ejecutarCrgasRespectivas();
 			
-			nodos[casillaDestino].noPuedeMover(f1); //En caso de que haya muerto este método no hará nada.
-			nodos[casillaDestino].noPuedeMover(f2); //En caso de que haya muerto este método no hará nada.
+			nodos[casillaDestino].noPuedenMover(); //En caso de que haya muerto este método no hará nada.
 			
 		}
 		else if(nodos[casillaOrigen1].estáAquí(f1)) {
@@ -257,6 +267,85 @@ public class Tablero implements Cloneable,Serializable{
 			
 			Ficha freal2 = nodos[casillaOrigen2].quitarFicha(f2);
 			nodos[casillaDestino].ponerFicha(freal2);
+			
+		}
+		
+    }
+	
+	public void moverFichasDeLaMismaCasilla(Ficha f1, Ficha f2, int casillaOrigen, int casillaDestino1, int casillaDestino2) {
+		
+		
+		nodos[casillaOrigen].ejecutarAtaquesDeHuidas();
+		
+		if(nodos[casillaOrigen].estáAquí(f1)) {
+			
+			Ficha freal1 = nodos[casillaOrigen].quitarFicha(f1);
+			nodos[casillaDestino1].ponerFicha(freal1);
+			
+			if(nodos[casillaDestino1].hayDosFichas()) {
+				
+				nodos[casillaDestino1].ejecutarCrga();
+				nodos[casillaDestino1].noPuedenMover(); //En caso de que haya muerto este método no hará nada.
+				
+			}
+			
+		}
+		
+		if(nodos[casillaOrigen].estáAquí(f2)) {
+			
+			Ficha freal2 = nodos[casillaOrigen].quitarFicha(f2);
+			nodos[casillaDestino2].ponerFicha(freal2);
+			
+			if(nodos[casillaDestino2].hayDosFichas()) {
+				
+				nodos[casillaDestino2].ejecutarCrga();
+				nodos[casillaDestino2].noPuedenMover(); //En caso de que haya muerto este método no hará nada.
+				
+			}
+			
+		}
+		
+    }
+	
+	public void moverFichasDeLaMismaCasillaALaMismaCasilla(Ficha f1, Ficha f2, int casillaOrigen, int casillaDestino) /*Modo retranqueta*/ {
+		
+		
+		nodos[casillaOrigen].ejecutarAtaquesDeHuidas();
+		
+		if(nodos[casillaOrigen].estáAquí(f1)) {
+			
+			Ficha freal1 = nodos[casillaOrigen].quitarFicha(f1);
+			nodos[casillaDestino].ponerFicha(freal1);
+			
+		}
+		
+		if(nodos[casillaOrigen].estáAquí(f2)) {
+			
+			Ficha freal2 = nodos[casillaOrigen].quitarFicha(f2);
+			nodos[casillaDestino].ponerFicha(freal2);
+			
+		}
+		
+    }
+	
+	public void cruzarFichas(Ficha f1, Ficha f2, int casillaOrigen1, int casillaOrigen2) {
+		
+		if (Math.random()>=0.5) {
+		
+			this.moverFicha(f1, casillaOrigen1, casillaOrigen2);
+			
+			nodos[casillaOrigen2].ejecutarCrgasRespectivas();
+			
+			nodos[casillaOrigen2].noPuedenMover(); //En caso de que haya muerto este método no hará nada.
+		
+		}
+		else {
+			
+			this.moverFicha(f2, casillaOrigen2, casillaOrigen1);
+			
+			nodos[casillaOrigen1].ejecutarCrgasRespectivas();
+			
+			nodos[casillaOrigen1].noPuedenMover(); //En caso de que haya muerto este método no hará nada.
 			
 		}
 		
