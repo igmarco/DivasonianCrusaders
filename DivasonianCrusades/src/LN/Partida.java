@@ -39,8 +39,8 @@ public class Partida implements Runnable {
 	private boolean rendición1;
 	private boolean rendición2;
 
-	private Instrucción instrucciónFacción1 = new Instrucción(); 
-	private Instrucción instrucciónFacción2 = new Instrucción();
+	private Instrucción instrucciónFacción1;
+	private Instrucción instrucciónFacción2;
 
 	private Tablero tablero;
 	
@@ -63,6 +63,9 @@ public class Partida implements Runnable {
     	
     	tablero = new Tablero();
     	
+    	instrucciónFacción1 = new Instrucción(); 
+    	instrucciónFacción2 = new Instrucción();
+    	
     }
     
     public Partida(Socket s1, Socket s2, String nombre1, String nombre2, Tablero tablero, int turno) {
@@ -75,6 +78,8 @@ public class Partida implements Runnable {
     	this.turno = turno;
     	
     	this.tablero = tablero;
+    	instrucciónFacción1 = new Instrucción(); 
+    	instrucciónFacción2 = new Instrucción();
     	
     }
     
@@ -93,8 +98,11 @@ public class Partida implements Runnable {
 			
 			while(!haTerminado) {
 				tablerosDelTurno.clear();
-				rendición1 = ois1.readLine().split("-")[0].equals("SURR");
+				String string1;
+				rendición1 = (string1 = ois1.readLine()).split("-")[0].equals("SURR");
 				rendición2 = ois2.readLine().split("-")[0].equals("SURR");
+				
+				System.out.println(string1);
 				
 				if(rendición1 && rendición2) {
 					
@@ -130,8 +138,23 @@ public class Partida implements Runnable {
 					this.instrucciónFacción1.clear();
 					this.instrucciónFacción2.clear();
 					
+					ois1.skip(ois1.available());
+					ois2.skip(ois2.available());
+					
+					
+					
+//					for(Operación op : (ArrayList<Operación>)((Instrucción) ois1.readObject())) {
+//						
+//						System.out.println(op.toString());
+//						instrucciónFacción1.add(op);
+//						
+//					}
+					
 					instrucciónFacción1.addAll((Instrucción) ois1.readObject());
 					instrucciónFacción2.addAll((Instrucción) ois2.readObject());
+					
+					/**/ System.out.println(instrucciónFacción1.toString());
+					/**/ System.out.println(instrucciónFacción2.toString());
 					
 					tablerosDelTurno.add((Tablero) this.tablero.clone()); //Tablero inicial
 					

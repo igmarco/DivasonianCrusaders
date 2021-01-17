@@ -596,9 +596,9 @@ public class TableroGrafico extends JFrame {
 					try {
 						out.writeBytes("OK-Todo bien bro\r\n");
 						out.flush();
-						String resultao = in.readLine();
-						String[] resultaos = resultao.split("-");
-						if(resultaos[0].equals("SURR")) {
+						String resultado = in.readLine();
+						String[] resultados = resultado.split("-");
+						if(resultados[0].equals("SURR")) {
 							acabado=true;
 							
 							//HABRÁ QUE MANDAR UN MENSAJE DE VICTORIA O ALGO SIMILAR
