@@ -264,6 +264,10 @@ public class Partida implements Runnable {
     	Operación op1 = (Operación) instrucciónFacción1.getOperacion(movimiento);
     	Operación op2 = (Operación) instrucciónFacción2.getOperacion(movimiento);
     	
+    	//Transformamos los movimientos de quien no puede mover en esperas:
+    	if(op1 instanceof Movimiento && !this.tablero.movimientoPosible(op1.getFicha())) op1 = null;
+    	if(op2 instanceof Movimiento && !this.tablero.movimientoPosible(op2.getFicha())) op2 = null;
+    	
     	if(op1 == null) {
     		
     		if(op2 == null) {

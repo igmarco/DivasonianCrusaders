@@ -693,18 +693,19 @@ public class TableroGrafico extends JFrame {
 		btnSiguienteMovimiento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(tabI<7) {
-					Tablero actual = tableros.get(tabI+1);
+//					Tablero actual = tableros.get(tabI+1);
+					/**/ tab = (Tablero)tableros.get(tabI+1).clone();
 					if(tabI==0) {
 						btnAnteriorMovimiento.setEnabled(true);
 					}
 					limpiarActions();
-					pintar(actual);
+					pintar(/*actual*/tab);
 					tabI++;
 					if(tabI==7) {
 						btnSiguienteMovimiento.setEnabled(false);
 						btnAnteriorMovimiento.setEnabled(false);
 						casillasMenu(true);
-						tab = (Tablero)actual.clone();
+//						tab = (Tablero)actual.clone();
 						turno++;
 						Turno.setText("Turno: "+turno);
 						maniobra=0;
@@ -745,14 +746,15 @@ public class TableroGrafico extends JFrame {
 		btnAnteriorMovimiento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(tabI!=0) {
-					Tablero actual = tableros.get(tabI-1);
+//					Tablero actual = tableros.get(tabI-1);
+					/**/ tab = (Tablero)tableros.get(tabI-1).clone();
 					if(tabI==7) {
 						btnSiguienteMovimiento.setEnabled(true);
 						turno--;
 						Turno.setText("Turno: "+turno);
 					}
-					pintar(actual);
-					/**/ tab = actual;
+					pintar(/*actual*/tab);
+//					/**/ tab = (Tablero)actual.clone();
 					tabI--;
 					maniobra--;
 					Maniobra.setText("Maniobra: "+maniobra);

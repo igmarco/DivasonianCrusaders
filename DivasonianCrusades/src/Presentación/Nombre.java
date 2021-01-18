@@ -39,7 +39,7 @@ public class Nombre extends JFrame {
 	 * Create the frame.
 	 */
 	public Nombre(final ClienteGUI menu, final TableroGrafico tablero, final Socket s) {
-		setTitle("Introducir nombre para la partida"); 
+		setTitle("Divasonian Crusaders"); 
 		final Nombre main = this;
 		/**/ this.s = s;
 		setResizable(false);

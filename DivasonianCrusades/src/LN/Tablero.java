@@ -196,7 +196,7 @@ public class Tablero implements Cloneable,Serializable{
     		
     		if(desde1 == desde2) {
     			
-    			moverFichasDeLaMismaCasilla(f1, f2, desde1, hasta1, hasta1);
+    			moverFichasDeLaMismaCasilla(f1, f2, desde1, hasta1, hasta2);
     			
     		}
     		else if(hasta1 == desde2 && hasta2 == desde1) {
@@ -616,34 +616,45 @@ public class Tablero implements Cloneable,Serializable{
     	if(whereIsTheArcher == 0) {
 			
 			posiciones.remove((Integer) 8);
-			posiciones.remove((Integer) 17);
+			posiciones.remove((Integer) 7);
 			
 		}
 		else if(whereIsTheArcher == 9) {
 			
 			posiciones.remove((Integer) 8);
 			posiciones.remove((Integer) 17);
-			posiciones.remove((Integer) 26);
+			posiciones.remove((Integer) 7);
+			posiciones.remove((Integer) 16);
 			
 		}
 		else if(whereIsTheArcher == 18) {
 			
 			posiciones.remove((Integer) 17);
 			posiciones.remove((Integer) 26);
-			posiciones.remove((Integer) 35);
+			posiciones.remove((Integer) 8);
+			posiciones.remove((Integer) 16);
+			posiciones.remove((Integer) 25);
+			posiciones.remove((Integer) 7);
 			
 		}
 		else if(whereIsTheArcher == 27) {
 			
 			posiciones.remove((Integer) 26);
 			posiciones.remove((Integer) 35);
-			posiciones.remove((Integer) 44);
+			posiciones.remove((Integer) 17);
+			posiciones.remove((Integer) 25);
+			posiciones.remove((Integer) 34);
+			posiciones.remove((Integer) 16);
 			
 		}
 		else if(whereIsTheArcher == 36) {
 			
 			posiciones.remove((Integer) 35);
 			posiciones.remove((Integer) 44);
+			posiciones.remove((Integer) 34);
+			posiciones.remove((Integer) 43);
+			posiciones.remove((Integer) 26);
+			posiciones.remove((Integer) 25);
 			
 		}
 		else if(whereIsTheArcher == 8) {
@@ -652,12 +663,14 @@ public class Tablero implements Cloneable,Serializable{
 			posiciones.remove((Integer) 1);
 			posiciones.remove((Integer) 9);
 			posiciones.remove((Integer) 10);
+			posiciones.remove((Integer) 18);
+			posiciones.remove((Integer) 19);
 			
 		}
 		else if(whereIsTheArcher == 17) {
 			
-			posiciones.remove((Integer) 0);
-			posiciones.remove((Integer) 1);
+			posiciones.remove((Integer) 27);
+			posiciones.remove((Integer) 28);
 			posiciones.remove((Integer) 9);
 			posiciones.remove((Integer) 10);
 			posiciones.remove((Integer) 18);
@@ -666,8 +679,8 @@ public class Tablero implements Cloneable,Serializable{
 		}
 		else if(whereIsTheArcher == 26) {
 
-			posiciones.remove((Integer) 9);
-			posiciones.remove((Integer) 10);
+			posiciones.remove((Integer) 36);
+			posiciones.remove((Integer) 37);
 			posiciones.remove((Integer) 18);
 			posiciones.remove((Integer) 19);
 			posiciones.remove((Integer) 27);
@@ -676,8 +689,6 @@ public class Tablero implements Cloneable,Serializable{
 		}
 		else if(whereIsTheArcher == 35) {
 			
-			posiciones.remove((Integer) 18);
-			posiciones.remove((Integer) 19);
 			posiciones.remove((Integer) 27);
 			posiciones.remove((Integer) 28);
 			posiciones.remove((Integer) 36);
@@ -686,8 +697,6 @@ public class Tablero implements Cloneable,Serializable{
 		}
 		else if(whereIsTheArcher == 44) {
 			
-			posiciones.remove((Integer) 27);
-			posiciones.remove((Integer) 28);
 			posiciones.remove((Integer) 36);
 			posiciones.remove((Integer) 37);
 			
