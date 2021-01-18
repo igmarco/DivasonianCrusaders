@@ -121,6 +121,7 @@ public class TableroGrafico extends JFrame {
 	 * Create the frame.
 	 */
 	public TableroGrafico(final ClienteGUI menu, Socket s) {
+		setTitle("Divasonian Crusaders");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -969,7 +970,24 @@ public class TableroGrafico extends JFrame {
 			Casilla cas = tab.getNodo(i).getCasilla();
 			Ficha f = tab.getNodo(i).getFichaDefensora();
 			Ficha fat = tab.getNodo(i).getFichaAtacante();
-			if (cas instanceof Catapulta) {
+			
+			if(tab.getNodo(i).getCayóProyectil()) {
+				
+				this.casillas[i].setIcon(new ImageIcon("Recursos\\ImpactoProyectilBC.png"));
+				this.casillas[i].addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						ratonInImpactoProyectil(x);
+					}
+
+					@Override
+					public void mouseExited(MouseEvent e) {
+						ratonOutImpactoProyectil(x);
+					}
+				});
+				
+			}
+			else if (cas instanceof Catapulta) {
 				if (((Catapulta) cas).getIdentificador() == 1) {
 					if (f == null) {
 						this.casillas[i].setIcon(new ImageIcon("Recursos\\CatapultaAzul.png"));
@@ -2892,6 +2910,16 @@ public class TableroGrafico extends JFrame {
 		String todo = "Recursos\\"+defensor+"v"+atacante+color+"BC.png";
 		this.casillas[i].setIcon(new ImageIcon(todo));
 		this.casillas[i].setBackground(Color.white);
+	}
+	
+	public void ratonInImpactoProyectil(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\ImpactoProyectilC.png"));
+		this.casillas[i].setBackground(Color.white);
+	}
+
+	public void ratonOutImpactoProyectil(int i) {
+		this.casillas[i].setIcon(new ImageIcon("Recursos\\ImpactoProyectilBC.png"));
+		this.casillas[i].setBackground(new Color(245, 245, 220));
 	}
 	
 	public void setIn(DataInputStream in) {

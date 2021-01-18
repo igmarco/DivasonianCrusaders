@@ -508,6 +508,7 @@ public class Tablero implements Cloneable,Serializable{
     	if(f != null && f.equals(this.nodos[this.dóndeEstá(catapulta)].getFichaDefensora()) && !this.nodos[this.dóndeEstá(catapulta)].hayDosFichas()) {
     		
     		nodos[casillaObjetivo].recibirDisparo(catapulta.realizarDisparo()); 
+    		nodos[casillaObjetivo].caeProyectil(); //Para indicar que aquí ha caído un proyectil este turno.
     		
     	}
     	
@@ -990,5 +991,15 @@ public class Tablero implements Cloneable,Serializable{
         return new Tablero(nodos);
     	
     }
+	
+	public void limpiarProyectiles() {
+		
+		for(int i = 0; i < 45; i++) {
+			
+			nodos[i].limpiarProyectil();
+			
+		}
+		
+	}
     
 }

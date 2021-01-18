@@ -260,7 +260,10 @@ public class Partida implements Runnable {
 
     public void ejecutarOperación() {
     	
-    	//Hacemos lo que haya que hacer con el ejecutor.
+    	//Primero que todo, limpiamos los booleanos de cayóProyectil de la operación anterior.
+    	this.tablero.limpiarProyectiles();
+    	
+    	//Obtenemos las operaciones
     	Operación op1 = (Operación) instrucciónFacción1.getOperacion(movimiento);
     	Operación op2 = (Operación) instrucciónFacción2.getOperacion(movimiento);
     	

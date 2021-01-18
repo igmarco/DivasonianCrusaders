@@ -15,11 +15,14 @@ public class Nodo implements Cloneable,Serializable{
 
     private Ficha fichaAtacante;
     
+    private boolean cayóProyectil;
+    
     public Nodo() {
     	
     	this.casilla = new Normal();
     	this.fichaDefensora = null;
     	this.fichaAtacante = null;
+    	this.cayóProyectil = false;
     	
     }
     
@@ -28,6 +31,7 @@ public class Nodo implements Cloneable,Serializable{
     	this.casilla = casilla;
     	this.fichaDefensora = null;
     	this.fichaAtacante = null;
+    	this.cayóProyectil = false;
     	
     }
     
@@ -36,6 +40,7 @@ public class Nodo implements Cloneable,Serializable{
     	this.casilla = new Normal();
     	this.fichaDefensora = fichaDefensora;
     	this.fichaAtacante = null;
+    	this.cayóProyectil = false;
     	
     }
     
@@ -44,6 +49,7 @@ public class Nodo implements Cloneable,Serializable{
     	this.casilla = casilla;
     	this.fichaDefensora = fichaDefensora;
     	this.fichaAtacante = null;
+    	this.cayóProyectil = false;
     	
     }
     
@@ -52,6 +58,16 @@ public class Nodo implements Cloneable,Serializable{
     	this.casilla = casilla;
     	this.fichaDefensora = fichaDefensora;
     	this.fichaAtacante = fichaAtacante;
+    	this.cayóProyectil = false;
+    	
+    }
+    
+    public Nodo(Casilla casilla, Ficha fichaDefensora, Ficha fichaAtacante, boolean cayóProyectil) {
+    	
+    	this.casilla = casilla;
+    	this.fichaDefensora = fichaDefensora;
+    	this.fichaAtacante = fichaAtacante;
+    	this.cayóProyectil = cayóProyectil;
     	
     }
     
@@ -60,6 +76,7 @@ public class Nodo implements Cloneable,Serializable{
     	this.casilla = new Normal();
     	this.fichaDefensora = fichaDefensora;
     	this.fichaAtacante = fichaAtacante;
+    	this.cayóProyectil = false;
     	
     }
 
@@ -405,7 +422,7 @@ public class Nodo implements Cloneable,Serializable{
     	if(this.fichaDefensora != null) fD = (Ficha) this.fichaDefensora.clone();
     	if(this.fichaAtacante != null) fA = (Ficha) this.fichaAtacante.clone();
     	
-    	clone = new Nodo(c, fD, fA);
+    	clone = new Nodo(c, fD, fA, this.getCayóProyectil());
     	
     	return clone;
     	
@@ -465,5 +482,23 @@ public class Nodo implements Cloneable,Serializable{
         return new Nodo(casilla, fichaDefensora, fichaAtacante);
     	
     }
+	
+	public void caeProyectil() {
+		
+		this.cayóProyectil = true;
+		
+	}
+	
+	public void limpiarProyectil() {
+		
+		this.cayóProyectil = false;
+		
+	}
+	
+	public boolean getCayóProyectil() {
+		
+		return this.cayóProyectil;
+		
+	}
 
 }
