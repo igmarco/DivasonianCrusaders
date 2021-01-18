@@ -411,6 +411,10 @@ public class Partida implements Runnable {
     	
     }
     
+    public Tablero getTablero() {
+    	return this.tablero;
+    }
+    
 //    public void guardarPartida(Tablero tablero, int turno, String nombrePartida) throws ParserConfigurationException, TransformerException {
 //    	
 //    	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

@@ -30,6 +30,8 @@ public class ClienteGUI extends JFrame {
 	private /*final*/ TableroGrafico tablero;
 	private final JButton btContinuarPartida;
 	private final JButton btRendirse;
+	
+	private boolean salir = false;
 
 	/**
 	 * Launch the application.
@@ -54,7 +56,7 @@ public class ClienteGUI extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				if(tablero != null) {
+				if(salir) {
 					tablero.salir();
 				}
 			}
@@ -85,6 +87,50 @@ public class ClienteGUI extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				btCargarPartida.setIcon(new ImageIcon("Recursos\\CargarPartida.png"));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					
+					boolean continuar = true;
+					
+					if(tablero != null) {
+						
+						int resp = JOptionPane.showConfirmDialog(null, "Crear una nueva partida eliminará la partida en curso. ¿Está seguro?", "Atención", JOptionPane.YES_NO_OPTION);
+						
+						if(resp == JOptionPane.NO_OPTION) {
+							
+							continuar = false; 
+							
+						}
+						
+					}
+					
+					if(continuar) {
+						
+						Socket s = new Socket("localhost",58000);
+						
+						setVisible(false);
+						//Deshabilitamos el botón continuar partida, ya que rompemos la partida que teníamos. Luego lo habilitamos al meter el nombre.
+						btContinuarPartida.setEnabled(false);
+						//OJO, en caso de que el jugador se eche para atrás no tiene sentido haber creado el TableroGrafico, no? eso hay que revisarlo.
+						//Ya está revisado
+						tablero = new TableroGrafico(main, s);
+						CargarPartida car = new CargarPartida(main, tablero, s);
+
+						car.setVisible(true);
+						
+					}
+
+					
+				} catch (IOException ex) {
+
+					JOptionPane.showMessageDialog(null, "Imposibilidad de entrar en una nueva partida: El servidor no se encuentra disponible.", "Atención", JOptionPane.WARNING_MESSAGE);
+					
+				} catch (Exception ex) {
+					
+					ex.printStackTrace();
+				}
 			}
 		});
 		btCargarPartida.setForeground(new Color(255, 250, 240));
@@ -327,6 +373,10 @@ public class ClienteGUI extends JFrame {
 		
 		this.btRendirse.setEnabled(false);
 		
+	}
+	
+	public void salir(boolean estado) {
+		this.salir=estado;
 	}
 	
 }

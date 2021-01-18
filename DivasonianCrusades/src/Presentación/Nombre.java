@@ -126,6 +126,8 @@ public class Nombre extends JFrame {
 						String linea = in.readLine();
 						//System.out.println("Llegué sii...");
 						if(linea.compareTo("OK1")==0) {
+							out.writeBytes("NEW-Una nueva\r\n");
+							out.flush();
 							azul = true;
 							lblEstado.setText("¡Oponente encontrado!");
 							linea = in.readLine();
@@ -136,16 +138,23 @@ public class Nombre extends JFrame {
 						out.writeBytes(textField.getText()+"\r\n");
 						out.flush();
 						String name = in.readLine();
-						menu.habilitarContinuar();
-						menu.habilitarRendirse();
-						/*/Esta puñetera orden vacia el buffer y parece que funciona/*/
-						in.skip(in.available());
+						String ok = in.readLine();
+						System.out.println(ok);
+						if(ok.equals("NEW")) {
+							menu.habilitarContinuar();
+							menu.habilitarRendirse();
+							/*/Esta puñetera orden vacia el buffer y parece que funciona/*/
+							in.skip(in.available());
+							
+							tablero.setNombre(textField.getText(), name,azul);
+							tablero.setIn(in);
+							tablero.setOut(out);
+							tablero.setVisible(true);
+							menu.salir(true);
+							setVisible(false);
+						}else {
+						}
 						
-						tablero.setNombre(textField.getText(), name,azul);
-						tablero.setIn(in);
-						tablero.setOut(out);
-						tablero.setVisible(true);
-						setVisible(false);
 					}catch(IOException ex) { 
 						lblEstado.setText("Error al conectar");
 						ex.printStackTrace();

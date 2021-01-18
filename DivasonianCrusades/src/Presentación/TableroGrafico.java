@@ -2966,4 +2966,9 @@ public class TableroGrafico extends JFrame {
     	
     }
 	
+	public void setTablero(Tablero tab) {
+		this.tab = tab;
+		this.pintar(tab);
+	}
+	
 }
