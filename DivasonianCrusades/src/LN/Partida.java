@@ -192,6 +192,8 @@ public class Partida implements Runnable {
 						
 						tablerosDelTurno.add((Tablero) this.tablero.clone()); //Tablero del turno "movimiento"
 						
+						this.tablero.limpiarProyectiles(); //Limpiamos los booleanos de cayóProyectil tras el turno.
+						
 					}
 					
 					turno++;
@@ -259,9 +261,6 @@ public class Partida implements Runnable {
 //    }
 
     public void ejecutarOperación() {
-    	
-    	//Primero que todo, limpiamos los booleanos de cayóProyectil de la operación anterior.
-    	this.tablero.limpiarProyectiles();
     	
     	//Obtenemos las operaciones
     	Operación op1 = (Operación) instrucciónFacción1.getOperacion(movimiento);
