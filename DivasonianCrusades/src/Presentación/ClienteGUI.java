@@ -21,6 +21,8 @@ import javax.swing.border.EmptyBorder;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import Cliente.Ayuda;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JMenuBar;
@@ -383,10 +385,44 @@ public class ClienteGUI extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Ayuda");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				// Al pulsar esto se muestra la descripción básica de la aplicación y su uso.
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Ayuda frameAyuda = new Ayuda();
+							frameAyuda.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+			}
+		});
 		mntmNewMenuItem_1.setHorizontalAlignment(SwingConstants.CENTER);
 		menuBar.add(mntmNewMenuItem_1);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("M\u00E1s informaci\u00F3n");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				// Al pulsar esto se muestra la información de nosotros
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Información frameInformación = new Información();
+							frameInformación.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+			}
+		});
 		mntmNewMenuItem_2.setHorizontalAlignment(SwingConstants.CENTER);
 		menuBar.add(mntmNewMenuItem_2);
 		
