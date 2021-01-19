@@ -295,6 +295,7 @@ public class Partida implements Runnable {
 //    	
 //    }
 
+    //Resuelve la maniobra que toque ejecutando las operaciones de ambos jugadores.
     public void ejecutarOperación() {
     	
     	//Obtenemos las operaciones
@@ -416,16 +417,16 @@ public class Partida implements Runnable {
     	
     }
 
+    //Ejecuta todas las acciones que deban resolverse al finalizar el turno
     public void resolverTurno() {
     	
     	//Imagino que será solo esto:
     	tablero.resolverTurno();
     	
     }
-
+    
+    //Mandamos los tableros de las maniobras del turno (más el inicial y el final), junto con un booleano que indica si la partida ha terminado.
     public void mandarTableros(ObjectOutputStream oos1, ObjectOutputStream oos2, ArrayList<Tablero> tablerosDelTurno) {
-    	
-    	//Abran sus sockets que les vamos a meter tremendos tableros
     	
     	try {
     		
@@ -454,6 +455,7 @@ public class Partida implements Runnable {
     	return this.turno;
     }
     
+    //Este método permitiría al servidor guardar una partida determinada.
 //    public void guardarPartida(Tablero tablero, int turno, String nombrePartida) throws ParserConfigurationException, TransformerException {
 //    	
 //    	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

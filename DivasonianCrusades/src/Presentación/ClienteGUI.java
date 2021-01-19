@@ -23,6 +23,9 @@ import javax.xml.transform.TransformerException;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class ClienteGUI extends JFrame {
 
@@ -30,6 +33,7 @@ public class ClienteGUI extends JFrame {
 	private /*final*/ TableroGrafico tablero;
 	private final JButton btContinuarPartida;
 	private final JButton btRendirse;
+	private String ip;
 	
 	private boolean salir = false;
 
@@ -40,7 +44,7 @@ public class ClienteGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ClienteGUI frame = new ClienteGUI(/*true,null*/);
+					ClienteGUI frame = new ClienteGUI(/*true,null*/"localhost");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +56,10 @@ public class ClienteGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ClienteGUI(/*boolean nuevo, final TableroGrafico Tablero*/) {
+	public ClienteGUI(/*boolean nuevo, final TableroGrafico Tablero*/String ip) {
+		
+		this.ip = ip;
+		
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -65,7 +72,7 @@ public class ClienteGUI extends JFrame {
 		final ClienteGUI main = this;
 //		tablero = new TableroGrafico();
 		setResizable(false);
-		setBounds(100, 100, 395, 491);
+		setBounds(100, 100, 395, 533);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(255, 250, 205));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -74,7 +81,7 @@ public class ClienteGUI extends JFrame {
 		
 		final JPanel panel = new JPanel();
 		panel.setBackground(new Color(240, 230, 140));
-		panel.setBounds(0, 0, 389, 465);
+		panel.setBounds(0, 0, 389, 504);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -108,7 +115,7 @@ public class ClienteGUI extends JFrame {
 					
 					if(continuar) {
 						
-						Socket s = new Socket("localhost",58000);
+						Socket s = new Socket(getIp(),58000);
 						
 						setVisible(false);
 						//Deshabilitamos el botón continuar partida, ya que rompemos la partida que teníamos. Luego lo habilitamos al meter el nombre.
@@ -137,7 +144,7 @@ public class ClienteGUI extends JFrame {
 		btCargarPartida.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
 		btCargarPartida.setBackground(new Color(240, 230, 140));
 		btCargarPartida.setIcon(new ImageIcon("Recursos\\CargarPartida.png"));
-		btCargarPartida.setBounds(104, 221, 175, 47);
+		btCargarPartida.setBounds(104, 249, 175, 47);
 		btCargarPartida.setHorizontalTextPosition(SwingConstants.CENTER);
 		btCargarPartida.setBorder(null);
 		panel.add(btCargarPartida);
@@ -164,7 +171,7 @@ public class ClienteGUI extends JFrame {
 		});
 		btGuardarPartida.setBackground(new Color(240, 230, 140));
 		btGuardarPartida.setIcon(new ImageIcon("Recursos\\GuardarPartida.png"));
-		btGuardarPartida.setBounds(104, 269, 175, 47);
+		btGuardarPartida.setBounds(104, 297, 175, 47);
 		btGuardarPartida.setHorizontalTextPosition(SwingConstants.CENTER);
 		btGuardarPartida.setBorder(null);
 		panel.add(btGuardarPartida);
@@ -208,7 +215,7 @@ public class ClienteGUI extends JFrame {
 		});
 		btSalir.setIcon(new ImageIcon("Recursos\\Salir2.png"));
 		btSalir.setBackground(new Color(240, 230, 140));
-		btSalir.setBounds(104, 391, 175, 47);
+		btSalir.setBounds(104, 419, 175, 47);
 		btSalir.setBorder(null);
 		panel.add(btSalir);
 	
@@ -243,7 +250,7 @@ public class ClienteGUI extends JFrame {
 								
 								if(continuar) {
 									
-									Socket s = new Socket("localhost",58000);
+									Socket s = new Socket(getIp(),58000);
 									
 									setVisible(false);
 									//Deshabilitamos el botón continuar partida, ya que rompemos la partida que teníamos. Luego lo habilitamos al meter el nombre.
@@ -273,7 +280,7 @@ public class ClienteGUI extends JFrame {
 			btNuevaPartida.setForeground(new Color(245, 245, 245));
 			//btNuevaPartida.setBackground(new Color(240, 230, 140));
 			btNuevaPartida.setIcon(new ImageIcon("Recursos\\NuevaPartida.png"));
-			btNuevaPartida.setBounds(104, 125, 175, 47);
+			btNuevaPartida.setBounds(104, 153, 175, 47);
 			btNuevaPartida.setHorizontalTextPosition(SwingConstants.CENTER);
 			btNuevaPartida.setBorder(null);
 			panel.add(btNuevaPartida);
@@ -305,7 +312,7 @@ public class ClienteGUI extends JFrame {
 			btContinuarPartida.setForeground(new Color(245, 245, 245));
 			//btNuevaPartida.setBackground(new Color(240, 230, 140));
 			btContinuarPartida.setIcon(new ImageIcon("Recursos\\ContinuarBoton.png"));
-			btContinuarPartida.setBounds(104, 173, 175, 47);
+			btContinuarPartida.setBounds(104, 201, 175, 47);
 			btContinuarPartida.setHorizontalTextPosition(SwingConstants.CENTER);
 			btContinuarPartida.setBorder(null);
 			/**/ btContinuarPartida.setEnabled(false);
@@ -314,7 +321,7 @@ public class ClienteGUI extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Recursos\\LogoD.png"));
-		lblNewLabel.setBounds(48, 5, 303, 113);
+		lblNewLabel.setBounds(48, 33, 303, 113);
 		panel.add(lblNewLabel);
 		
 		btRendirse = new JButton("");
@@ -344,11 +351,45 @@ public class ClienteGUI extends JFrame {
 		btRendirse.setFont(new Font("Matura MT Script Capitals", Font.PLAIN, 20));
 		btRendirse.setForeground(new Color(245, 245, 245));
 		btRendirse.setIcon(new ImageIcon("Recursos\\Rendirse.png"));
-		btRendirse.setBounds(105, 333, 175, 47);
+		btRendirse.setBounds(105, 361, 175, 47);
 		btRendirse.setHorizontalTextPosition(SwingConstants.CENTER);
 		btRendirse.setBorder(null);
 		/**/ btRendirse.setEnabled(false);
 		panel.add(btRendirse);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 389, 22);
+		panel.add(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("Herramientas");
+		mnNewMenu.setBounds(0, 0, 83, 20);
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Cambiar la IP del servidor");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Object resultado = JOptionPane.showInputDialog(null, "Introduzca la dirección IP en la que se encuentra\r\nel servidor de Divasonian Crusaders.", "IP del servidor", JOptionPane.QUESTION_MESSAGE, null, null, getIp());
+				
+				if(resultado == null) System.exit(0);
+				else {
+					
+					setIp((String) resultado);
+					
+				}
+				
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Ayuda");
+		mntmNewMenuItem_1.setHorizontalAlignment(SwingConstants.CENTER);
+		menuBar.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("M\u00E1s informaci\u00F3n");
+		mntmNewMenuItem_2.setHorizontalAlignment(SwingConstants.CENTER);
+		menuBar.add(mntmNewMenuItem_2);
+		
 	}
 	
 	public void habilitarContinuar() {
@@ -379,4 +420,15 @@ public class ClienteGUI extends JFrame {
 		this.salir=estado;
 	}
 	
+	public String getIp() {
+		
+		return this.ip;
+		
+	}
+	
+	public void setIp(String ip) {
+		
+		this.ip = ip;
+		
+	}
 }

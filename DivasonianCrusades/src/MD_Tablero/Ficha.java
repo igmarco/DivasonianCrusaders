@@ -21,7 +21,7 @@ public abstract class Ficha implements Cloneable, Serializable{
 
 	protected Facción facción;
     
-    public boolean puedeMover;
+    public boolean puedeMover; //Las fichas que se hayan trabado en combate este turno no podrán moverse más (porque no sabemos si es lo que el jugador desea).
     
     public int getDaño() {
 		return daño;
@@ -57,6 +57,8 @@ public abstract class Ficha implements Cloneable, Serializable{
 		this.puedeMover = true;
 	}
     
+    
+    //El siguiente método devuelve el entero correspondiente a la cantidad de daño que realiza, calculado mediante el "daño", con una desviación máxima de +-"dañoVariable"
     public int realizarAtaque() {
     	
     	int hd = 0;
@@ -65,11 +67,10 @@ public abstract class Ficha implements Cloneable, Serializable{
     	
     }
 
+    //Algunas fichas harán más daño a algunas de un tipo determinado. Por ejemplo: Los lanceros a la caballería.
     public int realizarAtaque(Ficha f) {
     	
-    	int hd = 0;
-    	if(hachaDivasónica != null) hd = hachaDivasónica.sumarDaño();
-    	return daño + (int) Math.floor(Math.random()*2*(dañoVariable)-dañoVariable) + hd;
+    	return this.realizarAtaque();
     	
     }
 
@@ -101,6 +102,7 @@ public abstract class Ficha implements Cloneable, Serializable{
     	
     }
 
+    //La vida de una ficha nunca puede subir por encima de la vida inicial.
     public void curarse(int v) {
     	
     	if(vida + v < vidaMáxima) {
@@ -127,12 +129,14 @@ public abstract class Ficha implements Cloneable, Serializable{
 		
 	}
 
+    //Al cargar se hace un 20% de daño extra.
     public int realizarCarga(Ficha f) {
     	
     	return (int) Math.floor(this.realizarAtaque(f)*1.2);
     	
     }
     
+    //El ataque contra una ficha que huye es de un 50%
     public int realizarAtaqueContraHuida(Ficha f) {
     	
     	return this.realizarCarga(f)/2;

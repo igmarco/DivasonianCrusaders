@@ -275,6 +275,7 @@ public class Tablero implements Cloneable,Serializable{
 		
     }
 	
+	//Si las casillas salen de la misma casilla se ejecutan ataques de huida respectivos.
 	public void moverFichasDeLaMismaCasilla(Ficha f1, Ficha f2, int casillaOrigen, int casillaDestino1, int casillaDestino2) {
 		
 		nodos[casillaOrigen].ejecutarAtaquesDeHuidas();
@@ -309,6 +310,7 @@ public class Tablero implements Cloneable,Serializable{
 		
     }
 	
+	//En el hipotético caso de que ambos jugadores dijeran a fichas que están combatiendo que huyan a la misma casilla; las fichas solo se atacarían (totalmente desconcertadas por la decisión de sus generales) en la huida, no en la carga.
 	public void moverFichasDeLaMismaCasillaALaMismaCasilla(Ficha f1, Ficha f2, int casillaOrigen, int casillaDestino) /*Modo retranqueta*/ {
 		
 		
@@ -330,6 +332,7 @@ public class Tablero implements Cloneable,Serializable{
 		
     }
 	
+	//Dos fichas que van a la casilla de la otra no se atraviesan, sino que hay un conflicto en una de las dos casillas de forma aleatoria (una permanece quieta).
 	public void cruzarFichas(Ficha f1, Ficha f2, int casillaOrigen1, int casillaOrigen2) {
 		
 		if (Math.random()>=0.5) {
@@ -385,6 +388,7 @@ public class Tablero implements Cloneable,Serializable{
     	
     }
 
+    //Comprueba si la partida ha terminado (aniquilación de un equipo o destrucción de la copa o "corona").
     public boolean haTerminado() {
     	
     	int posCopa1 = this.dóndeEstá(new Copa(Facción.Facción1));
@@ -424,6 +428,7 @@ public class Tablero implements Cloneable,Serializable{
     	
     }
 
+    //Devuelve el ganador (nota: Si ambos se destruyen en el mismo turno, entonces habrán empatado).
     public Facción getGanador() {
     	
     	//Indica qué facción ha ganado.
@@ -533,6 +538,7 @@ public class Tablero implements Cloneable,Serializable{
     	
     }
     
+    //Devuelve la lista de catapultas (su posición) que puede disparar el jugador de la facción indicada.
     public List<Integer> catapultasQuePuedesDisparar(Facción fc){
     	
     	List<Integer> listaCasillas = new ArrayList<Integer>();
@@ -547,6 +553,7 @@ public class Tablero implements Cloneable,Serializable{
     	
     }
     
+  //Devuelve la lista de nodos (su posición) a los que puede disparar la catapulta indicada.
     public List<Integer> dóndeDispararProyectiles(Catapulta cp) {
     	
     	//Devuelve una lista de enteros que representan las posiciones de las casillas a las que le llega el rango la catapulta dada.
@@ -748,8 +755,6 @@ public class Tablero implements Cloneable,Serializable{
     	if(dóndeEstá +1 <45)
     		movPosibles.add(dóndeEstá + 1);
     	
-    	int j;
-    	
     	if(dóndeEstá == 0) {
 			x = 8;
 			movPosibles.remove(x);
@@ -836,7 +841,7 @@ public class Tablero implements Cloneable,Serializable{
 //    		}
 /*    		else */ if(nodos[movPosibles.get(i)].estáAquí(f.getFacción())) {
     			
-    			j = movPosibles.remove(i);
+    			movPosibles.remove(i);
     			
     		}
     		

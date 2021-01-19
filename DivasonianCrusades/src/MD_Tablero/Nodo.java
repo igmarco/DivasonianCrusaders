@@ -15,7 +15,7 @@ public class Nodo implements Cloneable,Serializable{
 
     private Ficha fichaAtacante;
     
-    private boolean cayóProyectil;
+    private boolean cayóProyectil; //Este booleano "historia" sirve únicamente para indicar si ha caído un proyectil de catapulta en la última operación. 
     
     public Nodo() {
     	
@@ -112,6 +112,7 @@ public class Nodo implements Cloneable,Serializable{
     	
     }
 
+    //Únicamente coloca la ficha f en el nodo.
     public void ponerFicha(Ficha f) {
     	
     	if(this.fichaDefensora == null) this.fichaDefensora = f;
@@ -133,6 +134,7 @@ public class Nodo implements Cloneable,Serializable{
     	
     }
 
+    //Elimina la ficha del nodo. El método devuelve la ficha eliminada, para que se pueda colocar en otro nodo.
     public Ficha quitarFicha(Ficha f) {
     	
     	Ficha freturn = null;
@@ -178,9 +180,11 @@ public class Nodo implements Cloneable,Serializable{
     	
     }
 
+    //Realiza todas las acciones que se deben resolver tras la ejecución de las maniobras.
+    //Esto es: Resolver el combate, dar la curación de las casillas cercanas a una casilla de curación, restar la vida de la ficha que porte el hacha divasónica, comprobar las posibles bajas del combate y ejecutar los daños contra las copas o "coronas"
     public void resolverTurno() {
     	
-    	//Resolvemos combate, damos curación y sufrimos hacha. ¿Algo más? Quién sabe. Puede que resolver el disparo automático.
+    	//Resolvemos combate, damos curación y sufrimos hacha. ¿Algo más? Puede que resolver el disparo automático.
     	//Vale, no, resolver el disparo automático DESCARTADO.
     	//Claro, tenía que contemplar que hubiese hacha y que se la diese al último en pie (si lo hay).
     	//Epa, queda una cosa, saber si es una copa y resolver el daño también.
@@ -260,7 +264,6 @@ public class Nodo implements Cloneable,Serializable{
     	
     }
     
-    //OJOOOO ESTE LO HE AÑADIDO DE FREE TOTALMENTE
     public boolean hayDosFichas() {
     	
     	return (this.fichaAtacante != null);
@@ -348,7 +351,7 @@ public class Nodo implements Cloneable,Serializable{
     	
     }
     
-    //POR SI SE HA TRABADO EN COMBATE ESTE TURNETT.
+    //POR SI SE HA TRABADO EN COMBATE ESTE TURNO.
     public void noPuedeMover(Ficha f) {
     	
     	if (f != null) {
