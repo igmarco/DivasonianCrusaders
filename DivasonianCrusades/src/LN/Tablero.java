@@ -755,8 +755,6 @@ public class Tablero implements Cloneable,Serializable{
 			movPosibles.remove(x);
 			x = 17;
 			movPosibles.remove(x);
-			x = 26;
-			movPosibles.remove(x);
 			
 		}
 		else if(dóndeEstá == 9) {
@@ -766,16 +764,12 @@ public class Tablero implements Cloneable,Serializable{
 			movPosibles.remove(x);
 			x = 26;
 			movPosibles.remove(x);
-			x = 35;
-			movPosibles.remove(x);
 			
 		}
 		else if(dóndeEstá == 18) {
 			x = 26;
 			movPosibles.remove(x);
 			x = 17;
-			movPosibles.remove(x);
-			x = 35;
 			movPosibles.remove(x);
 			x = 8;
 			movPosibles.remove(x);
@@ -785,13 +779,15 @@ public class Tablero implements Cloneable,Serializable{
 			movPosibles.remove(x);
 			x = 26;
 			movPosibles.remove(x);
-			x = 44;
+			x = 17;
 			movPosibles.remove(x);
 		}
 		else if(dóndeEstá == 36) {
 			x = 44;
 			movPosibles.remove(x);
 			x=35;
+			movPosibles.remove(x);
+			x=26;
 			movPosibles.remove(x);
 		}
 		else if(dóndeEstá == 8) {
@@ -814,11 +810,7 @@ public class Tablero implements Cloneable,Serializable{
 		else if(dóndeEstá == 26) {
 			x = 18;
 			movPosibles.remove(x);
-			x = 9;
-			movPosibles.remove(x);
 			x = 27;
-			movPosibles.remove(x);
-			x= 0;
 			movPosibles.remove(x);
 			x = 36;
 			movPosibles.remove(x);
@@ -826,15 +818,11 @@ public class Tablero implements Cloneable,Serializable{
 		else if(dóndeEstá == 35) {
 			x = 27;
 			movPosibles.remove(x);
-			x = 18;
-			movPosibles.remove(x);
 			x = 36;
 			movPosibles.remove(x);
 		}
 		else if(dóndeEstá == 44) {
 			x = 36;
-			movPosibles.remove(x);
-			x = 27;
 			movPosibles.remove(x);
 			
 		}
