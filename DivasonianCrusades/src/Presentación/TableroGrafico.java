@@ -1293,6 +1293,8 @@ public class TableroGrafico extends JFrame {
 						}
 					});
 				}
+			}else {
+				this.pintarFichaCruzada(tab, i);
 			}
 		}
     }
@@ -1899,6 +1901,7 @@ public class TableroGrafico extends JFrame {
 				}
 			}
 		} else if (f2 instanceof Caballero) {
+			System.out.println("He entrado caballero");
 			final String defensor= "C";
 			if (f2.getFacción().equals(Facción.Facción1)) {
 				final String color = "A";
