@@ -14,8 +14,8 @@ public class Arquero extends Ficha {
 		
 		super(null, f);
 		super.daño = 10;
-		super.vida = 50;
-		super.vidaMáxima = 50;
+		super.vida = 75;
+		super.vidaMáxima = 75;
 		super.dañoVariable = 3;
 		this.dañoFlechas = 10;
 		this.dañoFlechasVariable = 5;

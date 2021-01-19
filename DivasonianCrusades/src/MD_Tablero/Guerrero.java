@@ -7,9 +7,9 @@ public class Guerrero extends Ficha {
 	public Guerrero(Facción f) {
 		
 		super(null, f);
-		super.daño = 15;
-		super.vida = 200;
-		super.vidaMáxima = 200;
+		super.daño = 18;
+		super.vida = 150;
+		super.vidaMáxima = 150;
 		super.dañoVariable = 2;
 		
 	}
