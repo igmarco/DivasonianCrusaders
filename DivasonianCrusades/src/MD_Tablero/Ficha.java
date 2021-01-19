@@ -135,7 +135,7 @@ public abstract class Ficha implements Cloneable, Serializable{
     
     public int realizarAtaqueContraHuida(Ficha f) {
     	
-    	return this.realizarAtaque(f)/2;
+    	return this.realizarCarga(f)/2;
     	
     }
     

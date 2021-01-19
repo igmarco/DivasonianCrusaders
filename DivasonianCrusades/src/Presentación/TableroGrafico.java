@@ -1734,7 +1734,7 @@ public class TableroGrafico extends JFrame {
 						}
 					});
 				}else if(f1 instanceof Lancero) {
-					this.casillas[i].setIcon(new ImageIcon("Recursos\\gvLRBC.png"));
+					this.casillas[i].setIcon(new ImageIcon("Recursos\\GvLRBC.png"));
 					final String atacante = "L";
 					this.casillas[i].addMouseListener(new MouseAdapter() {
 						@Override
@@ -1945,7 +1945,7 @@ public class TableroGrafico extends JFrame {
 						}
 					});
 				}else if(f1 instanceof Guerrero) {
-					this.casillas[i].setIcon(new ImageIcon("Recursos\\CvGaBC.png"));
+					this.casillas[i].setIcon(new ImageIcon("Recursos\\CvGABC.png"));
 					final String atacante = "G";
 					this.casillas[i].addMouseListener(new MouseAdapter() {
 						@Override

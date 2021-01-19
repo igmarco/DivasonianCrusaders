@@ -237,6 +237,7 @@ public class Tablero implements Cloneable,Serializable{
 		if(nodos[casillaOrigen1].hayDosFichas()) {
 			
 			nodos[casillaOrigen1].ejecutarAtaqueContraHuida(f1);
+			nodos[casillaOrigen2].ejecutarAtaqueContraHuida(f2);
 			
 		}
 		
@@ -275,7 +276,6 @@ public class Tablero implements Cloneable,Serializable{
     }
 	
 	public void moverFichasDeLaMismaCasilla(Ficha f1, Ficha f2, int casillaOrigen, int casillaDestino1, int casillaDestino2) {
-		
 		
 		nodos[casillaOrigen].ejecutarAtaquesDeHuidas();
 		

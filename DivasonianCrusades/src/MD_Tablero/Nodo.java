@@ -193,6 +193,7 @@ public class Nodo implements Cloneable,Serializable{
     	this.comprobarMuertes();
     	
     	if(this.fichaAtacante != null) this.fichaAtacante.puedeMover = true;
+    	if(this.fichaDefensora != null) this.fichaDefensora.puedeMover = true;
     	
     	if(this.casilla.tieneHacha() && this.fichaDefensora != null && this.fichaAtacante == null) {
     		
@@ -285,8 +286,8 @@ public class Nodo implements Cloneable,Serializable{
     
     public void ejecutarCrgasRespectivas() {
     	
-    	this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarCarga(this.fichaDefensora));
-    	this.fichaAtacante.sufrirDaño(this.fichaDefensora.realizarCarga(this.fichaAtacante));
+    	this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarAtaqueContraHuida(this.fichaDefensora));
+    	this.fichaAtacante.sufrirDaño(this.fichaDefensora.realizarAtaqueContraHuida(this.fichaAtacante));
     	
     	this.comprobarMuertes();
     	
@@ -297,8 +298,8 @@ public class Nodo implements Cloneable,Serializable{
     	
     	if(f != null) {
     		
-    		if(f.equals(this.fichaDefensora)) this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarCarga(this.fichaDefensora));
-    		else if(f.equals(this.fichaAtacante)) this.fichaAtacante.sufrirDaño(this.fichaDefensora.realizarCarga(this.fichaAtacante));
+    		if(f.equals(this.fichaDefensora)) this.fichaDefensora.sufrirDaño(this.fichaAtacante.realizarAtaqueContraHuida(this.fichaDefensora));
+    		else if(f.equals(this.fichaAtacante)) this.fichaAtacante.sufrirDaño(this.fichaDefensora.realizarAtaqueContraHuida(this.fichaAtacante));
     		
     		this.comprobarMuertes();
     		
