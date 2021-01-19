@@ -1,30 +1,31 @@
 package Presentación;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JButton;
 import java.awt.Color;
-import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Victoria extends JFrame {
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+public class Derrota extends JFrame {
 
 	private JPanel contentPane;
+
 
 	/**
 	 * Create the frame.
 	 */
-	public Victoria(String name, final ClienteGUI main, TableroGrafico tg) {
-		setTitle("Divas\u00F3n estar\u00E1 orgulloso de ti");
+	public Derrota(String name, final ClienteGUI main, TableroGrafico tg) {
+		setTitle("Divas\u00F3n estar\u00E1 decepcionado");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 281);
@@ -63,22 +64,23 @@ public class Victoria extends JFrame {
 		lblNewLabel_1_1.setBounds(52, 145, 66, 78);
 		contentPane.add(lblNewLabel_1_1);
 		
-		JLabel lblEnhorabuena = new JLabel("\u00A1ENHORABUENA!");
+		JLabel lblEnhorabuena = new JLabel("Vaya...");
 		lblEnhorabuena.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEnhorabuena.setFont(new Font("Consolas", Font.PLAIN, 31));
 		lblEnhorabuena.setBounds(10, 11, 424, 49);
 		contentPane.add(lblEnhorabuena);
 		
-		JLabel lblHasGanado = new JLabel("HAS GANADO");
+		JLabel lblHasGanado = new JLabel("has comido hacha");
 		lblHasGanado.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHasGanado.setFont(new Font("Consolas", Font.PLAIN, 27));
 		lblHasGanado.setBounds(10, 98, 424, 49);
 		contentPane.add(lblHasGanado);
 		
-		JLabel lblNewLabel_2 = new JLabel("unas pilas para el mando...");
+		JLabel lblNewLabel_2 = new JLabel("\u00BFOlvidaste usar el flush()?");
 		lblNewLabel_2.setFont(new Font("Consolas", Font.PLAIN, 12));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(10, 145, 424, 14);
 		contentPane.add(lblNewLabel_2);
 	}
+
 }

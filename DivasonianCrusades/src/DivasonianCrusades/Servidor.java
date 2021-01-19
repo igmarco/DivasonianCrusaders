@@ -3,6 +3,7 @@ package DivasonianCrusades;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -76,8 +77,6 @@ public class Servidor {
 						dos1.flush();
 						dos2.flush();
 						dos1.writeBytes("NEW\r\n");
-						dos1.flush();
-						dos1.writeBytes("NEW\r\n");
 						dos2.writeBytes("NEW\r\n");
 						dos1.flush();
 						dos2.flush();
@@ -117,6 +116,8 @@ public class Servidor {
 						dos2.writeBytes(nombre1+"\r\n");
 						dos1.flush();
 						dos2.flush();
+						dos2.writeBytes("LOAD\r\n");
+						dos2.flush();
 						String nombrePartida = dis1.readLine();
 						String color = dis1.readLine();
 						boolean azul;
@@ -126,14 +127,25 @@ public class Servidor {
 							azul = false;					
 						Partida p = new Partida(s1,s2, nombre1, nombre2,nombrePartida,azul);
 						Tablero tab =p.getTablero();
+						if(azul)
+							dos2.writeBytes("R\r\n");
+						else
+							dos2.writeBytes("A\r\n");
+						dos2.flush();
+						int turno = p.getTurno();
+						dos1.writeInt(turno);
+						dos2.writeInt(turno);
+						dos1.flush();
+						dos2.flush();
+						ObjectOutputStream ob2 = new ObjectOutputStream(dos2);
 						ObjectOutputStream ob1 = new ObjectOutputStream(dos1);
 						ob1.writeObject(tab);
 						ob1.flush();
-						ObjectOutputStream ob2 = new ObjectOutputStream(dos2);
 						ob2.writeObject(tab);
 						ob2.flush();
-						ob2.writeObject(!azul);
-						ob2.flush();
+						ObjectInputStream obi1 = new ObjectInputStream(dis1);
+						ObjectInputStream obi2 = new ObjectInputStream(dis2);
+						p.agenciarSockets(obi1, obi2,ob1, ob2,azul);
 						pool.execute(p);
 					}
 					
@@ -149,23 +161,6 @@ public class Servidor {
 				}
 				finally {
 					
-					if(s1 != null) {
-						try {
-							s1.close();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					if(s2 != null) {
-						try {
-							s2.close();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					
 				}
 
 				
@@ -175,7 +170,9 @@ public class Servidor {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		finally {}
+		finally {
+			pool.shutdown();
+		}
 
 	}
 

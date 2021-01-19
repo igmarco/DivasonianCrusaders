@@ -102,7 +102,7 @@ public class CargarPartida extends JFrame {
 							String linea = in.readLine();
 							//System.out.println("Llegué sii...");
 							if(linea.compareTo("OK1")==0) {
-								out.writeBytes("LOAD-Mandamos las partidiñas luego broski ;)");
+								out.writeBytes("LOAD-Mandamos las partidiñas luego broski ;)\r\n");
 								linea = in.readLine();
 							}
 							out.writeBytes(textField.getText()+"\r\n");
@@ -118,24 +118,17 @@ public class CargarPartida extends JFrame {
 							/*/Esta puñetera orden vacia el buffer y parece que funciona/*/
 							in.skip(in.available());
 							tablero.setNombre(textField.getText(), name,azul);
-//							BufferedInputStream read = new BufferedInputStream(new FileInputStream("PartidasGuardadas\\"+(String)list.getSelectedValue()));
-//							byte[] buff = new byte[1024];
-//							int leidos = read.read(buff);
-//							while(leidos != -1) {
-//								out.write(buff, 0, leidos);
-//								leidos = read.read(buff);
-//							}
-							out.writeBytes("PartidasGuardadas\\"+(String)list.getSelectedValue());
+							out.writeBytes("PartidasGuardadas\\"+(String)list.getSelectedValue()+"\r\n");
 							out.flush();
 							if(azul)
-								out.writeBytes("A");
+								out.writeBytes("A\r\n");
 							else
-								out.writeBytes("R");
+								out.writeBytes("R\r\n");
 							out.flush();
-							ObjectInputStream ob1 = new ObjectInputStream(in);
-							Tablero tab = (Tablero)ob1.readObject();
-							tablero.setTablero(tab);
+							int turno = in.readInt();
+							tablero.setTurno(turno);
 							tablero.setIn(in);
+							tablero.setTablero();
 							tablero.setOut(out);
 							tablero.setVisible(true);
 							setVisible(false);
@@ -144,9 +137,6 @@ public class CargarPartida extends JFrame {
 							ex.printStackTrace();
 							menu.setVisible(true);
 							setVisible(false);
-						} catch (ClassNotFoundException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
 						}
 					}
 				}

@@ -49,6 +49,8 @@ public class Partida implements Runnable {
 	ObjectOutputStream oos2 = null;
 	ObjectInputStream ois1 = null;
 	ObjectInputStream ois2 = null;
+	
+	private boolean empezada=false;
     
 	//Para una nueva partida
     public Partida(Socket s1, Socket s2, String nombre1, String nombre2) {
@@ -106,7 +108,7 @@ public class Partida implements Runnable {
     	this.nombre1 = nombre1;
     	this.nombre2 = nombre2;
     	
-    	this.turno = Integer.parseInt(tableroElemento.getAttribute("tipo"));
+    	this.turno = Integer.parseInt(tableroElemento.getAttribute("turno"));
     	
     	this.tablero = Tablero.getFromElemento(tableroElemento);
     	instrucciónFacción1 = new Instrucción(); 
@@ -114,16 +116,32 @@ public class Partida implements Runnable {
     	
     }
     
+    public void agenciarSockets(ObjectInputStream ois1,ObjectInputStream ois2, ObjectOutputStream oos1,ObjectOutputStream oos2, boolean azul) {
+    	if(azul) {
+        	this.oos1=oos1;
+        	this.ois1=ois1;
+        	this.oos2=oos2;
+        	this.ois2=ois2;
+    	}else {
+          	this.oos2=oos1;
+        	this.ois2=ois1;
+        	this.oos1=oos2;
+        	this.ois1=ois2;
+    	}
+    	empezada=true;
+    }
+    
     public void run() {
     	
     	ArrayList<Tablero> tablerosDelTurno = new ArrayList<Tablero>();
 
 		try {
-			
-			oos1 = new ObjectOutputStream(s1.getOutputStream());
-			oos2 = new ObjectOutputStream(s2.getOutputStream());
-			ois1 = new ObjectInputStream(s1.getInputStream());
-			ois2 = new ObjectInputStream(s2.getInputStream());
+			if(!empezada) {
+				oos1 = new ObjectOutputStream(s1.getOutputStream());
+				oos2 = new ObjectOutputStream(s2.getOutputStream());
+				ois1 = new ObjectInputStream(s1.getInputStream());
+				ois2 = new ObjectInputStream(s2.getInputStream());
+			}
 			
 			boolean haTerminado = false;
 			
@@ -244,6 +262,23 @@ public class Partida implements Runnable {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			if(this.s1!=null) {
+				try {
+					this.s1.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(this.s2!=null) {
+				try {
+					this.s2.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
     	
     }
@@ -413,6 +448,10 @@ public class Partida implements Runnable {
     
     public Tablero getTablero() {
     	return this.tablero;
+    }
+    
+    public int getTurno() {
+    	return this.turno;
     }
     
 //    public void guardarPartida(Tablero tablero, int turno, String nombrePartida) throws ParserConfigurationException, TransformerException {

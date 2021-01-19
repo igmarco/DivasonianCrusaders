@@ -2,13 +2,12 @@ package Presentación;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 
 import javax.swing.ImageIcon;
@@ -18,8 +17,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
+
+import LN.Tablero;
 
 public class Nombre extends JFrame {
 
@@ -139,8 +139,7 @@ public class Nombre extends JFrame {
 						out.flush();
 						String name = in.readLine();
 						String ok = in.readLine();
-						System.out.println(ok);
-						if(ok.equals("NEW")) {
+						if(ok.equals("NEW")|| azul) {
 							menu.habilitarContinuar();
 							menu.habilitarRendirse();
 							/*/Esta puñetera orden vacia el buffer y parece que funciona/*/
@@ -153,6 +152,26 @@ public class Nombre extends JFrame {
 							menu.salir(true);
 							setVisible(false);
 						}else {
+							menu.habilitarContinuar();
+							menu.habilitarRendirse();
+							String color = in.readLine();
+							if(color.equals("A"))
+								azul=true;
+							else
+								azul=false;
+							
+							int turno = in.readInt();
+							/*/Esta puñetera orden vacia el buffer y parece que funciona/*/
+							in.skip(in.available());
+							tablero.setNombre(textField.getText(), name,azul);
+							tablero.setTurno(turno);
+							tablero.setIn(in);
+							tablero.setTablero();
+							tablero.setOut(out);
+							tablero.setVisible(true);
+							menu.salir(true);
+							setVisible(false);
+							
 						}
 						
 					}catch(IOException ex) { 

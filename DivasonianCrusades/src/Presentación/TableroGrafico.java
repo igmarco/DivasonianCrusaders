@@ -100,6 +100,8 @@ public class TableroGrafico extends JFrame {
 	
 	private boolean acabado=false;
 	
+	JLabel Turno;
+	
 	private JTextArea txtCasilla;
 	private JTextArea txtFichaDef;
 	private JTextArea txtFichaAt;
@@ -426,7 +428,7 @@ public class TableroGrafico extends JFrame {
 		btnMenu.setBounds(35, 647, 179, 47);
 		contentPane.add(btnMenu);
 
-		final JLabel Turno = new JLabel("Turno: "+this.turno);
+		Turno = new JLabel("Turno: "+this.turno);
 		Turno.setFont(new Font("Consolas", Font.PLAIN, 14));
 		Turno.setBounds(231, 651, 119, 29);
 		contentPane.add(Turno);
@@ -649,15 +651,6 @@ public class TableroGrafico extends JFrame {
 							casillasMenu(false);
 							resetearCatapultas();
 							System.out.println("nuevo turno -------------------");
-							if(acabado) {
-								
-								//AQUÍ HABRÁ QUE HACER COSAS. SI HA ACABADO NO PODEMOS VOLVER A LA SITUACIÓN DEL PRINCIPIO
-								//NAH, NO TE VOY A MENTIR, ANDO MÁS PERDIDO QUE AGUILAR EN EL BANQUETE DE UNA BODA
-								//BTW, Jose, SI LLEGAS A CARGAR JUSTO ESTE COMMIT ESPECÍFICO Y LLEGAS AQUÍ, QUE SEPAS QUE SABEMOS QUE ERAS PORTERO Y QUE ERES UN CRACK
-								
-							}
-								
-							
 						}
 					}catch(IOException ex) {
 						ex.printStackTrace();
@@ -703,14 +696,28 @@ public class TableroGrafico extends JFrame {
 					pintar(/*actual*/tab);
 					tabI++;
 					if(tabI==7) {
-						btnSiguienteMovimiento.setEnabled(false);
-						btnAnteriorMovimiento.setEnabled(false);
-						casillasMenu(true);
-//						tab = (Tablero)actual.clone();
-						turno++;
-						Turno.setText("Turno: "+turno);
-						maniobra=0;
-						Maniobra.setText("Maniobra: "+maniobra);
+						if(acabado) {
+							Tablero tabVic = tableros.get(tableros.size()-1);
+							Facción faccionGanadora = tabVic.getGanador();
+							if(faccionGanadora == faccion) {
+								Victoria vic = new Victoria(nombre,menu,tablero);
+								vic.setVisible(true);
+								setVisible(false);
+							}else {
+								Derrota der = new Derrota(nombre,menu,tablero);
+								der.setVisible(true);
+								setVisible(false);
+							}
+						}else {
+							btnSiguienteMovimiento.setEnabled(false);
+							btnAnteriorMovimiento.setEnabled(false);
+							casillasMenu(true);
+	//						tab = (Tablero)actual.clone();
+							turno++;
+							Turno.setText("Turno: "+turno);
+							maniobra=0;
+							Maniobra.setText("Maniobra: "+maniobra);
+						}
 					}else {
 						maniobra++;
 						Maniobra.setText("Maniobra: "+maniobra);
@@ -2966,9 +2973,21 @@ public class TableroGrafico extends JFrame {
     	
     }
 	
-	public void setTablero(Tablero tab) {
-		this.tab = tab;
-		this.pintar(tab);
+	public void setTablero() {
+		try {
+			this.tab = (Tablero)in.readObject();
+			this.tableros.clear();
+			this.limpiarActions();
+			this.pintar(tab);
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void setTurno(int x) {
+		this.turno= x;
+		Turno.setText("Turno: "+turno);
 	}
 	
 }
