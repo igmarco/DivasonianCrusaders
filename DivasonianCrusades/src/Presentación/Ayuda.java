@@ -13,6 +13,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Ayuda extends JFrame {
 
@@ -137,7 +140,20 @@ public class Ayuda extends JFrame {
 		txtpnLaVerdaderaProtagonista.setBounds(20, 583, 1023, 114);
 		contentPane.add(txtpnLaVerdaderaProtagonista);
 		
-		JButton btnNewButton = new JButton("Ver m\u00E1s informaci\u00F3n sobre las casillas");
+		final JButton btnNewButton = new JButton("");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnNewButton.setIcon(new ImageIcon("Recursos\\CasillasS.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton.setIcon(new ImageIcon("Recursos\\Casillas.png"));
+			}
+		});
+		btnNewButton.setBackground(new Color(240, 230, 140));
+		btnNewButton.setBorder(null);
+		btnNewButton.setIcon(new ImageIcon("Recursos\\Casillas.png"));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -158,7 +174,20 @@ public class Ayuda extends JFrame {
 		btnNewButton.setBounds(334, 723, 175, 47);
 		contentPane.add(btnNewButton);
 		
-		JButton btnVerMsInformacin = new JButton("Ver m\u00E1s informaci\u00F3n sobre las fichas");
+		final JButton btnVerMsInformacin = new JButton("");
+		btnVerMsInformacin.setBackground(new Color(240, 230, 140));
+		btnVerMsInformacin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnVerMsInformacin.setIcon(new ImageIcon("Recursos\\FichasS.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnVerMsInformacin.setIcon(new ImageIcon("Recursos\\Fichas.png"));
+			}
+		});
+		btnVerMsInformacin.setIcon(new ImageIcon("Recursos\\Fichas.png"));
+		btnVerMsInformacin.setBorder(null);
 		btnVerMsInformacin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
