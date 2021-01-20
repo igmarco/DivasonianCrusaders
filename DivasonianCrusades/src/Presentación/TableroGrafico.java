@@ -2530,8 +2530,10 @@ public class TableroGrafico extends JFrame {
     //Manda al servidor un mensaje de que se ha rendido
     public void salir() {
     	try {
-    		out.writeBytes("AB-Me he rendido.\r\n");
-    		out.flush();
+    		if(out!=null) {
+    			out.writeBytes("AB-Me he rendido.\r\n");
+    			out.flush();
+    		}
     	}catch(IOException ex) {
     		ex.printStackTrace();
     	}
