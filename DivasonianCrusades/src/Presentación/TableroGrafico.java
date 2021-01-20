@@ -735,6 +735,7 @@ public class TableroGrafico extends JFrame {
 					}else {
 						maniobra++;
 						Maniobra.setText("Maniobra: "+maniobra);
+						
 					}
 				}
 			}
@@ -770,12 +771,14 @@ public class TableroGrafico extends JFrame {
 				if(tabI!=0) {
 //					Tablero actual = tableros.get(tabI-1);
 					/**/ tab = (Tablero)tableros.get(tabI-1).clone();
+						
 					if(tabI==7) {
 						btnSiguienteMovimiento.setEnabled(true);
 						turno--;
 						Turno.setText("Turno: "+turno);
 					}
 					pintar(/*actual*/tab);
+					limpiarActions();
 //					/**/ tab = (Tablero)actual.clone();
 					tabI--;
 					maniobra--;
