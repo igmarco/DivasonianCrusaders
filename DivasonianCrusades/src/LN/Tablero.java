@@ -96,6 +96,7 @@ public class Tablero implements Cloneable,Serializable{
     public boolean movimientoPosible(Ficha f) {
     	
     	// Devuelve false si la ficha ha sido trabada en combate en este turno (en una operación anterior a la siguiente).
+    	if(this.dóndeEstá(f) == -1) return false;
     	return (nodos[this.dóndeEstá(f)]).puedeMover(f);
     	
     }

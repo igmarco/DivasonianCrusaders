@@ -777,8 +777,8 @@ public class TableroGrafico extends JFrame {
 						turno--;
 						Turno.setText("Turno: "+turno);
 					}
-					pintar(/*actual*/tab);
 					limpiarActions();
+					pintar(/*actual*/tab);
 //					/**/ tab = (Tablero)actual.clone();
 					tabI--;
 					maniobra--;
