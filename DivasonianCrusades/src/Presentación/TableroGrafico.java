@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -59,8 +62,6 @@ import MD_Tablero.Guerrero;
 import MD_Tablero.Lancero;
 import Utilidades.Dirección;
 import Utilidades.Facción;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class TableroGrafico extends JFrame {
 
@@ -3019,7 +3020,10 @@ public class TableroGrafico extends JFrame {
                 System.out.println("Error al crear directorio");
             }
         }
-    	StreamResult result = new StreamResult(new File("PartidasGuardadas//"+Calendar.getInstance().getTime().toString().replaceAll(" ", "_").replaceAll(":", "-") +"_"+ this.nombre +"VS" +this.oponente +".xml"));
+    	SimpleDateFormat formato = new SimpleDateFormat("yyyy-MMMMM-dd_hh-mm-ss");
+    	String fechaString = formato.format(Calendar.getInstance().getTime());
+    	
+    	StreamResult result = new StreamResult(new File("PartidasGuardadas//"+fechaString +"_"+ this.nombre +"VS" +this.oponente +".xml"));
     	t.transform(source , result);
     	
     }
