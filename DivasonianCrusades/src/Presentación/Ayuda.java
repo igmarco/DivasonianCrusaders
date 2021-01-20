@@ -39,7 +39,7 @@ public class Ayuda extends JFrame {
 	 */
 	public Ayuda() {
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Ayuda.class.getResource("/Imagenes/iconoRefachero.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Ayuda.class.getResource("/Recursos/iconoRefachero.png")));
 		setTitle("Ayuda");
 		setBounds(100, 100, 729, 702);
 		contentPane = new JPanel();
