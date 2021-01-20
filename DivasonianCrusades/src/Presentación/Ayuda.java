@@ -45,7 +45,7 @@ public class Ayuda extends JFrame {
 		setResizable(false);
 //		setIconImage(Toolkit.getDefaultToolkit().getImage(Ayuda.class.getResource("/Recursos/iconoRefachero.png")));
 		setTitle("Ayuda");
-		setBounds(100, 100, 1087, 825);
+		setBounds(100, 100, 1087, 813);
 		contentPane = new JPanel();
 		contentPane.setForeground(Color.BLACK);
 		contentPane.setBackground(new Color(240, 230, 140));
@@ -137,7 +137,7 @@ public class Ayuda extends JFrame {
 		txtpnLaVerdaderaProtagonista.setForeground(Color.BLACK);
 		txtpnLaVerdaderaProtagonista.setEditable(false);
 		txtpnLaVerdaderaProtagonista.setBackground(new Color(245, 245, 220));
-		txtpnLaVerdaderaProtagonista.setBounds(20, 583, 1023, 114);
+		txtpnLaVerdaderaProtagonista.setBounds(20, 583, 1023, 100);
 		contentPane.add(txtpnLaVerdaderaProtagonista);
 		
 		final JButton btnNewButton = new JButton("");
@@ -171,7 +171,7 @@ public class Ayuda extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(334, 723, 175, 47);
+		btnNewButton.setBounds(334, 711, 175, 47);
 		contentPane.add(btnNewButton);
 		
 		final JButton btnVerMsInformacin = new JButton("");
@@ -205,7 +205,7 @@ public class Ayuda extends JFrame {
 				
 			}
 		});
-		btnVerMsInformacin.setBounds(566, 723, 175, 47);
+		btnVerMsInformacin.setBounds(566, 711, 175, 47);
 		contentPane.add(btnVerMsInformacin);
 	}
 }
