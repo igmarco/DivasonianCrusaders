@@ -41,7 +41,7 @@ public class Ayuda extends JFrame {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Ayuda.class.getResource("/Imagenes/iconoRefachero.png")));
 		setTitle("Ayuda");
-		setBounds(100, 100, 729, 702);
+		setBounds(100, 100, 729, 714);
 		contentPane = new JPanel();
 		contentPane.setForeground(Color.BLACK);
 		contentPane.setBackground(new Color(240, 230, 140));
@@ -92,11 +92,11 @@ public class Ayuda extends JFrame {
 		contentPane.add(txtpnLlasOperacionesQue);
 		
 		JTextPane txtpnMovimientoPodemos = new JTextPane();
-		txtpnMovimientoPodemos.setText("- Movimiento: Podemos indicar a una ficha que se desplace a una casilla adyacente. En caso de que en esa maniobra se trabe en combate con una ficha del rival, ejecutar\u00E1 una carga, y no se mover\u00E1n en el resto del turno (aunque en turnos posteriores podr\u00E1 huir del combate, sufriendo el da\u00F1o por persecuci\u00F3n del rival), ni esa ficha ni la del rival.");
+		txtpnMovimientoPodemos.setText("- Movimiento: Podemos indicar a una ficha que se desplace a una casilla adyacente. En caso de que en esa maniobra se trabe en combate con una ficha del rival, ejecutar\u00E1 una carga, y no se mover\u00E1n en el resto del turno (aunque en turnos posteriores podr\u00E1 huir del combate, sufriendo el da\u00F1o por persecuci\u00F3n del rival), ni esa ficha ni la del rival. Cada ficha puede moverse en un m\u00E1ximo de dos operaciones, salvo el Caballero, que puede mover tres.");
 		txtpnMovimientoPodemos.setForeground(Color.BLACK);
 		txtpnMovimientoPodemos.setEditable(false);
 		txtpnMovimientoPodemos.setBackground(Color.LIGHT_GRAY);
-		txtpnMovimientoPodemos.setBounds(20, 304, 676, 54);
+		txtpnMovimientoPodemos.setBounds(20, 304, 676, 67);
 		contentPane.add(txtpnMovimientoPodemos);
 		
 		JTextPane txtpnDisparoEn = new JTextPane();
@@ -104,7 +104,7 @@ public class Ayuda extends JFrame {
 		txtpnDisparoEn.setForeground(Color.BLACK);
 		txtpnDisparoEn.setEditable(false);
 		txtpnDisparoEn.setBackground(Color.LIGHT_GRAY);
-		txtpnDisparoEn.setBounds(20, 369, 676, 54);
+		txtpnDisparoEn.setBounds(20, 382, 676, 54);
 		contentPane.add(txtpnDisparoEn);
 		
 		JTextPane txtpnEsperaEn = new JTextPane();
@@ -112,12 +112,12 @@ public class Ayuda extends JFrame {
 		txtpnEsperaEn.setForeground(Color.BLACK);
 		txtpnEsperaEn.setEditable(false);
 		txtpnEsperaEn.setBackground(Color.LIGHT_GRAY);
-		txtpnEsperaEn.setBounds(20, 434, 676, 24);
+		txtpnEsperaEn.setBounds(20, 447, 676, 24);
 		contentPane.add(txtpnEsperaEn);
 		
 		JLabel lblHachaDivasnica = new JLabel("Hacha divas\u00F3nica:");
 		lblHachaDivasnica.setFont(new Font("Arial Black", Font.BOLD, 17));
-		lblHachaDivasnica.setBounds(10, 469, 330, 24);
+		lblHachaDivasnica.setBounds(10, 482, 330, 24);
 		contentPane.add(lblHachaDivasnica);
 		
 		JTextPane txtpnLaVerdaderaProtagonista = new JTextPane();
@@ -125,7 +125,7 @@ public class Ayuda extends JFrame {
 		txtpnLaVerdaderaProtagonista.setForeground(Color.BLACK);
 		txtpnLaVerdaderaProtagonista.setEditable(false);
 		txtpnLaVerdaderaProtagonista.setBackground(Color.LIGHT_GRAY);
-		txtpnLaVerdaderaProtagonista.setBounds(20, 504, 676, 85);
+		txtpnLaVerdaderaProtagonista.setBounds(20, 517, 676, 85);
 		contentPane.add(txtpnLaVerdaderaProtagonista);
 		
 		JButton btnNewButton = new JButton("Ver m\u00E1s informaci\u00F3n sobre las casillas");
@@ -146,7 +146,7 @@ public class Ayuda extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(89, 614, 230, 39);
+		btnNewButton.setBounds(89, 627, 230, 39);
 		contentPane.add(btnNewButton);
 		
 		JButton btnVerMsInformacin = new JButton("Ver m\u00E1s informaci\u00F3n sobre las fichas");
@@ -167,7 +167,7 @@ public class Ayuda extends JFrame {
 				
 			}
 		});
-		btnVerMsInformacin.setBounds(373, 614, 230, 39);
+		btnVerMsInformacin.setBounds(373, 627, 230, 39);
 		contentPane.add(btnVerMsInformacin);
 	}
 }

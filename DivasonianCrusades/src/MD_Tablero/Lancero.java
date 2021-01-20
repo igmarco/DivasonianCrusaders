@@ -13,8 +13,8 @@ public class Lancero extends Ficha {
 		
 		super(null, f);
 		super.daño = 15;
-		super.vida = 100;
-		super.vidaMáxima = 100;
+		super.vida = 125;
+		super.vidaMáxima = 125;
 		super.dañoVariable = 5;
 		this.dañoACaballería = 35;
 		

@@ -41,7 +41,7 @@ public class InfoFichas extends JFrame {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(InfoFichas.class.getResource("/Imagenes/iconoRefachero.png")));
 		setTitle("Informaci\u00F3n sobre las fichas");
-		setBounds(100, 100, 729, 702);
+		setBounds(100, 100, 729, 575);
 		contentPane = new JPanel();
 		contentPane.setForeground(Color.BLACK);
 		contentPane.setBackground(new Color(240, 230, 140));
@@ -70,9 +70,56 @@ public class InfoFichas extends JFrame {
 		txtpnACambioEl.setBounds(20, 105, 676, 40);
 		contentPane.add(txtpnACambioEl);
 		
-		JLabel lblBrbaro = new JLabel("B\u00E1rbaro");
+		JLabel lblBrbaro = new JLabel("B\u00E1rbaro:");
 		lblBrbaro.setFont(new Font("Arial Black", Font.BOLD, 17));
 		lblBrbaro.setBounds(10, 156, 330, 24);
 		contentPane.add(lblBrbaro);
+		
+		JTextPane txtpnElBrbaroEs = new JTextPane();
+		txtpnElBrbaroEs.setText("El b\u00E1rbaro es una ficha con una resistencia media y con un da\u00F1o enorme. Es especialmente \u00FAtil para acabar con las fichas enemigas con pocos puntos de vida, en especial los arqueros. Con el hacha divas\u00F3nica se puede convertir en un arma devastadora, pero hay que tener en cuenta que su resistencia es menor que la de otras fichas.");
+		txtpnElBrbaroEs.setForeground(Color.BLACK);
+		txtpnElBrbaroEs.setEditable(false);
+		txtpnElBrbaroEs.setBackground(Color.LIGHT_GRAY);
+		txtpnElBrbaroEs.setBounds(20, 191, 676, 53);
+		contentPane.add(txtpnElBrbaroEs);
+		
+		JLabel lblCaballero = new JLabel("Caballero:");
+		lblCaballero.setFont(new Font("Arial Black", Font.BOLD, 17));
+		lblCaballero.setBounds(10, 255, 330, 24);
+		contentPane.add(lblCaballero);
+		
+		JTextPane txtpnElCaballeroNo = new JTextPane();
+		txtpnElCaballeroNo.setText("El caballero no destaca por su da\u00F1o ni por su resistencia, pero es posiblemente la ficha m\u00E1s \u00FAtil del juego. A diferencia del resto, puede mover en un m\u00E1ximo de tres maniobras. Adem\u00E1s, sus cargas son devastadoras, por lo que puede ser una buena t\u00E9cnica emplearlo para acabar con fichas bajas de vida.");
+		txtpnElCaballeroNo.setForeground(Color.BLACK);
+		txtpnElCaballeroNo.setEditable(false);
+		txtpnElCaballeroNo.setBackground(Color.LIGHT_GRAY);
+		txtpnElCaballeroNo.setBounds(20, 290, 676, 53);
+		contentPane.add(txtpnElCaballeroNo);
+		
+		JLabel lblLancero = new JLabel("Lancero:");
+		lblLancero.setFont(new Font("Arial Black", Font.BOLD, 17));
+		lblLancero.setBounds(10, 354, 330, 24);
+		contentPane.add(lblLancero);
+		
+		JTextPane txtpnElLanceroEs = new JTextPane();
+		txtpnElLanceroEs.setText("El lancero es la ficha con caracter\u00EDsticas m\u00E1s equilibradas, pero es especialmente fuerte contra la caballer\u00EDa. Conviene mantenerlo cerca del caballero rival, y as\u00ED proteger al resto de tus fichas de sus cargas.");
+		txtpnElLanceroEs.setForeground(Color.BLACK);
+		txtpnElLanceroEs.setEditable(false);
+		txtpnElLanceroEs.setBackground(Color.LIGHT_GRAY);
+		txtpnElLanceroEs.setBounds(20, 389, 676, 40);
+		contentPane.add(txtpnElLanceroEs);
+		
+		JLabel lblGuerrero = new JLabel("Guerrero:");
+		lblGuerrero.setFont(new Font("Arial Black", Font.BOLD, 17));
+		lblGuerrero.setBounds(10, 440, 330, 24);
+		contentPane.add(lblGuerrero);
+		
+		JTextPane txtpnElGuerreroEs = new JTextPane();
+		txtpnElGuerreroEs.setText("El guerrero es la ficha con m\u00E1s puntos de vida de todo Divasonian Crusaders. Es el protector por defecto del arquero y la primera l\u00EDnea del ej\u00E9rcito, y suele ser una gran opci\u00F3n para portar el hacha divas\u00F3nica por su alta resistencia ante su corrupci\u00F3n.");
+		txtpnElGuerreroEs.setForeground(Color.BLACK);
+		txtpnElGuerreroEs.setEditable(false);
+		txtpnElGuerreroEs.setBackground(Color.LIGHT_GRAY);
+		txtpnElGuerreroEs.setBounds(20, 475, 676, 40);
+		contentPane.add(txtpnElGuerreroEs);
 	}
 }
