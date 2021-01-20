@@ -122,6 +122,12 @@ public class TableroGrafico extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	//Este es el constructor, es un monstruo pero basicamente crea toda la interfaz principal y le añade a todos los botones los eventos necesarios para que todo funcione
+	// para siguiente y anterior una vez se ha pasado turno avanza o retorcede en la visualizacion de los tableros resultado
+	// para confirmar acaba el turno mandando las 6 operaciones al servidor y establece una comunicacion con el servidor para ver si se ha terminado la partida o si esta sigue.
+	// mover, disparar y esperar se espera lo que hacen, ademas está comentado mas abajo.
+	// menu vuelve al menu principal pero sin cerrar la interfaz.
 	public TableroGrafico(final ClienteGUI menu, Socket s) {
 		setTitle("Divasonian Crusaders");
 		addWindowListener(new WindowAdapter() {
@@ -789,6 +795,7 @@ public class TableroGrafico extends JFrame {
 		contentPane.add(btnAnteriorMovimiento);
 	}
 
+	//pone los nombres y las facciones.
 	public void setNombre(String nombre1, String nombre2, boolean azul) {
 		if (azul) {
 			lblNewLabel_3.setText("Tú: " + nombre1 + " (Azul)");
@@ -809,7 +816,7 @@ public class TableroGrafico extends JFrame {
 	
 	
 	
-
+	//Este metodo añade eventos para que al poner el ratón encima del boton en cuestion muestre una informacion adicional sobre la vida y estado de una ficha o sobre una casilla.
 	public void ratonInNodo(int i) {
 
 		String casillaInfo = "";
@@ -962,6 +969,7 @@ public class TableroGrafico extends JFrame {
 		this.txtFichaAt.setText(fichaAtInfo);
 	}
 
+	//este metodo recorre todo el tablero tab dado y pinta las casillas y fichas correspondientes ademas de añadirles sus eventos correspondientes.
     public void pintar(Tablero tab) {
     	
     	//Representar gráficamente el tablero tab
@@ -1128,6 +1136,7 @@ public class TableroGrafico extends JFrame {
     	
     }
     
+    //Para dado el tablero y una posicion pinta la ficha de la misma, y añade sus eventos visuales.
     public void pintarFicha(Tablero tab, int i) {
     	Ficha f = tab.getNodo(i).getFichaDefensora();
     	Ficha f2 = tab.getNodo(i).getFichaAtacante();
@@ -1299,6 +1308,7 @@ public class TableroGrafico extends JFrame {
 		}
     }
     
+    //dado el tablero y una posicion pinta las dos fichas combatienes y añade sus respectivos eventos visuales.
     public void pintarFichaCruzada(Tablero tab, int i) {
     	Ficha f1 = tab.getNodo(i).getFichaAtacante();
     	Ficha f2 = tab.getNodo(i).getFichaDefensora();
@@ -2053,6 +2063,7 @@ public class TableroGrafico extends JFrame {
 		}
     }
     
+    //Bandera blanca y se lo notifica al servidor.
     public void rendirse() {
     	try {
     		out.writeBytes("SURR-Me he rendido.\r\n");
@@ -2061,6 +2072,8 @@ public class TableroGrafico extends JFrame {
     		ex.printStackTrace();
     	}
     }
+    
+    //Todo este codigo está muerto en un princio era lo que hacia mover, pero debido a que daba errores y no fué diseñado demasiado bien se comentó y ahora permanece aqui para el recuerdo.
     
 //    public void moverClick() {
 //	    	List<Integer> casAModificar = this.tab.quiénesPuedenMover(this.faccion);
@@ -2253,6 +2266,7 @@ public class TableroGrafico extends JFrame {
 ////		}
 //    }
     
+    //el handler de mover, para ejercutarlo todo
     public void moverClick() {
     	this.botonesCasillasMover(false);
     	this.introducirOperacionEnCurso=true;
@@ -2266,6 +2280,7 @@ public class TableroGrafico extends JFrame {
     	
     }
     
+    //Habilita solo los botones de las fichas que la faccion correspondiente que pueden mover.
     public void botonesCasillasMover(boolean estado) {
     	this.btnDisparar.setEnabled(estado);
     	this.btnEsperar.setEnabled(estado);
@@ -2307,7 +2322,8 @@ public class TableroGrafico extends JFrame {
     		/**/ this.pintar(tab);
     	}
     }
-    
+   
+    //lo mismo que deshabilitar todo pero el boton de la posicion i no.
     public void deshabilitarTodoMenosI (int i,boolean estado) {
     	List<Integer> casFichas = this.tab.quiénesPuedenMover(this.faccion);
     	for(Integer pos: casFichas) {
@@ -2320,6 +2336,7 @@ public class TableroGrafico extends JFrame {
     	}
     }
     
+    //Todo es todos los botones del tablero.
     public void deshabilitarTodo (boolean estado) {
     	for(Integer pos = 0; pos < 45; pos++) {
     		this.casillas[pos].setEnabled(estado);
@@ -2329,6 +2346,7 @@ public class TableroGrafico extends JFrame {
     	}
     }
     
+    //mira si la ficha que se encuentra en la posicion i puede mover, si sus movimientos se han agotado devolverá false.
     public boolean botonFichaPuedeMover(int i){
     	Ficha f = this.tab.getNodo(i).getFicha(faccion);
 		if(f instanceof Arquero) {
@@ -2350,6 +2368,7 @@ public class TableroGrafico extends JFrame {
 		return true;
     }
     
+    //Pinta de blanco las casillas o no donde puede mover una ficha
     public void botonesCasillasAMover(Ficha f,boolean estado) {
     	List<Integer> posiciones = this.tab.dóndePuedeMover(f);
     	final Movimiento mov;
@@ -2382,6 +2401,7 @@ public class TableroGrafico extends JFrame {
     	}
     }
     
+    //añade el movimiento adecuado a la instrucción y restaura el tablero. 
     public void añadirMov (Ficha f, Dirección direccion) {
     	this.inst.add(new Movimiento(f,direccion));
     	this.Operaciones.setText("Ops.: "+this.inst.size()+"/6");
@@ -2411,6 +2431,7 @@ public class TableroGrafico extends JFrame {
 		this.introducirOperacionEnCurso=false;
     }
     
+    //En un principio fueron actions pero como no iban muy bien pues pasó a limpiar mouselisteners de las fichas de la facción correspondiente.
     public void limpiarActionFichas() {
 		List<Integer> posFichas = this.tab.quiénesPuedenMover(this.faccion);
 		for(Integer posficha : posFichas) {
@@ -2429,6 +2450,7 @@ public class TableroGrafico extends JFrame {
 		}
     }
     
+    //eso, limpia los actions del boton deshacer.
     public void limpiarActionDeshacer() {
 		for(ActionListener al : this.btnCancelar.getActionListeners()) {
 			this.btnCancelar.removeActionListener(al);
@@ -2436,6 +2458,7 @@ public class TableroGrafico extends JFrame {
 		this.agregarFuncionalidadOriginalBtnCancelar();
     }
     
+    //Aunque pone actions limpia mouse listeners.
     public void limpiarActions() {
     	for(int i = 0 ; i<45; i++) {
     		this.casillas[i].setEnabled(true);
@@ -2445,6 +2468,7 @@ public class TableroGrafico extends JFrame {
     	}
     }
     
+    //Calcula la direaccion a partir de la posicion de la ficha y la posicion de la casilla a donde quiere moverse.
     public Dirección calcularDireccion(int posicionFicha, int posicionCasilla) {
     	System.out.println(posicionFicha+" "+posicionCasilla);
     	int resta =posicionCasilla-posicionFicha;
@@ -2489,12 +2513,14 @@ public class TableroGrafico extends JFrame {
     }
     
     
+    //los peina y cepilla para no tener problemas luego al visualizar el tablero, muy util en muchas circunstancia.
     public void peinarEventos(int i) {
     	for(MouseListener ls : this.casillas[i].getMouseListeners()) {
     		this.casillas[i].removeMouseListener(ls);
     	}
     }
     
+    //Manda al servidor un mensaje de que se ha rendido
     public void salir() {
     	try {
     		out.writeBytes("AB-Me he rendido.\r\n");
@@ -2504,7 +2530,7 @@ public class TableroGrafico extends JFrame {
     	}
     }
     
-    //
+    //Bloquea todos los botones excepto las catapultas disponibles.
     public void bloquearCasillasDisparo(boolean estado, final List<Integer> catapultas) {
     	this.btnDisparar.setEnabled(estado);
     	this.btnEsperar.setEnabled(estado);
@@ -2603,6 +2629,8 @@ public class TableroGrafico extends JFrame {
     }
     }
     
+    //Dada una ficha y una catapulta ademas del lugar de disparo y la posicion de la cata pulta crea un objeto Disparo y lo añade a las instrucciones a mandar, ademas de restaurar el tablero a su forma anterior
+    //quitando los eventos y los botones deshabilitados
     public void disparar(Ficha f, Catapulta cas, int lugarDisparo, int posicion) {
 //    	System.out.println("2. f es null? " + f == null);
     	Disparo disp = new Disparo(f,cas,lugarDisparo);
@@ -2710,6 +2738,7 @@ public class TableroGrafico extends JFrame {
     }
     
     
+    //Resetea los movimientos de las fichas, para que al comenzar un turno vuelvan a estar frescas.
     public void resetearMovs() {
     	this.movsB=0;
     	this.movsF=0;
@@ -2718,6 +2747,7 @@ public class TableroGrafico extends JFrame {
     	this.movsL=0;
     }
     
+    //Con el booleano estado habilita o deshabilita los botones del menu
     public void casillasMenu(boolean estado) {
     	this.btnCancelar.setEnabled(estado);
     	this.btnDisparar.setEnabled(estado);
@@ -2726,6 +2756,8 @@ public class TableroGrafico extends JFrame {
     	this.Listo.setEnabled(estado);
     }
     
+    
+    //Resetea las catapultas para que en un turno nuevo vuelvan a estar funcionales
     public void resetearCatapultas() {
     	this.catA =true;
     	this.catR =true;
@@ -2739,6 +2771,8 @@ public class TableroGrafico extends JFrame {
     // --------------------------- RATÓN ENTRA O SALE DE CASILLAS (BRILLO EN LAS IMÁGENES) -------------------------
     // -------------------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------------------
+    
+    //Básicamente añade fondo de color blanco y una imagen con o sin color a el botón correspondiente que puede representar una ficha o una casilla.
     
     public void ratonInCoronaAzul(int i) {
 		this.casillas[i].setIcon(new ImageIcon("Recursos\\CoronaAzul.png"));
@@ -2932,6 +2966,9 @@ public class TableroGrafico extends JFrame {
 		this.casillas[i].setBackground(new Color(245, 245, 220));
 	}
 	
+	//__________________________________________________________________________________________________________
+	
+	//Para conseguir los object Input y Output Streams.
 	public void setIn(DataInputStream in) {
 		try {
 			this.in= new ObjectInputStream(in);
@@ -2948,6 +2985,8 @@ public class TableroGrafico extends JFrame {
 		}
 	}
 	
+	
+	//A través de un arbol DOM creamos un archivo XML a partir del primer tablero de la partida y lo guradamos en 'PARTIDAS GUARDADAS'
 	public void guardarPartida() throws ParserConfigurationException, TransformerException {
     	
     	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -2971,7 +3010,7 @@ public class TableroGrafico extends JFrame {
                 System.out.println("Error al crear directorio");
             }
         }
-    	StreamResult result = new StreamResult(new File("PartidasGuardadas//" + this.nombre +"VS" +this.oponente + "_" + Calendar.getInstance().getTime().toString().replaceAll(" ", "_").replaceAll(":", "-") + ".xml"));
+    	StreamResult result = new StreamResult(new File("PartidasGuardadas//"+Calendar.getInstance().getTime().toString().replaceAll(" ", "_").replaceAll(":", "-") +"_"+ this.nombre +"VS" +this.oponente +".xml"));
     	t.transform(source , result);
     	
     }
@@ -2987,6 +3026,7 @@ public class TableroGrafico extends JFrame {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	public void setTurno(int x) {
 		this.turno= x;

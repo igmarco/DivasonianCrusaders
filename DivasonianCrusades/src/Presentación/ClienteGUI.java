@@ -55,6 +55,11 @@ public class ClienteGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	//el boton nuevapartida abre un nuevo formulario para introducir el nombre y conectar con el servidor, continuar partida si ya hay una empezada vuelve a la interfaz de la partida
+	// cargar partida es casi como nueva partida pero con un par de opciones mas para poder cargar una partida serializada en un documento XML,
+	// guardar partida persiste el estado de la partida que ya debe de haber empezado en un documento XML y por ultimo rendirse manda un mensaje de rendicion
+	// atraves del tablero para rendirse, salir sale. ademas los botones superiores proporcionan informacion extra acerca del juego y sus componentes.
 	public ClienteGUI(/*boolean nuevo, final TableroGrafico Tablero*/String ip) {
 		
 		this.ip = ip;
@@ -162,6 +167,7 @@ public class ClienteGUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					tablero.guardarPartida();
+					JOptionPane.showMessageDialog(null, "Su partida ha sido persistida con éxito.", "Al toque", JOptionPane.WARNING_MESSAGE);
 				} catch (ParserConfigurationException | TransformerException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

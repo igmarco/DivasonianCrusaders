@@ -38,6 +38,11 @@ public class Nombre extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	//en este consturctor se establece la primera conexion con el servidor para mandar el nombre la faccion y asi de modo que el primero en llegar es el azul
+	// y el segundo el rojo, y por ultimo se inicia la partida, cabe destacar que si en lugar de los dos clientes entran en modo nueva partida 
+	// si no que uno a cargado y el otro inicia nueva, en ese orden, en lugar de leer un NEW leera un LOAD y por tanto necesitará el tablero de la partida empezada
+	// y su facción en la misma.
 	public Nombre(final ClienteGUI menu, final TableroGrafico tablero, final Socket s) {
 		setTitle("Divasonian Crusaders"); 
 		final Nombre main = this;
