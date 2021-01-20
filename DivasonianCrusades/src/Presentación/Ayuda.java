@@ -38,8 +38,9 @@ public class Ayuda extends JFrame {
 	 * Create the frame.
 	 */
 	public Ayuda() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("Recursos\\iconoRefachero2.png"));
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Ayuda.class.getResource("/Recursos/iconoRefachero.png")));
+//		setIconImage(Toolkit.getDefaultToolkit().getImage(Ayuda.class.getResource("/Recursos/iconoRefachero.png")));
 		setTitle("Ayuda");
 		setBounds(100, 100, 729, 714);
 		contentPane = new JPanel();

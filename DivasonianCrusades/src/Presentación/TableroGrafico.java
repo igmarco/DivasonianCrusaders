@@ -709,11 +709,18 @@ public class TableroGrafico extends JFrame {
 								Victoria vic = new Victoria(nombre,menu,tablero);
 								vic.setVisible(true);
 								setVisible(false);
-							}else {
+							}else if(faccionGanadora != Facción.Ambos) {
 								Derrota der = new Derrota(nombre,menu,tablero);
 								der.setVisible(true);
 								setVisible(false);
+							}else {
+								
+								Empate der = new Empate(nombre,menu,tablero);
+								der.setVisible(true);
+								setVisible(false);
+								
 							}
+							
 						}else {
 							btnSiguienteMovimiento.setEnabled(false);
 							btnAnteriorMovimiento.setEnabled(false);
