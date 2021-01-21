@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Timer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -20,17 +21,22 @@ import org.xml.sax.SAXException;
 
 import LN.Partida;
 import LN.Tablero;
+import Utilidades.BorradorDeArchivos;
+import Utilidades.BorradorDelArchivo;
 
 public class Servidor {
 
 	public static void main(String[] args) {
 		
 		ExecutorService pool = null;
+		Timer timer = new Timer();
 		 
 		try {
 			
 			ServerSocket ss = new ServerSocket(58000);
 			pool = Executors.newCachedThreadPool();
+			
+			timer.schedule(new BorradorDeArchivos(), 0);
 			
 			while(true) {
 				
@@ -156,6 +162,8 @@ public class Servidor {
 							}
 							bw.flush();
 							
+							timer.schedule(new BorradorDelArchivo(nombrePartida), 10000);
+							
 						}
 						
 						//------------------------------------------------------------------
@@ -232,6 +240,8 @@ public class Servidor {
 								
 							}
 							bw.flush();
+							
+							timer.schedule(new BorradorDelArchivo(nombrePartida), 7200000);
 							
 						}
 						
