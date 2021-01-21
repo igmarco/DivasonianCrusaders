@@ -7,9 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -28,8 +32,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
-import LN.Tablero;
 
 public class CargarPartida extends JFrame {
 
@@ -100,6 +102,9 @@ public class CargarPartida extends JFrame {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					if(Azul.isSelected()||Rojo.isSelected()) {
+						
+						BufferedReader br = null;
+						
 						try {
 							Socket s = new Socket(menu.getIp(),58000);
 							boolean azul;
@@ -131,8 +136,33 @@ public class CargarPartida extends JFrame {
 								menu.setTableroGrafico(tablero); 
 								
 								tablero.setNombre(textField.getText(), name,azul);
-								out.writeBytes("PartidasGuardadas\\"+(String)list.getSelectedValue()+"\r\n");
+								out.writeBytes("PartidasGuardadasServidor\\"+(String)list.getSelectedValue()+"\r\n");
 								out.flush();
+								
+								
+								//------------------- ENVÍO DE TABLERO.XML -------------------------
+								
+								String existeXMLEnServidor = in.readLine();
+								
+								if(existeXMLEnServidor.split("-")[0].equals("NEXISTS")) {
+									
+									br = new BufferedReader(new FileReader("PartidasGuardadas\\"+(String)list.getSelectedValue()));
+									String lineaXML;
+									while((lineaXML = br.readLine()) != null) {
+										
+										out.writeBytes(lineaXML+"\r\n");
+										
+									}
+									out.flush();
+									
+									out.writeBytes("OK3-Terminado\r\n");
+									out.flush();
+									
+								}
+								
+								//------------------------------------------------------------------
+								
+								
 								if(azul)
 									out.writeBytes("A\r\n");
 								else
@@ -177,8 +207,31 @@ public class CargarPartida extends JFrame {
 									
 									
 									tablero.setNombre(textField.getText(), name,azul);
-									out.writeBytes("PartidasGuardadas\\"+(String)list.getSelectedValue()+"\r\n");
+									out.writeBytes("PartidasGuardadasServidor\\"+(String)list.getSelectedValue()+"\r\n");
 									out.flush();
+									
+									//------------------- ENVÍO DE TABLERO.XML -------------------------
+									
+									String existeXMLEnServidor = in.readLine();
+									
+									if(existeXMLEnServidor.split("-")[0].equals("NEXISTS")) {
+										
+										br = new BufferedReader(new FileReader("PartidasGuardadas\\"+(String)list.getSelectedValue()));
+										String lineaXML;
+										while((lineaXML = br.readLine()) != null) {
+											
+											out.writeBytes(lineaXML+"\r\n");
+											
+										}
+										out.flush();
+										
+										out.writeBytes("OK3-Terminado\r\n");
+										out.flush();
+										
+									}
+									
+									//------------------------------------------------------------------
+									
 									if(azul)
 										out.writeBytes("A\r\n");
 									else
@@ -220,8 +273,22 @@ public class CargarPartida extends JFrame {
 						}catch(IOException ex) { 
 							lblEstado.setText("Error al conectar");
 							ex.printStackTrace();
+							menu.restaurarMenu();
 							menu.setVisible(true);
 							setVisible(false);
+						}finally {
+							
+							if(br != null) {
+								
+								try {
+									br.close();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
+							}
+							
 						}
 					}
 				}

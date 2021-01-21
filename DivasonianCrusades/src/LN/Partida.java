@@ -78,10 +78,27 @@ public class Partida implements Runnable {
     }
     
     //Por si hiciera falta
-    public Partida(Socket s1, Socket s2, String nombre1, String nombre2, Tablero tablero, int turno) {
+    public Partida(Socket s1, Socket s2, String nombre1, String nombre2, ObjectInputStream dis1, ObjectInputStream dis2, ObjectOutputStream dos1, ObjectOutputStream dos2, Tablero tablero, int turno, boolean socket1EsElAzul) {
     	
-    	this.s1 = s1;
-    	this.s2 = s2;
+    	if(socket1EsElAzul) {
+    		this.s1 = s1;
+        	this.s2 = s2;
+        	
+        	this.oos1 = dos1;
+        	this.oos2 = dos2;
+        	this.ois1 = dis1;
+        	this.ois2 = dis2;
+    	}
+    	else {
+    		this.s1 = s2;
+        	this.s2 = s1;
+        	
+        	this.oos1 = dos2;
+        	this.oos2 = dos1;
+        	this.ois1 = dis2;
+        	this.ois2 = dis1;
+    	}
+    	
     	this.nombre1 = nombre1;
     	this.nombre2 = nombre2;
     	

@@ -127,7 +127,7 @@ public class Tablero implements Cloneable,Serializable{
     	
     	System.out.println(f.getClass().getSimpleName() + ": " + desde + " " + hasta);
     		
-    	this.moverFicha(f, desde, hasta);
+    	if(!this.hayFicha(f.getFacción(), hasta)) this.moverFicha(f, desde, hasta);
     	
     }
     
@@ -197,35 +197,41 @@ public class Tablero implements Cloneable,Serializable{
     		
     		if(desde1 == desde2) {
     			
-    			moverFichasDeLaMismaCasilla(f1, f2, desde1, hasta1, hasta2);
+    			if(!this.hayFicha(f1.getFacción(), hasta1) && !this.hayFicha(f2.getFacción(), hasta2)) moverFichasDeLaMismaCasilla(f1, f2, desde1, hasta1, hasta2);
+    			else if(!this.hayFicha(f1.getFacción(), hasta1)) this.moverFicha(f1, desde1, hasta1);
+    			else if(!this.hayFicha(f2.getFacción(), hasta2)) this.moverFicha(f2, desde2, hasta2);
     			
     		}
     		else if(hasta1 == desde2 && hasta2 == desde1) {
     			
-    			cruzarFichas(f1, f2, desde1, desde2); 
+    			if(!this.hayFicha(f1.getFacción(), hasta1) && !this.hayFicha(f2.getFacción(), hasta2)) cruzarFichas(f1, f2, desde1, desde2); 
+    			else if(!this.hayFicha(f1.getFacción(), hasta1)) this.moverFicha(f1, desde1, hasta1);
+    			else if(!this.hayFicha(f2.getFacción(), hasta2)) this.moverFicha(f2, desde2, hasta2);
     			
     		}
     		else if(hasta1 == desde2) {
     			
-    			this.moverFicha(f2, desde2, hasta2);
-    			this.moverFicha(f1, desde1, hasta1);
+    			if(!this.hayFicha(f2.getFacción(), hasta2)) this.moverFicha(f2, desde2, hasta2);
+    			if(!this.hayFicha(f1.getFacción(), hasta1)) this.moverFicha(f1, desde1, hasta1);
     			
     		}
     		else if(hasta2 == desde1) {
     			
-    			this.moverFicha(f1, desde1, hasta1);
-    			this.moverFicha(f2, desde2, hasta2);
+    			if(!this.hayFicha(f1.getFacción(), hasta1)) this.moverFicha(f1, desde1, hasta1);
+    			if(!this.hayFicha(f2.getFacción(), hasta2)) this.moverFicha(f2, desde2, hasta2);
     			
     		}
     		else if(hasta1 == hasta2) {
     			
-    			this.moverFichasALaMismaCasilla(f1, f2, desde1, desde2, hasta1);
+    			if(!this.hayFicha(f1.getFacción(), hasta1) && !this.hayFicha(f2.getFacción(), hasta2)) this.moverFichasALaMismaCasilla(f1, f2, desde1, desde2, hasta1);
+    			else if(!this.hayFicha(f1.getFacción(), hasta1)) this.moverFicha(f1, desde1, hasta1);
+    			else if(!this.hayFicha(f2.getFacción(), hasta2)) this.moverFicha(f2, desde2, hasta2);
     			
     		}
     		else {
     			
-    			this.moverFicha(f1, desde1, hasta1);
-    			this.moverFicha(f2, desde2, hasta2);
+    			if(!this.hayFicha(f1.getFacción(), hasta1)) this.moverFicha(f1, desde1, hasta1);
+    			if(!this.hayFicha(f2.getFacción(), hasta2)) this.moverFicha(f2, desde2, hasta2);
     			
     		}
     	
@@ -535,7 +541,7 @@ public class Tablero implements Cloneable,Serializable{
 
     public boolean hayFicha(Facción fc, int casilla) {
     	
-    	return (nodos[casilla].hayFicha());
+    	return (nodos[casilla].estáAquí(fc));
     	
     }
     

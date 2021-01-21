@@ -1,7 +1,10 @@
 package DivasonianCrusades;
 
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -38,6 +41,8 @@ public class Servidor {
 				ObjectOutputStream dos2 = null;
 				ObjectInputStream dis1 = null;
 				ObjectInputStream dis2 = null;
+				
+				BufferedWriter bw = null;
 				
 				try {
 					
@@ -126,6 +131,35 @@ public class Servidor {
 						dos1.flush();
 						dos2.flush();
 						String nombrePartida = dis2.readLine();
+						
+						//------------------- RECIBO DE TABLERO.XML -------------------------
+						
+						File partidaXML = new File(nombrePartida);
+						
+						if(partidaXML.exists()) {
+							
+							dos2.writeBytes("EXISTS-El fichero existe en la memoria del servidor.\r\n");
+							dos2.flush();
+							
+						}
+						else {
+							
+							dos2.writeBytes("NEXISTS-El fichero NO existe en la memoria del servidor.\r\n");
+							dos2.flush();
+							
+							bw = new BufferedWriter(new FileWriter(nombrePartida));
+							String lineaXML;
+							while(!(lineaXML = dis2.readLine()).split("-")[0].equals("OK3")) {
+								
+								bw.write(lineaXML + "\r\n");
+								
+							}
+							bw.flush();
+							
+						}
+						
+						//------------------------------------------------------------------
+						
 						String color = dis2.readLine();
 						boolean azul;
 						if(color.equals("A"))
@@ -174,6 +208,35 @@ public class Servidor {
 						dos1.flush();
 						dos2.flush();
 						String nombrePartida = dis1.readLine();
+						
+						//------------------- RECIBO DE TABLERO.XML -------------------------
+						
+						File partidaXML = new File(nombrePartida);
+						
+						if(partidaXML.exists()) {
+							
+							dos1.writeBytes("EXISTS-El fichero existe en la memoria del servidor.\r\n");
+							dos1.flush();
+							
+						}
+						else {
+							
+							dos1.writeBytes("NEXISTS-El fichero NO existe en la memoria del servidor.\r\n");
+							dos1.flush();
+							
+							bw = new BufferedWriter(new FileWriter(nombrePartida));
+							String lineaXML;
+							while(!(lineaXML = dis1.readLine()).split("-")[0].equals("OK3")) {
+								
+								bw.write(lineaXML + "\r\n");
+								
+							}
+							bw.flush();
+							
+						}
+						
+						//------------------------------------------------------------------
+						
 						String color = dis1.readLine();
 						boolean azul;
 						if(color.equals("A"))
@@ -226,6 +289,17 @@ public class Servidor {
 					e.printStackTrace();
 				}
 				finally {
+					
+					if(bw != null) {
+						
+						try {
+							bw.close();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+					}
 					
 				}
 

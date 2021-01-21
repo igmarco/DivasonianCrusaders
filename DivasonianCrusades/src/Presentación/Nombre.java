@@ -205,6 +205,7 @@ public class Nombre extends JFrame {
 						lblEstado.setText("Error al conectar");
 						JOptionPane.showMessageDialog(null, "Error al conectar con el servidor. Si la incidencia persiste, pruebe a seleccionar la ip que es.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 						ex.printStackTrace();
+						menu.restaurarMenu();
 						menu.setVisible(true);
 						setVisible(false);
 					}

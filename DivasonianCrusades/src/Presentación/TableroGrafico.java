@@ -11,14 +11,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -3041,7 +3042,9 @@ public class TableroGrafico extends JFrame {
     	SimpleDateFormat formato = new SimpleDateFormat("yyyy-MMMMM-dd_hh-mm-ss");
     	String fechaString = formato.format(Calendar.getInstance().getTime());
     	
-    	StreamResult result = new StreamResult(new File("PartidasGuardadas//"+fechaString +"_"+ this.nombre +"VS" +this.oponente +".xml"));
+    	File archivoXML = new File("PartidasGuardadas//"+fechaString +"_"+ this.nombre +"VS" +this.oponente +".xml");
+    	
+    	StreamResult result = new StreamResult(archivoXML);
     	t.transform(source , result);
     	
     }
