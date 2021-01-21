@@ -226,7 +226,7 @@ public class CargarPartida extends JFrame {
 										out.flush();
 										
 										out.writeBytes("OK3-Terminado\r\n");
-										out.flush();
+										out.flush(); 
 										
 									}
 									
