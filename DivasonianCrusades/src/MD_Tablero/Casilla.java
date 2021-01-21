@@ -147,7 +147,9 @@ public static Casilla getFromElemento(Element e) {
         		else if(hijo.getNodeName().equals("dañoProyectilesVariable")) dañoProyectilesVariable = Integer.parseInt(hijo.getFirstChild().getNodeValue());
         		else if(hijo.getNodeName().equals("identificador")) identificador = Integer.parseInt(hijo.getFirstChild().getNodeValue());
         		
-        		else if(hijo.getNodeName().equals("hachaDivasónica")) hachaDivasónica = HachaDivasónica.getFromElemento(hijo);
+        		else if(hijo.getNodeName().equals("HachaDivasónica")) {
+        			hachaDivasónica = HachaDivasónica.getFromElemento(hijo);
+        		}
         		
         		else if(hijo.getNodeName().equals("facción")) {
         			

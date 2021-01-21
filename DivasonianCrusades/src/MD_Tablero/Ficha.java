@@ -240,7 +240,7 @@ public abstract class Ficha implements Cloneable, Serializable{
         		else if(hijo.getNodeName().equals("vidaMáxima")) vidaMáxima = Integer.parseInt(hijo.getFirstChild().getNodeValue());
         		else if(hijo.getNodeName().equals("dañoVariable")) dañoVariable = Integer.parseInt(hijo.getFirstChild().getNodeValue());
         		
-        		else if(hijo.getNodeName().equals("hachaDivasónica")) hachaDivasónica = HachaDivasónica.getFromElemento(hijo);
+        		else if(hijo.getNodeName().equals("HachaDivasónica")) hachaDivasónica = HachaDivasónica.getFromElemento(hijo);
         		
         		else if(hijo.getNodeName().equals("facción")) {
         			
