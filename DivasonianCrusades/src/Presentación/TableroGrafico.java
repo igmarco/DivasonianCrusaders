@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -64,7 +65,7 @@ import Utilidades.Dirección;
 import Utilidades.Facción;
 
 public class TableroGrafico extends JFrame {
-
+	
 	private JPanel contentPane;
 	
 	private int turno;
@@ -129,7 +130,13 @@ public class TableroGrafico extends JFrame {
 	// para confirmar acaba el turno mandando las 6 operaciones al servidor y establece una comunicacion con el servidor para ver si se ha terminado la partida o si esta sigue.
 	// mover, disparar y esperar se espera lo que hacen, ademas está comentado mas abajo.
 	// menu vuelve al menu principal pero sin cerrar la interfaz.
-	public TableroGrafico(final ClienteGUI menu, Socket s) {
+	public TableroGrafico(final ClienteGUI menu, Socket s, ObjectInputStream inPasado, ObjectOutputStream outPasado) {
+		
+		this.s = s;
+		this.in = inPasado;
+		this.out = outPasado;
+		
+		
 		setTitle("Divasonian Crusaders");
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -154,7 +161,7 @@ public class TableroGrafico extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-	
+
 
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon("Recursos\\LogoDivasonian.png"));
@@ -633,18 +640,18 @@ public class TableroGrafico extends JFrame {
 						String[] resultados = resultado.split("-");
 						if(resultados[0].equals("SURR")) {
 							acabado=true;
+							menu.limpiarTablero();
 							Victoria vic = new Victoria(nombre,menu,tablero);
 							vic.setVisible(true);
 							setVisible(false);
 							//HABRÁ QUE MANDAR UN MENSAJE DE VICTORIA O ALGO SIMILAR
 							
 						}else {
-							
 							maniobra=0;
 							Instrucción inst2 = (Instrucción)inst.clone();
 							out.writeObject(inst2);
 							out.flush();
-							System.out.println(inst.toString());
+							System.out.println(inst.toString()); 
 							inst.clear();
 							/**/ tableros = (ArrayList<Tablero>) in.readObject();
 							tabI = 0;
@@ -704,6 +711,7 @@ public class TableroGrafico extends JFrame {
 					tabI++;
 					if(tabI==7) {
 						if(acabado) {
+							menu.limpiarTablero();
 							Tablero tabVic = tableros.get(tableros.size()-1);
 							Facción faccionGanadora = tabVic.getGanador();
 							if(faccionGanadora == faccion) {
@@ -726,7 +734,7 @@ public class TableroGrafico extends JFrame {
 							btnSiguienteMovimiento.setEnabled(false);
 							btnAnteriorMovimiento.setEnabled(false);
 							casillasMenu(true);
-	//						tab = (Tablero)actual.clone();
+//						tab = (Tablero)actual.clone();
 							turno++;
 							Turno.setText("Turno: "+turno);
 							maniobra=0;

@@ -513,7 +513,7 @@ public class Tablero implements Cloneable,Serializable{
     	//Ojo! Solo en caso de que la ficha siga ahí o no se haya trabado en combate.
     	if(f != null && f.equals(this.nodos[this.dóndeEstá(catapulta)].getFichaDefensora()) && !this.nodos[this.dóndeEstá(catapulta)].hayDosFichas()) {
     		
-    		nodos[casillaObjetivo].recibirDisparo(catapulta.realizarDisparo()); 
+    		nodos[casillaObjetivo].recibirDisparo(catapulta.realizarDisparo());  
     		nodos[casillaObjetivo].caeProyectil(); //Para indicar que aquí ha caído un proyectil este turno.
     		
     	}

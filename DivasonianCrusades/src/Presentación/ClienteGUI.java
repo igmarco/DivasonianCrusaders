@@ -101,8 +101,7 @@ public class ClienteGUI extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					
+				
 					boolean continuar = true;
 					
 					if(tablero != null) {
@@ -114,34 +113,26 @@ public class ClienteGUI extends JFrame {
 							continuar = false; 
 							
 						}
+						else {
+							
+							tablero.rendirse();
+							
+						}
 						
 					}
 					
 					if(continuar) {
-						
-						Socket s = new Socket(getIp(),58000);
 						
 						setVisible(false);
 						//Deshabilitamos el botón continuar partida, ya que rompemos la partida que teníamos. Luego lo habilitamos al meter el nombre.
 						btContinuarPartida.setEnabled(false);
 						//OJO, en caso de que el jugador se eche para atrás no tiene sentido haber creado el TableroGrafico, no? eso hay que revisarlo.
 						//Ya está revisado
-						tablero = new TableroGrafico(main, s);
-						CargarPartida car = new CargarPartida(main, tablero, s);
+						CargarPartida car = new CargarPartida(main);
 
 						car.setVisible(true);
 						
 					}
-
-					
-				} catch (IOException ex) {
-
-					JOptionPane.showMessageDialog(null, "Imposibilidad de entrar en una nueva partida: El servidor no se encuentra disponible.", "Atención", JOptionPane.WARNING_MESSAGE);
-					
-				} catch (Exception ex) {
-					
-					ex.printStackTrace();
-				}
 			}
 		});
 		btCargarPartida.setForeground(new Color(255, 250, 240));
@@ -237,8 +228,7 @@ public class ClienteGUI extends JFrame {
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-							try {
-								
+					
 								boolean continuar = true;
 								
 								if(tablero != null) {
@@ -250,34 +240,27 @@ public class ClienteGUI extends JFrame {
 										continuar = false; 
 										
 									}
+									else {
+										
+										tablero.rendirse();
+										
+									}
 									
 								}
 								
 								if(continuar) {
-									
-									Socket s = new Socket(getIp(),58000);
 									
 									setVisible(false);
 									//Deshabilitamos el botón continuar partida, ya que rompemos la partida que teníamos. Luego lo habilitamos al meter el nombre.
 									btContinuarPartida.setEnabled(false);
 									//OJO, en caso de que el jugador se eche para atrás no tiene sentido haber creado el TableroGrafico, no? eso hay que revisarlo.
 									//Ya está revisado
-									tablero = new TableroGrafico(main, s);
-									Nombre nom = new Nombre(main, tablero, s);
+									Nombre nom = new Nombre(main);
 
 									nom.setVisible(true);
 									
 								}
 
-								
-							} catch (IOException ex) {
-
-								JOptionPane.showMessageDialog(null, "Imposibilidad de entrar en una nueva partida: El servidor no se encuentra disponible.", "Atención", JOptionPane.WARNING_MESSAGE);
-								
-							} catch (Exception ex) {
-								
-								ex.printStackTrace();
-							}
 				}
 			});
 			btNuevaPartida.setBackground(new Color(240, 230, 140));
@@ -470,4 +453,23 @@ public class ClienteGUI extends JFrame {
 		this.ip = ip;
 		
 	}
+	
+	public void setTableroGrafico(TableroGrafico tg) {
+		
+		this.tablero = tg;
+		
+	}
+	
+	public String getIP() {
+		
+		return this.ip;
+		
+	}
+	
+	public void limpiarTablero() {
+		
+		this.tablero = null;
+		
+	}
+	
 }

@@ -11,6 +11,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,21 +37,21 @@ public class CargarPartida extends JFrame {
 	private JLabel lblEstado;
 	private JButton Aceptar;
 	private JButton Cancelar; 
-	/**/ private Socket s;
+	
+	TableroGrafico tablero;
 	
 	private DataInputStream in;
 	private DataOutputStream out;
 	private JScrollPane scrollPane;
 	
-
+	ClienteGUI menu;
 
 	/**
 	 * Create the frame.
 	 */
-	public CargarPartida(final ClienteGUI menu, final TableroGrafico tablero, final Socket s) {
+	public CargarPartida(final ClienteGUI menu) {
 		setTitle("Divasonian Crusaders"); 
 		final CargarPartida main = this;
-		/**/ this.s = s;
 		setResizable(false);
 		try {
 			final JRadioButton Azul = new JRadioButton("Azul");
@@ -94,15 +95,16 @@ public class CargarPartida extends JFrame {
 				public void mouseClicked(MouseEvent e) {
 					if(Azul.isSelected()||Rojo.isSelected()) {
 						try {
-	//						Socket s = new Socket("localhost",58000);
+							Socket s = new Socket(menu.getIp(),58000);
 							boolean azul;
-							DataInputStream in = new DataInputStream( s.getInputStream());
-							DataOutputStream out = new DataOutputStream(s.getOutputStream());
+							ObjectInputStream in = new ObjectInputStream(new DataInputStream( s.getInputStream()));
+							ObjectOutputStream out = new ObjectOutputStream(new DataOutputStream(s.getOutputStream()));
 							lblEstado.setText("Buscando oponente..."); //T.T
 							String linea = in.readLine();
 							//System.out.println("Llegué sii...");
 							if(linea.compareTo("OK1")==0) {
 								out.writeBytes("LOAD-Mandamos las partidiñas luego broski ;)\r\n");
+								out.flush();
 								linea = in.readLine();
 							}
 							out.writeBytes(textField.getText()+"\r\n");
@@ -116,7 +118,11 @@ public class CargarPartida extends JFrame {
 								azul = true;
 							}
 							/*/Esta puñetera orden vacia el buffer y parece que funciona/*/
-							in.skip(in.available());
+//							in.skip(in.available());
+							
+							iniciarTableroGrafico(s, in, out);
+							menu.setTableroGrafico(tablero); 
+							
 							tablero.setNombre(textField.getText(), name,azul);
 							out.writeBytes("PartidasGuardadas\\"+(String)list.getSelectedValue()+"\r\n");
 							out.flush();
@@ -127,9 +133,9 @@ public class CargarPartida extends JFrame {
 							out.flush();
 							int turno = in.readInt();
 							tablero.setTurno(turno);
-							tablero.setIn(in);
+//							tablero.setIn(in);
 							tablero.setTablero();
-							tablero.setOut(out);
+//							tablero.setOut(out);
 							tablero.setVisible(true);
 							setVisible(false);
 						}catch(IOException ex) { 
@@ -226,6 +232,12 @@ public class CargarPartida extends JFrame {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public void iniciarTableroGrafico(Socket s, ObjectInputStream in2, ObjectOutputStream out2) {
+		
+		this.tablero = new TableroGrafico(menu, s, in2, out2);
 		
 	}
 }

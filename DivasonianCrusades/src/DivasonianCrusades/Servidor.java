@@ -22,10 +22,6 @@ public class Servidor {
 	public static void main(String[] args) {
 		
 		ExecutorService pool = null;
-		DataOutputStream dos1 = null;
-		DataOutputStream dos2 = null;
-		DataInputStream dis1 = null;
-		DataInputStream dis2 = null;
 		
 		try {
 			
@@ -37,14 +33,19 @@ public class Servidor {
 				Socket s1 = null;
 				Socket s2 = null;
 				
+				ObjectOutputStream dos1 = null;
+				ObjectOutputStream dos2 = null;
+				ObjectInputStream dis1 = null;
+				ObjectInputStream dis2 = null;
+				
 				try {
 					
 					s1 = ss.accept();
 					/**/ s2 = ss.accept();
 					
 					s1.setKeepAlive(true); //Creo que con esto se evita el hecho de que se pierda la conexión con tiempo de espera.
-					dos1 = new DataOutputStream(s1.getOutputStream());			
-					dis1 = new DataInputStream(s1.getInputStream());
+					dos1 = new ObjectOutputStream(new DataOutputStream(s1.getOutputStream()));			
+					dis1 = new ObjectInputStream(new DataInputStream(s1.getInputStream()));
 					
 					dos1.writeBytes("OK1\r\n");
 					dos1.flush();
@@ -54,8 +55,8 @@ public class Servidor {
 						
 //						s2 = ss.accept();
 						s2.setKeepAlive(true); //Creo que con esto se evita el hecho de que se pierda la conexión con tiempo de espera.
-						dos2 = new DataOutputStream(s2.getOutputStream());
-						dis2 = new DataInputStream(s2.getInputStream());	
+						dos2 = new ObjectOutputStream(new DataOutputStream(s2.getOutputStream()));
+						dis2 = new ObjectInputStream(new DataInputStream(s2.getInputStream()));	
 						dos1.writeBytes("OK2\r\n");
 						dos2.writeBytes("OK2\r\n");
 						dos1.flush();
@@ -72,7 +73,7 @@ public class Servidor {
 		//				if(nombre1.split("-").equals("AB")) {
 		//					terminado2 = true;
 		//				}
-						dos1.writeBytes(nombre2+"\n\r");
+						dos1.writeBytes(nombre2+"\r\n");
 						dos2.writeBytes(nombre1+"\r\n");
 						dos1.flush();
 						dos2.flush();
@@ -80,7 +81,7 @@ public class Servidor {
 						dos2.writeBytes("NEW\r\n");
 						dos1.flush();
 						dos2.flush();
-						Partida p = new Partida(s1,s2, nombre1, nombre2);
+						Partida p = new Partida(s1,s2, nombre1, nombre2, dis1, dis2, dos1, dos2);
 						pool.execute(p);
 		//				if(!terminado1 && ! terminado2) {
 		//					dos1.writeBytes(nombre2+"\n\r");
@@ -102,8 +103,8 @@ public class Servidor {
 					}else if(caso.split("-")[0].equals("LOAD")) {
 //						s2 = ss.accept();
 						s2.setKeepAlive(true); //Creo que con esto se evita el hecho de que se pierda la conexión con tiempo de espera.
-						dos2 = new DataOutputStream(s2.getOutputStream());
-						dis2 = new DataInputStream(s2.getInputStream());	
+						dos2 = new ObjectOutputStream(new DataOutputStream(s2.getOutputStream()));
+						dis2 = new ObjectInputStream(new DataInputStream(s2.getInputStream()));	
 						dos1.writeBytes("OK2\r\n");
 						dos2.writeBytes("OK2\r\n");
 						dos1.flush();
@@ -112,7 +113,7 @@ public class Servidor {
 						
 						String nombre1 = dis1.readLine();
 						String nombre2 = dis2.readLine();
-						dos1.writeBytes(nombre2+"\n\r");
+						dos1.writeBytes(nombre2+"\r\n");
 						dos2.writeBytes(nombre1+"\r\n");
 						dos1.flush();
 						dos2.flush();
@@ -125,7 +126,7 @@ public class Servidor {
 							azul= true;
 						else
 							azul = false;					
-						Partida p = new Partida(s1,s2, nombre1, nombre2,nombrePartida,azul);
+						Partida p = new Partida(s1,s2, nombre1, nombre2, dis1, dis2, dos1, dos2, nombrePartida,azul);
 						Tablero tab =p.getTablero();
 						if(azul)
 							dos2.writeBytes("R\r\n");
@@ -137,15 +138,15 @@ public class Servidor {
 						dos2.writeInt(turno);
 						dos1.flush();
 						dos2.flush();
-						ObjectOutputStream ob2 = new ObjectOutputStream(dos2);
-						ObjectOutputStream ob1 = new ObjectOutputStream(dos1);
-						ob1.writeObject(tab);
-						ob1.flush();
-						ob2.writeObject(tab);
-						ob2.flush();
-						ObjectInputStream obi1 = new ObjectInputStream(dis1);
-						ObjectInputStream obi2 = new ObjectInputStream(dis2);
-						p.agenciarSockets(obi1, obi2,ob1, ob2,azul);
+//						ObjectOutputStream ob2 = new ObjectOutputStream(dos2);
+//						ObjectOutputStream ob1 = new ObjectOutputStream(dos1);
+						dos1.writeObject(tab);
+						dos1.flush();
+						dos2.writeObject(tab);
+						dos2.flush();
+//						ObjectInputStream obi1 = new ObjectInputStream(dis1);
+//						ObjectInputStream obi2 = new ObjectInputStream(dis2);
+//						p.agenciarSockets(obi1, obi2,ob1, ob2,azul);
 						pool.execute(p);
 					}
 					

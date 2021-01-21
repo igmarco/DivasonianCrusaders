@@ -53,12 +53,17 @@ public class Partida implements Runnable {
 	private boolean empezada=false;
     
 	//Para una nueva partida
-    public Partida(Socket s1, Socket s2, String nombre1, String nombre2) {
+    public Partida(Socket s1, Socket s2, String nombre1, String nombre2, ObjectInputStream dis1, ObjectInputStream dis2, ObjectOutputStream dos1, ObjectOutputStream dos2) {
     	
     	this.s1 = s1;
     	this.s2 = s2;
     	this.nombre1 = nombre1;
     	this.nombre2 = nombre2;
+    	
+    	this.oos1 = dos1;
+    	this.oos2 = dos2;
+    	this.ois1 = dis1;
+    	this.ois2 = dis2;
     	
     	this.rendición1 = false;
     	this.rendición1 = false;
@@ -89,7 +94,7 @@ public class Partida implements Runnable {
     }
     
     //Para cargar partida
-    public Partida(Socket s1, Socket s2, String nombre1, String nombre2, String archivoPartida, boolean socket1EsElAzul) throws SAXException, IOException, ParserConfigurationException {
+    public Partida(Socket s1, Socket s2, String nombre1, String nombre2, ObjectInputStream dis1, ObjectInputStream dis2, ObjectOutputStream dos1, ObjectOutputStream dos2, String archivoPartida, boolean socket1EsElAzul) throws SAXException, IOException, ParserConfigurationException {
     	
     	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
     	DocumentBuilder db = dbf.newDocumentBuilder();
@@ -100,10 +105,20 @@ public class Partida implements Runnable {
     	if(socket1EsElAzul) {
     		this.s1 = s1;
         	this.s2 = s2;
+        	
+        	this.oos1 = dos1;
+        	this.oos2 = dos2;
+        	this.ois1 = dis1;
+        	this.ois2 = dis2;
     	}
     	else {
     		this.s1 = s2;
         	this.s2 = s1;
+        	
+        	this.oos1 = dos2;
+        	this.oos2 = dos1;
+        	this.ois1 = dis2;
+        	this.ois2 = dis1;
     	}
     	this.nombre1 = nombre1;
     	this.nombre2 = nombre2;
@@ -136,12 +151,12 @@ public class Partida implements Runnable {
     	ArrayList<Tablero> tablerosDelTurno = new ArrayList<Tablero>();
 
 		try {
-			if(!empezada) {
-				oos1 = new ObjectOutputStream(s1.getOutputStream());
-				oos2 = new ObjectOutputStream(s2.getOutputStream());
-				ois1 = new ObjectInputStream(s1.getInputStream());
-				ois2 = new ObjectInputStream(s2.getInputStream());
-			}
+//			if(!empezada) {
+//				oos1 = new ObjectOutputStream(s1.getOutputStream());
+//				oos2 = new ObjectOutputStream(s2.getOutputStream());
+//				ois1 = new ObjectInputStream(s1.getInputStream());
+//				ois2 = new ObjectInputStream(s2.getInputStream());
+//			}
 			
 			boolean haTerminado = false;
 			
@@ -248,12 +263,14 @@ public class Partida implements Runnable {
 			// TODO Auto-generated catch block
 
 			try {
-				oos1.writeBytes("AB-Un jugador ha abandonado!\r\n");
+				oos1.writeBytes("SURR-Un jugador ha abandonado!\r\n");
+				oos1.flush();
 			} catch (IOException e2) {
 				//Uno de los dos hará saltar una excepción.
 			}
 			try {
-				oos2.writeBytes("AB-Un jugador ha abandonado!\r\n");
+				oos2.writeBytes("SURR-Un jugador ha abandonado!\r\n");
+				oos2.flush();
 			} catch (IOException e1) {
 				//Uno de los dos hará saltar una excepción.
 			}

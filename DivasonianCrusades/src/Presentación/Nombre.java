@@ -8,6 +8,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import javax.swing.ImageIcon;
@@ -28,10 +29,13 @@ public class Nombre extends JFrame {
 	private JLabel lblEstado;
 	private JButton Aceptar;
 	private JButton Cancelar; 
-	/**/ private Socket s;
 	
 	private DataInputStream in;
 	private DataOutputStream out;
+	
+	TableroGrafico tablero;
+	
+	ClienteGUI menu;
 	
 
 
@@ -43,10 +47,12 @@ public class Nombre extends JFrame {
 	// y el segundo el rojo, y por ultimo se inicia la partida, cabe destacar que si en lugar de los dos clientes entran en modo nueva partida 
 	// si no que uno a cargado y el otro inicia nueva, en ese orden, en lugar de leer un NEW leera un LOAD y por tanto necesitará el tablero de la partida empezada
 	// y su facción en la misma.
-	public Nombre(final ClienteGUI menu, final TableroGrafico tablero, final Socket s) {
+	public Nombre(final ClienteGUI menu) {
+		
+		this.menu = menu;
+		
 		setTitle("Divasonian Crusaders"); 
 		final Nombre main = this;
-		/**/ this.s = s;
 		setResizable(false);
 		try {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -123,12 +129,12 @@ public class Nombre extends JFrame {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					try {
-//						Socket s = new Socket("localhost",58000);
+						Socket s = new Socket(menu.getIp(),58000);
 						boolean azul;
-						DataInputStream in = new DataInputStream( s.getInputStream());
-						DataOutputStream out = new DataOutputStream(s.getOutputStream());
+						ObjectInputStream in = new ObjectInputStream(new DataInputStream( s.getInputStream()));
+						ObjectOutputStream out = new ObjectOutputStream(new DataOutputStream(s.getOutputStream()));
 						lblEstado.setText("Buscando oponente..."); //T.T
-						String linea = in.readLine();
+						String linea = in.readLine(); 
 						//System.out.println("Llegué sii...");
 						if(linea.compareTo("OK1")==0) {
 							out.writeBytes("NEW-Una nueva\r\n");
@@ -144,15 +150,23 @@ public class Nombre extends JFrame {
 						out.flush();
 						String name = in.readLine();
 						String ok = in.readLine();
-						if(ok.equals("NEW")|| azul) {
+						
+//						if(azul) {
+//							ok = in.readLine();
+//						}
+						
+						iniciarTableroGrafico(s, in, out);
+						menu.setTableroGrafico(tablero);
+						
+						if(ok.equals("NEW")/*|| azul*/) {
 							menu.habilitarContinuar();
 							menu.habilitarRendirse();
 							/*/Esta puñetera orden vacia el buffer y parece que funciona/*/
-							in.skip(in.available());
+//							in.skip(in.available());
 							
 							tablero.setNombre(textField.getText(), name,azul);
-							tablero.setIn(in);
-							tablero.setOut(out);
+//							tablero.setIn(in);
+//							tablero.setOut(out);
 							tablero.setVisible(true);
 							menu.salir(true);
 							setVisible(false);
@@ -167,12 +181,13 @@ public class Nombre extends JFrame {
 							
 							int turno = in.readInt();
 							/*/Esta puñetera orden vacia el buffer y parece que funciona/*/
-							in.skip(in.available());
+//							in.skip(in.available());
+							
 							tablero.setNombre(textField.getText(), name,azul);
 							tablero.setTurno(turno);
-							tablero.setIn(in);
+//							tablero.setIn(in);
 							tablero.setTablero();
-							tablero.setOut(out);
+//							tablero.setOut(out);
 							tablero.setVisible(true);
 							menu.salir(true);
 							setVisible(false);
@@ -232,5 +247,12 @@ public class Nombre extends JFrame {
 		}
 		
 	}
+	
+	public void iniciarTableroGrafico(Socket s, ObjectInputStream in2, ObjectOutputStream out2) {
+		
+		this.tablero = new TableroGrafico(menu, s, in2, out2);
+		
+	}
+	
 }
 
