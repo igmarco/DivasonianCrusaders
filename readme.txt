@@ -1,0 +1,1 @@
+Los dos .jar tanto cliente como servidor se encuentran en el directorio 'DivasoinanCrusades'

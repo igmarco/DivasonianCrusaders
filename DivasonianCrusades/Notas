@@ -1,4 +1,0 @@
-Mensajes de alerta:
-	JOptionPane.showMessageDialog(null, "Mensaje dentro de la ventana", "Mensaje en la barra de titulo", JOptionPane.WARNING_MESSAGE);
-
-Ojo, porque con el botón Deshacer pasan cosas feas.
