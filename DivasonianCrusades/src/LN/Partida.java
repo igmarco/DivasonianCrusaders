@@ -256,6 +256,7 @@ public class Partida implements Runnable {
 			
 			//Esto habrá que quitarlo, pero de momento lo voy a dejar porque así el servidor puede ver quién gana y quién pierde.
 			if(this.tablero.getGanador() == Facción.Facción1) System.out.println("¡Enhorabuena! Ha ganado el azul " + nombre1 + " en el turno " + turno);
+			if(this.tablero.getGanador() == Facción.Ambos) System.out.println("Empate");
 			else System.out.println("¡Nada mal! Ha ganado el rojo " + nombre2 + " en el turno " + turno);
 			
 			

@@ -28,7 +28,7 @@ public abstract class Casilla implements Cloneable, Serializable {
 	}
 
 	
-	public Casilla(HachaDivasónica hachaDivasónica, boolean casillaDeCura) {
+	public Casilla(HachaDivasónica hachaDivasónica, boolean casillaDeCura) { 
 		
 		this.hachaDivasónica = hachaDivasónica;
 		
@@ -102,7 +102,7 @@ public abstract class Casilla implements Cloneable, Serializable {
     
     public Element getElemento(Document doc) {
         
-        Element CasillaE = doc.createElement("Casilla");
+        Element CasillaE = doc.createElement("Casilla"); 
         
         CasillaE.setAttribute("tipo", this.getClass().getSimpleName());
         

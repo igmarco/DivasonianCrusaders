@@ -439,7 +439,7 @@ public class Nodo implements Cloneable,Serializable{
 		if(this.casilla != null) {
 			Element casillaE = this.casilla.getElemento(doc);
 			nodoE.appendChild(casillaE);
-		}
+		} 
 		
 		if(this.fichaDefensora != null) {
 			Element fichaDefensoraE = this.fichaDefensora.getElemento(doc);

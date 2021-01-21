@@ -3,6 +3,7 @@ package Presentación;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -76,8 +77,8 @@ public class TableroGrafico extends JFrame {
 	private final JButton Mover= new JButton("");
 	private final JButton btnEsperar= new JButton("");
 	private final JButton btnCancelar= new JButton("");
-	private final JButton Listo= new JButton("");
-	/**/ private boolean introducirOperacionEnCurso= false;
+	private final JButton Listo= new JButton(""); 
+	/**/ private boolean introducirOperacionEnCurso= false; 
 	
 	private ActionListener al;
 	
@@ -92,6 +93,7 @@ public class TableroGrafico extends JFrame {
 	private JLabel Operaciones;
 	
 	private Tablero tab;
+	private Tablero tabGuardado;
 	
 	private String nombre;
 	private String oponente;
@@ -132,6 +134,8 @@ public class TableroGrafico extends JFrame {
 	// menu vuelve al menu principal pero sin cerrar la interfaz.
 	public TableroGrafico(final ClienteGUI menu, Socket s, ObjectInputStream inPasado, ObjectOutputStream outPasado) {
 		
+		setIconImage(Toolkit.getDefaultToolkit().getImage("Recursos\\iconoRefachero2.png"));
+		
 		this.s = s;
 		this.in = inPasado;
 		this.out = outPasado;
@@ -151,6 +155,7 @@ public class TableroGrafico extends JFrame {
 //		/**/ this.tablerosRecibidos = new Tablero[7];
 		this.inst = new Instrucción();
 		tab = new Tablero();
+		tabGuardado = (Tablero) tab.clone();
 		this.tableros.add(tab);
 		setResizable(false);
 		final TableroGrafico tablero = this;
@@ -703,6 +708,7 @@ public class TableroGrafico extends JFrame {
 				if(tabI<7) {
 //					Tablero actual = tableros.get(tabI+1);
 					/**/ tab = (Tablero)tableros.get(tabI+1).clone();
+					tabGuardado = (Tablero)tableros.get(tabI+1).clone();
 					if(tabI==0) {
 						btnAnteriorMovimiento.setEnabled(true);
 					}
@@ -779,6 +785,7 @@ public class TableroGrafico extends JFrame {
 				if(tabI!=0) {
 //					Tablero actual = tableros.get(tabI-1);
 					/**/ tab = (Tablero)tableros.get(tabI-1).clone();
+					tabGuardado = (Tablero)tableros.get(tabI-1).clone();
 						
 					if(tabI==7) {
 						btnSiguienteMovimiento.setEnabled(true);
@@ -848,11 +855,11 @@ public class TableroGrafico extends JFrame {
 
 		// Info. de la casilla
 
-		casillaInfo += casilla.getClass().getCanonicalName().split("\\.")[casilla.getClass().getCanonicalName().split("\\.").length-1] + "\r\n";
+		casillaInfo += casilla.getClass().getSimpleName() + "\r\n";
 		
-		if(casillaInfo.equals("Copa")) {
+		if(casillaInfo.equals("Copa\r\n")) {
 		
-			casillaInfo = "Corona";
+			casillaInfo = "Corona\r\n";
 			
 		}
 
@@ -3014,7 +3021,7 @@ public class TableroGrafico extends JFrame {
     	DocumentBuilder db = dbf.newDocumentBuilder();
     	Document doc = db.newDocument();
     	
-    	Element tableroElemento = this.tableros.get(0).getElemento(doc);
+    	Element tableroElemento = this.tabGuardado.getElemento(doc);
     	
     	tableroElemento.setAttribute("turno", this.turno + "");
     	
@@ -3042,6 +3049,7 @@ public class TableroGrafico extends JFrame {
 	public void setTablero() {
 		try {
 			this.tab = (Tablero)in.readObject();
+			this.tabGuardado = (Tablero)tab.clone();
 			this.tableros.clear();
 			this.limpiarActions();
 			this.pintar(tab);

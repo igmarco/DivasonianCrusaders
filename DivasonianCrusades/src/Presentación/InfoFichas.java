@@ -38,7 +38,7 @@ public class InfoFichas extends JFrame {
 	 * Create the frame.
 	 */
 	public InfoFichas() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("Recursos\\iconoRefachero2.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("Recursos\\iconoRefachero2.png")); 
 		setResizable(false);
 //		setIconImage(Toolkit.getDefaultToolkit().getImage(InfoFichas.class.getResource("/Imagenes/iconoRefachero.png")));
 		setTitle("Informaci\u00F3n sobre las fichas");
@@ -48,7 +48,7 @@ public class InfoFichas extends JFrame {
 		contentPane.setBackground(new Color(240, 230, 140));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(null); 
 		
 		JTextPane txtpnLaAplicacinPermite = new JTextPane();
 		txtpnLaAplicacinPermite.setFont(new Font("Consolas", Font.PLAIN, 14));

@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -22,7 +23,7 @@ public class Servidor {
 	public static void main(String[] args) {
 		
 		ExecutorService pool = null;
-		
+		 
 		try {
 			
 			ServerSocket ss = new ServerSocket(58000);
@@ -46,17 +47,22 @@ public class Servidor {
 					s1.setKeepAlive(true); //Creo que con esto se evita el hecho de que se pierda la conexión con tiempo de espera.
 					dos1 = new ObjectOutputStream(new DataOutputStream(s1.getOutputStream()));			
 					dis1 = new ObjectInputStream(new DataInputStream(s1.getInputStream()));
+					dos2 = new ObjectOutputStream(new DataOutputStream(s2.getOutputStream()));
+					dis2 = new ObjectInputStream(new DataInputStream(s2.getInputStream()));	
 					
-					dos1.writeBytes("OK1\r\n");
+					dos1.writeBytes("OK1-primero\r\n");
 					dos1.flush();
-					String caso = dis1.readLine();
-					if(caso.split("-")[0].equals("NEW")) {
+					String caso1 = dis1.readLine();
+					
+					dos2.writeBytes("OK1-segundo\r\n");
+					dos2.flush();
+					String caso2 = dis2.readLine();
+					
+					if(caso1.split("-")[0].equals("NEW") && caso2.split("-")[0].equals("NEW")) {
 
 						
 //						s2 = ss.accept();
 						s2.setKeepAlive(true); //Creo que con esto se evita el hecho de que se pierda la conexión con tiempo de espera.
-						dos2 = new ObjectOutputStream(new DataOutputStream(s2.getOutputStream()));
-						dis2 = new ObjectInputStream(new DataInputStream(s2.getInputStream()));	
 						dos1.writeBytes("OK2\r\n");
 						dos2.writeBytes("OK2\r\n");
 						dos1.flush();
@@ -100,11 +106,9 @@ public class Servidor {
 		//					dos1.flush();
 		//					dos1.writeBytes("SURR-El oponente se ha rendido.\r\n");
 		//					dos1.flush();
-					}else if(caso.split("-")[0].equals("LOAD")) {
+					}else if(caso1.split("-")[0].equals("NEW") && caso2.split("-")[0].equals("LOAD")) {
 //						s2 = ss.accept();
 						s2.setKeepAlive(true); //Creo que con esto se evita el hecho de que se pierda la conexión con tiempo de espera.
-						dos2 = new ObjectOutputStream(new DataOutputStream(s2.getOutputStream()));
-						dis2 = new ObjectInputStream(new DataInputStream(s2.getInputStream()));	
 						dos1.writeBytes("OK2\r\n");
 						dos2.writeBytes("OK2\r\n");
 						dos1.flush();
@@ -117,7 +121,57 @@ public class Servidor {
 						dos2.writeBytes(nombre1+"\r\n");
 						dos1.flush();
 						dos2.flush();
+						dos1.writeBytes("LOAD\r\n");
+						dos2.writeBytes("NEW\r\n");
+						dos1.flush();
+						dos2.flush();
+						String nombrePartida = dis2.readLine();
+						String color = dis2.readLine();
+						boolean azul;
+						if(color.equals("A"))
+							azul= true;
+						else
+							azul = false;					
+						Partida p = new Partida(s1,s2, nombre1, nombre2, dis1, dis2, dos1, dos2, nombrePartida,!azul);
+						Tablero tab =p.getTablero();
+						if(azul)
+							dos1.writeBytes("R\r\n");
+						else
+							dos1.writeBytes("A\r\n");
+						dos1.flush();
+						int turno = p.getTurno();
+						dos1.writeInt(turno);
+						dos2.writeInt(turno);
+						dos1.flush();
+						dos2.flush();
+//						ObjectOutputStream ob2 = new ObjectOutputStream(dos2);
+//						ObjectOutputStream ob1 = new ObjectOutputStream(dos1);
+						dos1.writeObject(tab);
+						dos1.flush();
+						dos2.writeObject(tab);
+						dos2.flush();
+//						ObjectInputStream obi1 = new ObjectInputStream(dis1);
+//						ObjectInputStream obi2 = new ObjectInputStream(dis2);
+//						p.agenciarSockets(obi1, obi2,ob1, ob2,azul);
+						pool.execute(p);
+					}else if(caso1.split("-")[0].equals("LOAD")) {
+//						s2 = ss.accept();
+						s2.setKeepAlive(true); //Creo que con esto se evita el hecho de que se pierda la conexión con tiempo de espera.
+						dos1.writeBytes("OK2\r\n");
+						dos2.writeBytes("OK2\r\n");
+						dos1.flush();
+						dos2.flush();
+						
+						
+						String nombre1 = dis1.readLine();
+						String nombre2 = dis2.readLine();
+						dos1.writeBytes(nombre2+"\r\n");
+						dos2.writeBytes(nombre1+"\r\n");
+						dos1.flush();
+						dos2.flush();
+						dos1.writeBytes("LOAD\r\n");
 						dos2.writeBytes("LOAD\r\n");
+						dos1.flush();
 						dos2.flush();
 						String nombrePartida = dis1.readLine();
 						String color = dis1.readLine();
@@ -150,7 +204,18 @@ public class Servidor {
 						pool.execute(p);
 					}
 					
-				} catch (IOException e) {
+				} catch (SocketException e) {
+					// TODO Auto-generated catch block
+					
+					if(s1 != null) {
+						s1.close();
+					}
+					if(s2 != null) {
+						s2.close();
+					}
+					
+					e.printStackTrace();
+				}catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (SAXException e) {

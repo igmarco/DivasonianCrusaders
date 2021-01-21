@@ -3,6 +3,7 @@ package Presentación;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -59,16 +60,18 @@ public class ClienteGUI extends JFrame {
 	//el boton nuevapartida abre un nuevo formulario para introducir el nombre y conectar con el servidor, continuar partida si ya hay una empezada vuelve a la interfaz de la partida
 	// cargar partida es casi como nueva partida pero con un par de opciones mas para poder cargar una partida serializada en un documento XML,
 	// guardar partida persiste el estado de la partida que ya debe de haber empezado en un documento XML y por ultimo rendirse manda un mensaje de rendicion
-	// atraves del tablero para rendirse, salir sale. ademas los botones superiores proporcionan informacion extra acerca del juego y sus componentes.
+	// atraves del tablero para rendirse, salir sale. ademas los botones superiores proporcionan informacion extra acerca del juego y sus componentes. 
 	public ClienteGUI(/*boolean nuevo, final TableroGrafico Tablero*/String ip) {
+		
+		setIconImage(Toolkit.getDefaultToolkit().getImage("Recursos\\iconoRefachero2.png"));
 		
 		this.ip = ip;
 		
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				if(salir) {
-					tablero.salir();
+				if(tablero != null && salir) {
+					tablero.salir(); 
 				}
 			}
 		});
@@ -359,8 +362,7 @@ public class ClienteGUI extends JFrame {
 				
 				Object resultado = JOptionPane.showInputDialog(null, "Introduzca la dirección IP en la que se encuentra\r\nel servidor de Divasonian Crusaders.", "IP del servidor", JOptionPane.QUESTION_MESSAGE, null, null, getIp());
 				
-				if(resultado == null) System.exit(0);
-				else {
+				if(resultado != null) {
 					
 					setIp((String) resultado);
 					

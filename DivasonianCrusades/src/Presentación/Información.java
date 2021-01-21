@@ -34,7 +34,7 @@ public class Información extends JFrame {
 	 */
 	public Información() {
 //		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("Recursos\\iconoRefachero2.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("Recursos\\iconoRefachero2.png")); 
 		setResizable(false);
 //		setIconImage(Toolkit.getDefaultToolkit().getImage(Información.class.getResource("/Imagenes/iconoRefachero.png")));
 		setTitle("Informaci\u00F3n");

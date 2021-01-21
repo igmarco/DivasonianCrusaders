@@ -40,7 +40,7 @@ public class Tablero implements Cloneable,Serializable{
 		
 		nodos[2] = new Nodo(new Curación(1));
 		nodos[42] = new Nodo(new Curación(2)); 
-		
+		 
 		nodos[22] = new Nodo(new Normal(new HachaDivasónica()));
 		
 		nodos[1] = new Nodo(new Normal(null, true));
@@ -438,7 +438,7 @@ public class Tablero implements Cloneable,Serializable{
     	
     	boolean perdedor1 = false;
     	boolean perdedor2 = false;
-    	boolean algunoVivo1 = false;
+    	boolean algunoVivo1 = false; 
     	boolean algunoVivo2 = false;
     	
     	if(((Copa) this.nodos[posCopa1].getCasilla()).estáMuerta()) {
@@ -462,7 +462,7 @@ public class Tablero implements Cloneable,Serializable{
     		
     	}
     	
-    	if((perdedor1||!algunoVivo1) && (perdedor1||!algunoVivo1)) return Facción.Ambos;
+    	if((perdedor1||!algunoVivo1) && (perdedor2||!algunoVivo2)) return Facción.Ambos;
     	else if(perdedor1||!algunoVivo1) return Facción.Facción2;
     	else if(perdedor2||!algunoVivo2) return Facción.Facción1;
     	else return null;

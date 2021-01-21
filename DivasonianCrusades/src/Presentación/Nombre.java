@@ -2,6 +2,7 @@ package Presentación;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.DataInputStream;
@@ -15,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -46,8 +48,10 @@ public class Nombre extends JFrame {
 	//en este consturctor se establece la primera conexion con el servidor para mandar el nombre la faccion y asi de modo que el primero en llegar es el azul
 	// y el segundo el rojo, y por ultimo se inicia la partida, cabe destacar que si en lugar de los dos clientes entran en modo nueva partida 
 	// si no que uno a cargado y el otro inicia nueva, en ese orden, en lugar de leer un NEW leera un LOAD y por tanto necesitará el tablero de la partida empezada
-	// y su facción en la misma.
+	// y su facción en la misma. 
 	public Nombre(final ClienteGUI menu) {
+		
+		setIconImage(Toolkit.getDefaultToolkit().getImage("Recursos\\iconoRefachero2.png"));
 		
 		this.menu = menu;
 		
@@ -136,15 +140,18 @@ public class Nombre extends JFrame {
 						lblEstado.setText("Buscando oponente..."); //T.T
 						String linea = in.readLine(); 
 						//System.out.println("Llegué sii...");
-						if(linea.compareTo("OK1")==0) {
+						if(linea.compareTo("OK1-primero")==0) {
 							out.writeBytes("NEW-Una nueva\r\n");
 							out.flush();
 							azul = true;
 							lblEstado.setText("¡Oponente encontrado!");
 							linea = in.readLine();
-						}else { 
-							azul=false;
+						}else /*if(linea.compareTo("OK1-segundo")==0)*/ {
+							out.writeBytes("NEW-Una nueva\r\n");
+							out.flush();
+							azul = false;
 							lblEstado.setText("¡Oponente encontrado!");
+							linea = in.readLine();
 						}
 						out.writeBytes(textField.getText()+"\r\n");
 						out.flush();
@@ -196,6 +203,7 @@ public class Nombre extends JFrame {
 						
 					}catch(IOException ex) { 
 						lblEstado.setText("Error al conectar");
+						JOptionPane.showMessageDialog(null, "Error al conectar con el servidor. Si la incidencia persiste, pruebe a seleccionar la ip que es.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 						ex.printStackTrace();
 						menu.setVisible(true);
 						setVisible(false);

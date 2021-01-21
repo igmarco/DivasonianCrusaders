@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 public class Empate extends JFrame {
 
@@ -24,10 +25,11 @@ public class Empate extends JFrame {
 	 * Create the frame.
 	 */
 	public Empate(String name, final ClienteGUI main, TableroGrafico tg) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("Recursos\\iconoRefachero2.png"));
 		setTitle("Te has librado del hacha");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 281);
+		setBounds(100, 100, 450, 299);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(240, 230, 140));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -50,17 +52,17 @@ public class Empate extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Consolas", Font.PLAIN, 20));
-		btnNewButton.setBounds(147, 174, 155, 49);
+		btnNewButton.setBounds(147, 187, 155, 49);
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setIcon(new ImageIcon("Recursos\\HachaDivasoniaI.png"));
-		lblNewLabel_1.setBounds(328, 145, 66, 78);
+		lblNewLabel_1.setBounds(328, 158, 66, 78);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("New label");
 		lblNewLabel_1_1.setIcon(new ImageIcon("Recursos\\HachaDivasonia.png"));
-		lblNewLabel_1_1.setBounds(52, 145, 66, 78);
+		lblNewLabel_1_1.setBounds(52, 158, 66, 78);
 		contentPane.add(lblNewLabel_1_1);
 		
 		JLabel lblEnhorabuena = new JLabel("\u00A1EMPATE!");

@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 public class Victoria extends JFrame {
 
@@ -24,6 +25,7 @@ public class Victoria extends JFrame {
 	 * Create the frame.
 	 */
 	public Victoria(String name, final ClienteGUI main, TableroGrafico tg) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("Recursos\\iconoRefachero2.png"));
 		setTitle("Divas\u00F3n estar\u00E1 orgulloso de ti");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

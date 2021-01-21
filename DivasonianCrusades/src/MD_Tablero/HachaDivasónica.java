@@ -67,7 +67,7 @@ public class HachaDivasónica implements Serializable {
         HachaDivasónicaE.appendChild(dañoExtraVariableE);
         HachaDivasónicaE.appendChild(vidaPorTurnoE);
         HachaDivasónicaE.appendChild(vidaPorTurnoVariableE);
-		
+		 
 		return HachaDivasónicaE;
 		
 	}
