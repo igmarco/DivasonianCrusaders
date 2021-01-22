@@ -319,10 +319,18 @@ public class ClienteGUI extends JFrame {
 		btRendirse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					btContinuarPartida.setEnabled(false);
-					btRendirse.setEnabled(false);
-					tablero.rendirse();
-					tablero = null;
+					
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro de que quiere rendirse?", "Atención", JOptionPane.YES_NO_OPTION);
+					
+					if(resp == JOptionPane.YES_OPTION) {
+						
+						btContinuarPartida.setEnabled(false);
+						btRendirse.setEnabled(false);
+						tablero.rendirse();
+						tablero = null;
+						
+					}
+					
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}

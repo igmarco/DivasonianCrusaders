@@ -47,7 +47,7 @@ public class Catapulta extends Casilla {
 
     public int realizarDisparo() {
     	
-    	return dañoProyectiles + (int) Math.floor(Math.random()*2*(dañoProyectilesVariable)-1);
+    	return dañoProyectiles + (int) Math.floor(Math.random()*2*(dañoProyectilesVariable)-dañoProyectilesVariable);
     	
     }
     
