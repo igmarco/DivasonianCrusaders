@@ -10,6 +10,9 @@ import org.w3c.dom.NodeList;
 import Utilidades.Facción;
 
 public class HachaDivasónica implements Serializable {
+	
+	private static final long serialVersionUID = 100005L;
+	
     public int dañoExtra;
     
     public int dañoExtraVariable;

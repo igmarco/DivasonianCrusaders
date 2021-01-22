@@ -26,6 +26,9 @@ import Utilidades.Dirección;
 import Utilidades.Facción;
 
 public class Tablero implements Cloneable,Serializable{
+	
+	private static final long serialVersionUID = 100001L;
+	
     private Nodo[] nodos = new Nodo[45];
 
     public Tablero() {

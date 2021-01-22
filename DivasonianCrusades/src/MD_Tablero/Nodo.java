@@ -9,6 +9,9 @@ import org.w3c.dom.NodeList;
 import Utilidades.Facción;
 
 public class Nodo implements Cloneable,Serializable{
+	
+	private static final long serialVersionUID = 100002L;
+	
     private Casilla casilla;
 
     private Ficha fichaDefensora;

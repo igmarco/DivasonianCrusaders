@@ -1,5 +1,6 @@
 package DivasonianCrusades;
 
+import java.awt.EventQueue;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -21,12 +22,24 @@ import org.xml.sax.SAXException;
 
 import LN.Partida;
 import LN.Tablero;
+import Presentación.ServidorGUI;
 import Utilidades.BorradorDeArchivos;
 import Utilidades.BorradorDelArchivo;
 
 public class Servidor {
 
 	public static void main(String[] args) {
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ServidorGUI frame = new ServidorGUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		
 		ExecutorService pool = null;
 		Timer timer = new Timer();
@@ -324,6 +337,12 @@ public class Servidor {
 			pool.shutdown();
 		}
 
+	}
+	
+	public static void salir() {
+		
+		System.exit(0);
+		
 	}
 
 }

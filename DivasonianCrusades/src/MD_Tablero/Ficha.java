@@ -9,6 +9,9 @@ import org.w3c.dom.NodeList;
 import Utilidades.Facción;
 
 public abstract class Ficha implements Cloneable, Serializable{
+	
+	private static final long serialVersionUID = 100004L;
+	
     protected int daño;
 
     protected int vida;

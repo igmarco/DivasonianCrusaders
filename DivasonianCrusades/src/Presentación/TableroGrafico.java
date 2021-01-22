@@ -113,7 +113,7 @@ public class TableroGrafico extends JFrame {
 	
 	private boolean catA=true,catR=true;
 	
-	private Integer movsF=0,movsC=0,movsB=3,movsG=0,movsL =0;
+	private Integer movsF=0,movsC=0,movsB=0,movsG=0,movsL =0;
 	
 	private Facción faccion;
 	
@@ -673,10 +673,18 @@ public class TableroGrafico extends JFrame {
 							System.out.println("nuevo turno -------------------");
 						}
 					}catch(IOException ex) {
+						JOptionPane.showMessageDialog(null, "Error inesperado con el servidor.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 						ex.printStackTrace();
+						menu.restaurarMenu();
+						menu.setVisible(true);
+						setVisible(false);
 					} catch (ClassNotFoundException e) {
 						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, "Error inesperado con el servidor.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 						e.printStackTrace();
+						menu.restaurarMenu();
+						menu.setVisible(true);
+						setVisible(false);
 					}
 				}
 			}
@@ -2096,7 +2104,8 @@ public class TableroGrafico extends JFrame {
     		out.writeBytes("SURR-Me he rendido.\r\n");
     		out.flush();
     	}catch(IOException ex) {
-    		ex.printStackTrace();
+    		// TODO Auto-generated catch block
+			ex.printStackTrace();
     	}
     }
     

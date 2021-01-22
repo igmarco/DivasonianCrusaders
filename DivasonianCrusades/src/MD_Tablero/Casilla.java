@@ -10,6 +10,9 @@ import org.w3c.dom.NodeList;
 import Utilidades.Facción;
 
 public abstract class Casilla implements Cloneable, Serializable {
+	
+	private static final long serialVersionUID = 100003L;
+	
 	protected HachaDivasónica hachaDivasónica;
 	protected int curaciónAuxiliar;
 	
