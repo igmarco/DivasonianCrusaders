@@ -25,6 +25,8 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class ServidorGUI extends JFrame {
 
@@ -50,6 +52,14 @@ public class ServidorGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public ServidorGUI() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				
+				Servidor.salir();
+				
+			}
+		});
 		
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("Recursos\\iconoRefachero2.png"));

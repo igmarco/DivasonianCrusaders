@@ -477,7 +477,7 @@ public class ClienteGUI extends JFrame {
 	public void restaurarMenu() {
 		
 		this.btContinuarPartida.setEnabled(false);
-		this.btContinuarPartida.setEnabled(false);
+		this.btRendirse.setEnabled(false);
 		
 	}
 	
