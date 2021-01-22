@@ -128,6 +128,7 @@ public class Tablero implements Cloneable,Serializable{
     	System.out.println(f.getClass().getSimpleName() + ": " + desde + " " + hasta);
     		
     	if(!this.hayFicha(f.getFacción(), hasta)) this.moverFicha(f, desde, hasta);
+    	else nodos[this.dóndeEstá(f)].getFicha(f).puedeMover = false;
     	
     }
     
@@ -195,18 +196,56 @@ public class Tablero implements Cloneable,Serializable{
     		
     		//Comrpobaciones y órdenes
     		
+    		if(desde1 == desde2 && hasta1 == hasta2) {
+    			
+    			if(!this.hayFicha(f1.getFacción(), hasta1) && !this.hayFicha(f2.getFacción(), hasta2)) moverFichasDeLaMismaCasillaALaMismaCasilla(f1, f2, desde1, hasta1);
+    			else if(!this.hayFicha(f1.getFacción(), hasta1)) {
+    				this.moverFicha(f1, desde1, hasta1);
+    				nodos[this.dóndeEstá(f2)].getFicha(f2).puedeMover = false;
+    				
+    			}
+    			else if(!this.hayFicha(f2.getFacción(), hasta2)) {
+    				this.moverFicha(f2, desde2, hasta2);
+    				nodos[this.dóndeEstá(f1)].getFicha(f1).puedeMover = false;
+    			}
+    			else {
+    				nodos[this.dóndeEstá(f1)].getFicha(f1).puedeMover = false;
+    				nodos[this.dóndeEstá(f2)].getFicha(f2).puedeMover = false;
+    			}
+    			
+    		}
     		if(desde1 == desde2) {
     			
     			if(!this.hayFicha(f1.getFacción(), hasta1) && !this.hayFicha(f2.getFacción(), hasta2)) moverFichasDeLaMismaCasilla(f1, f2, desde1, hasta1, hasta2);
-    			else if(!this.hayFicha(f1.getFacción(), hasta1)) this.moverFicha(f1, desde1, hasta1);
-    			else if(!this.hayFicha(f2.getFacción(), hasta2)) this.moverFicha(f2, desde2, hasta2);
+    			else if(!this.hayFicha(f1.getFacción(), hasta1)) {
+    				this.moverFicha(f1, desde1, hasta1);
+    				nodos[this.dóndeEstá(f2)].getFicha(f2).puedeMover = false;
+    			}
+    			else if(!this.hayFicha(f2.getFacción(), hasta2)) {
+    				this.moverFicha(f2, desde2, hasta2);
+    				nodos[this.dóndeEstá(f1)].getFicha(f1).puedeMover = false;
+    			}
+    			else {
+    				nodos[this.dóndeEstá(f1)].getFicha(f1).puedeMover = false;
+    				nodos[this.dóndeEstá(f2)].getFicha(f2).puedeMover = false;
+    			}
     			
     		}
     		else if(hasta1 == desde2 && hasta2 == desde1) {
     			
     			if(!this.hayFicha(f1.getFacción(), hasta1) && !this.hayFicha(f2.getFacción(), hasta2)) cruzarFichas(f1, f2, desde1, desde2); 
-    			else if(!this.hayFicha(f1.getFacción(), hasta1)) this.moverFicha(f1, desde1, hasta1);
-    			else if(!this.hayFicha(f2.getFacción(), hasta2)) this.moverFicha(f2, desde2, hasta2);
+    			else if(!this.hayFicha(f1.getFacción(), hasta1)) {
+    				this.moverFicha(f1, desde1, hasta1);
+    				nodos[this.dóndeEstá(f2)].getFicha(f2).puedeMover = false;
+    			}
+    			else if(!this.hayFicha(f2.getFacción(), hasta2)) {
+    				this.moverFicha(f2, desde2, hasta2);
+    				nodos[this.dóndeEstá(f1)].getFicha(f1).puedeMover = false;
+    			}
+    			else {
+    				nodos[this.dóndeEstá(f1)].getFicha(f1).puedeMover = false;
+    				nodos[this.dóndeEstá(f2)].getFicha(f2).puedeMover = false;
+    			}
     			
     		}
     		else if(hasta1 == desde2) {
@@ -224,8 +263,18 @@ public class Tablero implements Cloneable,Serializable{
     		else if(hasta1 == hasta2) {
     			
     			if(!this.hayFicha(f1.getFacción(), hasta1) && !this.hayFicha(f2.getFacción(), hasta2)) this.moverFichasALaMismaCasilla(f1, f2, desde1, desde2, hasta1);
-    			else if(!this.hayFicha(f1.getFacción(), hasta1)) this.moverFicha(f1, desde1, hasta1);
-    			else if(!this.hayFicha(f2.getFacción(), hasta2)) this.moverFicha(f2, desde2, hasta2);
+    			else if(!this.hayFicha(f1.getFacción(), hasta1)) {
+    				this.moverFicha(f1, desde1, hasta1);
+    				nodos[this.dóndeEstá(f2)].getFicha(f2).puedeMover = false;
+    			}
+    			else if(!this.hayFicha(f2.getFacción(), hasta2)) {
+    				this.moverFicha(f2, desde2, hasta2);
+    				nodos[this.dóndeEstá(f1)].getFicha(f1).puedeMover = false;
+    			}
+    			else {
+    				nodos[this.dóndeEstá(f1)].getFicha(f1).puedeMover = false;
+    				nodos[this.dóndeEstá(f2)].getFicha(f2).puedeMover = false;
+    			}
     			
     		}
     		else {

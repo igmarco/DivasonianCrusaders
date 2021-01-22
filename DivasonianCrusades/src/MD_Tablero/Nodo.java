@@ -504,5 +504,14 @@ public class Nodo implements Cloneable,Serializable{
 		return this.cayóProyectil;
 		
 	}
+	
+	public Ficha getFicha(Ficha f) {
+		
+		if(f == null) return null;
+		if (f.equals(this.fichaDefensora)) return this.fichaDefensora;
+		else if (f.equals(this.fichaAtacante)) return this.fichaAtacante;
+		else return null;
+		
+	}
 
 }
