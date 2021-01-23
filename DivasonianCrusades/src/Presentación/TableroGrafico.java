@@ -2585,11 +2585,14 @@ public class TableroGrafico extends JFrame {
     public void salir() {
     	try {
     		if(out!=null) {
-    			out.writeBytes("AB-Me he rendido.\r\n");
+    			out.writeBytes("SURR-Me he rendido.\r\n");
     			out.flush();
     		}
     	}catch(IOException ex) {
     		ex.printStackTrace();
+    	}
+    	finally {
+    		System.exit(0);
     	}
     }
     
