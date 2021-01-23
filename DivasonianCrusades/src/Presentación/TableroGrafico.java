@@ -460,12 +460,12 @@ public class TableroGrafico extends JFrame {
 
 		lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setFont(new Font("Consolas", Font.PLAIN, 15));
-		lblNewLabel_3.setBounds(40, 196, 196, 25);
+		lblNewLabel_3.setBounds(40, 196, 287, 25);
 		contentPane.add(lblNewLabel_3);
 
 		lblNewLabel_4 = new JLabel("");
 		lblNewLabel_4.setFont(new Font("Consolas", Font.PLAIN, 15));
-		lblNewLabel_4.setBounds(269, 196, 196, 25);
+		lblNewLabel_4.setBounds(337, 196, 292, 25);
 		contentPane.add(lblNewLabel_4);
 
 		JSeparator separator_1 = new JSeparator();
