@@ -715,6 +715,7 @@ public class TableroGrafico extends JFrame {
 		btnSiguienteMovimiento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(tabI<7) {
+					
 //					Tablero actual = tableros.get(tabI+1);
 					/**/ tab = (Tablero)tableros.get(tabI+1).clone();
 					tabGuardado = (Tablero)tableros.get(tabI+1).clone();
@@ -724,7 +725,29 @@ public class TableroGrafico extends JFrame {
 					limpiarActions();
 					pintar(/*actual*/tab);
 					tabI++;
+					
 					if(tabI==7) {
+						
+						turno++;
+						Turno.setText("Turno: "+turno);
+						maniobra=0;
+						Maniobra.setText("Maniobra: "+maniobra);
+						
+					}
+					else {
+						
+						maniobra++;
+						Maniobra.setText("Maniobra: "+maniobra);
+						
+					}
+					
+				}
+				else if(tabI==7) {
+					
+					int resp = JOptionPane.showConfirmDialog(null, "¿Desea introducir la nueva instrucción?", "Continuar", JOptionPane.YES_NO_OPTION);
+					
+					if(resp == JOptionPane.YES_OPTION) {
+						
 						if(acabado) {
 							menu.limpiarTablero();
 							Tablero tabVic = tableros.get(tableros.size()-1);
@@ -749,17 +772,13 @@ public class TableroGrafico extends JFrame {
 							btnSiguienteMovimiento.setEnabled(false);
 							btnAnteriorMovimiento.setEnabled(false);
 							casillasMenu(true);
-//						tab = (Tablero)actual.clone();
-							turno++;
-							Turno.setText("Turno: "+turno);
-							maniobra=0;
-							Maniobra.setText("Maniobra: "+maniobra);
+//							tab = (Tablero)actual.clone();
 						}
-					}else {
-						maniobra++;
-						Maniobra.setText("Maniobra: "+maniobra);
 						
 					}
+						
+						
+						
 				}
 			}
 		});
@@ -791,7 +810,7 @@ public class TableroGrafico extends JFrame {
 
 		btnAnteriorMovimiento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(tabI!=0) {
+				if(tabI!=0 && tabI != 8) {
 //					Tablero actual = tableros.get(tabI-1);
 					/**/ tab = (Tablero)tableros.get(tabI-1).clone();
 					tabGuardado = (Tablero)tableros.get(tabI-1).clone();
@@ -800,6 +819,7 @@ public class TableroGrafico extends JFrame {
 						btnSiguienteMovimiento.setEnabled(true);
 						turno--;
 						Turno.setText("Turno: "+turno);
+						maniobra = 7; //A efectos prácticos es como si tuviese la maniobra 7 del turno anterior.
 					}
 					limpiarActions();
 					pintar(/*actual*/tab);
@@ -810,6 +830,11 @@ public class TableroGrafico extends JFrame {
 					if(tabI==0) {
 						btnAnteriorMovimiento.setEnabled(false);
 					}
+				}
+				else if(tabI == 8) {
+					
+					
+					
 				}
 			}
 		});

@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -16,6 +17,7 @@ import java.util.Timer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.swing.JOptionPane;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -329,12 +331,22 @@ public class Servidor {
 				
 			}
 			
-		} catch (IOException e1) {
+		} 
+		catch (BindException e) {
 			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Error: Puerto utilizado.", "Error", JOptionPane.WARNING_MESSAGE);
+			e.printStackTrace();
+		}
+		catch (IOException e1) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Error desconocido.", "Error", JOptionPane.WARNING_MESSAGE);
 			e1.printStackTrace();
 		}
 		finally {
-			pool.shutdown();
+			if(pool != null) {
+				pool.shutdown();
+			}
+			salir();
 		}
 
 	}

@@ -32,11 +32,11 @@ public class ClienteGUI extends JFrame {
 	private JPanel contentPane;
 	private /*final*/ TableroGrafico tablero;
 	private final JButton btContinuarPartida;
+	private final JButton btGuardarPartida;
 	private final JButton btRendirse;
 	private String ip;
 	
 	private boolean salir = false;
-
 	/**
 	 * Launch the application.
 	 */
@@ -129,6 +129,8 @@ public class ClienteGUI extends JFrame {
 						setVisible(false);
 						//Deshabilitamos el botón continuar partida, ya que rompemos la partida que teníamos. Luego lo habilitamos al meter el nombre.
 						btContinuarPartida.setEnabled(false);
+						btRendirse.setEnabled(false);
+						btGuardarPartida.setEnabled(false);
 						//OJO, en caso de que el jugador se eche para atrás no tiene sentido haber creado el TableroGrafico, no? eso hay que revisarlo.
 						//Ya está revisado
 						CargarPartida car = new CargarPartida(main);
@@ -147,7 +149,21 @@ public class ClienteGUI extends JFrame {
 		btCargarPartida.setBorder(null);
 		panel.add(btCargarPartida);
 		
-		final JButton btGuardarPartida = new JButton("");
+		btGuardarPartida = new JButton("");
+		btGuardarPartida.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				try {
+					tablero.guardarPartida();
+					JOptionPane.showMessageDialog(null, "Su partida ha sido persistida con éxito.", "Al toque", JOptionPane.WARNING_MESSAGE);
+				} catch (ParserConfigurationException | TransformerException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+			}
+		});
 		btGuardarPartida.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -157,22 +173,23 @@ public class ClienteGUI extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				btGuardarPartida.setIcon(new ImageIcon("Recursos\\GuardarPartida.png"));
 			}
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				try {
-					tablero.guardarPartida();
-					JOptionPane.showMessageDialog(null, "Su partida ha sido persistida con éxito.", "Al toque", JOptionPane.WARNING_MESSAGE);
-				} catch (ParserConfigurationException | TransformerException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				try {
+//					tablero.guardarPartida();
+//					JOptionPane.showMessageDialog(null, "Su partida ha sido persistida con éxito.", "Al toque", JOptionPane.WARNING_MESSAGE);
+//				} catch (ParserConfigurationException | TransformerException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//			}
 		});
 		btGuardarPartida.setBackground(new Color(240, 230, 140));
 		btGuardarPartida.setIcon(new ImageIcon("Recursos\\GuardarPartida.png"));
 		btGuardarPartida.setBounds(104, 297, 175, 47);
 		btGuardarPartida.setHorizontalTextPosition(SwingConstants.CENTER);
 		btGuardarPartida.setBorder(null);
+		btGuardarPartida.setEnabled(false);
 		panel.add(btGuardarPartida);
 		
 		final JButton btSalir = new JButton("");
@@ -256,6 +273,8 @@ public class ClienteGUI extends JFrame {
 									setVisible(false);
 									//Deshabilitamos el botón continuar partida, ya que rompemos la partida que teníamos. Luego lo habilitamos al meter el nombre.
 									btContinuarPartida.setEnabled(false);
+									btRendirse.setEnabled(false);
+									btGuardarPartida.setEnabled(false);
 									//OJO, en caso de que el jugador se eche para atrás no tiene sentido haber creado el TableroGrafico, no? eso hay que revisarlo.
 									//Ya está revisado
 									Nombre nom = new Nombre(main);
@@ -326,6 +345,7 @@ public class ClienteGUI extends JFrame {
 						
 						btContinuarPartida.setEnabled(false);
 						btRendirse.setEnabled(false);
+						btGuardarPartida.setEnabled(false);
 						tablero.rendirse();
 						tablero = null;
 						
@@ -436,6 +456,12 @@ public class ClienteGUI extends JFrame {
 		
 	}
 	
+	public void habilitarGuardar() {
+		
+		btGuardarPartida.setEnabled(true); 
+		
+	}
+	
 	public void deshabilitarContinuar() {
 		
 		btContinuarPartida.setEnabled(false); 
@@ -445,6 +471,12 @@ public class ClienteGUI extends JFrame {
 	public void deshabilitarRendirse() {
 		
 		this.btRendirse.setEnabled(false);
+		
+	}
+	
+	public void deshabilitarGuardar() {
+		
+		btGuardarPartida.setEnabled(false); 
 		
 	}
 	
@@ -484,8 +516,10 @@ public class ClienteGUI extends JFrame {
 	
 	public void restaurarMenu() {
 		
+		this.limpiarTablero();
 		this.btContinuarPartida.setEnabled(false);
 		this.btRendirse.setEnabled(false);
+		this.btGuardarPartida.setEnabled(false);
 		
 	}
 	

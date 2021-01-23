@@ -167,6 +167,7 @@ public class Nombre extends JFrame {
 						
 						if(ok.equals("NEW")/*|| azul*/) {
 							menu.habilitarContinuar();
+							menu.habilitarGuardar();
 							menu.habilitarRendirse();
 							/*/Esta puñetera orden vacia el buffer y parece que funciona/*/
 //							in.skip(in.available());
@@ -179,6 +180,7 @@ public class Nombre extends JFrame {
 							setVisible(false);
 						}else {
 							menu.habilitarContinuar();
+							menu.habilitarGuardar();
 							menu.habilitarRendirse();
 							String color = in.readLine();
 							if(color.equals("A"))

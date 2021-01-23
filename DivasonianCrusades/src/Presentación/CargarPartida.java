@@ -26,6 +26,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -101,7 +102,7 @@ public class CargarPartida extends JFrame {
 			Aceptar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(Azul.isSelected()||Rojo.isSelected()) {
+					if((Azul.isSelected()||Rojo.isSelected()) && list.getSelectedValue() != null) {
 						
 						BufferedReader br = null;
 						
@@ -128,6 +129,7 @@ public class CargarPartida extends JFrame {
 								String name = in.readLine();
 								String ok = in.readLine();
 								menu.habilitarContinuar();
+								menu.habilitarGuardar();
 								menu.habilitarRendirse();
 								/*/Esta puñetera orden vacia el buffer y parece que funciona/*/
 	//							in.skip(in.available());
@@ -192,6 +194,7 @@ public class CargarPartida extends JFrame {
 //								}
 								
 								menu.habilitarContinuar();
+								menu.habilitarGuardar();
 								menu.habilitarRendirse();
 								
 								iniciarTableroGrafico(s, in, out);
@@ -246,6 +249,7 @@ public class CargarPartida extends JFrame {
 									setVisible(false);
 								}else {
 									menu.habilitarContinuar();
+									menu.habilitarGuardar();
 									menu.habilitarRendirse();
 									String color = in.readLine();
 									if(color.equals("A"))
@@ -291,6 +295,17 @@ public class CargarPartida extends JFrame {
 							
 						}
 					}
+					else if(list.getSelectedValue() == null) {
+						
+						JOptionPane.showMessageDialog(null, "Debe seleccionar una partida a cargar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+						
+					}
+					else {
+						
+						JOptionPane.showMessageDialog(null, "Debe introducir el color con el que desea jugar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+						
+					}
+					
 				}
 				
 				@Override
