@@ -48,6 +48,7 @@ public class Derrota extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				main.deshabilitarRendirse();
 				main.deshabilitarContinuar();
+				main.deshabilitarGuardar();
 				main.setVisible(true);
 				dispose();
 			}
